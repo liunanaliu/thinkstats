@@ -62,67 +62,41 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 </head>
@@ -237,7 +211,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.9.1" data-path="data-visualization.html"><a href="data-visualization.html#perceptual-limitations"><i class="fa fa-check"></i><b>6.9.1</b> Perceptual limitations</a></li>
 </ul></li>
 <li class="chapter" data-level="6.10" data-path="data-visualization.html"><a href="data-visualization.html#correcting-for-other-factors"><i class="fa fa-check"></i><b>6.10</b> Correcting for other factors</a></li>
-<li class="chapter" data-level="6.11" data-path="data-visualization.html"><a href="data-visualization.html#suggested-readings-4"><i class="fa fa-check"></i><b>6.11</b> Suggested readings</a></li>
+<li class="chapter" data-level="6.11" data-path="data-visualization.html"><a href="data-visualization.html#suggested-readings-and-videos"><i class="fa fa-check"></i><b>6.11</b> Suggested readings and videos</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="sampling-1.html"><a href="sampling-1.html"><i class="fa fa-check"></i><b>7</b> Sampling</a><ul>
 <li class="chapter" data-level="7.1" data-path="sampling-1.html"><a href="sampling-1.html#how-do-we-sample"><i class="fa fa-check"></i><b>7.1</b> How do we sample?</a></li>
@@ -245,7 +219,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3" data-path="sampling-1.html"><a href="sampling-1.html#standard-error-of-the-mean"><i class="fa fa-check"></i><b>7.3</b> Standard error of the mean</a></li>
 <li class="chapter" data-level="7.4" data-path="sampling-1.html"><a href="sampling-1.html#the-central-limit-theorem"><i class="fa fa-check"></i><b>7.4</b> The Central Limit Theorem</a></li>
 <li class="chapter" data-level="7.5" data-path="sampling-1.html"><a href="sampling-1.html#confidence-intervals"><i class="fa fa-check"></i><b>7.5</b> Confidence intervals</a></li>
-<li class="chapter" data-level="7.6" data-path="sampling-1.html"><a href="sampling-1.html#suggested-readings-5"><i class="fa fa-check"></i><b>7.6</b> Suggested readings</a></li>
+<li class="chapter" data-level="7.6" data-path="sampling-1.html"><a href="sampling-1.html#suggested-readings-4"><i class="fa fa-check"></i><b>7.6</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html"><i class="fa fa-check"></i><b>8</b> Resampling and simulation</a><ul>
 <li class="chapter" data-level="8.1" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html#monte-carlo-simulation"><i class="fa fa-check"></i><b>8.1</b> Monte Carlo simulation</a></li>
@@ -255,7 +229,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html#using-simulation-for-statistics-the-bootstrap"><i class="fa fa-check"></i><b>8.5</b> Using simulation for statistics: The bootstrap</a><ul>
 <li class="chapter" data-level="8.5.1" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html#computing-the-bootstrap"><i class="fa fa-check"></i><b>8.5.1</b> Computing the bootstrap</a></li>
 </ul></li>
-<li class="chapter" data-level="8.6" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html#suggested-readings-6"><i class="fa fa-check"></i><b>8.6</b> Suggested readings</a></li>
+<li class="chapter" data-level="8.6" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html#suggested-readings-5"><i class="fa fa-check"></i><b>8.6</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html"><i class="fa fa-check"></i><b>9</b> Hypothesis testing</a><ul>
 <li class="chapter" data-level="9.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#null-hypothesis-statistical-testing-nhst"><i class="fa fa-check"></i><b>9.1</b> Null Hypothesis Statistical Testing (NHST)</a></li>
@@ -270,7 +244,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.3.7" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#what-does-a-significant-result-mean"><i class="fa fa-check"></i><b>9.3.7</b> What does a significant result mean?</a></li>
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#nhst-in-a-modern-context-multiple-testing"><i class="fa fa-check"></i><b>9.4</b> NHST in a modern context: Multiple testing</a></li>
-<li class="chapter" data-level="9.5" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#suggested-readings-7"><i class="fa fa-check"></i><b>9.5</b> Suggested readings</a></li>
+<li class="chapter" data-level="9.5" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#suggested-readings-6"><i class="fa fa-check"></i><b>9.5</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html"><i class="fa fa-check"></i><b>10</b> Confidence intervals, effect sizes, and statistical power</a><ul>
 <li class="chapter" data-level="10.1" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#confidence-intervals-1"><i class="fa fa-check"></i><b>10.1</b> Confidence intervals</a><ul>
@@ -288,7 +262,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#statistical-power"><i class="fa fa-check"></i><b>10.3</b> Statistical power</a><ul>
 <li class="chapter" data-level="10.3.1" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#power-analysis"><i class="fa fa-check"></i><b>10.3.1</b> Power analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#suggested-readings-8"><i class="fa fa-check"></i><b>10.4</b> Suggested readings</a></li>
+<li class="chapter" data-level="10.4" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#suggested-readings-7"><i class="fa fa-check"></i><b>10.4</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html"><i class="fa fa-check"></i><b>11</b> Bayesian statistics</a><ul>
 <li class="chapter" data-level="11.1" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html#generative-models"><i class="fa fa-check"></i><b>11.1</b> Generative models</a></li>
@@ -315,7 +289,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.6.1" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html#bayes-factors"><i class="fa fa-check"></i><b>11.6.1</b> Bayes factors</a></li>
 <li class="chapter" data-level="11.6.2" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html#bayes-factors-for-statistical-hypotheses"><i class="fa fa-check"></i><b>11.6.2</b> Bayes factors for statistical hypotheses</a></li>
 </ul></li>
-<li class="chapter" data-level="11.7" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html#suggested-readings-9"><i class="fa fa-check"></i><b>11.7</b> Suggested readings</a></li>
+<li class="chapter" data-level="11.7" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html#suggested-readings-8"><i class="fa fa-check"></i><b>11.7</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="modeling-categorical-relationships.html"><a href="modeling-categorical-relationships.html"><i class="fa fa-check"></i><b>12</b> Modeling categorical relationships</a><ul>
 <li class="chapter" data-level="12.1" data-path="modeling-categorical-relationships.html"><a href="modeling-categorical-relationships.html#example-candy-colors"><i class="fa fa-check"></i><b>12.1</b> Example: Candy colors</a></li>
@@ -340,7 +314,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.4" data-path="modeling-continuous-relationships.html"><a href="modeling-continuous-relationships.html#correlation-and-causation"><i class="fa fa-check"></i><b>13.4</b> Correlation and causation</a><ul>
 <li class="chapter" data-level="13.4.1" data-path="modeling-continuous-relationships.html"><a href="modeling-continuous-relationships.html#causal-graphs"><i class="fa fa-check"></i><b>13.4.1</b> Causal graphs</a></li>
 </ul></li>
-<li class="chapter" data-level="13.5" data-path="modeling-continuous-relationships.html"><a href="modeling-continuous-relationships.html#suggested-readings-10"><i class="fa fa-check"></i><b>13.5</b> Suggested readings</a></li>
+<li class="chapter" data-level="13.5" data-path="modeling-continuous-relationships.html"><a href="modeling-continuous-relationships.html#suggested-readings-9"><i class="fa fa-check"></i><b>13.5</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html"><i class="fa fa-check"></i><b>14</b> The General Linear Model</a><ul>
 <li class="chapter" data-level="14.1" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html#linear-regression"><i class="fa fa-check"></i><b>14.1</b> Linear regression</a><ul>
@@ -356,7 +330,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.4" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html#what-does-predict-really-mean"><i class="fa fa-check"></i><b>14.4</b> What does “predict” really mean?</a><ul>
 <li class="chapter" data-level="14.4.1" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html#cross-validation"><i class="fa fa-check"></i><b>14.4.1</b> Cross-validation</a></li>
 </ul></li>
-<li class="chapter" data-level="14.5" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html#suggested-readings-11"><i class="fa fa-check"></i><b>14.5</b> Suggested readings</a></li>
+<li class="chapter" data-level="14.5" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html#suggested-readings-10"><i class="fa fa-check"></i><b>14.5</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="comparing-means.html"><a href="comparing-means.html"><i class="fa fa-check"></i><b>15</b> Comparing means</a><ul>
 <li class="chapter" data-level="15.1" data-path="comparing-means.html"><a href="comparing-means.html#students-t-test"><i class="fa fa-check"></i><b>15.1</b> Student’s T test</a></li>
@@ -402,10 +376,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="17.6" data-path="doing-reproducible-research.html"><a href="doing-reproducible-research.html#doing-reproducible-data-analysis"><i class="fa fa-check"></i><b>17.6</b> Doing reproducible data analysis</a></li>
 <li class="chapter" data-level="17.7" data-path="doing-reproducible-research.html"><a href="doing-reproducible-research.html#conclusion-doing-better-science"><i class="fa fa-check"></i><b>17.7</b> Conclusion: Doing better science</a></li>
-<li class="chapter" data-level="17.8" data-path="doing-reproducible-research.html"><a href="doing-reproducible-research.html#suggested-readings-12"><i class="fa fa-check"></i><b>17.8</b> Suggested Readings</a></li>
+<li class="chapter" data-level="17.8" data-path="doing-reproducible-research.html"><a href="doing-reproducible-research.html#suggested-readings-11"><i class="fa fa-check"></i><b>17.8</b> Suggested Readings</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>18</b> References</a></li>
-<li class="chapter" data-level="" data-path="references-1.html"><a href="references-1.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
       </nav>
@@ -429,14 +402,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="example-candy-colors" class="section level2">
 <h2><span class="header-section-number">12.1</span> Example: Candy colors</h2>
 <p>Let’s say that I have purchased a bag of 100 candies, which are labeled as having 1/3 chocolates, 1/3 licorices, and 1/3 gumballs. When I count the candies in the bag, we get the following numbers:</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" title="1">candyDf &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb211-2" title="2"><span class="st">  </span><span class="kw">tibble</span>(<span class="dt">candyType=</span><span class="kw">c</span>(<span class="st">&#39;chocolate&#39;</span>,<span class="st">&#39;licorice&#39;</span>,<span class="st">&#39;gumball&#39;</span>),</a>
-<a class="sourceLine" id="cb211-3" title="3">         <span class="dt">count=</span><span class="kw">c</span>(<span class="dv">30</span>,<span class="dv">33</span>,<span class="dv">37</span>))</a>
-<a class="sourceLine" id="cb211-4" title="4"><span class="kw">pander</span>(candyDf)</a></code></pre></div>
-<table style="width:28%;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">candyDf &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">tibble</span>(<span class="dt">candyType=</span><span class="kw">c</span>(<span class="st">&#39;chocolate&#39;</span>,<span class="st">&#39;licorice&#39;</span>,<span class="st">&#39;gumball&#39;</span>),
+         <span class="dt">count=</span><span class="kw">c</span>(<span class="dv">30</span>,<span class="dv">33</span>,<span class="dv">37</span>))
+<span class="kw">pander</span>(candyDf)</code></pre></div>
+<table style="width:26%;">
 <colgroup>
 <col width="16%" />
-<col width="11%" />
+<col width="9%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -468,9 +441,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \chi^2 = \sum_i\frac{(observed_i - expected_i)^2}{expected_i}
 \]</span></p>
 <p>In the case of our candy example, the null hypothesis is that the proportion of each type of candies is equal. We can compute the chi-squared statistic for our observed counts of candy as follows:</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" title="1"><span class="co"># compute chi-squared statistic</span></a>
-<a class="sourceLine" id="cb212-2" title="2">nullExpectation &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">3</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">3</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">3</span>)<span class="op">*</span><span class="kw">sum</span>(candyDf<span class="op">$</span>count)</a>
-<a class="sourceLine" id="cb212-3" title="3">chisqVal &lt;-<span class="st"> </span><span class="kw">sum</span>(((candyDf<span class="op">$</span>count <span class="op">-</span><span class="st"> </span>nullExpectation)<span class="op">**</span><span class="dv">2</span>)<span class="op">/</span>nullExpectation)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute chi-squared statistic</span>
+nullExpectation &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">3</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">3</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">3</span>)<span class="op">*</span><span class="kw">sum</span>(candyDf<span class="op">$</span>count)
+chisqVal &lt;-<span class="st"> </span><span class="kw">sum</span>(((candyDf<span class="op">$</span>count <span class="op">-</span><span class="st"> </span>nullExpectation)<span class="op">**</span><span class="dv">2</span>)<span class="op">/</span>nullExpectation)</code></pre></div>
 <p>The chi-squared statistic for this analysis comes out to 0.74, which on its own is not interpretable, since it depends on the number of different values that were added together. However, we can take advantage of the fact that the chi-squared statistic is distributed according to a specific distribution under the null hypothesis, which is known as the <em>chi-squared</em> distribution. This distribution is defined as the sum of squares of a set of standard normal random variables; it has a number of degrees of freedom that is equal to the number of variables being added together. Figure <a href="modeling-categorical-relationships.html#fig:chisqDist">12.1</a> shows examples of the distribution for several different degrees of freedom.</p>
 <div class="figure"><span id="fig:chisqDist"></span>
 <img src="StatsThinking21_files/figure-html/chisqDist-1.png" alt="Examples of the chi-squared distribution for various degrees of freedom." width="384" height="50%" />
@@ -479,15 +452,15 @@ Figure 12.1: Examples of the chi-squared distribution for various degrees of fre
 </p>
 </div>
 <p>Let’s verify that the chi-squared distribution accurately describes the sum of squares of a set of standard normal random variables, using simulation.</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" title="1"><span class="co"># simulate 50,000 sums of 8 standard normal random variables and compare</span></a>
-<a class="sourceLine" id="cb213-2" title="2"><span class="co"># to theoretical chi-squared distribution</span></a>
-<a class="sourceLine" id="cb213-3" title="3"></a>
-<a class="sourceLine" id="cb213-4" title="4">d &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">50000</span>,<span class="kw">rnorm</span>(<span class="dv">8</span>)<span class="op">**</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb213-5" title="5">dMean &lt;-<span class="st"> </span><span class="kw">apply</span>(d,<span class="dv">2</span>,sum)</a>
-<a class="sourceLine" id="cb213-6" title="6"></a>
-<a class="sourceLine" id="cb213-7" title="7">csDf &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb213-8" title="8"><span class="st">  </span><span class="kw">data.frame</span>(<span class="dt">x=</span><span class="kw">seq</span>(<span class="fl">0.01</span>,<span class="dv">30</span>,<span class="fl">0.01</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb213-9" title="9"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">chisq=</span><span class="kw">dchisq</span>(x,<span class="dv">8</span>))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># simulate 50,000 sums of 8 standard normal random variables and compare</span>
+<span class="co"># to theoretical chi-squared distribution</span>
+
+d &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">50000</span>,<span class="kw">rnorm</span>(<span class="dv">8</span>)<span class="op">**</span><span class="dv">2</span>)
+dMean &lt;-<span class="st"> </span><span class="kw">apply</span>(d,<span class="dv">2</span>,sum)
+
+csDf &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">data.frame</span>(<span class="dt">x=</span><span class="kw">seq</span>(<span class="fl">0.01</span>,<span class="dv">30</span>,<span class="fl">0.01</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">chisq=</span><span class="kw">dchisq</span>(x,<span class="dv">8</span>))</code></pre></div>
 <p>Figure <a href="modeling-categorical-relationships.html#fig:chisqSim">12.2</a> shows that the theoretical distribution matches closely with the results of a simulation that repeatedly added</p>
 <div class="figure"><span id="fig:chisqSim"></span>
 <img src="StatsThinking21_files/figure-html/chisqSim-1.png" alt="Simulation of sum of squared random normal variables.   The histogram is based on the sum of squares of 50,000 sets of 8 random normal variables; the blue line shows the values of the theoretical chi-squared distribution with 8 degrees of freedom." width="384" height="50%" />
@@ -496,40 +469,40 @@ Figure 12.2: Simulation of sum of squared random normal variables. The histogram
 </p>
 </div>
 <p>For the candy example, we can compute the likelihood of our observed chi-squared value of 0.74 under the null hypothesis of equal frequency across all candies. We use a chi-squared distribution with degrees of freedom equal to n - 1, since we lost one degree of freedom when we computed the mean in order to generate the expected values.</p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" title="1">pval &lt;-<span class="st"> </span><span class="kw">pchisq</span>(chisqVal,<span class="dv">2</span>,<span class="dt">lower.tail=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb214-2" title="2"><span class="kw">sprintf</span>(<span class="st">&quot;p-value = %0.3f&quot;</span>,pval)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pval &lt;-<span class="st"> </span><span class="kw">pchisq</span>(chisqVal,<span class="dv">2</span>,<span class="dt">lower.tail=</span><span class="ot">FALSE</span>)
+<span class="kw">sprintf</span>(<span class="st">&quot;p-value = %0.3f&quot;</span>,pval)</code></pre></div>
 <pre><code>## [1] &quot;p-value = 0.691&quot;</code></pre>
 <p>This shows that the observed counts of candies are not particularly surprising based on the proportions printed on the bag of candy, and we would not reject the null hypothesis of equal proportions.</p>
 </div>
 <div id="contingency-tables-and-the-two-way-test" class="section level2">
 <h2><span class="header-section-number">12.3</span> Contingency tables and the two-way test</h2>
 <p>Another way that we often use the chi-squared test is to ask whether two categorical variables are related to one another. As a more realistic example, let’s take the question of whether a black driver is more likely to be searched when they are pulled over by a police officer, compared to a white driver The Stanford Open Policing Project (<a href="https://openpolicing.stanford.edu/" class="uri">https://openpolicing.stanford.edu/</a>) has studied this, and provides data that we can use to analyze the question. We will use the data from the State of Connecticut since they are fairly small. These data were first cleaned up to remove all unnecessary data (see code/process_CT_data.py).</p>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" title="1"><span class="co"># load police stop data</span></a>
-<a class="sourceLine" id="cb216-2" title="2"></a>
-<a class="sourceLine" id="cb216-3" title="3">stopData &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb216-4" title="4"><span class="st">  </span><span class="kw">read.table</span>(<span class="st">&#39;data/CT_data_cleaned.csv&#39;</span>,<span class="dt">header=</span><span class="ot">TRUE</span>,<span class="dt">sep=</span><span class="st">&#39;,&#39;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb216-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">searched=</span><span class="kw">recode</span>(search_conducted,<span class="st">&#39;False&#39;</span>=<span class="ot">FALSE</span>,<span class="st">&#39;True&#39;</span>=<span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb216-6" title="6"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="op">-</span>search_conducted)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load police stop data</span>
+
+stopData &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">read.table</span>(<span class="st">&#39;data/CT_data_cleaned.csv&#39;</span>,<span class="dt">header=</span><span class="ot">TRUE</span>,<span class="dt">sep=</span><span class="st">&#39;,&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">searched=</span><span class="kw">recode</span>(search_conducted,<span class="st">&#39;False&#39;</span>=<span class="ot">FALSE</span>,<span class="st">&#39;True&#39;</span>=<span class="ot">TRUE</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="op">-</span>search_conducted)</code></pre></div>
 <p>The standard way to represent data from a categorical analysis is through a <em>contingency table</em>, which presents the number or proportion of observations falling into each possible combination of values for each of the variables.</p>
 <p>Let’s compute the contingency table for the police search data:</p>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" title="1"><span class="co"># compute and print two-way contingency table</span></a>
-<a class="sourceLine" id="cb217-2" title="2"></a>
-<a class="sourceLine" id="cb217-3" title="3">summaryDf2way &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb217-4" title="4"><span class="st">  </span>stopData <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb217-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(searched,driver_race) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb217-6" title="6"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n=</span><span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb217-7" title="7"><span class="st">  </span><span class="kw">arrange</span>(driver_race,searched) </a>
-<a class="sourceLine" id="cb217-8" title="8"></a>
-<a class="sourceLine" id="cb217-9" title="9">summaryContingencyTable &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb217-10" title="10"><span class="st">  </span>summaryDf2way <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb217-11" title="11"><span class="st">  </span><span class="kw">spread</span>(driver_race,n)</a>
-<a class="sourceLine" id="cb217-12" title="12"></a>
-<a class="sourceLine" id="cb217-13" title="13"><span class="kw">pander</span>(summaryContingencyTable)</a></code></pre></div>
-<table style="width:39%;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute and print two-way contingency table</span>
+
+summaryDf2way &lt;-<span class="st"> </span>
+<span class="st">  </span>stopData <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(searched,driver_race) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n=</span><span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(driver_race,searched) 
+
+summaryContingencyTable &lt;-<span class="st"> </span>
+<span class="st">  </span>summaryDf2way <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">spread</span>(driver_race,n)
+
+<span class="kw">pander</span>(summaryContingencyTable)</code></pre></div>
+<table style="width:38%;">
 <colgroup>
 <col width="15%" />
 <col width="11%" />
-<col width="12%" />
+<col width="11%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -552,15 +525,15 @@ Figure 12.2: Simulation of sum of squared random normal variables. The histogram
 </tbody>
 </table>
 <p>It can also be useful to look at the contingency table using proportions rather than raw numbers, since they are easier to compare visually.</p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" title="1"><span class="co"># Compute and print contingency table using proportions </span></a>
-<a class="sourceLine" id="cb218-2" title="2"><span class="co"># rather than raw frequencies</span></a>
-<a class="sourceLine" id="cb218-3" title="3">summaryContingencyTableProportion &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb218-4" title="4"><span class="st">  </span>summaryContingencyTable <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb218-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(</a>
-<a class="sourceLine" id="cb218-6" title="6">    <span class="dt">Black=</span>Black<span class="op">/</span><span class="kw">nrow</span>(stopData),</a>
-<a class="sourceLine" id="cb218-7" title="7">    <span class="dt">White=</span>White<span class="op">/</span><span class="kw">nrow</span>(stopData)</a>
-<a class="sourceLine" id="cb218-8" title="8">  )</a>
-<a class="sourceLine" id="cb218-9" title="9"><span class="kw">pander</span>(summaryContingencyTableProportion,<span class="dt">round=</span><span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Compute and print contingency table using proportions </span>
+<span class="co"># rather than raw frequencies</span>
+summaryContingencyTableProportion &lt;-<span class="st"> </span>
+<span class="st">  </span>summaryContingencyTable <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">Black=</span>Black<span class="op">/</span><span class="kw">nrow</span>(stopData),
+    <span class="dt">White=</span>White<span class="op">/</span><span class="kw">nrow</span>(stopData)
+  )
+<span class="kw">pander</span>(summaryContingencyTableProportion,<span class="dt">round=</span><span class="dv">4</span>)</code></pre></div>
 <table style="width:40%;">
 <colgroup>
 <col width="15%" />
@@ -590,8 +563,7 @@ Figure 12.2: Simulation of sum of squared random normal variables. The histogram
 <p>The Pearson chi-squared test allows us to test whether observed frequencies are different from expected frequencies, so we need to determine what frequencies we would expect in each cell if searches and race were unrelated – which we can define as being <em>independent.</em> Remember from the chapter on probability that if X and Y are independent, then:</p>
 <p><span class="math display">\[
 P(X \cap Y) = P(X) * P(Y)
-\]</span>
-That is, the joint probability under the null hypothesis of independence is simply the product of the <em>marginal</em> probabilities of each individual variable. We can compute those marginal probabilities, and then multiply them together to get the expected proportions under independence.</p>
+\]</span> That is, the joint probability under the null hypothesis of independence is simply the product of the <em>marginal</em> probabilities of each individual variable. We can compute those marginal probabilities, and then multiply them together to get the expected proportions under independence.</p>
 <table>
 <thead>
 <tr class="header">
@@ -623,50 +595,50 @@ That is, the joint probability under the null hypothesis of independence is simp
 </tbody>
 </table>
 <p>We can use a linear algebra trick known as the “outer product” (via the <code>outer()</code> function) to compute this easily.</p>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" title="1"><span class="co"># compute the marginal probabilities</span></a>
-<a class="sourceLine" id="cb219-2" title="2">summaryDfRace &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb219-3" title="3"><span class="st">  </span>stopData <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb219-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(driver_race) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb219-5" title="5"><span class="st">  </span><span class="kw">summarize</span>(</a>
-<a class="sourceLine" id="cb219-6" title="6">    <span class="dt">n=</span><span class="kw">n</span>(),</a>
-<a class="sourceLine" id="cb219-7" title="7">    <span class="dt">prop=</span><span class="kw">n</span>()<span class="op">/</span><span class="kw">nrow</span>(stopData)</a>
-<a class="sourceLine" id="cb219-8" title="8">  )</a>
-<a class="sourceLine" id="cb219-9" title="9"></a>
-<a class="sourceLine" id="cb219-10" title="10">summaryDfStop &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb219-11" title="11"><span class="st">  </span>stopData <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb219-12" title="12"><span class="st">  </span><span class="kw">group_by</span>(searched) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb219-13" title="13"><span class="st">  </span><span class="kw">summarize</span>(</a>
-<a class="sourceLine" id="cb219-14" title="14">    <span class="dt">n=</span><span class="kw">n</span>(),</a>
-<a class="sourceLine" id="cb219-15" title="15">    <span class="dt">prop=</span><span class="kw">n</span>()<span class="op">/</span><span class="kw">nrow</span>(stopData)</a>
-<a class="sourceLine" id="cb219-16" title="16">  )</a>
-<a class="sourceLine" id="cb219-17" title="17"></a>
-<a class="sourceLine" id="cb219-18" title="18"><span class="co"># multiply outer product by n to compute expected frequencies</span></a>
-<a class="sourceLine" id="cb219-19" title="19">expected &lt;-<span class="st"> </span><span class="kw">outer</span>(summaryDfRace<span class="op">$</span>prop, summaryDfStop<span class="op">$</span>prop)<span class="op">*</span><span class="kw">nrow</span>(stopData)</a>
-<a class="sourceLine" id="cb219-20" title="20">expectedDf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(expected,<span class="dt">driverRace =</span> <span class="kw">c</span>(<span class="st">&#39;Black&#39;</span>,<span class="st">&#39;White&#39;</span>))</a>
-<a class="sourceLine" id="cb219-21" title="21"><span class="kw">names</span>(expectedDf) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;NotStopped&#39;</span>,<span class="st">&#39;Stopped&#39;</span>,<span class="st">&#39;driverRace&#39;</span>)</a>
-<a class="sourceLine" id="cb219-22" title="22">expectedDfTidy &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb219-23" title="23"><span class="st">  </span><span class="kw">gather</span>(expectedDf,searched,n,<span class="op">-</span>driverRace) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb219-24" title="24"><span class="st">  </span><span class="kw">arrange</span>(driverRace,searched)</a>
-<a class="sourceLine" id="cb219-25" title="25"></a>
-<a class="sourceLine" id="cb219-26" title="26"><span class="co"># add expected frequencies and squared difference to summary table</span></a>
-<a class="sourceLine" id="cb219-27" title="27">summaryDf2way &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb219-28" title="28"><span class="st">  </span>summaryDf2way <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb219-29" title="29"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">expected=</span><span class="ot">NA</span>)</a>
-<a class="sourceLine" id="cb219-30" title="30"></a>
-<a class="sourceLine" id="cb219-31" title="31">summaryDf2way<span class="op">$</span>expected =<span class="st"> </span>expectedDfTidy<span class="op">$</span>n</a>
-<a class="sourceLine" id="cb219-32" title="32"></a>
-<a class="sourceLine" id="cb219-33" title="33">summaryDf2way &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb219-34" title="34"><span class="st">  </span>summaryDf2way <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb219-35" title="35"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">stdSqDiff =</span> (n <span class="op">-</span><span class="st"> </span>expected)<span class="op">**</span><span class="dv">2</span><span class="op">/</span>expected)</a>
-<a class="sourceLine" id="cb219-36" title="36"></a>
-<a class="sourceLine" id="cb219-37" title="37"><span class="kw">pander</span>(summaryDf2way)</a></code></pre></div>
-<table style="width:79%;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute the marginal probabilities</span>
+summaryDfRace &lt;-<span class="st"> </span>
+<span class="st">  </span>stopData <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(driver_race) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(
+    <span class="dt">n=</span><span class="kw">n</span>(),
+    <span class="dt">prop=</span><span class="kw">n</span>()<span class="op">/</span><span class="kw">nrow</span>(stopData)
+  )
+
+summaryDfStop &lt;-<span class="st"> </span>
+<span class="st">  </span>stopData <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(searched) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(
+    <span class="dt">n=</span><span class="kw">n</span>(),
+    <span class="dt">prop=</span><span class="kw">n</span>()<span class="op">/</span><span class="kw">nrow</span>(stopData)
+  )
+
+<span class="co"># multiply outer product by n to compute expected frequencies</span>
+expected &lt;-<span class="st"> </span><span class="kw">outer</span>(summaryDfRace<span class="op">$</span>prop, summaryDfStop<span class="op">$</span>prop)<span class="op">*</span><span class="kw">nrow</span>(stopData)
+expectedDf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(expected,<span class="dt">driverRace =</span> <span class="kw">c</span>(<span class="st">&#39;Black&#39;</span>,<span class="st">&#39;White&#39;</span>))
+<span class="kw">names</span>(expectedDf) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;NotStopped&#39;</span>,<span class="st">&#39;Stopped&#39;</span>,<span class="st">&#39;driverRace&#39;</span>)
+expectedDfTidy &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">gather</span>(expectedDf,searched,n,<span class="op">-</span>driverRace) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(driverRace,searched)
+
+<span class="co"># add expected frequencies and squared difference to summary table</span>
+summaryDf2way &lt;-<span class="st"> </span>
+<span class="st">  </span>summaryDf2way <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">expected=</span><span class="ot">NA</span>)
+
+summaryDf2way<span class="op">$</span>expected =<span class="st"> </span>expectedDfTidy<span class="op">$</span>n
+
+summaryDf2way &lt;-<span class="st"> </span>
+<span class="st">  </span>summaryDf2way <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">stdSqDiff =</span> (n <span class="op">-</span><span class="st"> </span>expected)<span class="op">**</span><span class="dv">2</span><span class="op">/</span>expected)
+
+<span class="kw">pander</span>(summaryDf2way)</code></pre></div>
+<table style="width:78%;">
 <colgroup>
 <col width="15%" />
 <col width="19%" />
 <col width="12%" />
 <col width="15%" />
-<col width="16%" />
+<col width="15%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -708,25 +680,25 @@ That is, the joint probability under the null hypothesis of independence is simp
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" title="1"><span class="co"># compute chi-squared statistic by summing standarized squared differences</span></a>
-<a class="sourceLine" id="cb220-2" title="2">chisq &lt;-<span class="st"> </span><span class="kw">sum</span>(summaryDf2way<span class="op">$</span>stdSqDiff)</a>
-<a class="sourceLine" id="cb220-3" title="3"><span class="kw">sprintf</span>(<span class="st">&#39;Chi-squared value = %0.2f&#39;</span>,chisq)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute chi-squared statistic by summing standarized squared differences</span>
+chisq &lt;-<span class="st"> </span><span class="kw">sum</span>(summaryDf2way<span class="op">$</span>stdSqDiff)
+<span class="kw">sprintf</span>(<span class="st">&#39;Chi-squared value = %0.2f&#39;</span>,chisq)</code></pre></div>
 <pre><code>## [1] &quot;Chi-squared value = 828.30&quot;</code></pre>
 <p>Having computed the chi-squared statistic, we now need to compare it to the chi-squared distribution in order to determine how extreme it is compared to our expectation under the null hypothesis. The degrees of freedom for this distribution are <span class="math inline">\(df = (nRows - 1) * (nColumns - 1)\)</span> - thus, for a 2X2 table like the one here, <span class="math inline">\(df = (2-1)*(2-1)=1\)</span>. The intuition here is that computing the expected frequencies requires us to use three values: the total number of observations and the marginal probability for each of the two variables. Thus, once those values are computed, there is only one number that is free to vary, and thus there is one degree of freedom. Given this, we can compute the p-value for the chi-squared statistic:</p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb222-1" title="1">pval &lt;-<span class="st"> </span><span class="kw">pchisq</span>(chisq,<span class="dv">1</span>,<span class="dt">lower.tail=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb222-2" title="2"><span class="kw">sprintf</span>(<span class="st">&#39;p-value = %e&#39;</span>,pval)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pval &lt;-<span class="st"> </span><span class="kw">pchisq</span>(chisq,<span class="dv">1</span>,<span class="dt">lower.tail=</span><span class="ot">FALSE</span>)
+<span class="kw">sprintf</span>(<span class="st">&#39;p-value = %e&#39;</span>,pval)</code></pre></div>
 <pre><code>## [1] &quot;p-value = 3.795669e-182&quot;</code></pre>
 <p>The p value of <span class="math inline">\(3.79e^{-182}\)</span> is exceedingly small, showing that the observed data would be highly unlikely if there was truly no relationship between race and police searches, and thus we should reject the null hypothesis of independence.</p>
 <p>We can also perform this test easily using the <code>chisq.test()</code> function in R:</p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb224-1" title="1"><span class="co"># first need to rearrange the data into a 2x2 table</span></a>
-<a class="sourceLine" id="cb224-2" title="2">summaryDf2wayTable &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb224-3" title="3"><span class="st">  </span>summaryDf2way <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb224-4" title="4"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="op">-</span>expected,<span class="op">-</span>stdSqDiff) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb224-5" title="5"><span class="st">  </span><span class="kw">spread</span>(searched,n) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb224-6" title="6"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="op">-</span>driver_race)</a>
-<a class="sourceLine" id="cb224-7" title="7"></a>
-<a class="sourceLine" id="cb224-8" title="8">chisqTestResult &lt;-<span class="st"> </span><span class="kw">chisq.test</span>(summaryDf2wayTable,<span class="dv">1</span>,<span class="dt">correct=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb224-9" title="9">chisqTestResult</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># first need to rearrange the data into a 2x2 table</span>
+summaryDf2wayTable &lt;-<span class="st"> </span>
+<span class="st">  </span>summaryDf2way <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="op">-</span>expected,<span class="op">-</span>stdSqDiff) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">spread</span>(searched,n) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="op">-</span>driver_race)
+
+chisqTestResult &lt;-<span class="st"> </span><span class="kw">chisq.test</span>(summaryDf2wayTable,<span class="dv">1</span>,<span class="dt">correct=</span><span class="ot">FALSE</span>)
+chisqTestResult</code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s Chi-squared test
 ## 
@@ -738,23 +710,22 @@ That is, the joint probability under the null hypothesis of independence is simp
 <p>When we find a significant effect with the chi-squared test, this tells us that the data are unlikely under the null hypothesis, but it doesn’t tell us how the data differ. To get a deeper insight into how the data differ from what we would expect under the null hypothesis, we can examine the residuals from a model, which reflects the deviation of the data from the model in each cell. Rather than looking at the raw residuals (which will vary simply depending on the number of observations in the data), it’s more common to look at ther <em>standardized residuals</em>, which are computed as:</p>
 <p><span class="math display">\[
 standardized\ residual_{ij} = \frac{observed_{ij} - expected_{ij}}{\sqrt{expected_{ij}}}
-\]</span>
-where <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> are the indices for the rows and columns respectively. We can compute these for the police stop data:</p>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb226-1" title="1"><span class="co"># compute standardized residuals</span></a>
-<a class="sourceLine" id="cb226-2" title="2"></a>
-<a class="sourceLine" id="cb226-3" title="3">summaryDf2way &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb226-4" title="4"><span class="st">  </span>summaryDf2way <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb226-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">stdRes =</span> (n <span class="op">-</span><span class="st"> </span>expected)<span class="op">/</span><span class="kw">sqrt</span>(expected))</a>
-<a class="sourceLine" id="cb226-6" title="6"></a>
-<a class="sourceLine" id="cb226-7" title="7"><span class="kw">pander</span>(summaryDf2way)</a></code></pre></div>
-<table style="width:92%;">
+\]</span> where <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> are the indices for the rows and columns respectively. We can compute these for the police stop data:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute standardized residuals</span>
+
+summaryDf2way &lt;-<span class="st"> </span>
+<span class="st">  </span>summaryDf2way <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">stdRes =</span> (n <span class="op">-</span><span class="st"> </span>expected)<span class="op">/</span><span class="kw">sqrt</span>(expected))
+
+<span class="kw">pander</span>(summaryDf2way)</code></pre></div>
+<table style="width:90%;">
 <colgroup>
 <col width="15%" />
 <col width="19%" />
 <col width="12%" />
 <col width="15%" />
 <col width="16%" />
-<col width="12%" />
+<col width="11%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -811,19 +782,16 @@ odds_{searched|black} = \frac{N_{searched\cap black}}{N_{not\ searched\cap black
 \]</span></p>
 <p><span class="math display">\[
 odds_{searched|white} = \frac{N_{searched\cap white}}{N_{not\ searched\cap white}} = \frac{3108}{239241} = 0.013
-\]</span>
-<span class="math display">\[
+\]</span> <span class="math display">\[
 odds\ ratio = \frac{odds_{searched|black}}{odds_{searched|white}} = 2.59
 \]</span></p>
 <p>The odds ratio shows that the odds of being searched are 2.59 times higher for black versus white drivers, based on this dataset.</p>
 </div>
 <div id="bayes-factor" class="section level2">
 <h2><span class="header-section-number">12.6</span> Bayes factor</h2>
-<p>We discussed Bayes factors in the earlier chapter on Bayesian statistics – you may remember that it represents the ratio of the likelihood of the data under each of the two hypotheses:
-<span class="math display">\[ 
+<p>We discussed Bayes factors in the earlier chapter on Bayesian statistics – you may remember that it represents the ratio of the likelihood of the data under each of the two hypotheses: <span class="math display">\[ 
 K = \frac{P(data|H_A)}{P(data|H_0)} = \frac{P(H_A|data)*P(H_A)}{P(H_0|data)*P(H_0)}
-\]</span>
-Bayes factors are similar to p-values and effect sizes in one way, which is that their interpretation is somewhat subjective. There are various guidelines for their interpretation – here is one from <span class="citation">Kass and Raftery (1995)</span> :</p>
+\]</span> Bayes factors are similar to p-values and effect sizes in one way, which is that their interpretation is somewhat subjective. There are various guidelines for their interpretation – here is one from <span class="citation">Kass and Raftery (1995)</span> :</p>
 <table>
 <thead>
 <tr class="header">
@@ -851,14 +819,14 @@ Bayes factors are similar to p-values and effect sizes in one way, which is that
 </tbody>
 </table>
 <p>We can compute the Bayes factor for the police search data using the <code>contingencyTableBF()</code> function from the BayesFactor package:</p>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb227-1" title="1"><span class="co"># compute Bayes factor </span></a>
-<a class="sourceLine" id="cb227-2" title="2"><span class="co"># using independent multinomial sampling plan in which row totals (driver race)</span></a>
-<a class="sourceLine" id="cb227-3" title="3"><span class="co"># are fixed</span></a>
-<a class="sourceLine" id="cb227-4" title="4"></a>
-<a class="sourceLine" id="cb227-5" title="5">bf &lt;-<span class="st"> </span><span class="kw">contingencyTableBF</span>(<span class="kw">as.matrix</span>(summaryDf2wayTable), </a>
-<a class="sourceLine" id="cb227-6" title="6">                         <span class="dt">sampleType =</span> <span class="st">&quot;indepMulti&quot;</span>,</a>
-<a class="sourceLine" id="cb227-7" title="7">                         <span class="dt">fixedMargin=</span><span class="st">&#39;cols&#39;</span>)</a>
-<a class="sourceLine" id="cb227-8" title="8">bf</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute Bayes factor </span>
+<span class="co"># using independent multinomial sampling plan in which row totals (driver race)</span>
+<span class="co"># are fixed</span>
+
+bf &lt;-<span class="st"> </span><span class="kw">contingencyTableBF</span>(<span class="kw">as.matrix</span>(summaryDf2wayTable), 
+                         <span class="dt">sampleType =</span> <span class="st">&quot;indepMulti&quot;</span>,
+                         <span class="dt">fixedMargin=</span><span class="st">&#39;cols&#39;</span>)
+bf</code></pre></div>
 <pre><code>## Bayes factor analysis
 ## --------------
 ## [1] Non-indep. (a=1) : 1.8e+142 ±0%
@@ -873,20 +841,20 @@ Bayes factors are similar to p-values and effect sizes in one way, which is that
 <h2><span class="header-section-number">12.7</span> Categorical analysis beyond the 2 X 2 table</h2>
 <p>Categorical analysis can also be applied to contingency tables where there are more than two categories for each variable.</p>
 <p>For example, let’s look at the NHANES data and compare the variable <em>Depressed</em> which denotes the “self-reported number of days where participant felt down, depressed or hopeless”. This variable is coded as <code>None</code>, <code>Several</code>, or <code>Most</code>. Let’s test whether this variable is related to the <em>SleepTrouble</em> variable which reports whether the individual has reported sleeping problems to a doctor.</p>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb229-1" title="1"><span class="co"># summarize depression as a function of sleep trouble</span></a>
-<a class="sourceLine" id="cb229-2" title="2"></a>
-<a class="sourceLine" id="cb229-3" title="3">depressedSleepTrouble &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb229-4" title="4"><span class="st">  </span>NHANES_adult <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb229-5" title="5"><span class="st">  </span><span class="kw">drop_na</span>(SleepTrouble,Depressed) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb229-6" title="6"><span class="st">  </span><span class="kw">group_by</span>(SleepTrouble,Depressed) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb229-7" title="7"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n=</span><span class="kw">n</span>()) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb229-8" title="8"><span class="st">  </span><span class="kw">arrange</span>(SleepTrouble,Depressed)</a>
-<a class="sourceLine" id="cb229-9" title="9"></a>
-<a class="sourceLine" id="cb229-10" title="10">depressedSleepTroubleTable &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb229-11" title="11"><span class="st">  </span>depressedSleepTrouble <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb229-12" title="12"><span class="st">  </span><span class="kw">spread</span>(SleepTrouble,n)</a>
-<a class="sourceLine" id="cb229-13" title="13"></a>
-<a class="sourceLine" id="cb229-14" title="14"><span class="kw">pander</span>(depressedSleepTroubleTable)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># summarize depression as a function of sleep trouble</span>
+
+depressedSleepTrouble &lt;-<span class="st"> </span>
+<span class="st">  </span>NHANES_adult <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">drop_na</span>(SleepTrouble,Depressed) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(SleepTrouble,Depressed) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n=</span><span class="kw">n</span>()) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(SleepTrouble,Depressed)
+
+depressedSleepTroubleTable &lt;-<span class="st"> </span>
+<span class="st">  </span>depressedSleepTrouble <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">spread</span>(SleepTrouble,n)
+
+<span class="kw">pander</span>(depressedSleepTroubleTable)</code></pre></div>
 <table style="width:36%;">
 <colgroup>
 <col width="16%" />
@@ -919,24 +887,24 @@ Bayes factors are similar to p-values and effect sizes in one way, which is that
 </tbody>
 </table>
 <p>Simply by looking at these data, we can tell that it is likely that there is a relationship between the two variables; notably, while the total number of people with sleep trouble is muh less than those without, for people who report being depresssed most days the number with sleep problems is greater than those without. We can quantify this directly using the chi-squared test:</p>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" title="1"><span class="co"># need to remove the column with the label names</span></a>
-<a class="sourceLine" id="cb230-2" title="2">depressedSleepTroubleTable &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb230-3" title="3"><span class="st">  </span>depressedSleepTroubleTable <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb230-4" title="4"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="op">-</span>Depressed)</a>
-<a class="sourceLine" id="cb230-5" title="5"></a>
-<a class="sourceLine" id="cb230-6" title="6">depressedSleepChisq &lt;-<span class="st"> </span><span class="kw">chisq.test</span>(depressedSleepTroubleTable)</a>
-<a class="sourceLine" id="cb230-7" title="7">depressedSleepChisq</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># need to remove the column with the label names</span>
+depressedSleepTroubleTable &lt;-<span class="st"> </span>
+<span class="st">  </span>depressedSleepTroubleTable <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="op">-</span>Depressed)
+
+depressedSleepChisq &lt;-<span class="st"> </span><span class="kw">chisq.test</span>(depressedSleepTroubleTable)
+depressedSleepChisq</code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s Chi-squared test
 ## 
 ## data:  depressedSleepTroubleTable
 ## X-squared = 200, df = 2, p-value &lt;2e-16</code></pre>
 <p>This test shows that there is a strong relationship between depression and sleep trouble. We can also compute the Bayes factor to quantify the strength of the evidence in favor the alternative hypothesis:</p>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb232-1" title="1"><span class="co"># compute bayes factor, using a joint multinomial sampling plan</span></a>
-<a class="sourceLine" id="cb232-2" title="2"></a>
-<a class="sourceLine" id="cb232-3" title="3">bf &lt;-<span class="st"> </span><span class="kw">contingencyTableBF</span>(<span class="kw">as.matrix</span>(depressedSleepTroubleTable), </a>
-<a class="sourceLine" id="cb232-4" title="4">                         <span class="dt">sampleType =</span> <span class="st">&quot;jointMulti&quot;</span>)</a>
-<a class="sourceLine" id="cb232-5" title="5">bf</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute bayes factor, using a joint multinomial sampling plan</span>
+
+bf &lt;-<span class="st"> </span><span class="kw">contingencyTableBF</span>(<span class="kw">as.matrix</span>(depressedSleepTroubleTable), 
+                         <span class="dt">sampleType =</span> <span class="st">&quot;jointMulti&quot;</span>)
+bf</code></pre></div>
 <pre><code>## Bayes factor analysis
 ## --------------
 ## [1] Non-indep. (a=1) : 1.8e+35 ±0%
@@ -1045,7 +1013,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "true";
+    var src = "";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

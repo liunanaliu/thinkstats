@@ -62,67 +62,41 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 </head>
@@ -237,7 +211,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.9.1" data-path="data-visualization.html"><a href="data-visualization.html#perceptual-limitations"><i class="fa fa-check"></i><b>6.9.1</b> Perceptual limitations</a></li>
 </ul></li>
 <li class="chapter" data-level="6.10" data-path="data-visualization.html"><a href="data-visualization.html#correcting-for-other-factors"><i class="fa fa-check"></i><b>6.10</b> Correcting for other factors</a></li>
-<li class="chapter" data-level="6.11" data-path="data-visualization.html"><a href="data-visualization.html#suggested-readings-4"><i class="fa fa-check"></i><b>6.11</b> Suggested readings</a></li>
+<li class="chapter" data-level="6.11" data-path="data-visualization.html"><a href="data-visualization.html#suggested-readings-and-videos"><i class="fa fa-check"></i><b>6.11</b> Suggested readings and videos</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="sampling-1.html"><a href="sampling-1.html"><i class="fa fa-check"></i><b>7</b> Sampling</a><ul>
 <li class="chapter" data-level="7.1" data-path="sampling-1.html"><a href="sampling-1.html#how-do-we-sample"><i class="fa fa-check"></i><b>7.1</b> How do we sample?</a></li>
@@ -245,7 +219,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3" data-path="sampling-1.html"><a href="sampling-1.html#standard-error-of-the-mean"><i class="fa fa-check"></i><b>7.3</b> Standard error of the mean</a></li>
 <li class="chapter" data-level="7.4" data-path="sampling-1.html"><a href="sampling-1.html#the-central-limit-theorem"><i class="fa fa-check"></i><b>7.4</b> The Central Limit Theorem</a></li>
 <li class="chapter" data-level="7.5" data-path="sampling-1.html"><a href="sampling-1.html#confidence-intervals"><i class="fa fa-check"></i><b>7.5</b> Confidence intervals</a></li>
-<li class="chapter" data-level="7.6" data-path="sampling-1.html"><a href="sampling-1.html#suggested-readings-5"><i class="fa fa-check"></i><b>7.6</b> Suggested readings</a></li>
+<li class="chapter" data-level="7.6" data-path="sampling-1.html"><a href="sampling-1.html#suggested-readings-4"><i class="fa fa-check"></i><b>7.6</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html"><i class="fa fa-check"></i><b>8</b> Resampling and simulation</a><ul>
 <li class="chapter" data-level="8.1" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html#monte-carlo-simulation"><i class="fa fa-check"></i><b>8.1</b> Monte Carlo simulation</a></li>
@@ -255,7 +229,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html#using-simulation-for-statistics-the-bootstrap"><i class="fa fa-check"></i><b>8.5</b> Using simulation for statistics: The bootstrap</a><ul>
 <li class="chapter" data-level="8.5.1" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html#computing-the-bootstrap"><i class="fa fa-check"></i><b>8.5.1</b> Computing the bootstrap</a></li>
 </ul></li>
-<li class="chapter" data-level="8.6" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html#suggested-readings-6"><i class="fa fa-check"></i><b>8.6</b> Suggested readings</a></li>
+<li class="chapter" data-level="8.6" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html#suggested-readings-5"><i class="fa fa-check"></i><b>8.6</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html"><i class="fa fa-check"></i><b>9</b> Hypothesis testing</a><ul>
 <li class="chapter" data-level="9.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#null-hypothesis-statistical-testing-nhst"><i class="fa fa-check"></i><b>9.1</b> Null Hypothesis Statistical Testing (NHST)</a></li>
@@ -270,7 +244,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.3.7" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#what-does-a-significant-result-mean"><i class="fa fa-check"></i><b>9.3.7</b> What does a significant result mean?</a></li>
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#nhst-in-a-modern-context-multiple-testing"><i class="fa fa-check"></i><b>9.4</b> NHST in a modern context: Multiple testing</a></li>
-<li class="chapter" data-level="9.5" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#suggested-readings-7"><i class="fa fa-check"></i><b>9.5</b> Suggested readings</a></li>
+<li class="chapter" data-level="9.5" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#suggested-readings-6"><i class="fa fa-check"></i><b>9.5</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html"><i class="fa fa-check"></i><b>10</b> Confidence intervals, effect sizes, and statistical power</a><ul>
 <li class="chapter" data-level="10.1" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#confidence-intervals-1"><i class="fa fa-check"></i><b>10.1</b> Confidence intervals</a><ul>
@@ -288,7 +262,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#statistical-power"><i class="fa fa-check"></i><b>10.3</b> Statistical power</a><ul>
 <li class="chapter" data-level="10.3.1" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#power-analysis"><i class="fa fa-check"></i><b>10.3.1</b> Power analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#suggested-readings-8"><i class="fa fa-check"></i><b>10.4</b> Suggested readings</a></li>
+<li class="chapter" data-level="10.4" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#suggested-readings-7"><i class="fa fa-check"></i><b>10.4</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html"><i class="fa fa-check"></i><b>11</b> Bayesian statistics</a><ul>
 <li class="chapter" data-level="11.1" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html#generative-models"><i class="fa fa-check"></i><b>11.1</b> Generative models</a></li>
@@ -315,7 +289,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.6.1" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html#bayes-factors"><i class="fa fa-check"></i><b>11.6.1</b> Bayes factors</a></li>
 <li class="chapter" data-level="11.6.2" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html#bayes-factors-for-statistical-hypotheses"><i class="fa fa-check"></i><b>11.6.2</b> Bayes factors for statistical hypotheses</a></li>
 </ul></li>
-<li class="chapter" data-level="11.7" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html#suggested-readings-9"><i class="fa fa-check"></i><b>11.7</b> Suggested readings</a></li>
+<li class="chapter" data-level="11.7" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html#suggested-readings-8"><i class="fa fa-check"></i><b>11.7</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="modeling-categorical-relationships.html"><a href="modeling-categorical-relationships.html"><i class="fa fa-check"></i><b>12</b> Modeling categorical relationships</a><ul>
 <li class="chapter" data-level="12.1" data-path="modeling-categorical-relationships.html"><a href="modeling-categorical-relationships.html#example-candy-colors"><i class="fa fa-check"></i><b>12.1</b> Example: Candy colors</a></li>
@@ -340,7 +314,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.4" data-path="modeling-continuous-relationships.html"><a href="modeling-continuous-relationships.html#correlation-and-causation"><i class="fa fa-check"></i><b>13.4</b> Correlation and causation</a><ul>
 <li class="chapter" data-level="13.4.1" data-path="modeling-continuous-relationships.html"><a href="modeling-continuous-relationships.html#causal-graphs"><i class="fa fa-check"></i><b>13.4.1</b> Causal graphs</a></li>
 </ul></li>
-<li class="chapter" data-level="13.5" data-path="modeling-continuous-relationships.html"><a href="modeling-continuous-relationships.html#suggested-readings-10"><i class="fa fa-check"></i><b>13.5</b> Suggested readings</a></li>
+<li class="chapter" data-level="13.5" data-path="modeling-continuous-relationships.html"><a href="modeling-continuous-relationships.html#suggested-readings-9"><i class="fa fa-check"></i><b>13.5</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html"><i class="fa fa-check"></i><b>14</b> The General Linear Model</a><ul>
 <li class="chapter" data-level="14.1" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html#linear-regression"><i class="fa fa-check"></i><b>14.1</b> Linear regression</a><ul>
@@ -356,7 +330,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.4" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html#what-does-predict-really-mean"><i class="fa fa-check"></i><b>14.4</b> What does “predict” really mean?</a><ul>
 <li class="chapter" data-level="14.4.1" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html#cross-validation"><i class="fa fa-check"></i><b>14.4.1</b> Cross-validation</a></li>
 </ul></li>
-<li class="chapter" data-level="14.5" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html#suggested-readings-11"><i class="fa fa-check"></i><b>14.5</b> Suggested readings</a></li>
+<li class="chapter" data-level="14.5" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html#suggested-readings-10"><i class="fa fa-check"></i><b>14.5</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="comparing-means.html"><a href="comparing-means.html"><i class="fa fa-check"></i><b>15</b> Comparing means</a><ul>
 <li class="chapter" data-level="15.1" data-path="comparing-means.html"><a href="comparing-means.html#students-t-test"><i class="fa fa-check"></i><b>15.1</b> Student’s T test</a></li>
@@ -402,10 +376,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="17.6" data-path="doing-reproducible-research.html"><a href="doing-reproducible-research.html#doing-reproducible-data-analysis"><i class="fa fa-check"></i><b>17.6</b> Doing reproducible data analysis</a></li>
 <li class="chapter" data-level="17.7" data-path="doing-reproducible-research.html"><a href="doing-reproducible-research.html#conclusion-doing-better-science"><i class="fa fa-check"></i><b>17.7</b> Conclusion: Doing better science</a></li>
-<li class="chapter" data-level="17.8" data-path="doing-reproducible-research.html"><a href="doing-reproducible-research.html#suggested-readings-12"><i class="fa fa-check"></i><b>17.8</b> Suggested Readings</a></li>
+<li class="chapter" data-level="17.8" data-path="doing-reproducible-research.html"><a href="doing-reproducible-research.html#suggested-readings-11"><i class="fa fa-check"></i><b>17.8</b> Suggested Readings</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>18</b> References</a></li>
-<li class="chapter" data-level="" data-path="references-1.html"><a href="references-1.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
       </nav>
@@ -430,22 +403,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="confidence-intervals-1" class="section level2">
 <h2><span class="header-section-number">10.1</span> Confidence intervals</h2>
 <p>So far in the book we have focused on estimating the specific value of a statistic. For example, let’s say we want to estimate the mean weight of adults in the NHANES dataset. We could take a sample from the dataset and estimate the mean:</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" title="1"><span class="co"># take a sample from adults in NHANES and summarize their weight</span></a>
-<a class="sourceLine" id="cb169-2" title="2"></a>
-<a class="sourceLine" id="cb169-3" title="3">sampSize=<span class="dv">250</span></a>
-<a class="sourceLine" id="cb169-4" title="4">NHANES_sample=<span class="kw">sample_n</span>(NHANES_adult,sampSize)</a>
-<a class="sourceLine" id="cb169-5" title="5"></a>
-<a class="sourceLine" id="cb169-6" title="6">sample_summary &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb169-7" title="7"><span class="st">  </span>NHANES_sample <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb169-8" title="8"><span class="st">  </span><span class="kw">summarize</span>(</a>
-<a class="sourceLine" id="cb169-9" title="9">    <span class="dt">meanWeight=</span><span class="kw">mean</span>(Weight),</a>
-<a class="sourceLine" id="cb169-10" title="10">    <span class="dt">sdWeight=</span><span class="kw">sd</span>(Weight)</a>
-<a class="sourceLine" id="cb169-11" title="11">  )</a>
-<a class="sourceLine" id="cb169-12" title="12"><span class="kw">pander</span>(sample_summary)</a></code></pre></div>
-<table style="width:36%;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># take a sample from adults in NHANES and summarize their weight</span>
+
+sampSize=<span class="dv">250</span>
+NHANES_sample=<span class="kw">sample_n</span>(NHANES_adult,sampSize)
+
+sample_summary &lt;-<span class="st"> </span>
+<span class="st">  </span>NHANES_sample <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarize</span>(
+    <span class="dt">meanWeight=</span><span class="kw">mean</span>(Weight),
+    <span class="dt">sdWeight=</span><span class="kw">sd</span>(Weight)
+  )
+<span class="kw">pander</span>(sample_summary)</code></pre></div>
+<table style="width:32%;">
 <colgroup>
 <col width="18%" />
-<col width="18%" />
+<col width="13%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -463,7 +436,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In this sample, the mean weight was 82.77 kilograms. We refer to this as a <em>point estimate</em> since it provides us with a single number to describe the difference. However, we know from our earlier discussion of sampling error that there is some uncertainty about this estimate, which is described by the standard error. You should also remember that the standard error is determined by two components: the population standard deviation (which is the numerator), and the square root of the sample size (which is in the denominator). The population standard deviation is an unknown but fixed parameter that is not under our control, whereas the sample size <em>is</em> under our control. Thus, we can decrease our uncertainty about the estimate by increasing our sample size – up to the limit of the entire population size, at which point there is no uncertainty at all because we can just calculate the population parameter directly from the data of the entire population.</p>
 <p>You may also remember that earlier we introduced the concept of a <em>confidence interval</em>, which is a way of describing our uncertainty about a statistical estimate. Remember that a confidence interval describes an interval that will on average contain the true population parameter with a given probability; for example, the 95% confidence interval is an interval that will capture the true population parameter 95% of the time. Note again that this is not a statement about the population parameter; any particular confidence interval either does or does not contain the true parameter. As Jerzy Neyman, the inventor of the confidence interval, said:</p>
 <blockquote>
-<p>“The parameter is an unknown constant and no probability statement concerning its value may be made.”<span class="citation">(Neyman 1937)</span></p>
+<p>“The parameter is an unknown constant and no probability statement concerning its value may be made.”<span class="citation">(J Neyman 1937)</span></p>
 </blockquote>
 <p>The confidence interval for the mean is computed as:</p>
 <p><span class="math display">\[
@@ -485,20 +458,18 @@ CI = \bar{X} \pm 1.96*SE
 <p>We can compute the 95% confidence interval in a way similar to the normal distribution example above, but the critical value is determnined by the 2.5th percentile and the 97.5th percentile of the <em>t</em> distribution, which we can compute using the <code>qt()</code> function in R. Thus, the confidence interval for the mean (<span class="math inline">\(\bar{X}\)</span>) is:</p>
 <p><span class="math display">\[
 CI = \bar{X} \pm t_{crit}*SE
-\]</span>
-where <span class="math inline">\(t_{crit}\)</span> is the critical t value.
-For the NHANES weight example (with sample size of 250), the confidence interval would be:</p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" title="1"><span class="co"># compute confidence intervals for weight in NHANES data</span></a>
-<a class="sourceLine" id="cb170-2" title="2"></a>
-<a class="sourceLine" id="cb170-3" title="3">sample_summary &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb170-4" title="4"><span class="st">  </span>sample_summary <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb170-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(</a>
-<a class="sourceLine" id="cb170-6" title="6">    <span class="dt">cutoff_lower =</span> <span class="kw">qt</span>(<span class="fl">0.025</span>,sampSize),</a>
-<a class="sourceLine" id="cb170-7" title="7">    <span class="dt">cutoff_upper =</span> <span class="kw">qt</span>(<span class="fl">0.975</span>,sampSize),</a>
-<a class="sourceLine" id="cb170-8" title="8">    <span class="dt">CI_lower =</span> meanWeight <span class="op">+</span><span class="st"> </span>cutoff_lower<span class="op">*</span>sdWeight<span class="op">/</span><span class="kw">sqrt</span>(sampSize),</a>
-<a class="sourceLine" id="cb170-9" title="9">    <span class="dt">CI_upper =</span> meanWeight <span class="op">+</span><span class="st"> </span>cutoff_upper<span class="op">*</span>sdWeight<span class="op">/</span><span class="kw">sqrt</span>(sampSize)</a>
-<a class="sourceLine" id="cb170-10" title="10">  )</a>
-<a class="sourceLine" id="cb170-11" title="11"><span class="kw">pander</span>(sample_summary)</a></code></pre></div>
+\]</span> where <span class="math inline">\(t_{crit}\)</span> is the critical t value. For the NHANES weight example (with sample size of 250), the confidence interval would be:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute confidence intervals for weight in NHANES data</span>
+
+sample_summary &lt;-<span class="st"> </span>
+<span class="st">  </span>sample_summary <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">cutoff_lower =</span> <span class="kw">qt</span>(<span class="fl">0.025</span>,sampSize),
+    <span class="dt">cutoff_upper =</span> <span class="kw">qt</span>(<span class="fl">0.975</span>,sampSize),
+    <span class="dt">CI_lower =</span> meanWeight <span class="op">+</span><span class="st"> </span>cutoff_lower<span class="op">*</span>sdWeight<span class="op">/</span><span class="kw">sqrt</span>(sampSize),
+    <span class="dt">CI_upper =</span> meanWeight <span class="op">+</span><span class="st"> </span>cutoff_upper<span class="op">*</span>sdWeight<span class="op">/</span><span class="kw">sqrt</span>(sampSize)
+  )
+<span class="kw">pander</span>(sample_summary)</code></pre></div>
 <table>
 <colgroup>
 <col width="17%" />
@@ -545,20 +516,20 @@ Figure 10.1: An example of the effect of sample size on the width of the confide
 <h3><span class="header-section-number">10.1.4</span> Computing confidence intervals using the bootstrap</h3>
 <p>In some cases we can’t assume normality, or we don’t know the sampling distribution of the statistic. In these cases, we can use the bootstrap (which we introduced in Chapter <a href="resampling-and-simulation.html#resampling-and-simulation">8</a>). As a reminder, the bootstrap involves repeatedly resampling the data <em>with replacement</em>, and then using the distribution of the statistic computed on those samples as a surrogate for the sampling distribution of the statistic.</p>
 <p>Earlier we ran the bootstrap using hand-crafted code, but R includes a package called <code>boot</code> that we can use to run the bootstrap and compute confidence intervals. Let’s use it to compute the confidence interval for weight in our NHANES sample.</p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" title="1"><span class="co"># compute bootstrap confidence intervals on NHANES weight data</span></a>
-<a class="sourceLine" id="cb171-2" title="2"></a>
-<a class="sourceLine" id="cb171-3" title="3">meanWeight &lt;-<span class="st"> </span><span class="cf">function</span>(df,foo){</a>
-<a class="sourceLine" id="cb171-4" title="4">  <span class="kw">return</span>(<span class="kw">mean</span>(df[foo,]<span class="op">$</span>Weight))</a>
-<a class="sourceLine" id="cb171-5" title="5">}</a>
-<a class="sourceLine" id="cb171-6" title="6"></a>
-<a class="sourceLine" id="cb171-7" title="7">bs &lt;-<span class="st"> </span><span class="kw">boot</span>(NHANES_sample,meanWeight,<span class="dv">1000</span>)</a>
-<a class="sourceLine" id="cb171-8" title="8"><span class="co"># use the percentile bootstrap</span></a>
-<a class="sourceLine" id="cb171-9" title="9">bootci &lt;-<span class="st"> </span><span class="kw">boot.ci</span>(bs,<span class="dt">type=</span><span class="st">&#39;perc&#39;</span>)</a>
-<a class="sourceLine" id="cb171-10" title="10"><span class="kw">print</span>(<span class="st">&#39;Bootstrap confidence intervals:&#39;</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute bootstrap confidence intervals on NHANES weight data</span>
+
+meanWeight &lt;-<span class="st"> </span><span class="cf">function</span>(df,foo){
+  <span class="kw">return</span>(<span class="kw">mean</span>(df[foo,]<span class="op">$</span>Weight))
+}
+
+bs &lt;-<span class="st"> </span><span class="kw">boot</span>(NHANES_sample,meanWeight,<span class="dv">1000</span>)
+<span class="co"># use the percentile bootstrap</span>
+bootci &lt;-<span class="st"> </span><span class="kw">boot.ci</span>(bs,<span class="dt">type=</span><span class="st">&#39;perc&#39;</span>)
+<span class="kw">print</span>(<span class="st">&#39;Bootstrap confidence intervals:&#39;</span>)</code></pre></div>
 <pre><code>## [1] &quot;Bootstrap confidence intervals:&quot;</code></pre>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" title="1"><span class="kw">data.frame</span>(<span class="dt">lower=</span>bootci<span class="op">$</span>perc[<span class="dv">4</span>],</a>
-<a class="sourceLine" id="cb173-2" title="2">           <span class="dt">upper=</span>bootci<span class="op">$</span>perc[<span class="dv">5</span>]) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb173-3" title="3"><span class="st">  </span><span class="kw">pander</span>()</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data.frame</span>(<span class="dt">lower=</span>bootci<span class="op">$</span>perc[<span class="dv">4</span>],
+           <span class="dt">upper=</span>bootci<span class="op">$</span>perc[<span class="dv">5</span>]) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pander</span>()</code></pre></div>
 <table style="width:22%;">
 <colgroup>
 <col width="11%" />
@@ -601,13 +572,12 @@ d = \frac{\bar{X}_1 - \bar{X}_2}{s}
 <p>where <span class="math inline">\(\bar{X}_1\)</span> and <span class="math inline">\(\bar{X}_2\)</span> are the means of the two groups, and <span class="math inline">\(s\)</span> is the pooled standard deviation (which is a combination of the standard deviations for the two samples, weighted by their sample sizes):</p>
 <p><span class="math display">\[
 s = \sqrt{\frac{(n_1 - 1)s^2_1 + (n_2 - 1)s^2_2 }{n_1 +n_2 -2}}
-\]</span>
-where <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span> are the sample sizes and <span class="math inline">\(s^2_1\)</span> and <span class="math inline">\(s^2_2\)</span> are the standard deviations for the two groups respectively.</p>
+\]</span> where <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span> are the sample sizes and <span class="math inline">\(s^2_1\)</span> and <span class="math inline">\(s^2_2\)</span> are the standard deviations for the two groups respectively.</p>
 <p>There is a commonly used scale for interpreting the size of an effect in terms of Cohen’s d:</p>
-<table style="width:32%;">
+<table style="width:31%;">
 <colgroup>
 <col width="8%" />
-<col width="23%" />
+<col width="22%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -631,25 +601,25 @@ where <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n
 </tbody>
 </table>
 <p>It can be useful to look at some commonly understood effects to help understand these interpretations.</p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" title="1"><span class="co"># compute effect size for gender difference in NHANES</span></a>
-<a class="sourceLine" id="cb174-2" title="2"></a>
-<a class="sourceLine" id="cb174-3" title="3">NHANES_sample &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb174-4" title="4"><span class="st">  </span>NHANES_adult <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb174-5" title="5"><span class="st">  </span><span class="kw">drop_na</span>(Height) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb174-6" title="6"><span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">250</span>)</a>
-<a class="sourceLine" id="cb174-7" title="7"></a>
-<a class="sourceLine" id="cb174-8" title="8">hsum &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb174-9" title="9"><span class="st">  </span>NHANES_sample  <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb174-10" title="10"><span class="st">  </span><span class="kw">group_by</span>(Gender) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb174-11" title="11"><span class="st">  </span><span class="kw">summarize</span>(</a>
-<a class="sourceLine" id="cb174-12" title="12">    <span class="dt">meanHeight=</span><span class="kw">mean</span>(Height),</a>
-<a class="sourceLine" id="cb174-13" title="13">    <span class="dt">varHeight=</span><span class="kw">var</span>(Height),</a>
-<a class="sourceLine" id="cb174-14" title="14">    <span class="dt">n=</span><span class="kw">n</span>()</a>
-<a class="sourceLine" id="cb174-15" title="15">  )</a>
-<a class="sourceLine" id="cb174-16" title="16"></a>
-<a class="sourceLine" id="cb174-17" title="17">s_height_gender &lt;-<span class="st"> </span><span class="kw">sqrt</span>(((hsum<span class="op">$</span>n[<span class="dv">1</span>]<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span>hsum<span class="op">$</span>varHeight[<span class="dv">1</span>] <span class="op">+</span>(hsum<span class="op">$</span>n[<span class="dv">2</span>]<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span>hsum<span class="op">$</span>varHeight[<span class="dv">2</span>])<span class="op">/</span>(hsum<span class="op">$</span>n[<span class="dv">1</span>]<span class="op">+</span>hsum<span class="op">$</span>n[<span class="dv">2</span>]<span class="op">-</span><span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb174-18" title="18">d_height_gender &lt;-<span class="st"> </span>(hsum<span class="op">$</span>meanHeight[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>hsum<span class="op">$</span>meanHeight[<span class="dv">1</span>])<span class="op">/</span>s_height_gender</a>
-<a class="sourceLine" id="cb174-19" title="19"><span class="kw">sprintf</span>(<span class="st">&#39;Cohens d for male vs. female height = %0.2f&#39;</span>,d_height_gender)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute effect size for gender difference in NHANES</span>
+
+NHANES_sample &lt;-<span class="st"> </span>
+<span class="st">  </span>NHANES_adult <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">drop_na</span>(Height) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">250</span>)
+
+hsum &lt;-<span class="st"> </span>
+<span class="st">  </span>NHANES_sample  <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(Gender) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarize</span>(
+    <span class="dt">meanHeight=</span><span class="kw">mean</span>(Height),
+    <span class="dt">varHeight=</span><span class="kw">var</span>(Height),
+    <span class="dt">n=</span><span class="kw">n</span>()
+  )
+
+s_height_gender &lt;-<span class="st"> </span><span class="kw">sqrt</span>(((hsum<span class="op">$</span>n[<span class="dv">1</span>]<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span>hsum<span class="op">$</span>varHeight[<span class="dv">1</span>] <span class="op">+</span>(hsum<span class="op">$</span>n[<span class="dv">2</span>]<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span>hsum<span class="op">$</span>varHeight[<span class="dv">2</span>])<span class="op">/</span>(hsum<span class="op">$</span>n[<span class="dv">1</span>]<span class="op">+</span>hsum<span class="op">$</span>n[<span class="dv">2</span>]<span class="op">-</span><span class="dv">2</span>))
+d_height_gender &lt;-<span class="st"> </span>(hsum<span class="op">$</span>meanHeight[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>hsum<span class="op">$</span>meanHeight[<span class="dv">1</span>])<span class="op">/</span>s_height_gender
+<span class="kw">sprintf</span>(<span class="st">&#39;Cohens d for male vs. female height = %0.2f&#39;</span>,d_height_gender)</code></pre></div>
 <pre><code>## [1] &quot;Cohens d for male vs. female height = 1.95&quot;</code></pre>
 <p>The effect size for gender differences in height (d = 1.95) is huge by reference to our table above. We can also see this by looking at the distributions of male and female heights in our sample. Figure <a href="ci-effect-size-power.html#fig:genderHist">10.2</a> shows that the two distributions are quite well separated, though still overlapping, highlighting the fact that even when there is a very large effect size for the difference between two groups, there will be individuals from each group that are more like the other group.</p>
 <div class="figure"><span id="fig:genderHist"></span>
@@ -678,16 +648,16 @@ Figure 10.3: Examples of various levels of Pearson’s r.
 odds\ of\ A = \frac{P(A)}{P(\neg A)}
 \]</span></p>
 <p>The odds ratio is simply the ratio of two odds. For example, let’s take the case of smoking and lung cancer. A study published in the International Journal of Cancer in 2012 <span class="citation">(Pesch et al. 2012)</span> combined data regarding the occurrence of lung cancer in smokers and individuals who have never smoked across a number of different studies. Note that these data come from case-control studies, which means that participants in the studies were recruited because they either did or did not have cancer; their smoking status was then examined. These numbers thus do not represent the prevalence of cancer amongst smokers in the general population – but they can tell us about the relationship between cancer and smoking.</p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" title="1"><span class="co"># create table for cancer occurrence depending on smoking status</span></a>
-<a class="sourceLine" id="cb176-2" title="2">smokingDf &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">NeverSmoked=</span><span class="kw">c</span>(<span class="dv">2883</span>,<span class="dv">220</span>),</a>
-<a class="sourceLine" id="cb176-3" title="3">                    <span class="dt">CurrentSmoker=</span><span class="kw">c</span>(<span class="dv">3829</span>,<span class="dv">6784</span>),</a>
-<a class="sourceLine" id="cb176-4" title="4">                    <span class="dt">row.names=</span><span class="kw">c</span>(<span class="st">&#39;NoCancer&#39;</span>,<span class="st">&#39;Cancer&#39;</span>))</a>
-<a class="sourceLine" id="cb176-5" title="5"><span class="kw">pander</span>(smokingDf)</a></code></pre></div>
-<table style="width:58%;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create table for cancer occurrence depending on smoking status</span>
+smokingDf &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">NeverSmoked=</span><span class="kw">c</span>(<span class="dv">2883</span>,<span class="dv">220</span>),
+                    <span class="dt">CurrentSmoker=</span><span class="kw">c</span>(<span class="dv">3829</span>,<span class="dv">6784</span>),
+                    <span class="dt">row.names=</span><span class="kw">c</span>(<span class="st">&#39;NoCancer&#39;</span>,<span class="st">&#39;Cancer&#39;</span>))
+<span class="kw">pander</span>(smokingDf)</code></pre></div>
+<table style="width:57%;">
 <colgroup>
 <col width="19%" />
 <col width="22%" />
-<col width="16%" />
+<col width="15%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -710,21 +680,21 @@ odds\ of\ A = \frac{P(A)}{P(\neg A)}
 </tbody>
 </table>
 <p>We can convert these numbers to odds ratios for each of the groups:</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" title="1"><span class="co"># convert smoking data to odds</span></a>
-<a class="sourceLine" id="cb177-2" title="2"></a>
-<a class="sourceLine" id="cb177-3" title="3">smokingDf &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb177-4" title="4"><span class="st">  </span>smokingDf <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb177-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(</a>
-<a class="sourceLine" id="cb177-6" title="6">    <span class="dt">pNeverSmoked=</span>NeverSmoked<span class="op">/</span><span class="kw">sum</span>(NeverSmoked),</a>
-<a class="sourceLine" id="cb177-7" title="7">    <span class="dt">pCurrentSmoker=</span>CurrentSmoker<span class="op">/</span><span class="kw">sum</span>(CurrentSmoker)</a>
-<a class="sourceLine" id="cb177-8" title="8">  )</a>
-<a class="sourceLine" id="cb177-9" title="9">oddsCancerNeverSmoked &lt;-<span class="st"> </span>smokingDf<span class="op">$</span>NeverSmoked[<span class="dv">2</span>]<span class="op">/</span>smokingDf<span class="op">$</span>NeverSmoked[<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb177-10" title="10">oddsCancerCurrentSmoker &lt;-<span class="st"> </span>smokingDf<span class="op">$</span>CurrentSmoker[<span class="dv">2</span>]<span class="op">/</span>smokingDf<span class="op">$</span>CurrentSmoker[<span class="dv">1</span>]</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># convert smoking data to odds</span>
+
+smokingDf &lt;-<span class="st"> </span>
+<span class="st">  </span>smokingDf <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">pNeverSmoked=</span>NeverSmoked<span class="op">/</span><span class="kw">sum</span>(NeverSmoked),
+    <span class="dt">pCurrentSmoker=</span>CurrentSmoker<span class="op">/</span><span class="kw">sum</span>(CurrentSmoker)
+  )
+oddsCancerNeverSmoked &lt;-<span class="st"> </span>smokingDf<span class="op">$</span>NeverSmoked[<span class="dv">2</span>]<span class="op">/</span>smokingDf<span class="op">$</span>NeverSmoked[<span class="dv">1</span>]
+oddsCancerCurrentSmoker &lt;-<span class="st"> </span>smokingDf<span class="op">$</span>CurrentSmoker[<span class="dv">2</span>]<span class="op">/</span>smokingDf<span class="op">$</span>CurrentSmoker[<span class="dv">1</span>]</code></pre></div>
 <p>The odds of someone having lung cancer who has never smoked is 0.08 whereas the odds of a current smoker having lung cancer is 1.77. The ratio of these odds tells us about the relatively likelihood of cancer between the two groups:</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" title="1"><span class="co">#compute odds ratio</span></a>
-<a class="sourceLine" id="cb178-2" title="2"></a>
-<a class="sourceLine" id="cb178-3" title="3">oddsRatio &lt;-<span class="st"> </span>oddsCancerCurrentSmoker<span class="op">/</span>oddsCancerNeverSmoked</a>
-<a class="sourceLine" id="cb178-4" title="4"><span class="kw">sprintf</span>(<span class="st">&#39;odds ratio of cancer for smokers vs. nonsmokers: %0.3f&#39;</span>,oddsRatio)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#compute odds ratio</span>
+
+oddsRatio &lt;-<span class="st"> </span>oddsCancerCurrentSmoker<span class="op">/</span>oddsCancerNeverSmoked
+<span class="kw">sprintf</span>(<span class="st">&#39;odds ratio of cancer for smokers vs. nonsmokers: %0.3f&#39;</span>,oddsRatio)</code></pre></div>
 <pre><code>## [1] &quot;odds ratio of cancer for smokers vs. nonsmokers: 23.218&quot;</code></pre>
 <p>The odds ratio of 23.22 tells us that the odds of cancer in smokers are roughly 23 times higher than never-smokers.</p>
 </div>
@@ -744,34 +714,34 @@ power = 1 - \beta
 <li>Type I error rate: There is a relationship between Type I error and power such that (all else being equal) decreasing Type I error will also decrease power.</li>
 </ul>
 <p>We can see this through simulation. First let’s simulate a single experiment, in which we compare the means of two groups using a standard t-test. We will vary the size of the effect (specified in terms of Cohen’s d), the Type I error rate, and the sample size, and for each of these we will examine how the proportion of significant results (i.e. power) is affected. Figure <a href="ci-effect-size-power.html#fig:plotPowerSim">10.4</a> shows an example of how power changes as a function of these factors.</p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" title="1"><span class="co"># Simulate power as a function of sample size, effect size, and alpha</span></a>
-<a class="sourceLine" id="cb180-2" title="2"></a>
-<a class="sourceLine" id="cb180-3" title="3"><span class="co"># create a set of functions to generate simulated results</span></a>
-<a class="sourceLine" id="cb180-4" title="4">powerDf &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb180-5" title="5"><span class="st">  </span><span class="kw">expand.grid</span>(<span class="dt">sampSizePerGroup =</span> <span class="kw">c</span>(<span class="dv">12</span>,<span class="dv">24</span>,<span class="dv">48</span>,<span class="dv">96</span>),</a>
-<a class="sourceLine" id="cb180-6" title="6">              <span class="dt">effectSize=</span><span class="kw">c</span>(.<span class="dv">2</span>,.<span class="dv">5</span>,.<span class="dv">8</span>),</a>
-<a class="sourceLine" id="cb180-7" title="7">              <span class="dt">alpha=</span><span class="kw">c</span>(<span class="fl">0.005</span>,<span class="fl">0.05</span>)</a>
-<a class="sourceLine" id="cb180-8" title="8">    ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb180-9" title="9"><span class="st">  </span>tidyr<span class="op">::</span><span class="kw">expand</span>(effectSize,sampSizePerGroup,alpha) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb180-10" title="10"><span class="st">  </span><span class="kw">group_by</span>(effectSize,sampSizePerGroup,alpha)</a>
-<a class="sourceLine" id="cb180-11" title="11"></a>
-<a class="sourceLine" id="cb180-12" title="12">runPowerSim &lt;-<span class="st"> </span><span class="cf">function</span>(df,<span class="dt">nsims=</span><span class="dv">1000</span>){</a>
-<a class="sourceLine" id="cb180-13" title="13">  p &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="ot">NA</span>,<span class="dt">dim=</span>nsims)</a>
-<a class="sourceLine" id="cb180-14" title="14">  <span class="cf">for</span> (s <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nsims){</a>
-<a class="sourceLine" id="cb180-15" title="15">    data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">y=</span><span class="kw">rnorm</span>(df<span class="op">$</span>sampSizePerGroup<span class="op">*</span><span class="dv">2</span>),</a>
-<a class="sourceLine" id="cb180-16" title="16">                    <span class="dt">group=</span><span class="kw">array</span>(<span class="dv">0</span>,<span class="dt">dim=</span>df<span class="op">$</span>sampSizePerGroup<span class="op">*</span><span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb180-17" title="17">    </a>
-<a class="sourceLine" id="cb180-18" title="18">    data<span class="op">$</span>group[<span class="dv">1</span><span class="op">:</span>df<span class="op">$</span>sampSizePerGroup]=<span class="dv">1</span></a>
-<a class="sourceLine" id="cb180-19" title="19">    data<span class="op">$</span>y[data<span class="op">$</span>group<span class="op">==</span><span class="dv">1</span>]=data<span class="op">$</span>y[data<span class="op">$</span>group<span class="op">==</span><span class="dv">1</span>]<span class="op">+</span>df<span class="op">$</span>effectSize</a>
-<a class="sourceLine" id="cb180-20" title="20">    tt &lt;-<span class="st"> </span><span class="kw">t.test</span>(y<span class="op">~</span>group,<span class="dt">data=</span>data)</a>
-<a class="sourceLine" id="cb180-21" title="21">    p[s] &lt;-<span class="st"> </span>tt<span class="op">$</span>p.value</a>
-<a class="sourceLine" id="cb180-22" title="22">  }</a>
-<a class="sourceLine" id="cb180-23" title="23">  <span class="kw">return</span>(<span class="kw">data.frame</span>(<span class="dt">power=</span><span class="kw">mean</span>(p<span class="op">&lt;</span>df<span class="op">$</span>alpha)))</a>
-<a class="sourceLine" id="cb180-24" title="24">}</a>
-<a class="sourceLine" id="cb180-25" title="25"></a>
-<a class="sourceLine" id="cb180-26" title="26"><span class="co"># run the simulation</span></a>
-<a class="sourceLine" id="cb180-27" title="27">powerSimResults &lt;-<span class="st"> </span>powerDf <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb180-28" title="28"><span class="st">  </span><span class="kw">do</span>(<span class="kw">runPowerSim</span>(.))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Simulate power as a function of sample size, effect size, and alpha</span>
+
+<span class="co"># create a set of functions to generate simulated results</span>
+powerDf &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">expand.grid</span>(<span class="dt">sampSizePerGroup =</span> <span class="kw">c</span>(<span class="dv">12</span>,<span class="dv">24</span>,<span class="dv">48</span>,<span class="dv">96</span>),
+              <span class="dt">effectSize=</span><span class="kw">c</span>(.<span class="dv">2</span>,.<span class="dv">5</span>,.<span class="dv">8</span>),
+              <span class="dt">alpha=</span><span class="kw">c</span>(<span class="fl">0.005</span>,<span class="fl">0.05</span>)
+    ) <span class="op">%&gt;%</span>
+<span class="st">  </span>tidyr<span class="op">::</span><span class="kw">expand</span>(effectSize,sampSizePerGroup,alpha) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(effectSize,sampSizePerGroup,alpha)
+
+runPowerSim &lt;-<span class="st"> </span><span class="cf">function</span>(df,<span class="dt">nsims=</span><span class="dv">1000</span>){
+  p &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="ot">NA</span>,<span class="dt">dim=</span>nsims)
+  <span class="cf">for</span> (s <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nsims){
+    data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">y=</span><span class="kw">rnorm</span>(df<span class="op">$</span>sampSizePerGroup<span class="op">*</span><span class="dv">2</span>),
+                    <span class="dt">group=</span><span class="kw">array</span>(<span class="dv">0</span>,<span class="dt">dim=</span>df<span class="op">$</span>sampSizePerGroup<span class="op">*</span><span class="dv">2</span>))
+    
+    data<span class="op">$</span>group[<span class="dv">1</span><span class="op">:</span>df<span class="op">$</span>sampSizePerGroup]=<span class="dv">1</span>
+    data<span class="op">$</span>y[data<span class="op">$</span>group<span class="op">==</span><span class="dv">1</span>]=data<span class="op">$</span>y[data<span class="op">$</span>group<span class="op">==</span><span class="dv">1</span>]<span class="op">+</span>df<span class="op">$</span>effectSize
+    tt &lt;-<span class="st"> </span><span class="kw">t.test</span>(y<span class="op">~</span>group,<span class="dt">data=</span>data)
+    p[s] &lt;-<span class="st"> </span>tt<span class="op">$</span>p.value
+  }
+  <span class="kw">return</span>(<span class="kw">data.frame</span>(<span class="dt">power=</span><span class="kw">mean</span>(p<span class="op">&lt;</span>df<span class="op">$</span>alpha)))
+}
+
+<span class="co"># run the simulation</span>
+powerSimResults &lt;-<span class="st"> </span>powerDf <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">do</span>(<span class="kw">runPowerSim</span>(.))</code></pre></div>
 <div class="figure"><span id="fig:plotPowerSim"></span>
 <img src="StatsThinking21_files/figure-html/plotPowerSim-1.png" alt="Results from power simulation, showing power as a function of sample size, with effect sizes shown as different colors, and alpha shown as line type. The standard criterion of 80% power is shown by the dotted black line." width="576" height="50%" />
 <p class="caption">
@@ -784,8 +754,8 @@ Figure 10.4: Results from power simulation, showing power as a function of sampl
 <h3><span class="header-section-number">10.3.1</span> Power analysis</h3>
 <p>Fortunately, there are tools available that allow us to determine the statistical power of an experiment. The most common use of these tools is in planning an experiment, when we would like to determine how large our sample needs to be in order to have sufficient power to find our effect of interest.</p>
 <p>Let’s say that we are interested in running a study of how a particular personality trait differs between users of iOS versus Android devices. Our plan is collect two groups of individuals and measure them on the personality trait, and then compare the two groups using a t-test. In order to determine the necessary sample size, we can use the <code>pwr.t.test()</code> function from the <code>pwr</code> library.</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" title="1"><span class="co"># power analysis for Cohen&#39;s d = 0.5, for 80% power with alpha = 0.05</span></a>
-<a class="sourceLine" id="cb181-2" title="2"><span class="kw">pwr.t.test</span>(<span class="dt">d=</span><span class="fl">0.5</span>,<span class="dt">power=</span><span class="fl">0.8</span>,<span class="dt">sig.level=</span><span class="fl">0.05</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># power analysis for Cohen&#39;s d = 0.5, for 80% power with alpha = 0.05</span>
+<span class="kw">pwr.t.test</span>(<span class="dt">d=</span><span class="fl">0.5</span>,<span class="dt">power=</span><span class="fl">0.8</span>,<span class="dt">sig.level=</span><span class="fl">0.05</span>)</code></pre></div>
 <pre><code>## 
 ##      Two-sample t test power calculation 
 ## 
@@ -811,7 +781,7 @@ Figure 10.4: Results from power simulation, showing power as a function of sampl
 <p>However, it’s rare in science to be doing an experiment where we expect to find such a large effect – just as we don’t need statistics to tell us that 16-year-olds are taller than than 6-year-olds. When we run a power analysis, we need to specify an effect size that is plausible for our study, which would usually come from previous research. However, in Chapter <a href="#doing-reproducible-science"><strong>??</strong></a> we will discuss a phenomenon known as the “winner’s curse” that likely results in published effect sizes being larger than the true effect size, so this should also be kept in mind.</p>
 </div>
 </div>
-<div id="suggested-readings-8" class="section level2">
+<div id="suggested-readings-7" class="section level2">
 <h2><span class="header-section-number">10.4</span> Suggested readings</h2>
 <ul>
 <li><a href="http://www.ejwagenmakers.com/inpress/HoekstraEtAlPBR.pdf">Robust misinterpretation of confidence intervals, by Hoekstra et al.</a></li>
@@ -871,7 +841,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "true";
+    var src = "";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

@@ -62,67 +62,41 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 </head>
@@ -237,7 +211,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.9.1" data-path="data-visualization.html"><a href="data-visualization.html#perceptual-limitations"><i class="fa fa-check"></i><b>6.9.1</b> Perceptual limitations</a></li>
 </ul></li>
 <li class="chapter" data-level="6.10" data-path="data-visualization.html"><a href="data-visualization.html#correcting-for-other-factors"><i class="fa fa-check"></i><b>6.10</b> Correcting for other factors</a></li>
-<li class="chapter" data-level="6.11" data-path="data-visualization.html"><a href="data-visualization.html#suggested-readings-4"><i class="fa fa-check"></i><b>6.11</b> Suggested readings</a></li>
+<li class="chapter" data-level="6.11" data-path="data-visualization.html"><a href="data-visualization.html#suggested-readings-and-videos"><i class="fa fa-check"></i><b>6.11</b> Suggested readings and videos</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="sampling-1.html"><a href="sampling-1.html"><i class="fa fa-check"></i><b>7</b> Sampling</a><ul>
 <li class="chapter" data-level="7.1" data-path="sampling-1.html"><a href="sampling-1.html#how-do-we-sample"><i class="fa fa-check"></i><b>7.1</b> How do we sample?</a></li>
@@ -245,7 +219,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3" data-path="sampling-1.html"><a href="sampling-1.html#standard-error-of-the-mean"><i class="fa fa-check"></i><b>7.3</b> Standard error of the mean</a></li>
 <li class="chapter" data-level="7.4" data-path="sampling-1.html"><a href="sampling-1.html#the-central-limit-theorem"><i class="fa fa-check"></i><b>7.4</b> The Central Limit Theorem</a></li>
 <li class="chapter" data-level="7.5" data-path="sampling-1.html"><a href="sampling-1.html#confidence-intervals"><i class="fa fa-check"></i><b>7.5</b> Confidence intervals</a></li>
-<li class="chapter" data-level="7.6" data-path="sampling-1.html"><a href="sampling-1.html#suggested-readings-5"><i class="fa fa-check"></i><b>7.6</b> Suggested readings</a></li>
+<li class="chapter" data-level="7.6" data-path="sampling-1.html"><a href="sampling-1.html#suggested-readings-4"><i class="fa fa-check"></i><b>7.6</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html"><i class="fa fa-check"></i><b>8</b> Resampling and simulation</a><ul>
 <li class="chapter" data-level="8.1" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html#monte-carlo-simulation"><i class="fa fa-check"></i><b>8.1</b> Monte Carlo simulation</a></li>
@@ -255,7 +229,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html#using-simulation-for-statistics-the-bootstrap"><i class="fa fa-check"></i><b>8.5</b> Using simulation for statistics: The bootstrap</a><ul>
 <li class="chapter" data-level="8.5.1" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html#computing-the-bootstrap"><i class="fa fa-check"></i><b>8.5.1</b> Computing the bootstrap</a></li>
 </ul></li>
-<li class="chapter" data-level="8.6" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html#suggested-readings-6"><i class="fa fa-check"></i><b>8.6</b> Suggested readings</a></li>
+<li class="chapter" data-level="8.6" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html#suggested-readings-5"><i class="fa fa-check"></i><b>8.6</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html"><i class="fa fa-check"></i><b>9</b> Hypothesis testing</a><ul>
 <li class="chapter" data-level="9.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#null-hypothesis-statistical-testing-nhst"><i class="fa fa-check"></i><b>9.1</b> Null Hypothesis Statistical Testing (NHST)</a></li>
@@ -270,7 +244,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.3.7" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#what-does-a-significant-result-mean"><i class="fa fa-check"></i><b>9.3.7</b> What does a significant result mean?</a></li>
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#nhst-in-a-modern-context-multiple-testing"><i class="fa fa-check"></i><b>9.4</b> NHST in a modern context: Multiple testing</a></li>
-<li class="chapter" data-level="9.5" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#suggested-readings-7"><i class="fa fa-check"></i><b>9.5</b> Suggested readings</a></li>
+<li class="chapter" data-level="9.5" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#suggested-readings-6"><i class="fa fa-check"></i><b>9.5</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html"><i class="fa fa-check"></i><b>10</b> Confidence intervals, effect sizes, and statistical power</a><ul>
 <li class="chapter" data-level="10.1" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#confidence-intervals-1"><i class="fa fa-check"></i><b>10.1</b> Confidence intervals</a><ul>
@@ -288,7 +262,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#statistical-power"><i class="fa fa-check"></i><b>10.3</b> Statistical power</a><ul>
 <li class="chapter" data-level="10.3.1" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#power-analysis"><i class="fa fa-check"></i><b>10.3.1</b> Power analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#suggested-readings-8"><i class="fa fa-check"></i><b>10.4</b> Suggested readings</a></li>
+<li class="chapter" data-level="10.4" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#suggested-readings-7"><i class="fa fa-check"></i><b>10.4</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html"><i class="fa fa-check"></i><b>11</b> Bayesian statistics</a><ul>
 <li class="chapter" data-level="11.1" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html#generative-models"><i class="fa fa-check"></i><b>11.1</b> Generative models</a></li>
@@ -315,7 +289,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.6.1" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html#bayes-factors"><i class="fa fa-check"></i><b>11.6.1</b> Bayes factors</a></li>
 <li class="chapter" data-level="11.6.2" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html#bayes-factors-for-statistical-hypotheses"><i class="fa fa-check"></i><b>11.6.2</b> Bayes factors for statistical hypotheses</a></li>
 </ul></li>
-<li class="chapter" data-level="11.7" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html#suggested-readings-9"><i class="fa fa-check"></i><b>11.7</b> Suggested readings</a></li>
+<li class="chapter" data-level="11.7" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html#suggested-readings-8"><i class="fa fa-check"></i><b>11.7</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="modeling-categorical-relationships.html"><a href="modeling-categorical-relationships.html"><i class="fa fa-check"></i><b>12</b> Modeling categorical relationships</a><ul>
 <li class="chapter" data-level="12.1" data-path="modeling-categorical-relationships.html"><a href="modeling-categorical-relationships.html#example-candy-colors"><i class="fa fa-check"></i><b>12.1</b> Example: Candy colors</a></li>
@@ -340,7 +314,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.4" data-path="modeling-continuous-relationships.html"><a href="modeling-continuous-relationships.html#correlation-and-causation"><i class="fa fa-check"></i><b>13.4</b> Correlation and causation</a><ul>
 <li class="chapter" data-level="13.4.1" data-path="modeling-continuous-relationships.html"><a href="modeling-continuous-relationships.html#causal-graphs"><i class="fa fa-check"></i><b>13.4.1</b> Causal graphs</a></li>
 </ul></li>
-<li class="chapter" data-level="13.5" data-path="modeling-continuous-relationships.html"><a href="modeling-continuous-relationships.html#suggested-readings-10"><i class="fa fa-check"></i><b>13.5</b> Suggested readings</a></li>
+<li class="chapter" data-level="13.5" data-path="modeling-continuous-relationships.html"><a href="modeling-continuous-relationships.html#suggested-readings-9"><i class="fa fa-check"></i><b>13.5</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html"><i class="fa fa-check"></i><b>14</b> The General Linear Model</a><ul>
 <li class="chapter" data-level="14.1" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html#linear-regression"><i class="fa fa-check"></i><b>14.1</b> Linear regression</a><ul>
@@ -356,7 +330,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.4" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html#what-does-predict-really-mean"><i class="fa fa-check"></i><b>14.4</b> What does “predict” really mean?</a><ul>
 <li class="chapter" data-level="14.4.1" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html#cross-validation"><i class="fa fa-check"></i><b>14.4.1</b> Cross-validation</a></li>
 </ul></li>
-<li class="chapter" data-level="14.5" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html#suggested-readings-11"><i class="fa fa-check"></i><b>14.5</b> Suggested readings</a></li>
+<li class="chapter" data-level="14.5" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html#suggested-readings-10"><i class="fa fa-check"></i><b>14.5</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="comparing-means.html"><a href="comparing-means.html"><i class="fa fa-check"></i><b>15</b> Comparing means</a><ul>
 <li class="chapter" data-level="15.1" data-path="comparing-means.html"><a href="comparing-means.html#students-t-test"><i class="fa fa-check"></i><b>15.1</b> Student’s T test</a></li>
@@ -402,10 +376,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="17.6" data-path="doing-reproducible-research.html"><a href="doing-reproducible-research.html#doing-reproducible-data-analysis"><i class="fa fa-check"></i><b>17.6</b> Doing reproducible data analysis</a></li>
 <li class="chapter" data-level="17.7" data-path="doing-reproducible-research.html"><a href="doing-reproducible-research.html#conclusion-doing-better-science"><i class="fa fa-check"></i><b>17.7</b> Conclusion: Doing better science</a></li>
-<li class="chapter" data-level="17.8" data-path="doing-reproducible-research.html"><a href="doing-reproducible-research.html#suggested-readings-12"><i class="fa fa-check"></i><b>17.8</b> Suggested Readings</a></li>
+<li class="chapter" data-level="17.8" data-path="doing-reproducible-research.html"><a href="doing-reproducible-research.html#suggested-readings-11"><i class="fa fa-check"></i><b>17.8</b> Suggested Readings</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>18</b> References</a></li>
-<li class="chapter" data-level="" data-path="references-1.html"><a href="references-1.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
       </nav>
@@ -432,8 +405,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In this chapter we will introduce the concept of a Monte Carlo simulation and discuss how they can be used to perform statistical analyses.</p>
 <div id="monte-carlo-simulation" class="section level2">
 <h2><span class="header-section-number">8.1</span> Monte Carlo simulation</h2>
-<p>The concept of Monte Carlo simulation was devised by the mathematicians Stan Ulam and Nicholas Metropolis, who were working to develop an atomic weapon as part of the Manhattan Project. They needed to compute the average distance that a neutron would travel in a substance before it collided with an atomic nucleus, but they could not compute this using standard mathematics.
-Ulam realized that these computations could be simulated using random numbers, just like a casino game. His uncle had gambled at Monte Carlo, which is apparently where the name came from for their new technique.</p>
+<p>The concept of Monte Carlo simulation was devised by the mathematicians Stan Ulam and Nicholas Metropolis, who were working to develop an atomic weapon as part of the Manhattan Project. They needed to compute the average distance that a neutron would travel in a substance before it collided with an atomic nucleus, but they could not compute this using standard mathematics. Ulam realized that these computations could be simulated using random numbers, just like a casino game. His uncle had gambled at Monte Carlo, which is apparently where the name came from for their new technique.</p>
 <p>There are four steps to performing a Monte Carlo simulation:</p>
 <ol style="list-style-type: decimal">
 <li>Define a domain of possible values</li>
@@ -441,9 +413,7 @@ Ulam realized that these computations could be simulated using random numbers, j
 <li>Perform a computation using the random numbers</li>
 <li>Combine the results across many repetitions</li>
 </ol>
-<p>As an example, let’s say that I want to figure out how much time to allow for an in-class quiz. Say that we know that the distribution of quiz completion times is normal, with mean of 5 mins and standard deviation of 1 min. Given this, how long does the test period need to be so that we expect everyone to finish 99% of the time?
-There are two ways to solve this problem. The first is to calculate the answer using a mathematical theory known as the statistics of extreme values. However, this is quite complicated mathematically. Alternatively, we could use Monte Carlo simulation.
-To do this, we need to generate random samples from a normal distribution.</p>
+<p>As an example, let’s say that I want to figure out how much time to allow for an in-class quiz. Say that we know that the distribution of quiz completion times is normal, with mean of 5 mins and standard deviation of 1 min. Given this, how long does the test period need to be so that we expect everyone to finish 99% of the time? There are two ways to solve this problem. The first is to calculate the answer using a mathematical theory known as the statistics of extreme values. However, this is quite complicated mathematically. Alternatively, we could use Monte Carlo simulation. To do this, we need to generate random samples from a normal distribution.</p>
 </div>
 <div id="randomness-in-statistics" class="section level2">
 <h2><span class="header-section-number">8.2</span> Randomness in statistics</h2>
@@ -468,17 +438,17 @@ Figure 8.1: Examples of random numbers generated from a uniform (left) or normal
 </p>
 </div>
 <p>By default, R will generate a different set of random numbers every time you run it. However, it is also possible to generate exactly the same set of random numbers, by setting what is called the <em>random seed</em> to a specific value. We will do this in many of the examples in this book, in order to make sure that the examples are reproducible.</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" title="1"><span class="co"># if we run the rnorm() command twice, it will give us different sets of pseudorandom numbers each time</span></a>
-<a class="sourceLine" id="cb113-2" title="2"><span class="kw">print</span>(<span class="kw">rnorm</span>(<span class="dv">5</span>))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># if we run the rnorm() command twice, it will give us different sets of pseudorandom numbers each time</span>
+<span class="kw">print</span>(<span class="kw">rnorm</span>(<span class="dv">5</span>))</code></pre></div>
 <pre><code>## [1]  1.48  0.18  0.21 -0.15 -1.72</code></pre>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" title="1"><span class="kw">print</span>(<span class="kw">rnorm</span>(<span class="dv">5</span>))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">rnorm</span>(<span class="dv">5</span>))</code></pre></div>
 <pre><code>## [1] -0.691 -2.231  0.391  0.029 -0.647</code></pre>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" title="1"><span class="co"># if we set the random seed to the same value each time, then it will give us the same series of pseudorandom numbers each time.</span></a>
-<a class="sourceLine" id="cb117-2" title="2"><span class="kw">set.seed</span>(<span class="dv">12345</span>)</a>
-<a class="sourceLine" id="cb117-3" title="3"><span class="kw">print</span>(<span class="kw">rnorm</span>(<span class="dv">5</span>))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># if we set the random seed to the same value each time, then it will give us the same series of pseudorandom numbers each time.</span>
+<span class="kw">set.seed</span>(<span class="dv">12345</span>)
+<span class="kw">print</span>(<span class="kw">rnorm</span>(<span class="dv">5</span>))</code></pre></div>
 <pre><code>## [1]  0.59  0.71 -0.11 -0.45  0.61</code></pre>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" title="1"><span class="kw">set.seed</span>(<span class="dv">12345</span>)</a>
-<a class="sourceLine" id="cb119-2" title="2"><span class="kw">print</span>(<span class="kw">rnorm</span>(<span class="dv">5</span>))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">12345</span>)
+<span class="kw">print</span>(<span class="kw">rnorm</span>(<span class="dv">5</span>))</code></pre></div>
 <pre><code>## [1]  0.59  0.71 -0.11 -0.45  0.61</code></pre>
 </div>
 <div id="using-monte-carlo-simulation" class="section level2">
@@ -491,20 +461,20 @@ Figure 8.2: Simulated finishing time distributions.
 </p>
 </div>
 <p>However, what we really want to know is not what the distribution of finishing times looks like, but rather what the distribution of the <em>longest</em> finishing time for each quiz looks like. To do this, we can simulate a large number of quizzes (using the assumption that the finishing times are distributed normally, as stated above), and each time we can record the longest finishing time. To do this, we create a new function in R called <code>sampleMax()</code> which takes a sample of the appropriate size (i.e. the number of students in the class) from the appropriate distribution, and returns the maximum value in the sample. We then repeat this a large number of times (5000 should be enough) using the <code>replicate()</code> function, which will store all of the outputs into a single variable. The distribution of finishing times is shown in Figure <a href="resampling-and-simulation.html#fig:finishTimeSim">8.3</a>.</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb121-1" title="1"><span class="co"># sample maximum value 5000 times and compute 99th percentile</span></a>
-<a class="sourceLine" id="cb121-2" title="2"></a>
-<a class="sourceLine" id="cb121-3" title="3">nRuns &lt;-<span class="st"> </span><span class="dv">5000</span></a>
-<a class="sourceLine" id="cb121-4" title="4">sampSize &lt;-<span class="st"> </span><span class="dv">150</span></a>
-<a class="sourceLine" id="cb121-5" title="5"></a>
-<a class="sourceLine" id="cb121-6" title="6">sampleMax &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">sampSize=</span><span class="dv">150</span>){</a>
-<a class="sourceLine" id="cb121-7" title="7">  samp &lt;-<span class="st"> </span><span class="kw">rnorm</span>(sampSize,<span class="dt">mean=</span><span class="dv">5</span>,<span class="dt">sd=</span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb121-8" title="8">  <span class="kw">return</span>(<span class="kw">max</span>(samp))</a>
-<a class="sourceLine" id="cb121-9" title="9">}</a>
-<a class="sourceLine" id="cb121-10" title="10"></a>
-<a class="sourceLine" id="cb121-11" title="11">maxTime &lt;-<span class="st"> </span><span class="kw">replicate</span>(nRuns,<span class="kw">sampleMax</span>())</a>
-<a class="sourceLine" id="cb121-12" title="12"></a>
-<a class="sourceLine" id="cb121-13" title="13">cutoff &lt;-<span class="st"> </span><span class="kw">quantile</span>(maxTime,<span class="fl">0.99</span>)</a>
-<a class="sourceLine" id="cb121-14" title="14"><span class="kw">sprintf</span>(<span class="st">&#39;99th percentile of maxTime distribution: %.2f&#39;</span>,cutoff)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># sample maximum value 5000 times and compute 99th percentile</span>
+
+nRuns &lt;-<span class="st"> </span><span class="dv">5000</span>
+sampSize &lt;-<span class="st"> </span><span class="dv">150</span>
+
+sampleMax &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">sampSize=</span><span class="dv">150</span>){
+  samp &lt;-<span class="st"> </span><span class="kw">rnorm</span>(sampSize,<span class="dt">mean=</span><span class="dv">5</span>,<span class="dt">sd=</span><span class="dv">1</span>)
+  <span class="kw">return</span>(<span class="kw">max</span>(samp))
+}
+
+maxTime &lt;-<span class="st"> </span><span class="kw">replicate</span>(nRuns,<span class="kw">sampleMax</span>())
+
+cutoff &lt;-<span class="st"> </span><span class="kw">quantile</span>(maxTime,<span class="fl">0.99</span>)
+<span class="kw">sprintf</span>(<span class="st">&#39;99th percentile of maxTime distribution: %.2f&#39;</span>,cutoff)</code></pre></div>
 <pre><code>## [1] &quot;99th percentile of maxTime distribution: 8.81&quot;</code></pre>
 <div class="figure"><span id="fig:finishTimeSim"></span>
 <img src="StatsThinking21_files/figure-html/finishTimeSim-1.png" alt="Distribution of maximum finishing times across simulations." width="384" height="50%" />
@@ -512,8 +482,7 @@ Figure 8.2: Simulated finishing time distributions.
 Figure 8.3: Distribution of maximum finishing times across simulations.
 </p>
 </div>
-<p>This shows that the 99th percentile of the finishing time distribution falls at 8.81, meaning that if we were to give that much time, then everyone should finish 99% of the time.
-It’s always important to remember that our assumptions matter – if they are wrong, then the results of the simulation are useless. In this case, we assumed that the finishing time distribution was normally distributed with a particular mean and standard deviation; if this is incorrect (and it almost certainly is), then the answer could be very different.</p>
+<p>This shows that the 99th percentile of the finishing time distribution falls at 8.81, meaning that if we were to give that much time, then everyone should finish 99% of the time. It’s always important to remember that our assumptions matter – if they are wrong, then the results of the simulation are useless. In this case, we assumed that the finishing time distribution was normally distributed with a particular mean and standard deviation; if this is incorrect (and it almost certainly is), then the answer could be very different.</p>
 </div>
 <div id="using-simulation-for-statistics-the-bootstrap" class="section level2">
 <h2><span class="header-section-number">8.5</span> Using simulation for statistics: The bootstrap</h2>
@@ -523,25 +492,25 @@ It’s always important to remember that our assumptions matter – if they are 
 <p>In the section above, we used our knowledge of the sampling distribution of the mean to compute the standard error of the mean and confidence intervals. But what if we can’t assume that the estimates are normally distributed, or we don’t know their distribution? The idea of the bootstrap is to use the data themselves to estimate an answer. The name comes from the idea of pulling one’s self up by their own boostraps, expressing the idea that we don’t have any external source of leverage so we have to rely upon the data themselves. The bootstrap method was conceived by Bradley Efron of the Stanford Department of Statistics, who is one of the world’s most influential statisticians.</p>
 <p>The idea behind the boostrap is that we repeatedly sample from the actual dataset; importantly, we sample <em>with replacement</em>, such that the same data point will often end up being represented multiple times within one of the samples. We then compute our statistic of interest on each of the bootstrap samples, and use the distribution of those estimates</p>
 <p>Let’s start by using the bootstrap to estimate the sampling distribution of the mean, so that we can compare the result to the SEM that we discussed earlier.</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" title="1"><span class="co"># perform the boostrap to compute SEM and compare to parametric method</span></a>
-<a class="sourceLine" id="cb123-2" title="2"></a>
-<a class="sourceLine" id="cb123-3" title="3">nRuns &lt;-<span class="st"> </span><span class="dv">2500</span></a>
-<a class="sourceLine" id="cb123-4" title="4">sampleSize &lt;-<span class="st"> </span><span class="dv">32</span></a>
-<a class="sourceLine" id="cb123-5" title="5"></a>
-<a class="sourceLine" id="cb123-6" title="6">heightSample &lt;-<span class="st"> </span>NHANES_adult <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb123-7" title="7"><span class="st">  </span><span class="kw">sample_n</span>(sampleSize)</a>
-<a class="sourceLine" id="cb123-8" title="8"></a>
-<a class="sourceLine" id="cb123-9" title="9">bootMeanHeight &lt;-<span class="st"> </span><span class="cf">function</span>(df){</a>
-<a class="sourceLine" id="cb123-10" title="10">  bootSample &lt;-<span class="st"> </span><span class="kw">sample_n</span>(df,<span class="kw">dim</span>(df)[<span class="dv">1</span>],<span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb123-11" title="11">  <span class="kw">return</span>(<span class="kw">mean</span>(bootSample<span class="op">$</span>Height))</a>
-<a class="sourceLine" id="cb123-12" title="12">}</a>
-<a class="sourceLine" id="cb123-13" title="13">bootMeans &lt;-<span class="st"> </span><span class="kw">replicate</span>(nRuns,<span class="kw">bootMeanHeight</span>(heightSample))</a>
-<a class="sourceLine" id="cb123-14" title="14"></a>
-<a class="sourceLine" id="cb123-15" title="15">SEM_standard &lt;-<span class="st"> </span><span class="kw">sd</span>(heightSample<span class="op">$</span>Height)<span class="op">/</span><span class="kw">sqrt</span>(sampleSize)</a>
-<a class="sourceLine" id="cb123-16" title="16"><span class="kw">sprintf</span>(<span class="st">&#39;SEM computed using sample SD: %f&#39;</span>,SEM_standard)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># perform the boostrap to compute SEM and compare to parametric method</span>
+
+nRuns &lt;-<span class="st"> </span><span class="dv">2500</span>
+sampleSize &lt;-<span class="st"> </span><span class="dv">32</span>
+
+heightSample &lt;-<span class="st"> </span>NHANES_adult <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">sample_n</span>(sampleSize)
+
+bootMeanHeight &lt;-<span class="st"> </span><span class="cf">function</span>(df){
+  bootSample &lt;-<span class="st"> </span><span class="kw">sample_n</span>(df,<span class="kw">dim</span>(df)[<span class="dv">1</span>],<span class="dt">replace =</span> <span class="ot">TRUE</span>)
+  <span class="kw">return</span>(<span class="kw">mean</span>(bootSample<span class="op">$</span>Height))
+}
+bootMeans &lt;-<span class="st"> </span><span class="kw">replicate</span>(nRuns,<span class="kw">bootMeanHeight</span>(heightSample))
+
+SEM_standard &lt;-<span class="st"> </span><span class="kw">sd</span>(heightSample<span class="op">$</span>Height)<span class="op">/</span><span class="kw">sqrt</span>(sampleSize)
+<span class="kw">sprintf</span>(<span class="st">&#39;SEM computed using sample SD: %f&#39;</span>,SEM_standard)</code></pre></div>
 <pre><code>## [1] &quot;SEM computed using sample SD: 1.595789&quot;</code></pre>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb125-1" title="1">SEM_bootstrap &lt;-<span class="st"> </span><span class="kw">sd</span>(bootMeans)</a>
-<a class="sourceLine" id="cb125-2" title="2"><span class="kw">sprintf</span>(<span class="st">&#39;SEM computed using SD of bootstrap estimates: %f&#39;</span>,SEM_bootstrap)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">SEM_bootstrap &lt;-<span class="st"> </span><span class="kw">sd</span>(bootMeans)
+<span class="kw">sprintf</span>(<span class="st">&#39;SEM computed using SD of bootstrap estimates: %f&#39;</span>,SEM_bootstrap)</code></pre></div>
 <pre><code>## [1] &quot;SEM computed using SD of bootstrap estimates: 1.586913&quot;</code></pre>
 <div class="figure"><span id="fig:bootstrapSEM"></span>
 <img src="StatsThinking21_files/figure-html/bootstrapSEM-1.png" alt="An example of bootstrapping to compute the standard error of the mean. The histogram shows the distribution of means across bootstrap samples, while the red line shows the normal distribution based on the sample mean and standard deviation." width="384" height="50%" />
@@ -550,12 +519,12 @@ Figure 8.4: An example of bootstrapping to compute the standard error of the mea
 </p>
 </div>
 <p>Figure <a href="resampling-and-simulation.html#fig:bootstrapSEM">8.4</a> shows that the distribution of means across bootstrap samples is fairly close to the theoretical estimate based on the assumption of normality. We can also use the boostrap samples to compute a confidence interval for the mean, simply by computing the quantiles of interest from the distribution of bootstrap samples.</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" title="1"><span class="co"># compute bootstrap confidence interval</span></a>
-<a class="sourceLine" id="cb127-2" title="2"></a>
-<a class="sourceLine" id="cb127-3" title="3">bootCI &lt;-<span class="st"> </span><span class="kw">quantile</span>(bootMeans,<span class="kw">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>))</a>
-<a class="sourceLine" id="cb127-4" title="4"><span class="kw">pander</span>(<span class="st">&quot;boostrap confidence limits:&quot;</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute bootstrap confidence interval</span>
+
+bootCI &lt;-<span class="st"> </span><span class="kw">quantile</span>(bootMeans,<span class="kw">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>))
+<span class="kw">pander</span>(<span class="st">&quot;boostrap confidence limits:&quot;</span>)</code></pre></div>
 <p>boostrap confidence limits:</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" title="1"><span class="kw">pander</span>(bootCI)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pander</span>(bootCI)</code></pre></div>
 <table style="width:28%;">
 <colgroup>
 <col width="13%" />
@@ -574,15 +543,15 @@ Figure 8.4: An example of bootstrapping to compute the standard error of the mea
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" title="1"><span class="co">#now let&#39;s compute the confidence intervals using the sample mean and SD</span></a>
-<a class="sourceLine" id="cb129-2" title="2">sampleMean=<span class="kw">mean</span>(heightSample<span class="op">$</span>Height)</a>
-<a class="sourceLine" id="cb129-3" title="3"></a>
-<a class="sourceLine" id="cb129-4" title="4">normalCI &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="st">&quot;2.5%&quot;</span> =<span class="st"> </span>sampleMean <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span>SEM_standard,</a>
-<a class="sourceLine" id="cb129-5" title="5">          <span class="st">&quot;97.5%&quot;</span>=sampleMean <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span>SEM_standard) </a>
-<a class="sourceLine" id="cb129-6" title="6"></a>
-<a class="sourceLine" id="cb129-7" title="7"><span class="kw">print</span>(<span class="st">&quot;confidence limits based on sample SD and normal distribution:&quot;</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#now let&#39;s compute the confidence intervals using the sample mean and SD</span>
+sampleMean=<span class="kw">mean</span>(heightSample<span class="op">$</span>Height)
+
+normalCI &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="st">&quot;2.5%&quot;</span> =<span class="st"> </span>sampleMean <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span>SEM_standard,
+          <span class="st">&quot;97.5%&quot;</span>=sampleMean <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span>SEM_standard) 
+
+<span class="kw">print</span>(<span class="st">&quot;confidence limits based on sample SD and normal distribution:&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;confidence limits based on sample SD and normal distribution:&quot;</code></pre>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" title="1"><span class="kw">pander</span>(normalCI)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pander</span>(normalCI)</code></pre></div>
 <table style="width:28%;">
 <colgroup>
 <col width="13%" />
@@ -604,7 +573,7 @@ Figure 8.4: An example of bootstrapping to compute the standard error of the mea
 <p>We would not usually employ the bootstrap to compute confidence intervals for the mean (since we can generally assume that the normal distribution is appropriate for the sampling distribution of the mean, as long as our sample is large enough), but this example shows how the method gives us roughly the same result as the standard method based on the normal distribution. The bootstrap would more often be used to generate standard errors for estimates of other statistics where we know or suspect that the normal distribution is not appropriate.</p>
 </div>
 </div>
-<div id="suggested-readings-6" class="section level2">
+<div id="suggested-readings-5" class="section level2">
 <h2><span class="header-section-number">8.6</span> Suggested readings</h2>
 <ul>
 <li><em>Computer Age Statistical Inference:Algorithms, Evidence and Data Science</em>, by Bradley Efron and Trevor Hastie</li>
@@ -664,7 +633,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "true";
+    var src = "";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

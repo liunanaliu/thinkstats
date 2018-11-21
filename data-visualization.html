@@ -62,67 +62,41 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 </head>
@@ -237,7 +211,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.9.1" data-path="data-visualization.html"><a href="data-visualization.html#perceptual-limitations"><i class="fa fa-check"></i><b>6.9.1</b> Perceptual limitations</a></li>
 </ul></li>
 <li class="chapter" data-level="6.10" data-path="data-visualization.html"><a href="data-visualization.html#correcting-for-other-factors"><i class="fa fa-check"></i><b>6.10</b> Correcting for other factors</a></li>
-<li class="chapter" data-level="6.11" data-path="data-visualization.html"><a href="data-visualization.html#suggested-readings-4"><i class="fa fa-check"></i><b>6.11</b> Suggested readings</a></li>
+<li class="chapter" data-level="6.11" data-path="data-visualization.html"><a href="data-visualization.html#suggested-readings-and-videos"><i class="fa fa-check"></i><b>6.11</b> Suggested readings and videos</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="sampling-1.html"><a href="sampling-1.html"><i class="fa fa-check"></i><b>7</b> Sampling</a><ul>
 <li class="chapter" data-level="7.1" data-path="sampling-1.html"><a href="sampling-1.html#how-do-we-sample"><i class="fa fa-check"></i><b>7.1</b> How do we sample?</a></li>
@@ -245,7 +219,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3" data-path="sampling-1.html"><a href="sampling-1.html#standard-error-of-the-mean"><i class="fa fa-check"></i><b>7.3</b> Standard error of the mean</a></li>
 <li class="chapter" data-level="7.4" data-path="sampling-1.html"><a href="sampling-1.html#the-central-limit-theorem"><i class="fa fa-check"></i><b>7.4</b> The Central Limit Theorem</a></li>
 <li class="chapter" data-level="7.5" data-path="sampling-1.html"><a href="sampling-1.html#confidence-intervals"><i class="fa fa-check"></i><b>7.5</b> Confidence intervals</a></li>
-<li class="chapter" data-level="7.6" data-path="sampling-1.html"><a href="sampling-1.html#suggested-readings-5"><i class="fa fa-check"></i><b>7.6</b> Suggested readings</a></li>
+<li class="chapter" data-level="7.6" data-path="sampling-1.html"><a href="sampling-1.html#suggested-readings-4"><i class="fa fa-check"></i><b>7.6</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html"><i class="fa fa-check"></i><b>8</b> Resampling and simulation</a><ul>
 <li class="chapter" data-level="8.1" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html#monte-carlo-simulation"><i class="fa fa-check"></i><b>8.1</b> Monte Carlo simulation</a></li>
@@ -255,7 +229,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html#using-simulation-for-statistics-the-bootstrap"><i class="fa fa-check"></i><b>8.5</b> Using simulation for statistics: The bootstrap</a><ul>
 <li class="chapter" data-level="8.5.1" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html#computing-the-bootstrap"><i class="fa fa-check"></i><b>8.5.1</b> Computing the bootstrap</a></li>
 </ul></li>
-<li class="chapter" data-level="8.6" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html#suggested-readings-6"><i class="fa fa-check"></i><b>8.6</b> Suggested readings</a></li>
+<li class="chapter" data-level="8.6" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html#suggested-readings-5"><i class="fa fa-check"></i><b>8.6</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html"><i class="fa fa-check"></i><b>9</b> Hypothesis testing</a><ul>
 <li class="chapter" data-level="9.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#null-hypothesis-statistical-testing-nhst"><i class="fa fa-check"></i><b>9.1</b> Null Hypothesis Statistical Testing (NHST)</a></li>
@@ -270,7 +244,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.3.7" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#what-does-a-significant-result-mean"><i class="fa fa-check"></i><b>9.3.7</b> What does a significant result mean?</a></li>
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#nhst-in-a-modern-context-multiple-testing"><i class="fa fa-check"></i><b>9.4</b> NHST in a modern context: Multiple testing</a></li>
-<li class="chapter" data-level="9.5" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#suggested-readings-7"><i class="fa fa-check"></i><b>9.5</b> Suggested readings</a></li>
+<li class="chapter" data-level="9.5" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#suggested-readings-6"><i class="fa fa-check"></i><b>9.5</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html"><i class="fa fa-check"></i><b>10</b> Confidence intervals, effect sizes, and statistical power</a><ul>
 <li class="chapter" data-level="10.1" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#confidence-intervals-1"><i class="fa fa-check"></i><b>10.1</b> Confidence intervals</a><ul>
@@ -288,7 +262,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#statistical-power"><i class="fa fa-check"></i><b>10.3</b> Statistical power</a><ul>
 <li class="chapter" data-level="10.3.1" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#power-analysis"><i class="fa fa-check"></i><b>10.3.1</b> Power analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#suggested-readings-8"><i class="fa fa-check"></i><b>10.4</b> Suggested readings</a></li>
+<li class="chapter" data-level="10.4" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#suggested-readings-7"><i class="fa fa-check"></i><b>10.4</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html"><i class="fa fa-check"></i><b>11</b> Bayesian statistics</a><ul>
 <li class="chapter" data-level="11.1" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html#generative-models"><i class="fa fa-check"></i><b>11.1</b> Generative models</a></li>
@@ -315,7 +289,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.6.1" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html#bayes-factors"><i class="fa fa-check"></i><b>11.6.1</b> Bayes factors</a></li>
 <li class="chapter" data-level="11.6.2" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html#bayes-factors-for-statistical-hypotheses"><i class="fa fa-check"></i><b>11.6.2</b> Bayes factors for statistical hypotheses</a></li>
 </ul></li>
-<li class="chapter" data-level="11.7" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html#suggested-readings-9"><i class="fa fa-check"></i><b>11.7</b> Suggested readings</a></li>
+<li class="chapter" data-level="11.7" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html#suggested-readings-8"><i class="fa fa-check"></i><b>11.7</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="modeling-categorical-relationships.html"><a href="modeling-categorical-relationships.html"><i class="fa fa-check"></i><b>12</b> Modeling categorical relationships</a><ul>
 <li class="chapter" data-level="12.1" data-path="modeling-categorical-relationships.html"><a href="modeling-categorical-relationships.html#example-candy-colors"><i class="fa fa-check"></i><b>12.1</b> Example: Candy colors</a></li>
@@ -340,7 +314,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.4" data-path="modeling-continuous-relationships.html"><a href="modeling-continuous-relationships.html#correlation-and-causation"><i class="fa fa-check"></i><b>13.4</b> Correlation and causation</a><ul>
 <li class="chapter" data-level="13.4.1" data-path="modeling-continuous-relationships.html"><a href="modeling-continuous-relationships.html#causal-graphs"><i class="fa fa-check"></i><b>13.4.1</b> Causal graphs</a></li>
 </ul></li>
-<li class="chapter" data-level="13.5" data-path="modeling-continuous-relationships.html"><a href="modeling-continuous-relationships.html#suggested-readings-10"><i class="fa fa-check"></i><b>13.5</b> Suggested readings</a></li>
+<li class="chapter" data-level="13.5" data-path="modeling-continuous-relationships.html"><a href="modeling-continuous-relationships.html#suggested-readings-9"><i class="fa fa-check"></i><b>13.5</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html"><i class="fa fa-check"></i><b>14</b> The General Linear Model</a><ul>
 <li class="chapter" data-level="14.1" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html#linear-regression"><i class="fa fa-check"></i><b>14.1</b> Linear regression</a><ul>
@@ -356,7 +330,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.4" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html#what-does-predict-really-mean"><i class="fa fa-check"></i><b>14.4</b> What does “predict” really mean?</a><ul>
 <li class="chapter" data-level="14.4.1" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html#cross-validation"><i class="fa fa-check"></i><b>14.4.1</b> Cross-validation</a></li>
 </ul></li>
-<li class="chapter" data-level="14.5" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html#suggested-readings-11"><i class="fa fa-check"></i><b>14.5</b> Suggested readings</a></li>
+<li class="chapter" data-level="14.5" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html#suggested-readings-10"><i class="fa fa-check"></i><b>14.5</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="comparing-means.html"><a href="comparing-means.html"><i class="fa fa-check"></i><b>15</b> Comparing means</a><ul>
 <li class="chapter" data-level="15.1" data-path="comparing-means.html"><a href="comparing-means.html#students-t-test"><i class="fa fa-check"></i><b>15.1</b> Student’s T test</a></li>
@@ -402,10 +376,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="17.6" data-path="doing-reproducible-research.html"><a href="doing-reproducible-research.html#doing-reproducible-data-analysis"><i class="fa fa-check"></i><b>17.6</b> Doing reproducible data analysis</a></li>
 <li class="chapter" data-level="17.7" data-path="doing-reproducible-research.html"><a href="doing-reproducible-research.html#conclusion-doing-better-science"><i class="fa fa-check"></i><b>17.7</b> Conclusion: Doing better science</a></li>
-<li class="chapter" data-level="17.8" data-path="doing-reproducible-research.html"><a href="doing-reproducible-research.html#suggested-readings-12"><i class="fa fa-check"></i><b>17.8</b> Suggested Readings</a></li>
+<li class="chapter" data-level="17.8" data-path="doing-reproducible-research.html"><a href="doing-reproducible-research.html#suggested-readings-11"><i class="fa fa-check"></i><b>17.8</b> Suggested Readings</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>18</b> References</a></li>
-<li class="chapter" data-level="" data-path="references-1.html"><a href="references-1.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
       </nav>
@@ -446,8 +419,19 @@ Figure 6.2: A replotting of Tufte’s damage index data. The blue line shows the
 </div>
 <div id="anatomy-of-a-plot" class="section level2">
 <h2><span class="header-section-number">6.2</span> Anatomy of a plot</h2>
-<p>The goal of plotting data is to present a summary of a dataset in a two-dimensional (or occasionally three-dimensional) presentation. We refer to the dimensions as <em>axes</em> – the horizontal axis is called the <em>X-axis</em> and the vertical axis is called the <em>Y-axis</em>. We can arrange the data long those axes in a way that highlights their values (either continuous or categorical).</p>
-<p>There are many different types of plots that we can use, which have different advantages and disadvantages. Let’s say that we are interested in characterizing the difference in height between men and women in the NHANES dataset. Figure <a href="data-visualization.html#fig:plotHeight">6.3</a> shows four different ways to plot these data. The bar graph in panel A shows the difference in means, but does’t show us how much spread there is in the data around these means – and as we will see later, knowing this is essential to determine whether we think the difference between the groups is large enough to be important. The second plot shows the bars with all of the data points overlaid - this makes it a bit clearer that the distributions of height for men and women are overlapping, but it’s still hard to see due to the large number of data points. In general we prefer using a plotting technique that provides a clearely view of the distribution of the data points. In panel C we see one example, known as a <em>violin plot</em>, which plots the distribution of data in each condition (after smoothing it out a bit). Another option is the <em>box plot</em> shown in panel D, which shows the median (central line), a measure of variability (the width of the box, which is based on a measure called the interquartile range), and any outliers (noted by the points at the ends of the lines). These are both effective ways to show data that provide a good feel for the distribution of the data.</p>
+<p>The goal of plotting data is to present a summary of a dataset in a two-dimensional (or occasionally three-dimensional) presentation. We refer to the dimensions as <em>axes</em> – the horizontal axis is called the <em>X-axis</em> and the vertical axis is called the <em>Y-axis</em>. We can arrange the data along the axes in a way that highlights the data values. These values may be either continuous or categorical.</p>
+<p>There are many different types of plots that we can use, which have different advantages and disadvantages. Let’s say that we are interested in characterizing the difference in height between men and women in the NHANES dataset. Figure <a href="data-visualization.html#fig:plotHeight">6.3</a> shows four different ways to plot these data.</p>
+<ol style="list-style-type: decimal">
+<li>The bar graph in panel A shows the difference in means, but doesn’t show us how much spread there is in the data around these means – and as we will see later, knowing this is essential to determine whether we think the difference between the groups is large enough to be important.<br />
+</li>
+<li>The second plot shows the bars with all of the data points overlaid - this makes it a bit clearer that the distributions of height for men and women are overlapping, but it’s still hard to see due to the large number of data points.</li>
+</ol>
+<p>In general we prefer using a plotting technique that provides a clearly view of the distribution of the data points.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>In panel C, we see one example of clearly showing the data points, known as a <em>violin plot</em>, which plots the distribution of data in each condition (after smoothing it out a bit).<br />
+</li>
+<li>Another option is the <em>box plot</em> shown in panel D, which shows the median (central line), a measure of variability (the width of the box, which is based on a measure called the interquartile range), and any outliers (noted by the points at the ends of the lines). These are both effective ways to show data that provide a good feel for the distribution of the data.</li>
+</ol>
 <div class="figure"><span id="fig:plotHeight"></span>
 <img src="StatsThinking21_files/figure-html/plotHeight-1.png" alt="Four different ways of plotting the difference in height between men and women in the NHANES dataset.  Panel A plots the means of the two groups, which gives no way to assess the relative overlap of the two distributions.  Panel B shows the same bars, but also overlays the data points, jittering them so that we can see their overall distribution.  Panel C shows a violin plot, which shows the distribution of the datasets for each group.  PAnel D shows a box plot, which highlights the spread of the distribution along with any outliers (which are shown as individual points)." width="576" />
 <p class="caption">
@@ -459,30 +443,34 @@ Figure 6.3: Four different ways of plotting the difference in height between men
 <h2><span class="header-section-number">6.3</span> Plotting in R using ggplot</h2>
 <p>There are many different tools for plotting data in R, but we will focus on the <code>ggplot()</code> function provided by a package called <code>ggplot2</code>. ggplot is very powerful, but using it requires getting one’s head around how it works.</p>
 <p>Let’s say that we want to create a <em>scatterplot</em> that plots height against weight for each adult in a sample of 150 people from the NHANES dataset, with different markers used to denote men and women. First we create our sample:</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" title="1">NHANES_sample &lt;-<span class="st"> </span>NHANES_adult <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb90-2" title="2"><span class="st">  </span><span class="kw">drop_na</span>(Weight,Gender) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb90-3" title="3"><span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">150</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">NHANES_sample &lt;-<span class="st"> </span>
+<span class="st">  </span>NHANES_adult <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">drop_na</span>(Weight, Gender) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#remove rows (individuals) with missing values for Weight and Gender</span>
+<span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">150</span>) <span class="co">#take a random sample of n = 150 rows (individuals)</span></code></pre></div>
 <p>Now let’s set up the <code>ggplot()</code> command. This requires us to specify two things. First, we need to tell it which data frame to obtain the data from (in this case, <code>NHANES_sample</code>). Second, we need to tell it which variables from the data frame to use, which we do via the <em>aesthetics</em> function <code>aes()</code>. In this case, we want to plot height on the X axis and weight on the Y axis. The result is shown in Figure <a href="data-visualization.html#fig:emptyPlot">6.4</a>: The command generates a set of plot axes but doesn’t actually show any data.</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" title="1"><span class="kw">ggplot</span>(NHANES_sample,<span class="kw">aes</span>(<span class="dt">x=</span>Height,<span class="dt">y=</span>Weight))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">NHANES_sample <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Height, <span class="dt">y =</span> Weight))</code></pre></div>
 <div class="figure"><span id="fig:emptyPlot"></span>
 <img src="StatsThinking21_files/figure-html/emptyPlot-1.png" alt="Empty plot frame generated by ggplot()" width="384" height="50%" />
 <p class="caption">
 Figure 6.4: Empty plot frame generated by ggplot()
 </p>
 </div>
-<p>We next need to add a presentation of the data. The way that we tell <code>ggplot</code> what to show is by adding various commands to the main <code>ggplot()</code> command. In particular, we generally need to add a <em>geometry</em>, which specifies how the data will be arranged in the plot. For example, to show each data point we can use the <code>geom_point()</code> geometry, as shown in Figure <a href="data-visualization.html#fig:simpleGeom">6.5</a>.</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" title="1"><span class="kw">ggplot</span>(NHANES_sample,<span class="kw">aes</span>(<span class="dt">x=</span>Height,<span class="dt">y=</span>Weight)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb92-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<p>We next need to add a presentation of the data. The way that we tell <code>ggplot</code> what to show is by adding various commands to the main <code>ggplot()</code> command. In particular, we generally need to add a <em>geometry</em> or “geom”, which specifies how the data will be arranged in the plot. For example, to show each data point we can use the <code>geom_point()</code> geometry, as shown in Figure <a href="data-visualization.html#fig:simpleGeom">6.5</a>. Each data point represents an individual row in our <code>NHANES_sample</code> dataset with each row corresponding to an individual person in this dataset.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">NHANES_sample <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Height, <span class="dt">y =</span> Weight)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
 <div class="figure"><span id="fig:simpleGeom"></span>
-<img src="StatsThinking21_files/figure-html/simpleGeom-1.png" alt="Simple scatter plot using geom_point()" width="384" height="50%" />
+<img src="StatsThinking21_files/figure-html/simpleGeom-1.png" alt="Simple scatter plot" width="384" height="50%" />
 <p class="caption">
-Figure 6.5: Simple scatter plot using geom_point()
+Figure 6.5: Simple scatter plot
 </p>
 </div>
-<p>Finally, we want to plot the points in separate colors depending on whether their gender. We do this by simply adding a <em>color</em> keyword to the aesthetics, which tells the <code>geom_point()</code> function to separately color points by Gender. This is shown in Figure <a href="data-visualization.html#fig:colorPoints">6.6</a>. This figure also shows an example of how we can include multiple geometry layers in a single figure – in this case, we use <code>geom_smooth()</code> to plot the lines that best describe relation between height and weight, separately by gender. The shading around the lines reflects our confidence in the estimate at that point.</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" title="1"><span class="kw">ggplot</span>(NHANES_sample,<span class="kw">aes</span>(<span class="dt">x=</span>Height,<span class="dt">y=</span>Weight,<span class="dt">color=</span>Gender)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb93-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb93-3" title="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&#39;lm&#39;</span>)</a></code></pre></div>
+<p>Finally, we want to plot the points in separate colors depending on their gender. We do this by simply adding a <em>color</em> keyword to the aesthetics, which tells the <code>geom_point()</code> function to separately color points by Gender. This is shown in Figure <a href="data-visualization.html#fig:colorPoints">6.6</a>. This figure also shows an example of how we can include multiple geometry layers in a single figure – in this case, we use <code>geom_smooth()</code> to plot the lines that best describe the relation between height and weight, separately by gender. The shading around the lines reflects our confidence in the estimate at that point.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">NHANES_sample <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Height, <span class="dt">y =</span> Weight, <span class="dt">color =</span> Gender)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>)</code></pre></div>
 <div class="figure"><span id="fig:colorPoints"></span>
 <img src="StatsThinking21_files/figure-html/colorPoints-1.png" alt="Scatterplot with points separately colored by Gender." width="384" height="50%" />
 <p class="caption">
@@ -496,7 +484,18 @@ Figure 6.6: Scatterplot with points separately colored by Gender.
 <p>Here is our distillation of some important principles for data visualization.</p>
 <div id="show-the-data-and-make-them-stand-out" class="section level3">
 <h3><span class="header-section-number">6.4.1</span> Show the data and make them stand out</h3>
-<p>Let’s say that I had performed a study that examined the relationship between dental health and time spent flossing, and I would like to visualize my data. Figure <a href="data-visualization.html#fig:dentalFigs">6.7</a> shows four possible presentations of these data. In panel A, we don’t actually show the data, just a line expressing the relationship between the data. This is clearly not optimal, because we can’t actually see what the underlying data look like. Panels B-D show three possible outcomes from plotting the actual data, where each plot shows a different way that the data could have been generated. If we saw the plot in Panel B, we would probably be suspicious – rarely would real data follow such a precise pattern. The data in Panel C, on the other hand, look like real data – they show a general trend, but they are messy, as data in the world usually are. The data in Panel D show us that the apparent relationship between the two variables is solely caused by one individual, which we would refer to as an <em>outlier</em> because they fall so far outside of the pattern in the rest of the group. It should be clear that we probably don’t want to conclude very much from an effect that is driven by one data point. This figure highlights why it is <em>always</em> important to look at the raw data before putting too much faith in any summary of the data.</p>
+<p>Let’s say that I had performed a study that examined the relationship between dental health and time spent flossing, and I would like to visualize my data. Figure <a href="data-visualization.html#fig:dentalFigs">6.7</a> shows four possible presentations of these data.</p>
+<ol style="list-style-type: decimal">
+<li>In panel A, we don’t actually show the data, just a line expressing the relationship between the data. This is clearly not optimal, because we can’t actually see what the underlying data look like.</li>
+</ol>
+<p>Panels B-D show three possible outcomes from plotting the actual data, where each plot shows a different way that the data could have been generated.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>If we saw the plot in Panel B, we would probably be suspicious – rarely would real data follow such a precise pattern.<br />
+</li>
+<li>The data in Panel C, on the other hand, look like real data – they show a general trend, but they are messy, as data in the world usually are.<br />
+</li>
+<li>The data in Panel D show us that the apparent relationship between the two variables is solely caused by one individual, who we would refer to as an <em>outlier</em> because they fall so far outside of the pattern of the rest of the group. It should be clear that we probably don’t want to conclude very much from an effect that is driven by one data point. This figure highlights why it is <em>always</em> important to look at the raw data before putting too much faith in any summary of the data.</li>
+</ol>
 <div class="figure"><span id="fig:dentalFigs"></span>
 <img src="StatsThinking21_files/figure-html/dentalFigs-1.png" alt="Four different possible presentations of data for the dental health example. Each point in the scatter plot represents one data point in the dataset, and the line in each plot represents the linear trend in the data." width="576" />
 <p class="caption">
@@ -507,11 +506,10 @@ Figure 6.7: Four different possible presentations of data for the dental health 
 </div>
 <div id="maximize-the-dataink-ratio" class="section level2">
 <h2><span class="header-section-number">6.5</span> Maximize the data/ink ratio</h2>
-<p>Tufte has proposed an idea called the data/ink ratio:</p>
+<p>Edward Tufte has proposed an idea called the data/ink ratio:</p>
 <p><span class="math display">\[
 data/ink\ ratio = \frac{amount\, of\, ink\, used\, on\, data}{total\, amount\, of\, ink}
-\]</span>
-The point of this is to minimize visual clutter and let the data show through. For example, take the two presentations of the dental health data in Figure <a href="data-visualization.html#fig:dataInkExample">6.8</a>. Both panels show the same data, but panel A is much easier to apprehend, because of its relatively higher data/ink ratio.</p>
+\]</span> The point of this is to minimize visual clutter and let the data show through. For example, take the two presentations of the dental health data in Figure <a href="data-visualization.html#fig:dataInkExample">6.8</a>. Both panels show the same data, but panel A is much easier to apprehend, because of its relatively higher data/ink ratio.</p>
 <div class="figure"><span id="fig:dataInkExample"></span>
 <img src="StatsThinking21_files/figure-html/dataInkExample-1.png" alt="An example of the same data plotted with two different data/ink ratios." width="768" height="50%" />
 <p class="caption">
@@ -544,11 +542,11 @@ Figure 6.9: An example of chart junk.
 Figure 6.10: Crime data from 1990 to 2014 plotted over time. Panels A and B show the same data, but with different axis ranges. Data obtained from <a href="https://www.ucrdatatool.gov/Search/Crime/State/RunCrimeStatebyState.cfm" class="uri">https://www.ucrdatatool.gov/Search/Crime/State/RunCrimeStatebyState.cfm</a>
 </p>
 </div>
-<p>One of the major controversies in statistical data visualization is how to choose the Y axis, and in particular whether it should always include zero. In his famous book “How to lie with statsitics”, Darrell Huff argued strongly that one should always include the zero point in the Y axis. On the other hand, Edward Tufte has argued against this:</p>
+<p>One of the major controversies in statistical data visualization is how to choose the Y axis, and in particular whether it should always include zero. In his famous book “How to lie with statistics”, Darrell Huff argued strongly that one should always include the zero point in the Y axis. On the other hand, Edward Tufte has argued against this:</p>
 <blockquote>
 <p>“In general, in a time-series, use a baseline that shows the data not the zero point; don’t spend a lot of empty vertical space trying to reach down to the zero point at the cost of hiding what is going on in the data line itself.” (from <a href="https://qz.com/418083/its-ok-not-to-start-your-y-axis-at-zero/" class="uri">https://qz.com/418083/its-ok-not-to-start-your-y-axis-at-zero/</a>)</p>
 </blockquote>
-<p>There are certainly cases where using the zero point makes no sense at all. Let’s say that we are interested in plotting body temperate for an individual over time. In Figure <a href="data-visualization.html#fig:bodyTempAxis">6.11</a> we plot the same (simulated) data with or without zero in the Y axis. It should be obvious that by plotting these data with zero in the Y axis (Panel A) we are wasting a lot of space in the figure, given that body temperature of a living person could never go to zero! By including zero, we are also making the apparent jump in temperature during days 21-30 much less evident. In general, my inclination for line plots and scatterplots is to use all of the space in the graph, unless the zero point is truly important to highlight.</p>
+<p>There are certainly cases where using the zero point makes no sense at all. Let’s say that we are interested in plotting body temperature for an individual over time. In Figure <a href="data-visualization.html#fig:bodyTempAxis">6.11</a> we plot the same (simulated) data with or without zero in the Y axis. It should be obvious that by plotting these data with zero in the Y axis (Panel A) we are wasting a lot of space in the figure, given that body temperature of a living person could never go to zero! By including zero, we are also making the apparent jump in temperature during days 21-30 much less evident. In general, my inclination for line plots and scatterplots is to use all of the space in the graph, unless the zero point is truly important to highlight.</p>
 <div class="figure"><span id="fig:bodyTempAxis"></span>
 <img src="StatsThinking21_files/figure-html/bodyTempAxis-1.png" alt="Body temperature over time, plotted with or without the zero point in the Y axis." width="768" height="50%" />
 <p class="caption">
@@ -559,7 +557,7 @@ Figure 6.11: Body temperature over time, plotted with or without the zero point 
 <div id="the-lie-factor" class="section level2">
 <h2><span class="header-section-number">6.8</span> The lie factor</h2>
 <p>Edward Tufte introduced the concept of the “lie factor” to describe the degree to which physical differences in a visualization correspond to the magnitude of the differences in the data. If a graphic has a lie factor near 1, then it is appropriately representing the data, whereas lie factors far from one reflect a distortion of the underlying data.</p>
-<p>The lie factor supports the argument that one should always include the zero point in a bar chart. In Figure <a href="data-visualization.html#fig:barCharLieFactor">6.12</a> we plot the same data with and without zero in the Y axis. In panel A, the proportional difference in area between the two bars is exactly the same as the proportional difference between the values (i.e. lie factor = 1), whereas in Panel B (where zero is not included) the proportional difference in area between the two bars is roughly 2.8 times bigger than the proportional difference in the values, and thus it visually exaggerates the size of the difference.</p>
+<p>The lie factor supports the argument that one should always include the zero point in a bar chart in many cases. In Figure <a href="data-visualization.html#fig:barCharLieFactor">6.12</a> we plot the same data with and without zero in the Y axis. In panel A, the proportional difference in area between the two bars is exactly the same as the proportional difference between the values (i.e. lie factor = 1), whereas in Panel B (where zero is not included) the proportional difference in area between the two bars is roughly 2.8 times bigger than the proportional difference in the values, and thus it visually exaggerates the size of the difference.</p>
 <div class="figure"><span id="fig:barCharLieFactor"></span>
 <img src="StatsThinking21_files/figure-html/barCharLieFactor-1.png" alt="Two bar charts with associated lie factors." width="768" height="50%" />
 <p class="caption">
@@ -586,7 +584,7 @@ Figure 6.13: Example of a bad figure that relies solely on color contrast.
 Figure 6.14: An example of a pie chart, highlighting the difficult in apprehending the relative volume of the different pie slices.
 </p>
 </div>
-<p>This plot is terrible for several reasons. First, it requires distingishing a large number of colors from very small patches at the bottom of the figure. Second, the visual perspective distorts the relative numbers, such that the pie wedge for Catholic appears much larger than the pie wedge for None, when in fact the number for None is slightly larger (22.8 vs 20.8 percent), as was evident in Figure <a href="data-visualization.html#fig:chartJunk">6.9</a>. Third, by separating the legend from the graphic, it requires the viewer to hold information in their working memory in order to map between the graphic and legend. And finally, it uses text that is far too small, making it impossible to read without zooming in.</p>
+<p>This plot is terrible for several reasons. First, it requires distinguishing a large number of colors from very small patches at the bottom of the figure. Second, the visual perspective distorts the relative numbers, such that the pie wedge for Catholic appears much larger than the pie wedge for None, when in fact the number for None is slightly larger (22.8 vs 20.8 percent), as was evident in Figure <a href="data-visualization.html#fig:chartJunk">6.9</a>. Third, by separating the legend from the graphic, it requires the viewer to hold information in their working memory in order to map between the graphic and legend and to conduct many “table look-ups” in order to continuously match the legend labels to the visualization. And finally, it uses text that is far too small, making it impossible to read without zooming in.</p>
 <p>Plotting the data using a more reasonable approach (Figure <a href="data-visualization.html#fig:religionBars">6.15</a>), we can see the pattern much more clearly. This plot may not look as flashy as the pie chart generated using Excel, but it’s a much more effective and accurate representation of the data.</p>
 <div class="figure"><span id="fig:religionBars"></span>
 <img src="StatsThinking21_files/figure-html/religionBars-1.png" alt="A clearer presentation of the religious affiliation data (obtained from http://www.pewforum.org/religious-landscape-study/)." width="768" height="50%" />
@@ -594,24 +592,27 @@ Figure 6.14: An example of a pie chart, highlighting the difficult in apprehendi
 Figure 6.15: A clearer presentation of the religious affiliation data (obtained from <a href="http://www.pewforum.org/religious-landscape-study/" class="uri">http://www.pewforum.org/religious-landscape-study/</a>).
 </p>
 </div>
+<p>This plot allows the viewer to make comparisons based on the the <strong>length</strong> of the bars <strong>along a common scale</strong> (the y-axis). Humans tend to be more accurate when decoding differences based on these perceptual elements than based on area or color.</p>
 </div>
 </div>
 <div id="correcting-for-other-factors" class="section level2">
 <h2><span class="header-section-number">6.10</span> Correcting for other factors</h2>
 <p>Often we are interested in plotting data where the variable of interest is affected by other factors than the one we are interested in. For example, let’s say that we want to understand how the price of gasoline has changed over time. Figure <a href="data-visualization.html#fig:gasPrices">6.16</a> shows historical gas price data, plotted either with or without adjustment for inflation. Whereas the unadjusted data show a huge increase, the adjusted data show that this is mostly just reflective of inflation. Other examples where one needs to adjust data for other factors include population size (as we saw in the crime rate examples in an earlier chapter) and data collected across different seasons.</p>
 <div class="figure"><span id="fig:gasPrices"></span>
-<img src="StatsThinking21_files/figure-html/gasPrices-1.png" alt="The price of gasoline in the US from 1930 to 201 (obtained from http://www.thepeoplehistory.com/70yearsofpricechange.html) with or without correction for inflation  Inflation correction based on Consumer Price Index data obtained from https://inflationdata.com/Inflation/Consumer_Price_Index/HistoricalCPI.aspx?reloaded=true#Table." width="384" height="50%" />
+<img src="StatsThinking21_files/figure-html/gasPrices-1.png" alt="The price of gasoline in the US from 1930 to 201 (obtained from http://www.thepeoplehistory.com/70yearsofpricechange.html) with or without correction for inflation (based on Consumer Price Index)." width="384" height="50%" />
 <p class="caption">
-Figure 6.16: The price of gasoline in the US from 1930 to 201 (obtained from <a href="http://www.thepeoplehistory.com/70yearsofpricechange.html" class="uri">http://www.thepeoplehistory.com/70yearsofpricechange.html</a>) with or without correction for inflation Inflation correction based on Consumer Price Index data obtained from <a href="https://inflationdata.com/Inflation/Consumer_Price_Index/HistoricalCPI.aspx?reloaded=true#Table" class="uri">https://inflationdata.com/Inflation/Consumer_Price_Index/HistoricalCPI.aspx?reloaded=true#Table</a>.
+Figure 6.16: The price of gasoline in the US from 1930 to 201 (obtained from <a href="http://www.thepeoplehistory.com/70yearsofpricechange.html" class="uri">http://www.thepeoplehistory.com/70yearsofpricechange.html</a>) with or without correction for inflation (based on Consumer Price Index).
 </p>
 </div>
 </div>
-<div id="suggested-readings-4" class="section level2">
-<h2><span class="header-section-number">6.11</span> Suggested readings</h2>
+<div id="suggested-readings-and-videos" class="section level2">
+<h2><span class="header-section-number">6.11</span> Suggested readings and videos</h2>
 <ul>
+<li><a href="https://serialmentor.com/dataviz/"><em>Fundamentals of data visualization</em></a>, by Claus Wilke</li>
 <li><em>Visual Explanations</em>, by Edward Tufte</li>
 <li><em>Visualizing Data</em>, by William S. Cleveland</li>
 <li><em>Graph Design for the Eye and Mind</em>, by Stephen M. Kosslyn</li>
+<li><a href="https://www.youtube.com/watch?v=fSgEeI2Xpdc&amp;feature=youtu.be"><em>How Humans See Data</em></a>, by John Rauser</li>
 </ul>
 
 </div>
@@ -668,7 +669,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "true";
+    var src = "";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

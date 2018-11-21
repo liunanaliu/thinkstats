@@ -62,67 +62,41 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 </head>
@@ -237,7 +211,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.9.1" data-path="data-visualization.html"><a href="data-visualization.html#perceptual-limitations"><i class="fa fa-check"></i><b>6.9.1</b> Perceptual limitations</a></li>
 </ul></li>
 <li class="chapter" data-level="6.10" data-path="data-visualization.html"><a href="data-visualization.html#correcting-for-other-factors"><i class="fa fa-check"></i><b>6.10</b> Correcting for other factors</a></li>
-<li class="chapter" data-level="6.11" data-path="data-visualization.html"><a href="data-visualization.html#suggested-readings-4"><i class="fa fa-check"></i><b>6.11</b> Suggested readings</a></li>
+<li class="chapter" data-level="6.11" data-path="data-visualization.html"><a href="data-visualization.html#suggested-readings-and-videos"><i class="fa fa-check"></i><b>6.11</b> Suggested readings and videos</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="sampling-1.html"><a href="sampling-1.html"><i class="fa fa-check"></i><b>7</b> Sampling</a><ul>
 <li class="chapter" data-level="7.1" data-path="sampling-1.html"><a href="sampling-1.html#how-do-we-sample"><i class="fa fa-check"></i><b>7.1</b> How do we sample?</a></li>
@@ -245,7 +219,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3" data-path="sampling-1.html"><a href="sampling-1.html#standard-error-of-the-mean"><i class="fa fa-check"></i><b>7.3</b> Standard error of the mean</a></li>
 <li class="chapter" data-level="7.4" data-path="sampling-1.html"><a href="sampling-1.html#the-central-limit-theorem"><i class="fa fa-check"></i><b>7.4</b> The Central Limit Theorem</a></li>
 <li class="chapter" data-level="7.5" data-path="sampling-1.html"><a href="sampling-1.html#confidence-intervals"><i class="fa fa-check"></i><b>7.5</b> Confidence intervals</a></li>
-<li class="chapter" data-level="7.6" data-path="sampling-1.html"><a href="sampling-1.html#suggested-readings-5"><i class="fa fa-check"></i><b>7.6</b> Suggested readings</a></li>
+<li class="chapter" data-level="7.6" data-path="sampling-1.html"><a href="sampling-1.html#suggested-readings-4"><i class="fa fa-check"></i><b>7.6</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html"><i class="fa fa-check"></i><b>8</b> Resampling and simulation</a><ul>
 <li class="chapter" data-level="8.1" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html#monte-carlo-simulation"><i class="fa fa-check"></i><b>8.1</b> Monte Carlo simulation</a></li>
@@ -255,7 +229,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html#using-simulation-for-statistics-the-bootstrap"><i class="fa fa-check"></i><b>8.5</b> Using simulation for statistics: The bootstrap</a><ul>
 <li class="chapter" data-level="8.5.1" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html#computing-the-bootstrap"><i class="fa fa-check"></i><b>8.5.1</b> Computing the bootstrap</a></li>
 </ul></li>
-<li class="chapter" data-level="8.6" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html#suggested-readings-6"><i class="fa fa-check"></i><b>8.6</b> Suggested readings</a></li>
+<li class="chapter" data-level="8.6" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html#suggested-readings-5"><i class="fa fa-check"></i><b>8.6</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html"><i class="fa fa-check"></i><b>9</b> Hypothesis testing</a><ul>
 <li class="chapter" data-level="9.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#null-hypothesis-statistical-testing-nhst"><i class="fa fa-check"></i><b>9.1</b> Null Hypothesis Statistical Testing (NHST)</a></li>
@@ -270,7 +244,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.3.7" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#what-does-a-significant-result-mean"><i class="fa fa-check"></i><b>9.3.7</b> What does a significant result mean?</a></li>
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#nhst-in-a-modern-context-multiple-testing"><i class="fa fa-check"></i><b>9.4</b> NHST in a modern context: Multiple testing</a></li>
-<li class="chapter" data-level="9.5" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#suggested-readings-7"><i class="fa fa-check"></i><b>9.5</b> Suggested readings</a></li>
+<li class="chapter" data-level="9.5" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#suggested-readings-6"><i class="fa fa-check"></i><b>9.5</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html"><i class="fa fa-check"></i><b>10</b> Confidence intervals, effect sizes, and statistical power</a><ul>
 <li class="chapter" data-level="10.1" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#confidence-intervals-1"><i class="fa fa-check"></i><b>10.1</b> Confidence intervals</a><ul>
@@ -288,7 +262,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#statistical-power"><i class="fa fa-check"></i><b>10.3</b> Statistical power</a><ul>
 <li class="chapter" data-level="10.3.1" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#power-analysis"><i class="fa fa-check"></i><b>10.3.1</b> Power analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#suggested-readings-8"><i class="fa fa-check"></i><b>10.4</b> Suggested readings</a></li>
+<li class="chapter" data-level="10.4" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#suggested-readings-7"><i class="fa fa-check"></i><b>10.4</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html"><i class="fa fa-check"></i><b>11</b> Bayesian statistics</a><ul>
 <li class="chapter" data-level="11.1" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html#generative-models"><i class="fa fa-check"></i><b>11.1</b> Generative models</a></li>
@@ -315,7 +289,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.6.1" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html#bayes-factors"><i class="fa fa-check"></i><b>11.6.1</b> Bayes factors</a></li>
 <li class="chapter" data-level="11.6.2" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html#bayes-factors-for-statistical-hypotheses"><i class="fa fa-check"></i><b>11.6.2</b> Bayes factors for statistical hypotheses</a></li>
 </ul></li>
-<li class="chapter" data-level="11.7" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html#suggested-readings-9"><i class="fa fa-check"></i><b>11.7</b> Suggested readings</a></li>
+<li class="chapter" data-level="11.7" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html#suggested-readings-8"><i class="fa fa-check"></i><b>11.7</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="modeling-categorical-relationships.html"><a href="modeling-categorical-relationships.html"><i class="fa fa-check"></i><b>12</b> Modeling categorical relationships</a><ul>
 <li class="chapter" data-level="12.1" data-path="modeling-categorical-relationships.html"><a href="modeling-categorical-relationships.html#example-candy-colors"><i class="fa fa-check"></i><b>12.1</b> Example: Candy colors</a></li>
@@ -340,7 +314,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.4" data-path="modeling-continuous-relationships.html"><a href="modeling-continuous-relationships.html#correlation-and-causation"><i class="fa fa-check"></i><b>13.4</b> Correlation and causation</a><ul>
 <li class="chapter" data-level="13.4.1" data-path="modeling-continuous-relationships.html"><a href="modeling-continuous-relationships.html#causal-graphs"><i class="fa fa-check"></i><b>13.4.1</b> Causal graphs</a></li>
 </ul></li>
-<li class="chapter" data-level="13.5" data-path="modeling-continuous-relationships.html"><a href="modeling-continuous-relationships.html#suggested-readings-10"><i class="fa fa-check"></i><b>13.5</b> Suggested readings</a></li>
+<li class="chapter" data-level="13.5" data-path="modeling-continuous-relationships.html"><a href="modeling-continuous-relationships.html#suggested-readings-9"><i class="fa fa-check"></i><b>13.5</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html"><i class="fa fa-check"></i><b>14</b> The General Linear Model</a><ul>
 <li class="chapter" data-level="14.1" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html#linear-regression"><i class="fa fa-check"></i><b>14.1</b> Linear regression</a><ul>
@@ -356,7 +330,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.4" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html#what-does-predict-really-mean"><i class="fa fa-check"></i><b>14.4</b> What does “predict” really mean?</a><ul>
 <li class="chapter" data-level="14.4.1" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html#cross-validation"><i class="fa fa-check"></i><b>14.4.1</b> Cross-validation</a></li>
 </ul></li>
-<li class="chapter" data-level="14.5" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html#suggested-readings-11"><i class="fa fa-check"></i><b>14.5</b> Suggested readings</a></li>
+<li class="chapter" data-level="14.5" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html#suggested-readings-10"><i class="fa fa-check"></i><b>14.5</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="comparing-means.html"><a href="comparing-means.html"><i class="fa fa-check"></i><b>15</b> Comparing means</a><ul>
 <li class="chapter" data-level="15.1" data-path="comparing-means.html"><a href="comparing-means.html#students-t-test"><i class="fa fa-check"></i><b>15.1</b> Student’s T test</a></li>
@@ -402,10 +376,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="17.6" data-path="doing-reproducible-research.html"><a href="doing-reproducible-research.html#doing-reproducible-data-analysis"><i class="fa fa-check"></i><b>17.6</b> Doing reproducible data analysis</a></li>
 <li class="chapter" data-level="17.7" data-path="doing-reproducible-research.html"><a href="doing-reproducible-research.html#conclusion-doing-better-science"><i class="fa fa-check"></i><b>17.7</b> Conclusion: Doing better science</a></li>
-<li class="chapter" data-level="17.8" data-path="doing-reproducible-research.html"><a href="doing-reproducible-research.html#suggested-readings-12"><i class="fa fa-check"></i><b>17.8</b> Suggested Readings</a></li>
+<li class="chapter" data-level="17.8" data-path="doing-reproducible-research.html"><a href="doing-reproducible-research.html#suggested-readings-11"><i class="fa fa-check"></i><b>17.8</b> Suggested Readings</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>18</b> References</a></li>
-<li class="chapter" data-level="" data-path="references-1.html"><a href="references-1.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
       </nav>
@@ -438,8 +411,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Now that we have those definitions, we can outline the formal features of a probability, which were first defined by the Russian mathematician Andrei Kolmogorov. If <span class="math inline">\(P(X_i)\)</span> is the probability of event <span class="math inline">\(X_i\)</span>:</p>
 <ul>
 <li>Probability cannot be negative: <span class="math inline">\(P(X_i) \ge 0\)</span></li>
-<li>The total probability of all outcomes in the sample space is 1. We can express this using the summation symbol <span class="math inline">\(\sum\)</span>:
-<span class="math display">\[
+<li>The total probability of all outcomes in the sample space is 1. We can express this using the summation symbol <span class="math inline">\(\sum\)</span>: <span class="math display">\[
 \sum_{i=1}^N{P(X_i)} = P(X_1) + P(X_2) + ... + P(X_N) = 1
 \]</span></li>
 </ul>
@@ -455,28 +427,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="empirical-frequency" class="section level3">
 <h3><span class="header-section-number">3.2.2</span> Empirical frequency</h3>
 <p>Another way to determine the probability of an event is to do the experiment many times and count how often each event happens. From the relative frequency of the different outcomes, we can compute the probability of each. For example, let’s say that we are interested in knowing the probability of rain in San Francisco. We first have to define the experiment — let’s say that we will look at the National Weather Service data for each day in 2017 (which can be downloaded from <a href="https://www.ncdc.noaa.gov/" class="uri">https://www.ncdc.noaa.gov/</a>) and determine whether there was any rain at the downtown San Francisco weather station.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># load data on rain in San Francisco and compute probability</span></a>
-<a class="sourceLine" id="cb13-2" title="2">SFrain &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/SanFranciscoRain/1329219.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb13-3" title="3"></a>
-<a class="sourceLine" id="cb13-4" title="4"><span class="co"># create a new variable indicating whether it rained on each day</span></a>
-<a class="sourceLine" id="cb13-5" title="5">SFrain &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb13-6" title="6"><span class="st">  </span>SFrain <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb13-7" title="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rainToday =</span> <span class="kw">as.integer</span>(PRCP <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>))</a>
-<a class="sourceLine" id="cb13-8" title="8"></a>
-<a class="sourceLine" id="cb13-9" title="9">SFrain_summary &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb13-10" title="10"><span class="st">  </span>SFrain <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb13-11" title="11"><span class="st">  </span><span class="kw">summarize</span>(</a>
-<a class="sourceLine" id="cb13-12" title="12">    <span class="dt">nRainyDays =</span> <span class="kw">sum</span>(rainToday),</a>
-<a class="sourceLine" id="cb13-13" title="13">    <span class="dt">nDaysMeasured =</span> <span class="kw">n</span>(),</a>
-<a class="sourceLine" id="cb13-14" title="14">    <span class="dt">pRainInSF =</span> nRainyDays <span class="op">/</span><span class="st"> </span>nDaysMeasured</a>
-<a class="sourceLine" id="cb13-15" title="15">  ) </a>
-<a class="sourceLine" id="cb13-16" title="16"></a>
-<a class="sourceLine" id="cb13-17" title="17"><span class="kw">pander</span>(SFrain_summary)</a></code></pre></div>
-<table style="width:57%;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load data on rain in San Francisco and compute probability</span>
+SFrain &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/SanFranciscoRain/1329219.csv&quot;</span>)
+
+<span class="co"># create a new variable indicating whether it rained on each day</span>
+SFrain &lt;-<span class="st"> </span>
+<span class="st">  </span>SFrain <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rainToday =</span> <span class="kw">as.integer</span>(PRCP <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>))
+
+SFrain_summary &lt;-<span class="st"> </span>
+<span class="st">  </span>SFrain <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarize</span>(
+    <span class="dt">nRainyDays =</span> <span class="kw">sum</span>(rainToday),
+    <span class="dt">nDaysMeasured =</span> <span class="kw">n</span>(),
+    <span class="dt">pRainInSF =</span> nRainyDays <span class="op">/</span><span class="st"> </span>nDaysMeasured
+  ) 
+
+<span class="kw">pander</span>(SFrain_summary)</code></pre></div>
+<table style="width:56%;">
 <colgroup>
 <col width="18%" />
 <col width="22%" />
-<col width="16%" />
+<col width="15%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -532,13 +504,11 @@ P(\bar{A}) = 1 - P(A)
 <p>A second rule tells us how to compute the probability of a conjoint event – that is, the probability of both of two events occurring. This version of the rule tells us how to compute this quantity in the special case when the two events are independent from one another; we will learn later exactly what the concept of <em>independence</em> means, but for now we can just take it for granted that the two die throws are independent events.</p>
 <p><span class="math display">\[
 P(A \cap B) = P(A) * P(B)\ iff\ A\ and\ B\ are\ independent
-\]</span>
-Thus, the probability of throwing a six on each of two rolls is <span class="math inline">\(\frac{1}{6}*\frac{1}{6}=\frac{1}{36}\)</span>.</p>
+\]</span> Thus, the probability of throwing a six on each of two rolls is <span class="math inline">\(\frac{1}{6}*\frac{1}{6}=\frac{1}{36}\)</span>.</p>
 <p>The third rule tells us how to add together probabilities - and it is here that we see the source of de Méré’s error. The addition rule tells us that:</p>
 <p><span class="math display">\[
 P(A \cup B) = P(A) + P(B) - P(A \cap B)
-\]</span>
-That is, the probability of A or B occurring is determined by adding together the individual probabilities, but then subtracting the likelihood of both occurring together. In a sense, this prevents us from counting those instances twice. Let’s say that we want to find the probability of rolling 6 on either of two throws. According to our rules:</p>
+\]</span> That is, the probability of A or B occurring is determined by adding together the individual probabilities, but then subtracting the likelihood of both occurring together. In a sense, this prevents us from counting those instances twice. Let’s say that we want to find the probability of rolling 6 on either of two throws. According to our rules:</p>
 <p><span class="math display">\[
 P(Roll1_{throw1} \cup Roll1_{throw2}) = P(Roll1_{throw1}) + P(Roll1_{throw2}) - P(Roll1_{throw1} \cap Roll1_{throw2}) = \frac{1}{6} + \frac{1}{6} - \frac{1}{36} = \frac{11}{36}
 \]</span></p>
@@ -564,8 +534,7 @@ P(at\ least\ one\ six\ in\ four\ rolls) = 1 - \bigg(\frac{5}{6}\bigg)^4=0.517
 <p>But what about de Méré’s second bet? Pascal used the same trick:</p>
 <p><span class="math display">\[
 P(no\ double\ six\ in\ 24\ rolls) = \bigg(\frac{35}{36}\bigg)^{24}=0.509
-\]</span>
-<span class="math display">\[
+\]</span> <span class="math display">\[
 P(at\ least\ one\ double\ six\ in\ 24\ rolls) = 1 - \bigg(\frac{35}{36}\bigg)^{24}=0.491
 \]</span></p>
 <p>The probability of this outcome was slightly below 0.5, showing why de Méré lost money on average on this bet.</p>
@@ -577,11 +546,10 @@ P(at\ least\ one\ double\ six\ in\ 24\ rolls) = 1 - \bigg(\frac{35}{36}\bigg)^{2
 <p><span class="math display">\[
 P(k; n,p) = P(X=k) = \binom{n}{k} p^k(1-p)^{n-k}
 \]</span></p>
-<p>This refers to the probability of k successes on n trials when the probability of success is p. You may not be familiar with <span class="math inline">\(\binom{n}{k}\)</span>, which is referred to as the <em>binomial coefficient</em>. The binomial coefficient is also referred to as “n-choose-k” because it describes the number of different ways that one can choose k items out of n total items. The binomial coefficient is computed as:</p>
+<p>This refers to the probability of k successes on n trials when the probability of success is p. You may not be familiar with <span class="math inline">\(\binom{n}{k}\)</span>, which is referred to as the <em>binomial coefficient</em>. The binomial coefficient is also referred to as “n-choose-k” because it describes the number of different ways that one can choose k items out of n total items. The binomial coefficient is computed as:</p>
 <p><span class="math display">\[
 \binom{n}{k} = \frac{n!}{k!(n-k)!}
-\]</span>
-where the explanation point (!) refers to the <em>factorial</em> of the number:</p>
+\]</span> where the explanation point (!) refers to the <em>factorial</em> of the number:</p>
 <p><span class="math display">\[
 n! = \prod_{i=1}^n i = n*(n-1)*...*2*1 
 \]</span></p>
@@ -598,15 +566,15 @@ P(2;4,0.91) = \binom{4}{2} 0.91^2(1-0.91)^{4-2} = 0.040
 P(k\le2)= P(k=2) + P(k=1) + P(k=0) = 6e^{-5} + .002 + .040 = .043  
 \]</span></p>
 <p>In many cases the number of possible outcomes would be too large for us to compute the cumulative probability by enumerating all possible values; fortunately, it can be computed directly. For the binomial, we can do this in R using the <code>pbinom()</code> function:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="co"># compute cumulative probability distribution for Curry&#39;s free throws</span></a>
-<a class="sourceLine" id="cb14-2" title="2"></a>
-<a class="sourceLine" id="cb14-3" title="3"><span class="kw">tibble</span>(</a>
-<a class="sourceLine" id="cb14-4" title="4">  <span class="dt">numSuccesses =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb14-5" title="5">) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb14-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(</a>
-<a class="sourceLine" id="cb14-7" title="7">    <span class="dt">probability =</span> <span class="kw">pbinom</span>(numSuccesses, <span class="dt">size =</span> <span class="dv">4</span>, <span class="dt">prob =</span> <span class="fl">0.91</span>)</a>
-<a class="sourceLine" id="cb14-8" title="8">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-9" title="9"><span class="st">  </span><span class="kw">pander</span>()</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute cumulative probability distribution for Curry&#39;s free throws</span>
+
+<span class="kw">tibble</span>(
+  <span class="dt">numSuccesses =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">4</span>)
+) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">probability =</span> <span class="kw">pbinom</span>(numSuccesses, <span class="dt">size =</span> <span class="dv">4</span>, <span class="dt">prob =</span> <span class="fl">0.91</span>)
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pander</span>()</code></pre></div>
 <table style="width:42%;">
 <colgroup>
 <col width="20%" />
@@ -665,27 +633,27 @@ Figure 3.4: A graphical depiction of conditional probability, showing how the co
 <h2><span class="header-section-number">3.5</span> Computing conditional probabilities from data</h2>
 <p>For many examples in this course we will use data obtained from the National Health and Nutrition Examination Survey (NHANES). NHANES is a large ongoing study organized by the US Centers for Disease Control that is designed to provide an overall picture of the health and nutritional status of both adults and children in the US. Every year, the survey examines a sample of about 5000 people across the US using both interviews and physical and medical tests. The NHANES data is included as a package in R, making it easy to access and work with. It also provides us with a large, realistic dataset that will serve as an example for many different statistical tools.</p>
 <p>Let’s say that we are interested in the following question: What is the probability that someone has diabetes, given that they are not physically active? – that is, <span class="math inline">\(P(diabetes|inactive)\)</span>. NHANES records two variables that address the two parts of this question. The first (<code>Diabetes</code>) asks whether the person has ever been told that they have diabetes, and the second (<code>PhysActive</code>) records whether the person engages in sports, fitness, or recreational activities that are at least of moderate intensity. Let’s first compute the simple probabilities.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="co"># Summarize NHANES data for diabetes and physical activity</span></a>
-<a class="sourceLine" id="cb15-2" title="2"></a>
-<a class="sourceLine" id="cb15-3" title="3"><span class="co"># drop duplicated IDs within the NHANES dataset</span></a>
-<a class="sourceLine" id="cb15-4" title="4">NHANES_diabetes_activity &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb15-5" title="5"><span class="st">  </span>NHANES <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb15-6" title="6"><span class="st">  </span><span class="kw">distinct</span>(ID, <span class="dt">.keep_all =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb15-7" title="7"><span class="st">  </span><span class="kw">drop_na</span>(PhysActive, Diabetes)</a>
-<a class="sourceLine" id="cb15-8" title="8"></a>
-<a class="sourceLine" id="cb15-9" title="9"><span class="kw">pander</span>(<span class="st">&#39;Summary data for diabetes&#39;</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Summarize NHANES data for diabetes and physical activity</span>
+
+<span class="co"># drop duplicated IDs within the NHANES dataset</span>
+NHANES_diabetes_activity &lt;-<span class="st"> </span>
+<span class="st">  </span>NHANES <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">distinct</span>(ID, <span class="dt">.keep_all =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">drop_na</span>(PhysActive, Diabetes)
+
+<span class="kw">pander</span>(<span class="st">&#39;Summary data for diabetes&#39;</span>)</code></pre></div>
 <p>Summary data for diabetes</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">NHANES_diabetes_activity <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb16-2" title="2"><span class="st">  </span><span class="kw">count</span>(Diabetes) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb16-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(</a>
-<a class="sourceLine" id="cb16-4" title="4">    <span class="dt">prob =</span> n <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(n)</a>
-<a class="sourceLine" id="cb16-5" title="5">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb16-6" title="6"><span class="st">  </span><span class="kw">pander</span>()</a></code></pre></div>
-<table style="width:36%;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">NHANES_diabetes_activity <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(Diabetes) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">prob =</span> n <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(n)
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pander</span>()</code></pre></div>
+<table style="width:35%;">
 <colgroup>
 <col width="15%" />
 <col width="9%" />
-<col width="11%" />
+<col width="9%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -707,19 +675,19 @@ Figure 3.4: A graphical depiction of conditional probability, showing how the co
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">pander</span>(<span class="st">&#39;Summary data for physical activity&#39;</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pander</span>(<span class="st">&#39;Summary data for physical activity&#39;</span>)</code></pre></div>
 <p>Summary data for physical activity</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1">NHANES_diabetes_activity <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb18-2" title="2"><span class="st">  </span><span class="kw">count</span>(PhysActive) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb18-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(</a>
-<a class="sourceLine" id="cb18-4" title="4">    <span class="dt">prob =</span> n <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(n)</a>
-<a class="sourceLine" id="cb18-5" title="5">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb18-6" title="6"><span class="st">  </span><span class="kw">pander</span>()</a></code></pre></div>
-<table style="width:39%;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">NHANES_diabetes_activity <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(PhysActive) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">prob =</span> n <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(n)
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pander</span>()</code></pre></div>
+<table style="width:38%;">
 <colgroup>
 <col width="18%" />
 <col width="9%" />
-<col width="11%" />
+<col width="9%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -743,22 +711,22 @@ Figure 3.4: A graphical depiction of conditional probability, showing how the co
 </table>
 <p>This shows that the probability that someone in the NHANES dataset has diabetes is .101, and the probability that someone is inactive is .454.</p>
 <p>To compute <span class="math inline">\(P(diabetes|inactive)\)</span> we would also need to know the joint probability of being diabetic <em>and</em> inactive, in addition to the simple probabilities of each:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="co"># compute joint probabilities for diabetes and physical activity</span></a>
-<a class="sourceLine" id="cb19-2" title="2"></a>
-<a class="sourceLine" id="cb19-3" title="3">NHANES_diabetes_stats_by_activity &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb19-4" title="4"><span class="st">  </span>NHANES_diabetes_activity <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb19-5" title="5"><span class="st">  </span><span class="kw">count</span>(Diabetes, PhysActive) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb19-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(</a>
-<a class="sourceLine" id="cb19-7" title="7">    <span class="dt">prob =</span> n <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(n)</a>
-<a class="sourceLine" id="cb19-8" title="8">  ) </a>
-<a class="sourceLine" id="cb19-9" title="9"></a>
-<a class="sourceLine" id="cb19-10" title="10"><span class="kw">pander</span>(NHANES_diabetes_stats_by_activity)</a></code></pre></div>
-<table style="width:54%;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute joint probabilities for diabetes and physical activity</span>
+
+NHANES_diabetes_stats_by_activity &lt;-<span class="st"> </span>
+<span class="st">  </span>NHANES_diabetes_activity <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(Diabetes, PhysActive) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">prob =</span> n <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(n)
+  ) 
+
+<span class="kw">pander</span>(NHANES_diabetes_stats_by_activity)</code></pre></div>
+<table style="width:53%;">
 <colgroup>
 <col width="15%" />
 <col width="18%" />
 <col width="9%" />
-<col width="11%" />
+<col width="9%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -796,24 +764,24 @@ Figure 3.4: A graphical depiction of conditional probability, showing how the co
 </tbody>
 </table>
 <p>Based on these joint probabilities, we can compute <span class="math inline">\(P(diabetes|inactive)\)</span>:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="co"># compute conditional probability p(diabetes|inactive)</span></a>
-<a class="sourceLine" id="cb20-2" title="2"></a>
-<a class="sourceLine" id="cb20-3" title="3">P_inactive &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb20-4" title="4"><span class="st">  </span>NHANES_diabetes_activity <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb20-5" title="5"><span class="st">  </span><span class="kw">summarise</span>(</a>
-<a class="sourceLine" id="cb20-6" title="6">    <span class="kw">mean</span>(PhysActive <span class="op">==</span><span class="st"> &quot;No&quot;</span>)</a>
-<a class="sourceLine" id="cb20-7" title="7">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb20-8" title="8"><span class="st">  </span><span class="kw">pull</span>()</a>
-<a class="sourceLine" id="cb20-9" title="9"></a>
-<a class="sourceLine" id="cb20-10" title="10">P_diabetes_and_inactive &lt;-</a>
-<a class="sourceLine" id="cb20-11" title="11"><span class="st">  </span>NHANES_diabetes_stats_by_activity <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb20-12" title="12"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(Diabetes <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>, PhysActive <span class="op">==</span><span class="st"> &quot;No&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb20-13" title="13"><span class="st">  </span><span class="kw">pull</span>(prob)</a>
-<a class="sourceLine" id="cb20-14" title="14"></a>
-<a class="sourceLine" id="cb20-15" title="15">P_diabetes_given_inactive &lt;-</a>
-<a class="sourceLine" id="cb20-16" title="16"><span class="st">  </span>P_diabetes_and_inactive <span class="op">/</span><span class="st"> </span>P_inactive</a>
-<a class="sourceLine" id="cb20-17" title="17"></a>
-<a class="sourceLine" id="cb20-18" title="18">P_diabetes_given_inactive</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute conditional probability p(diabetes|inactive)</span>
+
+P_inactive &lt;-<span class="st"> </span>
+<span class="st">  </span>NHANES_diabetes_activity <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(
+    <span class="kw">mean</span>(PhysActive <span class="op">==</span><span class="st"> &quot;No&quot;</span>)
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pull</span>()
+
+P_diabetes_and_inactive &lt;-
+<span class="st">  </span>NHANES_diabetes_stats_by_activity <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(Diabetes <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>, PhysActive <span class="op">==</span><span class="st"> &quot;No&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pull</span>(prob)
+
+P_diabetes_given_inactive &lt;-
+<span class="st">  </span>P_diabetes_and_inactive <span class="op">/</span><span class="st"> </span>P_inactive
+
+P_diabetes_given_inactive</code></pre></div>
 <pre><code>## [1] 0.1411812</code></pre>
 <p>The first line of code in this chunk computed <span class="math inline">\(P(inactive)\)</span> by taking the mean of a test for whether the PhysActive variable was equal to “No” for each indivdual. This trick works because TRUE/FALSE values are treated as 1/0 respectively by R; thus, if we want to know the probaility of some event, we can generate a Boolean variable that tests for that event, and then simply take the mean of that variable. We then use that value to compute the conditional probability, where we find that the probability of someone having diabetes given that they are physically active is 0.141.</p>
 </div>
@@ -825,24 +793,24 @@ P(A|B) = P(A)
 \]</span></p>
 <p>That is, the probability of A given some value of B is just the same as the overall probability of A. Looking at it this way, we see that many cases of what we would call “independence” in the world are not actually statistically independent. For example, there is currently a move by a small group of California citizens to declare a new independent state called Jefferson, which would comprise a number of counties in northern California and Oregon. If this were to happen, then the probability that a current California resident would now live in the state of Jefferson would be <span class="math inline">\(P(Jefferson)=0.014\)</span>, whereas the proability that they would remain a California resident would be <span class="math inline">\(P(California)=0.986\)</span>. The new states might be politically independent, but they would <em>not</em> be statistically independent, because <span class="math inline">\(P(California|Jefferson) = 0\)</span>! That is, while independence in common language often refers to sets that are exclusive, statistical independence refers to the case where one cannot predict anything about one variable from the value of another variable. For example, knowing a person’s hair color is unlikely to tell you whether they prefer chocolate or strawberry ice cream.</p>
 <p>Let’s look at another example, using the NHANES data: Are physical health and mental health independent of one another? NHANES includes two relevant questions: <em>PhysActive</em>, which asks whether the individual is physically active, and <em>DaysMentHlthBad</em>, which asks how many days out of the last 30 that the individual experienced bad mental health. We will define a new variable called badMentalHealth as having more than 7 days of bad mental health in the last month, and then determine whether they are independent by asking whether the simple probability of bad mental health is different from the conditional probability of bad mental health given that one is physically active.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="co"># compute probabilities for mental health and physical activity</span></a>
-<a class="sourceLine" id="cb22-2" title="2">NHANES_adult &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb22-3" title="3"><span class="st">  </span>NHANES <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb22-4" title="4"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(</a>
-<a class="sourceLine" id="cb22-5" title="5">    Age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">18</span>,</a>
-<a class="sourceLine" id="cb22-6" title="6">    <span class="op">!</span><span class="kw">is.na</span>(PhysActive),</a>
-<a class="sourceLine" id="cb22-7" title="7">    <span class="op">!</span><span class="kw">is.na</span>(DaysMentHlthBad)</a>
-<a class="sourceLine" id="cb22-8" title="8">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb22-9" title="9"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">badMentalHealth =</span> DaysMentHlthBad <span class="op">&gt;</span><span class="st"> </span><span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb22-10" title="10"></a>
-<a class="sourceLine" id="cb22-11" title="11">NHANES_MentalHealth_summary &lt;-</a>
-<a class="sourceLine" id="cb22-12" title="12"><span class="st">  </span>NHANES_adult <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb22-13" title="13"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">badMentalHealth =</span> <span class="kw">mean</span>(badMentalHealth))</a>
-<a class="sourceLine" id="cb22-14" title="14"></a>
-<a class="sourceLine" id="cb22-15" title="15"><span class="kw">pander</span>(NHANES_MentalHealth_summary)</a></code></pre></div>
-<table style="width:25%;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute probabilities for mental health and physical activity</span>
+NHANES_adult &lt;-<span class="st"> </span>
+<span class="st">  </span>NHANES <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(
+    Age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">18</span>,
+    <span class="op">!</span><span class="kw">is.na</span>(PhysActive),
+    <span class="op">!</span><span class="kw">is.na</span>(DaysMentHlthBad)
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">badMentalHealth =</span> DaysMentHlthBad <span class="op">&gt;</span><span class="st"> </span><span class="dv">7</span>)
+
+NHANES_MentalHealth_summary &lt;-
+<span class="st">  </span>NHANES_adult <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">badMentalHealth =</span> <span class="kw">mean</span>(badMentalHealth))
+
+<span class="kw">pander</span>(NHANES_MentalHealth_summary)</code></pre></div>
+<table style="width:24%;">
 <colgroup>
-<col width="25%" />
+<col width="23%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -855,16 +823,16 @@ P(A|B) = P(A)
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1">NHANES_MentalHealth_by_PhysActive &lt;-</a>
-<a class="sourceLine" id="cb23-2" title="2"><span class="st">  </span>NHANES_adult <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb23-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(PhysActive) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb23-4" title="4"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">badMentalHealth =</span> <span class="kw">mean</span>(badMentalHealth)) </a>
-<a class="sourceLine" id="cb23-5" title="5"></a>
-<a class="sourceLine" id="cb23-6" title="6"><span class="kw">pander</span>(NHANES_MentalHealth_by_PhysActive)</a></code></pre></div>
-<table style="width:43%;">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">NHANES_MentalHealth_by_PhysActive &lt;-
+<span class="st">  </span>NHANES_adult <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(PhysActive) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">badMentalHealth =</span> <span class="kw">mean</span>(badMentalHealth)) 
+
+<span class="kw">pander</span>(NHANES_MentalHealth_by_PhysActive)</code></pre></div>
+<table style="width:42%;">
 <colgroup>
 <col width="18%" />
-<col width="25%" />
+<col width="23%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -924,9 +892,7 @@ P(cancer|test) = \frac{P(test|cancer)*P(cancer)}{P(test|disease)*P(disease) + P(
 <p><span class="math display">\[
 P(B|A) =  \frac{P(A|B)*P(B)}{P(A)}
 \]</span></p>
-<p>The different parts of Bayes’ rule have specific names, that relate to their role in using Bayes rule to update our beliefs. We start out with an initial guess about the probability of B (<span class="math inline">\(P(B)\)</span>), which we refer to as the <em>prior</em> probability. In the PSA example we used the base rate for the prior, since it was our best guess before we knew the test result. We then collect some data, which in our example was the test result. The degree to which the data A are consistent with outcome B is given by <span class="math inline">\(P(A|B)\)</span>, which we refer to as the <em>likelihood</em>. You can think of this as how likely the data are, given the particular hypothesis being tested. In our example, the hypothesis being tested was whether the individual had cancer, and the likelihood was based on our knowledge about the specficity of the test.
-The denominator (<span class="math inline">\(P(A)\)</span>) is referred to as the <em>marginal likelihood</em>, because it expresses the overall likelihood of the data, averaged across all of the possible values of A (which in our example were the positive and negative test results).
-The outcome to the left (<span class="math inline">\(P(B|A)\)</span>) is referred to as the <em>posterior</em> - because it’s what comes out the back end of the computation.</p>
+<p>The different parts of Bayes’ rule have specific names, that relate to their role in using Bayes rule to update our beliefs. We start out with an initial guess about the probability of B (<span class="math inline">\(P(B)\)</span>), which we refer to as the <em>prior</em> probability. In the PSA example we used the base rate for the prior, since it was our best guess before we knew the test result. We then collect some data, which in our example was the test result. The degree to which the data A are consistent with outcome B is given by <span class="math inline">\(P(A|B)\)</span>, which we refer to as the <em>likelihood</em>. You can think of this as how likely the data are, given the particular hypothesis being tested. In our example, the hypothesis being tested was whether the individual had cancer, and the likelihood was based on our knowledge about the specficity of the test. The denominator (<span class="math inline">\(P(A)\)</span>) is referred to as the <em>marginal likelihood</em>, because it expresses the overall likelihood of the data, averaged across all of the possible values of A (which in our example were the positive and negative test results). The outcome to the left (<span class="math inline">\(P(B|A)\)</span>) is referred to as the <em>posterior</em> - because it’s what comes out the back end of the computation.</p>
 <p>There is a another way of writing Bayes rule that makes this a bit clearer:</p>
 <p><span class="math display">\[
 P(B|A) = \frac{P(A|B)}{P(A)}*P(B)
@@ -1024,7 +990,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "true";
+    var src = "";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

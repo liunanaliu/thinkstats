@@ -62,67 +62,41 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 </head>
@@ -237,7 +211,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.9.1" data-path="data-visualization.html"><a href="data-visualization.html#perceptual-limitations"><i class="fa fa-check"></i><b>6.9.1</b> Perceptual limitations</a></li>
 </ul></li>
 <li class="chapter" data-level="6.10" data-path="data-visualization.html"><a href="data-visualization.html#correcting-for-other-factors"><i class="fa fa-check"></i><b>6.10</b> Correcting for other factors</a></li>
-<li class="chapter" data-level="6.11" data-path="data-visualization.html"><a href="data-visualization.html#suggested-readings-4"><i class="fa fa-check"></i><b>6.11</b> Suggested readings</a></li>
+<li class="chapter" data-level="6.11" data-path="data-visualization.html"><a href="data-visualization.html#suggested-readings-and-videos"><i class="fa fa-check"></i><b>6.11</b> Suggested readings and videos</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="sampling-1.html"><a href="sampling-1.html"><i class="fa fa-check"></i><b>7</b> Sampling</a><ul>
 <li class="chapter" data-level="7.1" data-path="sampling-1.html"><a href="sampling-1.html#how-do-we-sample"><i class="fa fa-check"></i><b>7.1</b> How do we sample?</a></li>
@@ -245,7 +219,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3" data-path="sampling-1.html"><a href="sampling-1.html#standard-error-of-the-mean"><i class="fa fa-check"></i><b>7.3</b> Standard error of the mean</a></li>
 <li class="chapter" data-level="7.4" data-path="sampling-1.html"><a href="sampling-1.html#the-central-limit-theorem"><i class="fa fa-check"></i><b>7.4</b> The Central Limit Theorem</a></li>
 <li class="chapter" data-level="7.5" data-path="sampling-1.html"><a href="sampling-1.html#confidence-intervals"><i class="fa fa-check"></i><b>7.5</b> Confidence intervals</a></li>
-<li class="chapter" data-level="7.6" data-path="sampling-1.html"><a href="sampling-1.html#suggested-readings-5"><i class="fa fa-check"></i><b>7.6</b> Suggested readings</a></li>
+<li class="chapter" data-level="7.6" data-path="sampling-1.html"><a href="sampling-1.html#suggested-readings-4"><i class="fa fa-check"></i><b>7.6</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html"><i class="fa fa-check"></i><b>8</b> Resampling and simulation</a><ul>
 <li class="chapter" data-level="8.1" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html#monte-carlo-simulation"><i class="fa fa-check"></i><b>8.1</b> Monte Carlo simulation</a></li>
@@ -255,7 +229,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html#using-simulation-for-statistics-the-bootstrap"><i class="fa fa-check"></i><b>8.5</b> Using simulation for statistics: The bootstrap</a><ul>
 <li class="chapter" data-level="8.5.1" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html#computing-the-bootstrap"><i class="fa fa-check"></i><b>8.5.1</b> Computing the bootstrap</a></li>
 </ul></li>
-<li class="chapter" data-level="8.6" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html#suggested-readings-6"><i class="fa fa-check"></i><b>8.6</b> Suggested readings</a></li>
+<li class="chapter" data-level="8.6" data-path="resampling-and-simulation.html"><a href="resampling-and-simulation.html#suggested-readings-5"><i class="fa fa-check"></i><b>8.6</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html"><i class="fa fa-check"></i><b>9</b> Hypothesis testing</a><ul>
 <li class="chapter" data-level="9.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#null-hypothesis-statistical-testing-nhst"><i class="fa fa-check"></i><b>9.1</b> Null Hypothesis Statistical Testing (NHST)</a></li>
@@ -270,7 +244,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.3.7" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#what-does-a-significant-result-mean"><i class="fa fa-check"></i><b>9.3.7</b> What does a significant result mean?</a></li>
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#nhst-in-a-modern-context-multiple-testing"><i class="fa fa-check"></i><b>9.4</b> NHST in a modern context: Multiple testing</a></li>
-<li class="chapter" data-level="9.5" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#suggested-readings-7"><i class="fa fa-check"></i><b>9.5</b> Suggested readings</a></li>
+<li class="chapter" data-level="9.5" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#suggested-readings-6"><i class="fa fa-check"></i><b>9.5</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html"><i class="fa fa-check"></i><b>10</b> Confidence intervals, effect sizes, and statistical power</a><ul>
 <li class="chapter" data-level="10.1" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#confidence-intervals-1"><i class="fa fa-check"></i><b>10.1</b> Confidence intervals</a><ul>
@@ -288,7 +262,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#statistical-power"><i class="fa fa-check"></i><b>10.3</b> Statistical power</a><ul>
 <li class="chapter" data-level="10.3.1" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#power-analysis"><i class="fa fa-check"></i><b>10.3.1</b> Power analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#suggested-readings-8"><i class="fa fa-check"></i><b>10.4</b> Suggested readings</a></li>
+<li class="chapter" data-level="10.4" data-path="ci-effect-size-power.html"><a href="ci-effect-size-power.html#suggested-readings-7"><i class="fa fa-check"></i><b>10.4</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html"><i class="fa fa-check"></i><b>11</b> Bayesian statistics</a><ul>
 <li class="chapter" data-level="11.1" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html#generative-models"><i class="fa fa-check"></i><b>11.1</b> Generative models</a></li>
@@ -315,7 +289,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.6.1" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html#bayes-factors"><i class="fa fa-check"></i><b>11.6.1</b> Bayes factors</a></li>
 <li class="chapter" data-level="11.6.2" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html#bayes-factors-for-statistical-hypotheses"><i class="fa fa-check"></i><b>11.6.2</b> Bayes factors for statistical hypotheses</a></li>
 </ul></li>
-<li class="chapter" data-level="11.7" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html#suggested-readings-9"><i class="fa fa-check"></i><b>11.7</b> Suggested readings</a></li>
+<li class="chapter" data-level="11.7" data-path="bayesian-statistics.html"><a href="bayesian-statistics.html#suggested-readings-8"><i class="fa fa-check"></i><b>11.7</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="modeling-categorical-relationships.html"><a href="modeling-categorical-relationships.html"><i class="fa fa-check"></i><b>12</b> Modeling categorical relationships</a><ul>
 <li class="chapter" data-level="12.1" data-path="modeling-categorical-relationships.html"><a href="modeling-categorical-relationships.html#example-candy-colors"><i class="fa fa-check"></i><b>12.1</b> Example: Candy colors</a></li>
@@ -340,7 +314,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.4" data-path="modeling-continuous-relationships.html"><a href="modeling-continuous-relationships.html#correlation-and-causation"><i class="fa fa-check"></i><b>13.4</b> Correlation and causation</a><ul>
 <li class="chapter" data-level="13.4.1" data-path="modeling-continuous-relationships.html"><a href="modeling-continuous-relationships.html#causal-graphs"><i class="fa fa-check"></i><b>13.4.1</b> Causal graphs</a></li>
 </ul></li>
-<li class="chapter" data-level="13.5" data-path="modeling-continuous-relationships.html"><a href="modeling-continuous-relationships.html#suggested-readings-10"><i class="fa fa-check"></i><b>13.5</b> Suggested readings</a></li>
+<li class="chapter" data-level="13.5" data-path="modeling-continuous-relationships.html"><a href="modeling-continuous-relationships.html#suggested-readings-9"><i class="fa fa-check"></i><b>13.5</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html"><i class="fa fa-check"></i><b>14</b> The General Linear Model</a><ul>
 <li class="chapter" data-level="14.1" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html#linear-regression"><i class="fa fa-check"></i><b>14.1</b> Linear regression</a><ul>
@@ -356,7 +330,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.4" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html#what-does-predict-really-mean"><i class="fa fa-check"></i><b>14.4</b> What does “predict” really mean?</a><ul>
 <li class="chapter" data-level="14.4.1" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html#cross-validation"><i class="fa fa-check"></i><b>14.4.1</b> Cross-validation</a></li>
 </ul></li>
-<li class="chapter" data-level="14.5" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html#suggested-readings-11"><i class="fa fa-check"></i><b>14.5</b> Suggested readings</a></li>
+<li class="chapter" data-level="14.5" data-path="the-general-linear-model.html"><a href="the-general-linear-model.html#suggested-readings-10"><i class="fa fa-check"></i><b>14.5</b> Suggested readings</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="comparing-means.html"><a href="comparing-means.html"><i class="fa fa-check"></i><b>15</b> Comparing means</a><ul>
 <li class="chapter" data-level="15.1" data-path="comparing-means.html"><a href="comparing-means.html#students-t-test"><i class="fa fa-check"></i><b>15.1</b> Student’s T test</a></li>
@@ -402,10 +376,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="17.6" data-path="doing-reproducible-research.html"><a href="doing-reproducible-research.html#doing-reproducible-data-analysis"><i class="fa fa-check"></i><b>17.6</b> Doing reproducible data analysis</a></li>
 <li class="chapter" data-level="17.7" data-path="doing-reproducible-research.html"><a href="doing-reproducible-research.html#conclusion-doing-better-science"><i class="fa fa-check"></i><b>17.7</b> Conclusion: Doing better science</a></li>
-<li class="chapter" data-level="17.8" data-path="doing-reproducible-research.html"><a href="doing-reproducible-research.html#suggested-readings-12"><i class="fa fa-check"></i><b>17.8</b> Suggested Readings</a></li>
+<li class="chapter" data-level="17.8" data-path="doing-reproducible-research.html"><a href="doing-reproducible-research.html#suggested-readings-11"><i class="fa fa-check"></i><b>17.8</b> Suggested Readings</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>18</b> References</a></li>
-<li class="chapter" data-level="" data-path="references-1.html"><a href="references-1.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
       </nav>
@@ -430,62 +403,80 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="how-do-we-sample" class="section level2">
 <h2><span class="header-section-number">7.1</span> How do we sample?</h2>
 <p>Our goal in sampling is to determine some feature of the full population of interest, using just a small subset of the population. We do this primarily to save time and effort – why go to the trouble of measuring every indivdual in the population when just a small sample is sufficient to accurately estimate the variable of interest?</p>
-<p>In the election example, the population is all voters, and the sample is the set of 1000 individuals selected by the polling organization. The way in which we select the sample is critical to ensuring that the sample is <em>representative</em> of the entire population, which is a main goal of statistical sampling. It’s easy to imagine a non-representative sample; if a pollster only called individuals whose names they had received from the local Democratic party, then it would be unlikely that the results of the poll would be representative of the population as a whole. In general we would define a representative poll as being one in which every member of the population has an equal chance of being selected. When this fails, then we have to worry about whether the statistic that we compute on the sample is <em>biased</em> - that is, whether its value is systematically different from the population value (which we refer to as a <em>parameter</em>). Keep in mind that we generally don’t know this population parameter, because if we did then we wouldn’t need to sample! But we will use examples where we have access to the entire population, in order to explain some of the key ideas.</p>
-<p>It’s important to also distinguish between two different ways of sampling: with replacement versus without replacement. In sampling <em>with replacement</em>, after a member of the population has been sampled, they are put back into the pool so that they can potentially be sampled again. In <em>sampling without replacement</em>, once a member has been sampled they are not eligible to be sampled again. It’s most common to use sampling without replacement, but there will be some contexts in which we will use sampling with replacement, as when we discuss a technical called <em>bootstrapping</em> in Chapter <a href="resampling-and-simulation.html#resampling-and-simulation">8</a>.</p>
+<p>In the election example, the population is all voters, and the sample is the set of 1000 individuals selected by the polling organization. The way in which we select the sample is critical to ensuring that the sample is <em>representative</em> of the entire population, which is a main goal of statistical sampling. It’s easy to imagine a non-representative sample; if a pollster only called individuals whose names they had received from the local Democratic party, then it would be unlikely that the results of the poll would be representative of the population as a whole. In general, we would define a representative poll as being one in which every member of the population has an equal chance of being selected. When this fails, then we have to worry about whether the statistic that we compute on the sample is <em>biased</em> - that is, whether its value is systematically different from the population value (which we refer to as a <em>parameter</em>). Keep in mind that we generally don’t know this population parameter, because if we did then we wouldn’t need to sample! But we will use examples where we have access to the entire population, in order to explain some of the key ideas.</p>
+<p>It’s important to also distinguish between two different ways of sampling: with replacement versus without replacement. In sampling <em>with replacement</em>, after a member of the population has been sampled, they are put back into the pool so that they can potentially be sampled again. In <em>sampling without replacement</em>, once a member has been sampled they are not eligible to be sampled again. It’s most common to use sampling without replacement, but there will be some contexts in which we will use sampling with replacement, as when we discuss a technique called <em>bootstrapping</em> in Chapter <a href="resampling-and-simulation.html#resampling-and-simulation">8</a>.</p>
 </div>
 <div id="sampling-error" class="section level2">
 <h2><span class="header-section-number">7.2</span> Sampling error</h2>
-<p>Regardless of how representative our sample is, it’s likely that the statistic that we compute from the sample is going to differ at least slightly from the population parameter. We refer to this as <em>sampling error</em>. The value of our statistical estimate will also vary from sample to sample; we refer to this distribution of our statistic across samples as the <em>sampling distribution</em>. We will use the NHANES dataset as an example; we are going to assume that NHANES is the entire population, and then we will draw random samples from the population. We will have more to say in the next chapter about exactly how the generation of “random” samples works in a computer.</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" title="1"><span class="co"># load the NHANES data library</span></a>
-<a class="sourceLine" id="cb94-2" title="2"><span class="kw">library</span>(NHANES)</a>
-<a class="sourceLine" id="cb94-3" title="3"></a>
-<a class="sourceLine" id="cb94-4" title="4"><span class="co"># drop duplicated IDs within the NHANES dataset</span></a>
-<a class="sourceLine" id="cb94-5" title="5">NHANES &lt;-<span class="st"> </span>NHANES <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb94-6" title="6"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">distinct</span>(ID,<span class="dt">.keep_all=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb94-7" title="7"></a>
-<a class="sourceLine" id="cb94-8" title="8">NHANES_adult &lt;-<span class="st"> </span>NHANES <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb94-9" title="9"><span class="st">  </span><span class="kw">drop_na</span>(Height) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb94-10" title="10"><span class="st">  </span><span class="kw">subset</span>(Age<span class="op">&gt;=</span><span class="dv">18</span>)</a>
-<a class="sourceLine" id="cb94-11" title="11"></a>
-<a class="sourceLine" id="cb94-12" title="12"><span class="kw">sprintf</span>(<span class="st">&#39;Population height: mean = %.2f&#39;</span>,</a>
-<a class="sourceLine" id="cb94-13" title="13">               <span class="kw">mean</span>(NHANES_adult<span class="op">$</span>Height))</a></code></pre></div>
+<p>Regardless of how representative our sample is, it’s likely that the statistic that we compute from the sample is going to differ at least slightly from the population parameter. We refer to this as <em>sampling error</em>. The value of our statistical estimate will also vary from sample to sample; we refer to this distribution of our statistic across samples as the <em>sampling distribution</em>.</p>
+<p>Sampling error is directly related to the quality of our measurement of the population. Clearly we want the estimates obtained from our sample to be as close as possible to the true value of the population parameter. However, even if our statistic is unbiased (that is, in the long run we expect it to have the same value as the population parameter), the value for any particular estimate will differ from the population estimate, and those differences will be greater when the sampling error is greater. Thus, reducing sampling error is an important step towards better measurement.</p>
+<p>We will use the NHANES dataset as an example; we are going to assume that NHANES is the entire population, and then we will draw random samples from the population. We will have more to say in the next chapter about exactly how the generation of “random” samples works in a computer.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load the NHANES data library</span>
+<span class="kw">library</span>(NHANES)
+
+<span class="co"># create a NHANES dataset without duplicated IDs </span>
+NHANES &lt;-
+<span class="st">  </span>NHANES <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">distinct</span>(ID, <span class="dt">.keep_all =</span> <span class="ot">TRUE</span>) 
+
+<span class="co">#create a dataset of only adults</span>
+NHANES_adult &lt;-<span class="st"> </span>
+<span class="st">  </span>NHANES <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>( 
+    <span class="op">!</span><span class="kw">is.na</span>(Height), 
+    Age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">18</span>
+  )
+
+<span class="co">#print the NHANES population mean and standard deviation of adult height</span>
+<span class="kw">sprintf</span>(
+  <span class="st">&quot;Population height: mean = %.2f&quot;</span>,
+  <span class="kw">mean</span>(NHANES_adult<span class="op">$</span>Height)
+)</code></pre></div>
 <pre><code>## [1] &quot;Population height: mean = 168.35&quot;</code></pre>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" title="1"><span class="kw">sprintf</span>(<span class="st">&#39;Population height: std deviation = %.2f&#39;</span>,</a>
-<a class="sourceLine" id="cb96-2" title="2">               <span class="kw">sd</span>(NHANES_adult<span class="op">$</span>Height))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sprintf</span>(
+  <span class="st">&quot;Population height: std deviation = %.2f&quot;</span>,
+  <span class="kw">sd</span>(NHANES_adult<span class="op">$</span>Height)
+)</code></pre></div>
 <pre><code>## [1] &quot;Population height: std deviation = 10.16&quot;</code></pre>
-<p>In this case we know the population mean and standard deviation. Now let’s take a single sample of 50 individuals from the NHANES population, and compare the resulting statistics to the population parameters.</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" title="1"><span class="co"># sample 50 individuals from NHANES dataset</span></a>
-<a class="sourceLine" id="cb98-2" title="2"></a>
-<a class="sourceLine" id="cb98-3" title="3">exampleSample &lt;-<span class="st"> </span>NHANES_adult <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb98-4" title="4"><span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">50</span>)</a>
-<a class="sourceLine" id="cb98-5" title="5"><span class="kw">sprintf</span>(<span class="st">&#39;Sample height: mean = %.2f&#39;</span>,</a>
-<a class="sourceLine" id="cb98-6" title="6">               <span class="kw">mean</span>(exampleSample<span class="op">$</span>Height))</a></code></pre></div>
+<p>In this example, we know the adult population mean and standard deviation for height because we are assuming that the NHANES dataset contains the entire population of adults. Now let’s take a single sample of 50 individuals from the NHANES population, and compare the resulting statistics to the population parameters.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># sample 50 individuals from NHANES dataset</span>
+exampleSample &lt;-<span class="st"> </span>
+<span class="st">  </span>NHANES_adult <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">50</span>)
+
+<span class="co">#print the sample mean and standard deviation of adult height</span>
+<span class="kw">sprintf</span>(
+  <span class="st">&#39;Sample height: mean = %.2f&#39;</span>,
+  <span class="kw">mean</span>(exampleSample<span class="op">$</span>Height)
+  )</code></pre></div>
 <pre><code>## [1] &quot;Sample height: mean = 169.46&quot;</code></pre>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" title="1"><span class="kw">sprintf</span>(<span class="st">&#39;Sample height: std deviation = %.2f&#39;</span>,</a>
-<a class="sourceLine" id="cb100-2" title="2">               <span class="kw">sd</span>(exampleSample<span class="op">$</span>Height))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sprintf</span>(
+  <span class="st">&#39;Sample height: std deviation = %.2f&#39;</span>,
+  <span class="kw">sd</span>(exampleSample<span class="op">$</span>Height)
+)</code></pre></div>
 <pre><code>## [1] &quot;Sample height: std deviation = 10.07&quot;</code></pre>
-<p>The sample mean and standard deviation are similar but not exactly equal to the population values. Now let’s take a large number of samples of 50 individuals, compute the mean, and look at the resulting sampling distribution. We have to decide how many samples to take in order to do a good job of estimating the sampling distribution – in this case, let’s take 5000 samples so that we are really confident in the answer. Note that simulations like this one can sometimes take a few minutes to run, and might make your computer huff and puff. The histogram in Figure <a href="sampling-1.html#fig:samplePlot">7.1</a> shows that the means estimated for each of the samples of 50 individuals vary somewhat, but that overall they are centered around the population mean.</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" title="1"><span class="co"># compute sample means across 5000 samples from NHANES data</span></a>
-<a class="sourceLine" id="cb102-2" title="2"></a>
-<a class="sourceLine" id="cb102-3" title="3">sampSize &lt;-<span class="st"> </span><span class="dv">50</span>  <span class="co"># size of sample</span></a>
-<a class="sourceLine" id="cb102-4" title="4">nsamps &lt;-<span class="st"> </span><span class="dv">5000</span>  <span class="co"># number of samples we will take</span></a>
-<a class="sourceLine" id="cb102-5" title="5"></a>
-<a class="sourceLine" id="cb102-6" title="6"><span class="co"># set up variable to store all of the results</span></a>
-<a class="sourceLine" id="cb102-7" title="7"></a>
-<a class="sourceLine" id="cb102-8" title="8">sampMeans &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="ot">NA</span>,nsamps)</a>
-<a class="sourceLine" id="cb102-9" title="9"></a>
-<a class="sourceLine" id="cb102-10" title="10"><span class="co"># Loop through and repeatedly sample and compute the mean</span></a>
-<a class="sourceLine" id="cb102-11" title="11"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nsamps){</a>
-<a class="sourceLine" id="cb102-12" title="12">  NHANES_sample &lt;-<span class="st"> </span><span class="kw">sample_n</span>(NHANES_adult,sampSize)</a>
-<a class="sourceLine" id="cb102-13" title="13">  sampMeans[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(NHANES_sample<span class="op">$</span>Height)</a>
-<a class="sourceLine" id="cb102-14" title="14">}</a>
-<a class="sourceLine" id="cb102-15" title="15"></a>
-<a class="sourceLine" id="cb102-16" title="16">sampdataDf &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">mean=</span>sampMeans)</a>
-<a class="sourceLine" id="cb102-17" title="17"></a>
-<a class="sourceLine" id="cb102-18" title="18"><span class="kw">sprintf</span>(<span class="st">&#39;Average sample mean = %.2f&#39;</span>,</a>
-<a class="sourceLine" id="cb102-19" title="19">               <span class="kw">mean</span>(sampMeans))</a></code></pre></div>
+<p>The sample mean and standard deviation are similar but not exactly equal to the population values. Now let’s take a large number of samples of 50 individuals, compute the mean for each sample, and look at the resulting sampling distribution of means. We have to decide how many samples to take in order to do a good job of estimating the sampling distribution – in this case, let’s take 5000 samples so that we are really confident in the answer. Note that simulations like this one can sometimes take a few minutes to run, and might make your computer huff and puff. The histogram in Figure <a href="sampling-1.html#fig:samplePlot">7.1</a> shows that the means estimated for each of the samples of 50 individuals vary somewhat, but that overall they are centered around the population mean.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute sample means across 5000 samples from NHANES data</span>
+sampSize &lt;-<span class="st"> </span><span class="dv">50</span> <span class="co"># size of sample</span>
+nsamps &lt;-<span class="st"> </span><span class="dv">5000</span> <span class="co"># number of samples we will take</span>
+
+<span class="co"># set up variable to store all of the results</span>
+sampMeans &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="ot">NA</span>, nsamps)
+
+<span class="co"># Loop through and repeatedly sample and compute the mean</span>
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nsamps) {
+  NHANES_sample &lt;-<span class="st"> </span><span class="kw">sample_n</span>(NHANES_adult, sampSize)
+  sampMeans[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(NHANES_sample<span class="op">$</span>Height)
+}
+
+sampdataDf &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">mean =</span> sampMeans)
+
+<span class="kw">sprintf</span>(
+  <span class="st">&quot;Average sample mean = %.2f&quot;</span>,
+  <span class="kw">mean</span>(sampMeans)
+)</code></pre></div>
 <pre><code>## [1] &quot;Average sample mean = 168.33&quot;</code></pre>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" title="1">sampMeans_df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">sampMeans=</span>sampMeans)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sampMeans_df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">sampMeans =</span> sampMeans)</code></pre></div>
 <div class="figure"><span id="fig:samplePlot"></span>
 <img src="StatsThinking21_files/figure-html/samplePlot-1.png" alt="The blue histogram shows the sampling distribution of the mean over 5000 random samples from the NHANES dataset.  The histogram for the full dataset is shown in gray for reference." width="768" height="50%" />
 <p class="caption">
@@ -498,25 +489,30 @@ Figure 7.1: The blue histogram shows the sampling distribution of the mean over 
 <p>Later in the course it will become essential to be able to characterize how variable our samples are, in order to make inferences about the sample statistics. For the mean, we do this using a quantity called the <em>standard error</em> of the mean (SEM), which one can think of as the standard deviation of the sampling distribution. If we know the population standard deviation, then we can compute the standard error using:</p>
 <p><span class="math display">\[
 SEM = \frac{\sigma}{\sqrt{n}}
-\]</span>
-where <span class="math inline">\(n\)</span> is the size of the sample. We don’t usually know <span class="math inline">\(\sigma\)</span>, so instead we would usually plug in our estimate, which is the standard deviation computed on the sample (<span class="math inline">\(\hat{\sigma}\)</span>):</p>
+\]</span> where <span class="math inline">\(n\)</span> is the size of the sample. We don’t usually know <span class="math inline">\(\sigma\)</span> (the population standard deviation), so instead we would usually plug in our estimate of <span class="math inline">\(\sigma\)</span>, which is the standard deviation computed on the sample (<span class="math inline">\(\hat{\sigma}\)</span>):</p>
 <p><span class="math display">\[
 SEM = \frac{\hat{\sigma}}{\sqrt{n}}
 \]</span></p>
-<p>In general we have to be careful about doing this with smaller samples (less than about 30). Because we have many samples from the NHANES population and we actually know the population parameter, we can confirm that this works correctly by comparing the SEM estimated using the population parameter with the actual standard deviation of the samples that we took from the NHANES dataset.</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" title="1"><span class="co"># compare standard error based on population to standard deviation </span></a>
-<a class="sourceLine" id="cb105-2" title="2"><span class="co"># of sample means</span></a>
-<a class="sourceLine" id="cb105-3" title="3"><span class="kw">sprintf</span>(<span class="st">&#39;Estimated standard error based on population SD: %.2f&#39;</span>,</a>
-<a class="sourceLine" id="cb105-4" title="4">               <span class="kw">sd</span>(NHANES_adult<span class="op">$</span>Height)<span class="op">/</span><span class="kw">sqrt</span>(sampSize))</a></code></pre></div>
+<p>However, we have to be careful about computing SEM using the estimated standard deviation if our sample is small (less than about 30).</p>
+<p>Because we have many samples from the NHANES population and we actually know the population parameter, we can confirm that the SEM estimated using the population parameter is very close to the observed standard deviation of the samples that we took from the NHANES dataset.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compare standard error based on population to standard deviation </span>
+<span class="co"># of sample means</span>
+
+<span class="kw">sprintf</span>(
+  <span class="st">&#39;Estimated standard error based on population SD: %.2f&#39;</span>,
+  <span class="kw">sd</span>(NHANES_adult<span class="op">$</span>Height)<span class="op">/</span><span class="kw">sqrt</span>(sampSize)
+)</code></pre></div>
 <pre><code>## [1] &quot;Estimated standard error based on population SD: 1.44&quot;</code></pre>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" title="1"><span class="kw">sprintf</span>(<span class="st">&#39;Standard deviation of sample means = %.2f&#39;</span>,</a>
-<a class="sourceLine" id="cb107-2" title="2">               <span class="kw">sd</span>(sampMeans))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sprintf</span>(
+  <span class="st">&#39;Standard deviation of sample means = %.2f&#39;</span>,
+  <span class="kw">sd</span>(sampMeans)
+)</code></pre></div>
 <pre><code>## [1] &quot;Standard deviation of sample means = 1.43&quot;</code></pre>
-<p>The formula for the standard error of the mean says that the quality of our measurement involves two quantities: the population variability, and the size of our sample. We have no control over the population variability, but we <em>do</em> have control over the sample size. Thus, if we wish to improve our sample statistics (by reducing their sampling variability) then we should use larger samples. However, the formula also tells us something very fundamental about statistical sampling – namely, that the utility of larger samples diminishes with the square root of the sample size. This means that doubling the sample size will <em>not</em> double the quality of the statistics; rather, it will improve it by a factor of <span class="math inline">\(\sqrt{2}\)</span>. In Section (statistical-power) we will discuss statistical power, which is intimately tied to this idea.</p>
+<p>The formula for the standard error of the mean says that the quality of our measurement involves two quantities: the population variability, and the size of our sample. Of course, because the sample size is the denominator in the formula for SEM, a larger sample size will yield a smaller SEM when holding the population variability constant. We have no control over the population variability, but we <em>do</em> have control over the sample size. Thus, if we wish to improve our sample statistics (by reducing their sampling variability) then we should use larger samples. However, the formula also tells us something very fundamental about statistical sampling – namely, that the utility of larger samples diminishes with the square root of the sample size. This means that doubling the sample size will <em>not</em> double the quality of the statistics; rather, it will improve it by a factor of <span class="math inline">\(\sqrt{2}\)</span>. In Section (statistical-power) we will discuss statistical power, which is intimately tied to this idea.</p>
 </div>
 <div id="the-central-limit-theorem" class="section level2">
 <h2><span class="header-section-number">7.4</span> The Central Limit Theorem</h2>
-<p>The Central Limit Theorem tells us that as sample sizes get larger, the sampling distribution of the mean will come to be normally distributed, <em>even if the data are not normally distributed</em>.</p>
+<p>The Central Limit Theorem tells us that as sample sizes get larger, the sampling distribution of the mean will become normally distributed, <em>even if the data within each sample are not normally distributed</em>.</p>
 <p>We can also see this in real data. Let’s work with the variable AlcoholYear in the NHANES distribution, which is highly skewed, as shown in Figure <a href="sampling-1.html#fig:alcoholYearDist">7.2</a>.</p>
 <div class="figure"><span id="fig:alcoholYearDist"></span>
 <img src="StatsThinking21_files/figure-html/alcoholYearDist-1.png" alt="Distribution of the variable AlcoholYear in the NHANES dataset, which reflects the number of days that the individual drank in a year." width="768" height="50%" />
@@ -525,7 +521,6 @@ Figure 7.2: Distribution of the variable AlcoholYear in the NHANES dataset, whic
 </p>
 </div>
 <p>This distribution is, for lack of a better word, funky – and definitely not normally distributed. Now let’s look at the sampling distribution of the mean for this variable. Figure <a href="sampling-1.html#fig:alcDist50">7.3</a> shows the sampling distribution for this variable, which is obtained by repeatedly drawing samples of size 50 from the NHANES dataset and taking the mean. Despite the clear non-normality of the original data, the sampling distribution is remarkably close to the normal.</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" title="1"><span class="kw">get_sampling_dist</span>(<span class="dv">50</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:alcDist50"></span>
 <img src="StatsThinking21_files/figure-html/alcDist50-1.png" alt="The sampling distribution of the mean for AlcoholYear in the NHANES dataset, obtained by drawing repeated samples of size 50, in blue.  The normal distribution with the same mean and standard deviation is shown in red." width="384" height="50%" />
 <p class="caption">
@@ -535,8 +530,8 @@ Figure 7.3: The sampling distribution of the mean for AlcoholYear in the NHANES 
 </div>
 <div id="confidence-intervals" class="section level2">
 <h2><span class="header-section-number">7.5</span> Confidence intervals</h2>
-<p>Most people are familiar with the idea of a “margin of error” for political polls. These polls usually try to provide an answer that is accurate within +/- 3 percent. In statistics we refer to these as <em>confidence intervals</em>, which provide a measure of our degree of uncertainty about how close our estimate is to the population parameter.</p>
-<p>We saw in the previous section that with sufficient sample size, the sampling distribution of the mean is normally distributed, and that the standard error describes the standard deviation of this sampling distribution. Using this knowledge, we can ask: What is the range that we would expect to capture 95% of all estimates? To answer this, we can use the normal distribution, for which we know the values between which we expect 95% of all samples to fall. Specifically, we use the <em>quantile</em> function for the normal distribution (<code>qnorm()</code> in R) to determine the values of the normal distribution that that fall at the 2.5% and 97.5% points in the distribution. We choose these points because we want to find the 95% of values in the center of the distribution, so we need to cut off 2.5% on each end in order to end up with 95% in the middle. Figure <a href="sampling-1.html#fig:normalCutoffs">7.4</a> shows that this occurs for <span class="math inline">\(Z \pm 1.96\)</span>.</p>
+<p>Most people are familiar with the idea of a “margin of error” for political polls. These polls usually try to provide an answer that is accurate within +/- 3 percent. For example, when a candidate is estimated to win an election by 9 percentage points with a margin of error of 3, the percentage by which they will win is estimated to fall within 6-12 percentage points. In statistics we refer to this range of values as the <em>confidence interval</em>, which provides a measure of our degree of uncertainty about how close our estimate is to the population parameter. The larger the condidence interval, the greater our uncertainty.</p>
+<p>We saw in the previous section that with sufficient sample size, the sampling distribution of the mean is normally distributed, and that the standard error describes the standard deviation of this sampling distribution. Using this knowledge, we can ask: What is the range of values within which we would expect to capture 95% of all estimates of the mean? To answer this, we can use the normal distribution, for which we know the values between which we expect 95% of all sample means to fall. Specifically, we use the <em>quantile</em> function for the normal distribution (<code>qnorm()</code> in R) to determine the values of the normal distribution that fall at the 2.5% and 97.5% points in the distribution. We choose these points because we want to find the 95% of values in the center of the distribution, so we need to cut off 2.5% on each end in order to end up with 95% in the middle. Figure <a href="sampling-1.html#fig:normalCutoffs">7.4</a> shows that this occurs for <span class="math inline">\(Z \pm 1.96\)</span>.</p>
 <div class="figure"><span id="fig:normalCutoffs"></span>
 <img src="StatsThinking21_files/figure-html/normalCutoffs-1.png" alt="Normal distribution, with the orange section in the center denoting the range in which we expect 95% of all values to fall.  The green sections show the portions of the distribution that are more extreme, which we would expect to occur less than 5% of the time." width="384" height="50%" />
 <p class="caption">
@@ -548,16 +543,16 @@ Figure 7.4: Normal distribution, with the orange section in the center denoting 
 CI_{95\%} = \bar{X} \pm 1.96*SEM
 \]</span></p>
 <p>Let’s compute the confidence interval for the NHANES height data,</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" title="1"><span class="co"># compute confidence intervals</span></a>
-<a class="sourceLine" id="cb110-2" title="2"></a>
-<a class="sourceLine" id="cb110-3" title="3">NHANES_sample &lt;-<span class="st"> </span><span class="kw">sample_n</span>(NHANES_adult,<span class="dv">250</span>)</a>
-<a class="sourceLine" id="cb110-4" title="4"></a>
-<a class="sourceLine" id="cb110-5" title="5">sample_summary &lt;-<span class="st"> </span>NHANES_sample <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb110-6" title="6"><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">mean=</span><span class="kw">mean</span>(Height),</a>
-<a class="sourceLine" id="cb110-7" title="7">            <span class="dt">sem=</span><span class="kw">sd</span>(Height)<span class="op">/</span><span class="kw">sqrt</span>(sampSize)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb110-8" title="8"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">CI_lower=</span>mean<span class="fl">-1.96</span><span class="op">*</span>sem,</a>
-<a class="sourceLine" id="cb110-9" title="9">           <span class="dt">CI_upper=</span>mean<span class="fl">+1.96</span><span class="op">*</span>sem)</a>
-<a class="sourceLine" id="cb110-10" title="10"><span class="kw">pander</span>(sample_summary)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute confidence intervals</span>
+
+NHANES_sample &lt;-<span class="st"> </span><span class="kw">sample_n</span>(NHANES_adult,<span class="dv">250</span>)
+
+sample_summary &lt;-<span class="st"> </span>NHANES_sample <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">summarize</span>(<span class="dt">mean=</span><span class="kw">mean</span>(Height),
+            <span class="dt">sem=</span><span class="kw">sd</span>(Height)<span class="op">/</span><span class="kw">sqrt</span>(sampSize)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">CI_lower=</span>mean<span class="op">-</span><span class="fl">1.96</span><span class="op">*</span>sem,
+           <span class="dt">CI_upper=</span>mean<span class="op">+</span><span class="fl">1.96</span><span class="op">*</span>sem)
+<span class="kw">pander</span>(sample_summary)</code></pre></div>
 <table style="width:56%;">
 <colgroup>
 <col width="13%" />
@@ -583,31 +578,37 @@ CI_{95\%} = \bar{X} \pm 1.96*SEM
 </tbody>
 </table>
 <p>Confidence intervals are notoriously confusing, primarily because they don’t mean what we would hope they mean. It seems natural to think that the 95% confidence interval tells us that there is a 95% chance that the population mean falls within the interval. However, as we will see throughout the course, concepts in statsitics often don’t mean what we think they should mean. In the case of confidence intervals, we can’t interpret them in this way because the population parameter has a fixed value – it either is or isn’t in the interval. The proper interpretation of the 95% confidence interval is that it is the interval that will capture the true population mean 95% of the time. We can confirm this by resampling the NHANES data repeatedly and counting how often the interval contains the true population mean.</p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" title="1"><span class="co"># compute how often the confidence interval contains the true population mean</span></a>
-<a class="sourceLine" id="cb111-2" title="2"></a>
-<a class="sourceLine" id="cb111-3" title="3">nsamples &lt;-<span class="st"> </span><span class="dv">2500</span></a>
-<a class="sourceLine" id="cb111-4" title="4">ci_contains_mean &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="ot">NA</span>,nsamples)</a>
-<a class="sourceLine" id="cb111-5" title="5">sampSize &lt;-<span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb111-6" title="6"></a>
-<a class="sourceLine" id="cb111-7" title="7"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nsamples){</a>
-<a class="sourceLine" id="cb111-8" title="8">  NHANES_sample &lt;-<span class="st"> </span><span class="kw">sample_n</span>(NHANES_adult,sampSize)</a>
-<a class="sourceLine" id="cb111-9" title="9">  sample_summary &lt;-<span class="st"> </span>NHANES_sample <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb111-10" title="10"><span class="st">    </span><span class="kw">summarize</span>(</a>
-<a class="sourceLine" id="cb111-11" title="11">      <span class="dt">mean =</span> <span class="kw">mean</span>(Height),</a>
-<a class="sourceLine" id="cb111-12" title="12">      <span class="dt">sem =</span> <span class="kw">sd</span>(Height)<span class="op">/</span><span class="kw">sqrt</span>(sampSize)</a>
-<a class="sourceLine" id="cb111-13" title="13">    ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb111-14" title="14"><span class="st">    </span><span class="kw">mutate</span>(</a>
-<a class="sourceLine" id="cb111-15" title="15">      <span class="dt">CI_upper =</span> mean<span class="fl">+1.96</span><span class="op">*</span>sem,</a>
-<a class="sourceLine" id="cb111-16" title="16">      <span class="dt">CI_lower =</span> mean<span class="fl">-1.96</span><span class="op">*</span>sem</a>
-<a class="sourceLine" id="cb111-17" title="17">          )</a>
-<a class="sourceLine" id="cb111-18" title="18">  ci_contains_mean[i] &lt;-<span class="st"> </span>(sample_summary<span class="op">$</span>CI_upper<span class="op">&gt;</span><span class="kw">mean</span>(NHANES_adult<span class="op">$</span>Height))<span class="op">&amp;</span>(sample_summary<span class="op">$</span>CI_lower<span class="op">&lt;</span><span class="kw">mean</span>(NHANES_adult<span class="op">$</span>Height))</a>
-<a class="sourceLine" id="cb111-19" title="19"></a>
-<a class="sourceLine" id="cb111-20" title="20">}</a>
-<a class="sourceLine" id="cb111-21" title="21"><span class="kw">sprintf</span>(<span class="st">&#39;proportion of confidence intervals containing population mean: %.3f&#39;</span>,<span class="kw">mean</span>(ci_contains_mean))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute how often the confidence interval contains the true population mean</span>
+nsamples &lt;-<span class="st"> </span><span class="dv">2500</span>
+sampSize &lt;-<span class="st"> </span><span class="dv">100</span>
+
+ci_contains_mean &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="ot">NA</span>,nsamples)
+
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nsamples) {
+  NHANES_sample &lt;-<span class="st"> </span><span class="kw">sample_n</span>(NHANES_adult, sampSize)
+  sample_summary &lt;-<span class="st"> </span>
+<span class="st">    </span>NHANES_sample <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">summarize</span>(
+      <span class="dt">mean =</span> <span class="kw">mean</span>(Height),
+      <span class="dt">sem =</span> <span class="kw">sd</span>(Height) <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(sampSize)
+    ) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">mutate</span>(
+      <span class="dt">CI_upper =</span> mean <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>sem,
+      <span class="dt">CI_lower =</span> mean <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>sem
+    )
+  ci_contains_mean[i] &lt;-<span class="st"> </span>
+<span class="st">    </span>(sample_summary<span class="op">$</span>CI_upper <span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>(NHANES_adult<span class="op">$</span>Height)) <span class="op">&amp;</span><span class="st"> </span>
+<span class="st">    </span>(sample_summary<span class="op">$</span>CI_lower <span class="op">&lt;</span><span class="st"> </span><span class="kw">mean</span>(NHANES_adult<span class="op">$</span>Height))
+}
+
+<span class="kw">sprintf</span>(
+  <span class="st">&#39;proportion of confidence intervals containing population mean: %.3f&#39;</span>,
+  <span class="kw">mean</span>(ci_contains_mean)
+)</code></pre></div>
 <pre><code>## [1] &quot;proportion of confidence intervals containing population mean: 0.953&quot;</code></pre>
 <p>This confirms that the confidence interval does indeed capture the population mean about 95% of the time.</p>
 </div>
-<div id="suggested-readings-5" class="section level2">
+<div id="suggested-readings-4" class="section level2">
 <h2><span class="header-section-number">7.6</span> Suggested readings</h2>
 <ul>
 <li><em>The Signal and the Noise: Why So Many Predictions Fail - But Some Don’t</em>, by Nate Silver</li>
@@ -667,7 +668,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "true";
+    var src = "";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
