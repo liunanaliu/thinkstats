@@ -14,7 +14,7 @@
   
   
   
-  
+  <meta name="github-repo" content="poldrack/psych10-book" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Statistical Thinking for the 21st Century" />
@@ -552,8 +552,8 @@ bootci &lt;-<span class="st"> </span><span class="kw">boot.ci</span>(bs,<span cl
 </div>
 <div id="relation-of-confidence-intervals-to-hypothesis-tests" class="section level3">
 <h3><span class="header-section-number">10.1.5</span> Relation of confidence intervals to hypothesis tests</h3>
-<p>There is a close relationship between confidence intervals and hypothesis tests. In particular, if the confidence interval does not include the null hypothesis, then the associated statistical test would be statistically significant.</p>
-<p>TBD - ADD DETAILS ABOUT COMPARING CIs ACROSS CONDITIONS</p>
+<p>There is a close relationship between confidence intervals and hypothesis tests. In particular, if the confidence interval does not include the null hypothesis, then the associated statistical test would be statistically significant. For example, if you are testing whether the mean of a sample is greater than zero with <span class="math inline">\(\alpha = 0.05\)</span>, you could simply check to see whether zero is contained within the 95% confidence interval for the mean.</p>
+<p>Things get trickier if we want to compare the means of two conditions <span class="citation">(Schenker and Gentleman 2001)</span>. There are a couple of situations that are clear. First, each mean is contained within the confidence interval for the other mean, then there is certainly no significant difference at the chosen confidence level. Second, if there is no overlap between the confidence intervals, then there is certainly a significant difference at the chosen level; in fact, this test is substantially <em>conservative</em>, such that the actual error rate will be lower than the chosen level. But what about the case where the confidence intervals overlap one another but don’t contain the means for the other group? In this case the answer depends on the relative variability of the two variables, and there is no general answer. In general we should avoid using the “visual test” for overlapping confidence intervals, because it will generally result in a higher rate of false negative (Type II) errors.</p>
 </div>
 </div>
 <div id="effect-sizes" class="section level2">
@@ -825,8 +825,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": null,
-"text": null
+"link": "https://github.com/poldrack/psych10-book/edit/master/10-ConfIntEffectSize.Rmd",
+"text": "Edit"
 },
 "download": ["StatsThinking21.pdf"],
 "toc": {

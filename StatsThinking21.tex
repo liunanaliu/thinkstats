@@ -123,7 +123,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{Draft: 2018-11-21}
+    \date{Draft: 2018-11-22}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -276,7 +276,7 @@ Thanks to the following Twitter users for helpful suggestions:
 @enoriverbend
 
 Thanks to the following individuals for submitting edits via Github:
-Mehdi Rahim
+Mehdi Rahim, Shanaathanan Modchalingam
 
 \chapter{Introduction}\label{introduction}
 
@@ -7121,9 +7121,26 @@ tests}\label{relation-of-confidence-intervals-to-hypothesis-tests}
 There is a close relationship between confidence intervals and
 hypothesis tests. In particular, if the confidence interval does not
 include the null hypothesis, then the associated statistical test would
-be statistically significant.
+be statistically significant. For example, if you are testing whether
+the mean of a sample is greater than zero with \(\alpha = 0.05\), you
+could simply check to see whether zero is contained within the 95\%
+confidence interval for the mean.
 
-TBD - ADD DETAILS ABOUT COMPARING CIs ACROSS CONDITIONS
+Things get trickier if we want to compare the means of two conditions
+(Schenker and Gentleman 2001). There are a couple of situations that are
+clear. First, each mean is contained within the confidence interval for
+the other mean, then there is certainly no significant difference at the
+chosen confidence level. Second, if there is no overlap between the
+confidence intervals, then there is certainly a significant difference
+at the chosen level; in fact, this test is substantially
+\emph{conservative}, such that the actual error rate will be lower than
+the chosen level. But what about the case where the confidence intervals
+overlap one another but don't contain the means for the other group? In
+this case the answer depends on the relative variability of the two
+variables, and there is no general answer. In general we should avoid
+using the ``visual test'' for overlapping confidence intervals, because
+it will generally result in a higher rate of false negative (Type II)
+errors.
 
 \section{Effect sizes}\label{effect-sizes}
 
@@ -7708,7 +7725,7 @@ device.
 
 The data are composed of the results of the explosive screening test.
 Let's say that the security staff runs the bag through their testing
-apparatus 10 times, and it gives a positive reading on 6 of the 10
+apparatus 10 times, and it gives a positive reading on 9 of the 10
 tests.
 
 \begin{Shaded}
@@ -7757,14 +7774,16 @@ The marginal likelihood in this case is a weighted average of the
 likelihood of the data under either presence or absence of the
 explosive, multiplied by the probability of the explosive being present
 (i.e.~the prior). In this case, let's say that we know that the
-specifity of the test is 0.9, such that the likelihood of a positive
+specificity of the test is 0.9, such that the likelihood of a positive
 result when there is no explosive is 0.1.
 
 We can compute this in R as follows:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{marginal_likelihood <-}\StringTok{ }\KeywordTok{dbinom}\NormalTok{(nPositives,nTests,}\FloatTok{0.99}\NormalTok{)}\OperatorTok{*}\NormalTok{prior }\OperatorTok{+}\StringTok{ }\KeywordTok{dbinom}\NormalTok{(nPositives,nTests,.}\DecValTok{1}\NormalTok{)}\OperatorTok{*}\NormalTok{(}\DecValTok{1}\OperatorTok{-}\NormalTok{prior)}
+\NormalTok{p_test_explosive =}\StringTok{ }\FloatTok{0.99} \CommentTok{# known sensitivity of the test}
+\NormalTok{p_test_noExplosive =}\StringTok{ }\DecValTok{1} \OperatorTok{-}\StringTok{ }\FloatTok{0.9} \CommentTok{# 1 - known specificity of test}
+\NormalTok{marginal_likelihood <-}\StringTok{ }\KeywordTok{dbinom}\NormalTok{(nPositives,nTests,p_test_explosive)}\OperatorTok{*}\NormalTok{prior }\OperatorTok{+}\StringTok{ }\KeywordTok{dbinom}\NormalTok{(nPositives,nTests,p_test_noExplosive)}\OperatorTok{*}\NormalTok{(}\DecValTok{1}\OperatorTok{-}\NormalTok{prior)}
 \KeywordTok{sprintf}\NormalTok{(}\StringTok{'marginal likelihood = %.3e'}\NormalTok{,marginal_likelihood)}
 \end{Highlighting}
 \end{Shaded}
@@ -7776,7 +7795,7 @@ We can compute this in R as follows:
 \subsection{Computing the posterior}\label{computing-the-posterior}
 
 We now have all of the parts that we need to compute the posterior
-probability of of an explosive being present, given the observed 6
+probability of of an explosive being present, given the observed 9
 positive outcomes out of 10 tests.
 
 \begin{Shaded}
@@ -12485,6 +12504,13 @@ and Lung Cancer--relative Risk Estimates for the Major Histological
 Types from a Pooled Analysis of Case-Control Studies.'' \emph{Int J
 Cancer} 131 (5): 1210--9.
 doi:\href{https://doi.org/10.1002/ijc.27339}{10.1002/ijc.27339}.
+
+\hypertarget{ref-sche:gent:2001}{}
+Schenker, Nathaniel, and Jane F. Gentleman. 2001. ``On Judging the
+Significance of Differences by Examining the Overlap Between Confidence
+Intervals.'' \emph{The American Statistician} 55 (3). {[}American
+Statistical Association, Taylor \& Francis, Ltd.{]}: 182--86.
+\url{http://www.jstor.org/stable/2685796}.
 
 \hypertarget{ref-simm:nels:simo:2011}{}
 Simmons, Joseph P, Leif D Nelson, and Uri Simonsohn. 2011.

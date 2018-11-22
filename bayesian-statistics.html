@@ -14,7 +14,7 @@
   
   
   
-  
+  <meta name="github-repo" content="poldrack/psych10-book" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Statistical Thinking for the 21st Century" />
@@ -437,7 +437,7 @@ P(H|D) = \frac{P(D|H)*P(H)}{P(D)}
 </div>
 <div id="collect-some-data" class="section level3">
 <h3><span class="header-section-number">11.3.2</span> Collect some data</h3>
-<p>The data are composed of the results of the explosive screening test. Let’s say that the security staff runs the bag through their testing apparatus 10 times, and it gives a positive reading on 6 of the 10 tests.</p>
+<p>The data are composed of the results of the explosive screening test. Let’s say that the security staff runs the bag through their testing apparatus 10 times, and it gives a positive reading on 9 of the 10 tests.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nTests &lt;-<span class="st"> </span><span class="dv">10</span>
 nPositives &lt;-<span class="st"> </span><span class="dv">9</span></code></pre></div>
 </div>
@@ -454,15 +454,17 @@ likelihood</code></pre></div>
 <p><span class="math display">\[
 P(B|A) = \frac{P(A|B)*P(B)}{P(A|B)*P(B) + P(A|\neg B)*P(\neg B)}
 \]</span></p>
-<p>The marginal likelihood in this case is a weighted average of the likelihood of the data under either presence or absence of the explosive, multiplied by the probability of the explosive being present (i.e. the prior). In this case, let’s say that we know that the specifity of the test is 0.9, such that the likelihood of a positive result when there is no explosive is 0.1.</p>
+<p>The marginal likelihood in this case is a weighted average of the likelihood of the data under either presence or absence of the explosive, multiplied by the probability of the explosive being present (i.e. the prior). In this case, let’s say that we know that the specificity of the test is 0.9, such that the likelihood of a positive result when there is no explosive is 0.1.</p>
 <p>We can compute this in R as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">marginal_likelihood &lt;-<span class="st"> </span><span class="kw">dbinom</span>(nPositives,nTests,<span class="fl">0.99</span>)<span class="op">*</span>prior <span class="op">+</span><span class="st"> </span><span class="kw">dbinom</span>(nPositives,nTests,.<span class="dv">1</span>)<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>prior)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p_test_explosive =<span class="st"> </span><span class="fl">0.99</span> <span class="co"># known sensitivity of the test</span>
+p_test_noExplosive =<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.9</span> <span class="co"># 1 - known specificity of test</span>
+marginal_likelihood &lt;-<span class="st"> </span><span class="kw">dbinom</span>(nPositives,nTests,p_test_explosive)<span class="op">*</span>prior <span class="op">+</span><span class="st"> </span><span class="kw">dbinom</span>(nPositives,nTests,p_test_noExplosive)<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>prior)
 <span class="kw">sprintf</span>(<span class="st">&#39;marginal likelihood = %.3e&#39;</span>,marginal_likelihood)</code></pre></div>
 <pre><code>## [1] &quot;marginal likelihood = 2.727e-08&quot;</code></pre>
 </div>
 <div id="computing-the-posterior" class="section level3">
 <h3><span class="header-section-number">11.3.5</span> Computing the posterior</h3>
-<p>We now have all of the parts that we need to compute the posterior probability of of an explosive being present, given the observed 6 positive outcomes out of 10 tests.</p>
+<p>We now have all of the parts that we need to compute the posterior probability of of an explosive being present, given the observed 9 positive outcomes out of 10 tests.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">posterior &lt;-<span class="st"> </span>(likelihood<span class="op">*</span>prior)<span class="op">/</span>marginal_likelihood
 posterior</code></pre></div>
 <pre><code>## [1] 0.67</code></pre>
@@ -839,8 +841,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": null,
-"text": null
+"link": "https://github.com/poldrack/psych10-book/edit/master/11-BayesianStatistics.Rmd",
+"text": "Edit"
 },
 "download": ["StatsThinking21.pdf"],
 "toc": {
