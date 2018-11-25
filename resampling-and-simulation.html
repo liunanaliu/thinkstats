@@ -406,7 +406,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>In this chapter we will introduce the concept of a Monte Carlo simulation and discuss how they can be used to perform statistical analyses.</p>
 <div id="monte-carlo-simulation" class="section level2">
 <h2><span class="header-section-number">8.1</span> Monte Carlo simulation</h2>
-<p>The concept of Monte Carlo simulation was devised by the mathematicians Stan Ulam and Nicholas Metropolis, who were working to develop an atomic weapon as part of the Manhattan Project. They needed to compute the average distance that a neutron would travel in a substance before it collided with an atomic nucleus, but they could not compute this using standard mathematics. Ulam realized that these computations could be simulated using random numbers, just like a casino game. His uncle had gambled at Monte Carlo, which is apparently where the name came from for their new technique.</p>
+<p>The concept of Monte Carlo simulation was devised by the mathematicians Stan Ulam and Nicholas Metropolis, who were working to develop an atomic weapon as part of the Manhattan Project (<a href="https://en.wikipedia.org/wiki/Manhattan_Project" class="uri">https://en.wikipedia.org/wiki/Manhattan_Project</a>). They needed to compute the average distance that a neutron would travel in a substance before it collided with an atomic nucleus, but they could not compute this using standard mathematics. Ulam realized that these computations could be simulated using random numbers, just like a casino game. In in a casino game, numbers are drawn at random; to estimate the probability of a specific outcome, you could play the game hundreds of times. Ulamn’s uncle had gambled at the Monte Carlo casino in Monaco, which is apparently where the name came from for this new technique.</p>
 <p>There are four steps to performing a Monte Carlo simulation:</p>
 <ol style="list-style-type: decimal">
 <li>Define a domain of possible values</li>
@@ -431,51 +431,68 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><code>rnorm()</code> - normal distribution</li>
 <li><code>rbinom()</code> - binomial distribution (e.g. rolling the dice, coin flips)</li>
 </ul>
-<p>Figure <a href="resampling-and-simulation.html#fig:rngExamples">8.1</a> shows examples of numbers generated using the <code>runif()</code> and <code>rnorm()</code> functions. You can also generate random numbers for any distribution if you have a <em>quantile</em> function for the distribution. This is the inverse of the cumulative distribution function, which maps cumulative probabilities into values. Using this function, we can generate random numbers from a uniform distribution, and then map those into the distribution of interest via its quantile function.</p>
+<p>Figure <a href="resampling-and-simulation.html#fig:rngExamples">8.1</a> shows examples of numbers generated using the <code>runif()</code> and <code>rnorm()</code> functions, generated using the following code:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p1 &lt;-
+<span class="st">  </span><span class="kw">tibble</span>(
+    <span class="dt">x =</span> <span class="kw">runif</span>(<span class="dv">10000</span>)
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>((<span class="kw">aes</span>(x))) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">100</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Uniform&quot;</span>)
+
+p2 &lt;-
+<span class="st">  </span><span class="kw">tibble</span>(
+    <span class="dt">x =</span> <span class="kw">runif</span>(<span class="dv">10000</span>)
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(x)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">100</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Normal&quot;</span>)
+
+<span class="kw">plot_grid</span>(p1, p2, <span class="dt">ncol =</span> <span class="dv">3</span>)</code></pre></div>
 <div class="figure"><span id="fig:rngExamples"></span>
 <img src="StatsThinking21_files/figure-html/rngExamples-1.png" alt="Examples of random numbers generated from a uniform (left) or normal (right) distribution." width="768" height="50%" />
 <p class="caption">
 Figure 8.1: Examples of random numbers generated from a uniform (left) or normal (right) distribution.
 </p>
 </div>
-<p>By default, R will generate a different set of random numbers every time you run it. However, it is also possible to generate exactly the same set of random numbers, by setting what is called the <em>random seed</em> to a specific value. We will do this in many of the examples in this book, in order to make sure that the examples are reproducible.</p>
+<p>You can also generate random numbers for any distribution if you have a <em>quantile</em> function for the distribution. This is the inverse of the cumulative distribution function; instead of identifying the cumulative probabilities for a set of values, the quantile function identifies the values for a set of cumulative probabilities. Using the quantile function, we can generate random numbers from a uniform distribution, and then map those into the distribution of interest via its quantile function.</p>
+<p>By default, R will generate a different set of random numbers every time you run one of the random number generator functions described above. However, it is also possible to generate exactly the same set of random numbers, by setting what is called the <em>random seed</em> to a specific value. We will do this in many of the examples in this book, in order to make sure that the examples are reproducible.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># if we run the rnorm() command twice, it will give us different sets of pseudorandom numbers each time</span>
-<span class="kw">print</span>(<span class="kw">rnorm</span>(<span class="dv">5</span>))</code></pre></div>
-<pre><code>## [1]  1.48  0.18  0.21 -0.15 -1.72</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">rnorm</span>(<span class="dv">5</span>))</code></pre></div>
-<pre><code>## [1] -0.691 -2.231  0.391  0.029 -0.647</code></pre>
+<span class="kw">print</span>(<span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">5</span>))</code></pre></div>
+<pre><code>## [1]  0.7396  1.7826 -1.5350  0.0027  0.3085</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">5</span>))</code></pre></div>
+<pre><code>## [1]  2.171 -0.414 -0.754 -0.084 -1.593</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># if we set the random seed to the same value each time, then it will give us the same series of pseudorandom numbers each time.</span>
 <span class="kw">set.seed</span>(<span class="dv">12345</span>)
-<span class="kw">print</span>(<span class="kw">rnorm</span>(<span class="dv">5</span>))</code></pre></div>
+<span class="kw">print</span>(<span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">5</span>))</code></pre></div>
 <pre><code>## [1]  0.59  0.71 -0.11 -0.45  0.61</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">12345</span>)
-<span class="kw">print</span>(<span class="kw">rnorm</span>(<span class="dv">5</span>))</code></pre></div>
+<span class="kw">print</span>(<span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">5</span>))</code></pre></div>
 <pre><code>## [1]  0.59  0.71 -0.11 -0.45  0.61</code></pre>
 </div>
 <div id="using-monte-carlo-simulation" class="section level2">
 <h2><span class="header-section-number">8.4</span> Using Monte Carlo simulation</h2>
-<p>Let’s go back to our example of exam finishing times. Let’s say that I administer three exams and record the finishing times, which might look like the distributions presented in Figure <a href="resampling-and-simulation.html#fig:finishingTimes">8.2</a>.</p>
+<p>Let’s go back to our example of exam finishing times. Let’s say that I administer three quizzes and record the finishing times for each student for each exame, which might look like the distributions presented in Figure <a href="resampling-and-simulation.html#fig:finishingTimes">8.2</a>.</p>
 <div class="figure"><span id="fig:finishingTimes"></span>
 <img src="StatsThinking21_files/figure-html/finishingTimes-1.png" alt="Simulated finishing time distributions." width="768" height="50%" />
 <p class="caption">
 Figure 8.2: Simulated finishing time distributions.
 </p>
 </div>
-<p>However, what we really want to know is not what the distribution of finishing times looks like, but rather what the distribution of the <em>longest</em> finishing time for each quiz looks like. To do this, we can simulate a large number of quizzes (using the assumption that the finishing times are distributed normally, as stated above), and each time we can record the longest finishing time. To do this, we create a new function in R called <code>sampleMax()</code> which takes a sample of the appropriate size (i.e. the number of students in the class) from the appropriate distribution, and returns the maximum value in the sample. We then repeat this a large number of times (5000 should be enough) using the <code>replicate()</code> function, which will store all of the outputs into a single variable. The distribution of finishing times is shown in Figure <a href="resampling-and-simulation.html#fig:finishTimeSim">8.3</a>.</p>
+<p>However, what we really want to know is not what the distribution of finishing times looks like, but rather what the distribution of the <em>longest</em> finishing time for each quiz looks like. To do this, we can simulate a large number of quizzes (using the assumption that the finishing times are distributed normally, as stated above); for each of these simulated quizzes, we can record the longest finishing time. To do this, we create a new function in R called <code>sampleMax()</code> which simulates a sample of the appropriate size (i.e. the number of students in the class) from the appropriate distribution (i.e., normal), and returns the maximum value in the sample. We then repeat this simulation a large number of times (5000 should be enough) using the <code>replicate()</code> function, which will store all of the outputs into a single variable. The distribution of finishing times is shown in Figure <a href="resampling-and-simulation.html#fig:finishTimeSim">8.3</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># sample maximum value 5000 times and compute 99th percentile</span>
-
 nRuns &lt;-<span class="st"> </span><span class="dv">5000</span>
 sampSize &lt;-<span class="st"> </span><span class="dv">150</span>
 
-sampleMax &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">sampSize=</span><span class="dv">150</span>){
-  samp &lt;-<span class="st"> </span><span class="kw">rnorm</span>(sampSize,<span class="dt">mean=</span><span class="dv">5</span>,<span class="dt">sd=</span><span class="dv">1</span>)
+sampleMax &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">sampSize =</span> <span class="dv">150</span>) {
+  samp &lt;-<span class="st"> </span><span class="kw">rnorm</span>(sampSize, <span class="dt">mean =</span> <span class="dv">5</span>, <span class="dt">sd =</span> <span class="dv">1</span>)
   <span class="kw">return</span>(<span class="kw">max</span>(samp))
 }
 
-maxTime &lt;-<span class="st"> </span><span class="kw">replicate</span>(nRuns,<span class="kw">sampleMax</span>())
+maxTime &lt;-<span class="st"> </span><span class="kw">replicate</span>(nRuns, <span class="kw">sampleMax</span>())
 
-cutoff &lt;-<span class="st"> </span><span class="kw">quantile</span>(maxTime,<span class="fl">0.99</span>)
-<span class="kw">sprintf</span>(<span class="st">&#39;99th percentile of maxTime distribution: %.2f&#39;</span>,cutoff)</code></pre></div>
+cutoff &lt;-<span class="st"> </span><span class="kw">quantile</span>(maxTime, <span class="fl">0.99</span>)
+<span class="kw">sprintf</span>(<span class="st">&quot;99th percentile of maxTime distribution: %.2f&quot;</span>, cutoff)</code></pre></div>
 <pre><code>## [1] &quot;99th percentile of maxTime distribution: 8.81&quot;</code></pre>
 <div class="figure"><span id="fig:finishTimeSim"></span>
 <img src="StatsThinking21_files/figure-html/finishTimeSim-1.png" alt="Distribution of maximum finishing times across simulations." width="384" height="50%" />
@@ -483,35 +500,37 @@ cutoff &lt;-<span class="st"> </span><span class="kw">quantile</span>(maxTime,<s
 Figure 8.3: Distribution of maximum finishing times across simulations.
 </p>
 </div>
-<p>This shows that the 99th percentile of the finishing time distribution falls at 8.81, meaning that if we were to give that much time, then everyone should finish 99% of the time. It’s always important to remember that our assumptions matter – if they are wrong, then the results of the simulation are useless. In this case, we assumed that the finishing time distribution was normally distributed with a particular mean and standard deviation; if this is incorrect (and it almost certainly is), then the answer could be very different.</p>
+<p>This shows that the 99th percentile of the finishing time distribution falls at 8.81, meaning that if we were to give that much time for the quiz, then everyone should finish 99% of the time. It’s always important to remember that our assumptions matter – if they are wrong, then the results of the simulation are useless. In this case, we assumed that the finishing time distribution was normally distributed with a particular mean and standard deviation; if these assumptions are incorrect (and they almost certainly are), then the true answer could be very different.</p>
 </div>
 <div id="using-simulation-for-statistics-the-bootstrap" class="section level2">
 <h2><span class="header-section-number">8.5</span> Using simulation for statistics: The bootstrap</h2>
-<p>So far we have used simulation to demonstrate statistical principles, but we can also use simulation to answer real statistical questions. In this section we will introduce a concept known as the <em>bootstrap</em> that lets us use simulation to quantify our uncertainty about statistical estimates. Later in the course we will see other examples of how simulation can often be used to answer statistical questions, especially when theoretical statistical methods are not available or when their assumptions are too stifling.</p>
+<p>So far we have used simulation to demonstrate statistical principles, but we can also use simulation to answer real statistical questions. In this section we will introduce a concept known as the <em>bootstrap</em> that lets us use simulation to quantify our uncertainty about statistical estimates. Later in the course, we will see other examples of how simulation can often be used to answer statistical questions, especially when theoretical statistical methods are not available or when their assumptions are too stifling.</p>
 <div id="computing-the-bootstrap" class="section level3">
 <h3><span class="header-section-number">8.5.1</span> Computing the bootstrap</h3>
-<p>In the section above, we used our knowledge of the sampling distribution of the mean to compute the standard error of the mean and confidence intervals. But what if we can’t assume that the estimates are normally distributed, or we don’t know their distribution? The idea of the bootstrap is to use the data themselves to estimate an answer. The name comes from the idea of pulling one’s self up by their own boostraps, expressing the idea that we don’t have any external source of leverage so we have to rely upon the data themselves. The bootstrap method was conceived by Bradley Efron of the Stanford Department of Statistics, who is one of the world’s most influential statisticians.</p>
+<p>In the section above, we used our knowledge of the sampling distribution of the mean to compute the standard error of the mean and confidence intervals. But what if we can’t assume that the estimates are normally distributed, or we don’t know their distribution? The idea of the bootstrap is to use the data themselves to estimate an answer. The name comes from the idea of pulling one’s self up by one’s own boostraps, expressing the idea that we don’t have any external source of leverage so we have to rely upon the data themselves. The bootstrap method was conceived by Bradley Efron of the Stanford Department of Statistics, who is one of the world’s most influential statisticians.</p>
 <p>The idea behind the boostrap is that we repeatedly sample from the actual dataset; importantly, we sample <em>with replacement</em>, such that the same data point will often end up being represented multiple times within one of the samples. We then compute our statistic of interest on each of the bootstrap samples, and use the distribution of those estimates</p>
-<p>Let’s start by using the bootstrap to estimate the sampling distribution of the mean, so that we can compare the result to the SEM that we discussed earlier.</p>
+<p>Let’s start by using the bootstrap to estimate the sampling distribution of the mean, so that we can compare the result to the standard error of the mean (SEM) that we discussed earlier.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># perform the boostrap to compute SEM and compare to parametric method</span>
 
 nRuns &lt;-<span class="st"> </span><span class="dv">2500</span>
 sampleSize &lt;-<span class="st"> </span><span class="dv">32</span>
 
-heightSample &lt;-<span class="st"> </span>NHANES_adult <span class="op">%&gt;%</span>
+heightSample &lt;-<span class="st"> </span>
+<span class="st">  </span>NHANES_adult <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">sample_n</span>(sampleSize)
 
-bootMeanHeight &lt;-<span class="st"> </span><span class="cf">function</span>(df){
-  bootSample &lt;-<span class="st"> </span><span class="kw">sample_n</span>(df,<span class="kw">dim</span>(df)[<span class="dv">1</span>],<span class="dt">replace =</span> <span class="ot">TRUE</span>)
+bootMeanHeight &lt;-<span class="st"> </span><span class="cf">function</span>(df) {
+  bootSample &lt;-<span class="st"> </span><span class="kw">sample_n</span>(df, <span class="kw">dim</span>(df)[<span class="dv">1</span>], <span class="dt">replace =</span> <span class="ot">TRUE</span>)
   <span class="kw">return</span>(<span class="kw">mean</span>(bootSample<span class="op">$</span>Height))
 }
-bootMeans &lt;-<span class="st"> </span><span class="kw">replicate</span>(nRuns,<span class="kw">bootMeanHeight</span>(heightSample))
 
-SEM_standard &lt;-<span class="st"> </span><span class="kw">sd</span>(heightSample<span class="op">$</span>Height)<span class="op">/</span><span class="kw">sqrt</span>(sampleSize)
-<span class="kw">sprintf</span>(<span class="st">&#39;SEM computed using sample SD: %f&#39;</span>,SEM_standard)</code></pre></div>
+bootMeans &lt;-<span class="st"> </span><span class="kw">replicate</span>(nRuns, <span class="kw">bootMeanHeight</span>(heightSample))
+
+SEM_standard &lt;-<span class="st"> </span><span class="kw">sd</span>(heightSample<span class="op">$</span>Height) <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(sampleSize)
+<span class="kw">sprintf</span>(<span class="st">&quot;SEM computed using sample SD: %f&quot;</span>, SEM_standard)</code></pre></div>
 <pre><code>## [1] &quot;SEM computed using sample SD: 1.595789&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">SEM_bootstrap &lt;-<span class="st"> </span><span class="kw">sd</span>(bootMeans)
-<span class="kw">sprintf</span>(<span class="st">&#39;SEM computed using SD of bootstrap estimates: %f&#39;</span>,SEM_bootstrap)</code></pre></div>
+<span class="kw">sprintf</span>(<span class="st">&quot;SEM computed using SD of bootstrap estimates: %f&quot;</span>, SEM_bootstrap)</code></pre></div>
 <pre><code>## [1] &quot;SEM computed using SD of bootstrap estimates: 1.586913&quot;</code></pre>
 <div class="figure"><span id="fig:bootstrapSEM"></span>
 <img src="StatsThinking21_files/figure-html/bootstrapSEM-1.png" alt="An example of bootstrapping to compute the standard error of the mean. The histogram shows the distribution of means across bootstrap samples, while the red line shows the normal distribution based on the sample mean and standard deviation." width="384" height="50%" />
@@ -522,7 +541,7 @@ Figure 8.4: An example of bootstrapping to compute the standard error of the mea
 <p>Figure <a href="resampling-and-simulation.html#fig:bootstrapSEM">8.4</a> shows that the distribution of means across bootstrap samples is fairly close to the theoretical estimate based on the assumption of normality. We can also use the boostrap samples to compute a confidence interval for the mean, simply by computing the quantiles of interest from the distribution of bootstrap samples.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute bootstrap confidence interval</span>
 
-bootCI &lt;-<span class="st"> </span><span class="kw">quantile</span>(bootMeans,<span class="kw">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>))
+bootCI &lt;-<span class="st"> </span><span class="kw">quantile</span>(bootMeans, <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))
 <span class="kw">pander</span>(<span class="st">&quot;boostrap confidence limits:&quot;</span>)</code></pre></div>
 <p>boostrap confidence limits:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pander</span>(bootCI)</code></pre></div>
@@ -544,11 +563,14 @@ bootCI &lt;-<span class="st"> </span><span class="kw">quantile</span>(bootMeans,
 </tr>
 </tbody>
 </table>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#now let&#39;s compute the confidence intervals using the sample mean and SD</span>
-sampleMean=<span class="kw">mean</span>(heightSample<span class="op">$</span>Height)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># now let&#39;s compute the confidence intervals using the sample mean and SD</span>
+sampleMean &lt;-<span class="st"> </span><span class="kw">mean</span>(heightSample<span class="op">$</span>Height)
 
-normalCI &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="st">&quot;2.5%&quot;</span> =<span class="st"> </span>sampleMean <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span>SEM_standard,
-          <span class="st">&quot;97.5%&quot;</span>=sampleMean <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span>SEM_standard) 
+normalCI &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">tibble</span>(
+  <span class="st">&quot;2.5%&quot;</span> =<span class="st"> </span>sampleMean <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>SEM_standard,
+  <span class="st">&quot;97.5%&quot;</span> =<span class="st"> </span>sampleMean <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span> <span class="op">*</span><span class="st"> </span>SEM_standard
+)
 
 <span class="kw">print</span>(<span class="st">&quot;confidence limits based on sample SD and normal distribution:&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;confidence limits based on sample SD and normal distribution:&quot;</code></pre>
@@ -577,7 +599,7 @@ normalCI &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span clas
 <div id="suggested-readings-5" class="section level2">
 <h2><span class="header-section-number">8.6</span> Suggested readings</h2>
 <ul>
-<li><em>Computer Age Statistical Inference:Algorithms, Evidence and Data Science</em>, by Bradley Efron and Trevor Hastie</li>
+<li><em>Computer Age Statistical Inference: Algorithms, Evidence and Data Science</em>, by Bradley Efron and Trevor Hastie</li>
 </ul>
 
 </div>
