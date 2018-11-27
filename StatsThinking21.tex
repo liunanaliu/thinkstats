@@ -123,7 +123,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{Draft: 2018-11-25}
+    \date{Draft: 2018-11-27}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -958,7 +958,7 @@ measure. For this reason, researchers developing a new measurement (such
 as a new survey) will often go to great lengths to test its reliability.
 
 \begin{figure}
-\includegraphics[height=0.33\textheight]{images/Reliability_and_validity} \caption{A figure demonstrating the distinction between reliability and valdity.  Copyright Nevit Dilmen/CC-BY-SA-3.0}\label{fig:ReliabilityValidity}
+\includegraphics[height=0.33\textheight]{StatsThinking21_files/figure-latex/ReliabilityValidity-1} \caption{A figure demonstrating the distinction between reliability and valdity. Based on  }\label{fig:ReliabilityValidity}
 \end{figure}
 
 \subsection{\texorpdfstring{\emph{Validity}}{Validity}}\label{validity}
@@ -5657,13 +5657,14 @@ hypothesis is supported by the data.
 (NHST)}\label{null-hypothesis-statistical-testing-nhst}
 
 The specific type of hypothesis testing that we will discuss is known
-(for reasons that will become clear) as \emph{null hypothesis staistical
-testing} (NHST). If you pick up almost any scientific or biomedical
-research publication, you will see NHST being used to test hypotheses,
-and in their introductory psycholology textbook, Gerrig \& Zimbardo
-(2002) referred to NHST as the ``backbone of psychological research''.
-Thus, learning how to use and interpret the results from hypothesis
-testing is essential to understand the results from this research.
+(for reasons that will become clear) as \emph{null hypothesis
+statistical testing} (NHST). If you pick up almost any scientific or
+biomedical research publication, you will see NHST being used to test
+hypotheses, and in their introductory psycholology textbook, Gerrig \&
+Zimbardo (2002) referred to NHST as the ``backbone of psychological
+research''. Thus, learning how to use and interpret the results from
+hypothesis testing is essential to understand the results from this
+research.
 
 It is also important for you to know, however, that NHST is deeply
 flawed, and that many statisticians and researchers (including myself)
@@ -5683,7 +5684,7 @@ approaches (like those that we will discuss in the following chapters):
   scientific progress'' (Luce, 1988)
 \end{itemize}
 
-NHST is also widely misunderstood, largely because it violates out
+NHST is also widely misunderstood, largely because it violates our
 intuitions about how statistical hypothesis testing should work. Let's
 look at an example to see.
 
@@ -5697,10 +5698,11 @@ experimental evidence, and it has become increasingly common for
 governments to use randomized controlled trials to test such ideas. A
 randomized controlled trial of the effectiveness of body-worn cameras
 was performed by the Washington, DC government and DC Metropolitan
-Police Department in 2015/2016 in order to test this. Officers were
-randomly assigned to wear a body-worn camera or not, and their behavior
-was then tracked over time to determine whether the cameras resulted in
-less usee of force and fewer civilian complaints about officer behavior.
+Police Department in 2015/2016 in order to test the hypothesis that
+body-worn cameras are effective. Officers were randomly assigned to wear
+a body-worn camera or not, and their behavior was then tracked over time
+to determine whether the cameras resulted in less use of force and fewer
+civilian complaints about officer behavior.
 
 Before we get to the results, let's ask how you would think the
 statistical analysis might work. Let's say we want to specifically test
@@ -5709,7 +5711,7 @@ of cameras. The randomized controlled trial provides us with the data to
 test the hypothesis -- namely, the rates of use of force by officers
 assigned to either the camera or control groups. The next obvious step
 is to look at the data and determine whether they provide convincing
-evidence for or against the hypothesis. That is: What is the likelihood
+evidence for or against this hypothesis. That is: What is the likelihood
 that body-worn cameras reduce the use of force, given the data and
 everything else we know?
 
@@ -5787,24 +5789,57 @@ inactive individuals.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# sample 250 adults from NHANES and compute BMI separately for active}
+\CommentTok{# sample 250 adults from NHANES and compute mean BMI separately for active}
 \CommentTok{# and inactive individuals}
 
 \NormalTok{sampSize <-}\StringTok{ }\DecValTok{250}
-\NormalTok{NHANES_sample <-}\StringTok{ }\NormalTok{NHANES_adult }\OperatorTok{%>%}
+
+\NormalTok{NHANES_sample <-}\StringTok{ }
+\StringTok{  }\NormalTok{NHANES_adult }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{sample_n}\NormalTok{(sampSize)}
 
 \NormalTok{sampleSummary <-}
 \StringTok{  }\NormalTok{NHANES_sample }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(PhysActive) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(PhysActive) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{summarize}\NormalTok{(}
-    \DataTypeTok{N=}\KeywordTok{length}\NormalTok{(BMI),}
-    \DataTypeTok{mean=}\KeywordTok{mean}\NormalTok{(BMI),}
-    \DataTypeTok{sd=}\KeywordTok{sd}\NormalTok{(BMI)}
+    \DataTypeTok{N =} \KeywordTok{length}\NormalTok{(BMI),}
+    \DataTypeTok{mean =} \KeywordTok{mean}\NormalTok{(BMI),}
+    \DataTypeTok{sd =} \KeywordTok{sd}\NormalTok{(BMI)}
 \NormalTok{  )}
 
-\NormalTok{meanDiff=sampleSummary[}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{] }\OperatorTok{-}\StringTok{ }\NormalTok{sampleSummary[}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{]}
+\CommentTok{# calculate the mean difference in BMI between active }
+\CommentTok{# and inactive individuals; we'll use this later to calculate the t-statistic}
+\NormalTok{meanDiff <-}\StringTok{ }
+\StringTok{  }\NormalTok{sampleSummary }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}
+\NormalTok{    PhysActive,}
+\NormalTok{    mean}
+\NormalTok{  ) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{spread}\NormalTok{(PhysActive, mean) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}
+    \DataTypeTok{meanDiff =}\NormalTok{ No }\OperatorTok{-}\StringTok{ }\NormalTok{Yes}
+\NormalTok{  ) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{pull}\NormalTok{(meanDiff)}
 
+\CommentTok{# calculate the summed variances in BMI for active }
+\CommentTok{# and inactive individuals; we'll use this later to calculate the t-statistic}
+\NormalTok{sumVariance <-}\StringTok{ }
+\StringTok{  }\NormalTok{sampleSummary }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}
+\NormalTok{    PhysActive,}
+\NormalTok{    N,}
+\NormalTok{    sd}
+\NormalTok{  ) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{gather}\NormalTok{(column, stat, N}\OperatorTok{:}\NormalTok{sd) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{unite}\NormalTok{(temp, PhysActive, column) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{spread}\NormalTok{(temp, stat) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}
+    \DataTypeTok{sumVariance =}\NormalTok{ No_sd}\OperatorTok{**}\DecValTok{2} \OperatorTok{/}\StringTok{ }\NormalTok{No_N }\OperatorTok{+}\StringTok{ }\NormalTok{Yes_sd}\OperatorTok{**}\DecValTok{2} \OperatorTok{/}\StringTok{ }\NormalTok{Yes_N}
+\NormalTok{  ) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{pull}\NormalTok{(sumVariance)}
+
+
+\CommentTok{# print sampleSummary table}
 \KeywordTok{pander}\NormalTok{(sampleSummary)}
 \end{Highlighting}
 \end{Shaded}
@@ -5951,28 +5986,29 @@ example, \(H_0: P(heads)=0.5\) and \(H_A: P(heads) \neq 0.5\), and our
 test statistic is simply the number of heads that we counted. The
 question that we then want to as is: How likely is it that we would
 observe 70 heads if the true probability of heads is 0.5. We can imagine
-that it might happen very occasionally just by chance, but doesn't seem
-very likely. To quantify this, we can use the \emph{binomial
-distribution}:
+that this might happen very occasionally just by chance, but doesn't
+seem very likely. To quantify this probability, we can use the
+\emph{binomial distribution}:
 
 \[
 P(X < k) = \sum_{i=0}^k \binom{N}{k} p^i (1-p)^{(n-i)}
-\] This tells us the likelihood of a certain number of heads or fewer,
-given a particular probability of heads. However, what we really want to
-know is the probability of a certain number or more, which we can obtain
-by subtracting from one:
+\] This equation will tell us the likelihood of a certain number of
+heads or fewer, given a particular probability of heads. However, what
+we really want to know is the probability of a certain number or more,
+which we can obtain by subtracting from one:
 
 \[
 P(X \ge k) = 1 - P(X < k)
 \]
 
-We can compute the probability for our example as follows:
+We can compute the probability for our example using the
+\texttt{pbinom()} function in R as follows:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# compute the probability of 69 or fewer heads, when P(heads)=0.5}
-\NormalTok{p_lt_}\DecValTok{70}\NormalTok{ <-}\StringTok{ }\KeywordTok{pbinom}\NormalTok{(}\DecValTok{69}\NormalTok{,}\DecValTok{100}\NormalTok{,}\FloatTok{0.5}\NormalTok{)}
-\KeywordTok{sprintf}\NormalTok{(}\StringTok{'probability of 69 or fewer heads given P(heads)=0.5: %0.6f'}\NormalTok{,p_lt_}\DecValTok{70}\NormalTok{)}
+\NormalTok{p_lt_}\DecValTok{70}\NormalTok{ <-}\StringTok{ }\KeywordTok{pbinom}\NormalTok{(}\DecValTok{69}\NormalTok{, }\DecValTok{100}\NormalTok{, }\FloatTok{0.5}\NormalTok{) }
+\KeywordTok{sprintf}\NormalTok{(}\StringTok{"probability of 69 or fewer heads given P(heads)=0.5: %0.6f"}\NormalTok{, p_lt_}\DecValTok{70}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5984,7 +6020,7 @@ We can compute the probability for our example as follows:
 \begin{Highlighting}[]
 \CommentTok{# the probability of 70 or more heads is simply the complement of p_lt_70}
 \NormalTok{p_ge_}\DecValTok{70}\NormalTok{ <-}\StringTok{ }\DecValTok{1} \OperatorTok{-}\StringTok{ }\NormalTok{p_lt_}\DecValTok{70}
-\KeywordTok{sprintf}\NormalTok{(}\StringTok{'probability of 70 or more heads given P(heads)=0.5: %0.6f'}\NormalTok{,p_ge_}\DecValTok{70}\NormalTok{)}
+\KeywordTok{sprintf}\NormalTok{(}\StringTok{"probability of 70 or more heads given P(heads)=0.5: %0.6f"}\NormalTok{, p_ge_}\DecValTok{70}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5997,7 +6033,7 @@ coin is indeed fair is very small. Now, what if we didn't have the
 \texttt{pbinom()} function to tell us the probability of that number of
 heads? We could instead determine it by simulation -- we repeatly flip a
 coin 100 times using a true probability of 0.5, and then compute the
-distribution of number of heads across those simulation runs. Figure
+distribution of the number of heads across those simulation runs. Figure
 \ref{fig:coinFlips} shows the result from this simulation.
 
 \begin{Shaded}
@@ -6006,16 +6042,19 @@ distribution of number of heads across those simulation runs. Figure
 \CommentTok{# probability of 70 or more heads out of 100 flips}
 
 \CommentTok{# create function to toss coins}
-\NormalTok{tossCoins <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{()\{}
-\NormalTok{  flips <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(}\DecValTok{100}\NormalTok{)}\OperatorTok{>}\FloatTok{0.5}
+\NormalTok{tossCoins <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{() \{}
+\NormalTok{  flips <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(}\DecValTok{100}\NormalTok{) }\OperatorTok{>}\StringTok{ }\FloatTok{0.5} 
   \KeywordTok{return}\NormalTok{(}\KeywordTok{sum}\NormalTok{(flips))}
 \NormalTok{\}}
 
 \CommentTok{# use a large number of replications since this is fast}
-\NormalTok{coinFlips <-}\StringTok{ }\KeywordTok{replicate}\NormalTok{(}\DecValTok{100000}\NormalTok{,}\KeywordTok{tossCoins}\NormalTok{())}
+\NormalTok{coinFlips <-}\StringTok{ }\KeywordTok{replicate}\NormalTok{(}\DecValTok{100000}\NormalTok{, }\KeywordTok{tossCoins}\NormalTok{())}
 
-\NormalTok{p_ge_70_sim <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(coinFlips}\OperatorTok{>=}\DecValTok{70}\NormalTok{)}
-\KeywordTok{sprintf}\NormalTok{(}\StringTok{'empirical probability of 70 or more heads given P(heads)=0.5: %0.6f'}\NormalTok{,p_ge_70_sim)}
+\NormalTok{p_ge_70_sim <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(coinFlips }\OperatorTok{>=}\StringTok{ }\DecValTok{70}\NormalTok{)}
+\KeywordTok{sprintf}\NormalTok{(}
+  \StringTok{"empirical probability of 70 or more heads given P(heads)=0.5: %0.6f"}\NormalTok{, }
+\NormalTok{  p_ge_70_sim}
+\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6027,16 +6066,19 @@ distribution of number of heads across those simulation runs. Figure
 \includegraphics[height=0.5\textheight]{StatsThinking21_files/figure-latex/coinFlips-1} \caption{Distribution of numbers of heads (out of 100 flips) across 100,000 simulated runs.}\label{fig:coinFlips}
 \end{figure}
 
-Here we can see that the probability computed via simulation (.00002) is
-very close to the theoretical probability (.00004).
+Here we can see that the probability computed via simulation (0.000020)
+is very close to the theoretical probability (.00004).
 
 Let's do the analogous computation for our BMI example. First we compute
-the t statistic using the values from our sample:
+the t statistic using the values from our sample that we calculated
+above:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{tStat <-}\StringTok{ }\NormalTok{(sampleSummary[}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{] }\OperatorTok{-}\StringTok{ }\NormalTok{sampleSummary[}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{])}\OperatorTok{/}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(sampleSummary[}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{]}\OperatorTok{**}\DecValTok{2}\OperatorTok{/}\NormalTok{sampleSummary[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{] }\OperatorTok{+}\StringTok{ }\NormalTok{sampleSummary[}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{]}\OperatorTok{**}\DecValTok{2}\OperatorTok{/}\NormalTok{sampleSummary[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{] )}
-\KeywordTok{sprintf}\NormalTok{(}\StringTok{'t statistic = %0.3f'}\NormalTok{,tStat)}
+\NormalTok{tStat <-}\StringTok{ }
+\StringTok{  }\NormalTok{meanDiff }\OperatorTok{/}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(sumVariance)}
+
+\KeywordTok{sprintf}\NormalTok{(}\StringTok{"t statistic = %0.3f"}\NormalTok{, tStat)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6059,8 +6101,10 @@ tail'' probability (by setting \texttt{lower.tail\ =\ FALSE}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{pvalue_tdist <-}\StringTok{ }\KeywordTok{pt}\NormalTok{(tStat}\OperatorTok{$}\NormalTok{mean,}\DataTypeTok{df=}\DecValTok{248}\NormalTok{, }\DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{)}
-\KeywordTok{sprintf}\NormalTok{(}\StringTok{'p(t > %0.2f, df = 248) = %0.3f'}\NormalTok{,tStat}\OperatorTok{$}\NormalTok{mean,pvalue_tdist)}
+\NormalTok{pvalue_tdist <-}\StringTok{ }
+\StringTok{  }\KeywordTok{pt}\NormalTok{(tStat, }\DataTypeTok{df =} \DecValTok{248}\NormalTok{, }\DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{)}
+
+\KeywordTok{sprintf}\NormalTok{(}\StringTok{"p(t > %0.2f, df = 248) = %0.3f"}\NormalTok{, tStat, pvalue_tdist)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6082,9 +6126,15 @@ distribution is centered around zero. Using this, we can get a
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{pvalue_tdist_twotailed <-}\StringTok{ }\KeywordTok{pt}\NormalTok{(tStat}\OperatorTok{$}\NormalTok{mean,}\DataTypeTok{df=}\DecValTok{248}\NormalTok{, }\DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{pt}\NormalTok{(}\OperatorTok{-}\DecValTok{1}\OperatorTok{*}\NormalTok{tStat}\OperatorTok{$}\NormalTok{mean,}\DataTypeTok{df=}\DecValTok{248}\NormalTok{, }\DataTypeTok{lower.tail =} \OtherTok{TRUE}\NormalTok{)}
-\KeywordTok{sprintf}\NormalTok{(}\StringTok{'p(t > %0.2f or t< %0.2f, df = 248) = %0.3f'}\NormalTok{,tStat}\OperatorTok{$}\NormalTok{mean,}\OperatorTok{-}\DecValTok{1}\OperatorTok{*}\NormalTok{tStat}\OperatorTok{$}\NormalTok{mean,pvalue_tdist_twotailed)}
+\NormalTok{pvalue_tdist_twotailed <-}\StringTok{ }
+\StringTok{  }\KeywordTok{pt}\NormalTok{(tStat, }\DataTypeTok{df =} \DecValTok{248}\NormalTok{, }\DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{pt}\NormalTok{(}\OperatorTok{-}\DecValTok{1} \OperatorTok{*}\StringTok{ }\NormalTok{tStat, }\DataTypeTok{df =} \DecValTok{248}\NormalTok{, }\DataTypeTok{lower.tail =} \OtherTok{TRUE}\NormalTok{)}
+
+\KeywordTok{sprintf}\NormalTok{(}
+  \StringTok{"p(t > %0.2f or t< %0.2f, df = 248) = %0.3f"}\NormalTok{, }
+\NormalTok{  tStat, }
+  \OperatorTok{-}\DecValTok{1} \OperatorTok{*}\StringTok{ }\NormalTok{tStat, pvalue_tdist_twotailed}
+\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6142,15 +6192,18 @@ cross-country runners (which we will generate randomly, assuming that
 \CommentTok{# reset random seed for this example}
 \KeywordTok{set.seed}\NormalTok{(}\DecValTok{12345678}\NormalTok{)}
 
-\CommentTok{# create a function to round values to nearest product of 5, }
+\CommentTok{# create a function to round values to nearest product of 5,}
 \CommentTok{# to keep example simple}
-\NormalTok{roundToNearest5 <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x,}\DataTypeTok{base=}\DecValTok{5}\NormalTok{)\{ }
-        \KeywordTok{return}\NormalTok{(base}\OperatorTok{*}\KeywordTok{round}\NormalTok{(x}\OperatorTok{/}\NormalTok{base))}
-\NormalTok{\} }
+\NormalTok{roundToNearest5 <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x, }\DataTypeTok{base =} \DecValTok{5}\NormalTok{) \{}
+  \KeywordTok{return}\NormalTok{(base }\OperatorTok{*}\StringTok{ }\KeywordTok{round}\NormalTok{(x }\OperatorTok{/}\StringTok{ }\NormalTok{base))}
+\NormalTok{\}}
 
 \CommentTok{# create and show data frame containing simulated data}
-\NormalTok{squatDf <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{group=}\KeywordTok{as.factor}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\StringTok{'FB'}\NormalTok{,}\DecValTok{5}\NormalTok{),}\KeywordTok{rep}\NormalTok{(}\StringTok{'XC'}\NormalTok{,}\DecValTok{5}\NormalTok{))),}
-              \DataTypeTok{squat=}\KeywordTok{roundToNearest5}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{5}\NormalTok{)}\OperatorTok{*}\DecValTok{30} \OperatorTok{+}\StringTok{ }\DecValTok{300}\NormalTok{,}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{5}\NormalTok{)}\OperatorTok{*}\DecValTok{30} \OperatorTok{+}\StringTok{ }\DecValTok{140}\NormalTok{)))}
+\NormalTok{squatDf <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}
+  \DataTypeTok{group =} \KeywordTok{as.factor}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\StringTok{"FB"}\NormalTok{, }\DecValTok{5}\NormalTok{), }\KeywordTok{rep}\NormalTok{(}\StringTok{"XC"}\NormalTok{, }\DecValTok{5}\NormalTok{))),}
+  \DataTypeTok{squat =} \KeywordTok{roundToNearest5}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{5}\NormalTok{) }\OperatorTok{*}\StringTok{ }\DecValTok{30} \OperatorTok{+}\StringTok{ }\DecValTok{300}\NormalTok{, }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{5}\NormalTok{) }\OperatorTok{*}\StringTok{ }\DecValTok{30} \OperatorTok{+}\StringTok{ }\DecValTok{140}\NormalTok{))}
+\NormalTok{)}
+
 \KeywordTok{pander}\NormalTok{(squatDf)}
 \end{Highlighting}
 \end{Shaded}
@@ -6229,9 +6282,15 @@ test our hypothesis, using the \texttt{t.test()} command in R:
 \begin{Highlighting}[]
 \CommentTok{# compute and print t statistic comparing two groups}
 
-\NormalTok{tt <-}\StringTok{ }\KeywordTok{t.test}\NormalTok{(squat}\OperatorTok{~}\NormalTok{group,}\DataTypeTok{data=}\NormalTok{squatDf,}\DataTypeTok{alternative=}\StringTok{'greater'}\NormalTok{,}\DataTypeTok{var.equal=}\OtherTok{TRUE}\NormalTok{)}
+\NormalTok{tt <-}\StringTok{ }
+\StringTok{  }\KeywordTok{t.test}\NormalTok{(}
+\NormalTok{    squat }\OperatorTok{~}\StringTok{ }\NormalTok{group, }
+    \DataTypeTok{data =}\NormalTok{ squatDf, }
+    \DataTypeTok{alternative =} \StringTok{"greater"}\NormalTok{, }
+    \DataTypeTok{var.equal =} \OtherTok{TRUE}
+\NormalTok{  )}
 
-\KeywordTok{sprintf}\NormalTok{(}\StringTok{'p(t > %0.2f, df = 8) = %0.5f'}\NormalTok{,tt}\OperatorTok{$}\NormalTok{statistic,tt}\OperatorTok{$}\NormalTok{p.value)}
+\KeywordTok{sprintf}\NormalTok{(}\StringTok{"p(t > %0.2f, df = 8) = %0.5f"}\NormalTok{, tt}\OperatorTok{$}\NormalTok{statistic, tt}\OperatorTok{$}\NormalTok{p.value)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6255,12 +6314,13 @@ the groups. The results of such a shuffle are shown in Figure
 \begin{Highlighting}[]
 \CommentTok{# create a scrambled version of the group membership variable}
 
-\NormalTok{dfScram <-}\StringTok{ }
-\StringTok{  }\NormalTok{squatDf }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{dfScram <-}
+\StringTok{  }\NormalTok{squatDf }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}
-    \DataTypeTok{scrambledGroup=}\KeywordTok{sample}\NormalTok{(group)}
+    \DataTypeTok{scrambledGroup =} \KeywordTok{sample}\NormalTok{(group)}
 \NormalTok{  ) }\OperatorTok{%>%}
-\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{group)}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{group)}
+
 \KeywordTok{pander}\NormalTok{(dfScram)}
 \end{Highlighting}
 \end{Shaded}
@@ -6342,19 +6402,24 @@ each iteration; this may take a moment to complete.
 
 \NormalTok{nRuns <-}\StringTok{ }\DecValTok{10000}
 
-\NormalTok{shuffleAndMeasure <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(df)\{}
-\NormalTok{  dfScram <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{shuffleAndMeasure <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(df) \{}
+\NormalTok{  dfScram <-}\StringTok{ }
+\StringTok{    }\NormalTok{df }\OperatorTok{%>%}
 \StringTok{    }\KeywordTok{mutate}\NormalTok{(}
-      \DataTypeTok{scrambledGroup=}\KeywordTok{sample}\NormalTok{(group)}
-\NormalTok{    ) }
-\NormalTok{  tt <-}\StringTok{ }\KeywordTok{t.test}\NormalTok{(squat}\OperatorTok{~}\NormalTok{scrambledGroup,}\DataTypeTok{data=}\NormalTok{dfScram,}
-               \DataTypeTok{alternative=}\StringTok{'greater'}\NormalTok{,}\DataTypeTok{var.equal=}\OtherTok{TRUE}\NormalTok{)}
+      \DataTypeTok{scrambledGroup =} \KeywordTok{sample}\NormalTok{(group)}
+\NormalTok{    )}
+\NormalTok{  tt <-}\StringTok{ }\KeywordTok{t.test}\NormalTok{(}
+\NormalTok{    squat }\OperatorTok{~}\StringTok{ }\NormalTok{scrambledGroup,}
+    \DataTypeTok{data =}\NormalTok{ dfScram,}
+    \DataTypeTok{alternative =} \StringTok{"greater"}\NormalTok{, }
+    \DataTypeTok{var.equal =} \OtherTok{TRUE}
+\NormalTok{  )}
   \KeywordTok{return}\NormalTok{(tt}\OperatorTok{$}\NormalTok{statistic)}
 \NormalTok{\}}
 
-\NormalTok{shuffleDiff <-}\StringTok{ }\KeywordTok{replicate}\NormalTok{(nRuns,}\KeywordTok{shuffleAndMeasure}\NormalTok{(squatDf))}
+\NormalTok{shuffleDiff <-}\StringTok{ }\KeywordTok{replicate}\NormalTok{(nRuns, }\KeywordTok{shuffleAndMeasure}\NormalTok{(squatDf))}
 
-\KeywordTok{sprintf}\NormalTok{(}\StringTok{'mean t value across shuffles = %0.3f'}\NormalTok{,}\KeywordTok{mean}\NormalTok{(shuffleDiff))}
+\KeywordTok{sprintf}\NormalTok{(}\StringTok{"mean t value across shuffles = %0.3f"}\NormalTok{, }\KeywordTok{mean}\NormalTok{(shuffleDiff))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6382,8 +6447,8 @@ the actual t value:
 \CommentTok{# compute number of runs on which t statistic for shuffle data was }
 \CommentTok{# equal to observed t statistic}
 
-\NormalTok{equalSum <-}\StringTok{ }\KeywordTok{sum}\NormalTok{(shuffleDiff}\OperatorTok{==}\NormalTok{tt}\OperatorTok{$}\NormalTok{statistic)}
-\KeywordTok{sprintf}\NormalTok{(}\StringTok{'Number of runs on which shuffled t == observed t: %d'}\NormalTok{,equalSum)}
+\NormalTok{equalSum <-}\StringTok{ }\KeywordTok{sum}\NormalTok{(shuffleDiff }\OperatorTok{==}\StringTok{ }\NormalTok{tt}\OperatorTok{$}\NormalTok{statistic)}
+\KeywordTok{sprintf}\NormalTok{(}\StringTok{"Number of runs on which shuffled t == observed t: %d"}\NormalTok{, equalSum)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6393,11 +6458,11 @@ the actual t value:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# compute number of runs on which t statistic for shuffle data was }
+\CommentTok{# compute number of runs on which t statistic for shuffle data was}
 \CommentTok{# equal to observed t statistic times -1}
 
-\NormalTok{equalSumMinus <-}\StringTok{ }\KeywordTok{sum}\NormalTok{(shuffleDiff}\OperatorTok{==}\NormalTok{tt}\OperatorTok{$}\NormalTok{statistic}\OperatorTok{*-}\DecValTok{1}\NormalTok{)}
-\KeywordTok{sprintf}\NormalTok{(}\StringTok{'Number of runs on which shuffled t == observed t*-1: %d'}\NormalTok{,equalSumMinus)}
+\NormalTok{equalSumMinus <-}\StringTok{ }\KeywordTok{sum}\NormalTok{(shuffleDiff }\OperatorTok{==}\StringTok{ }\NormalTok{tt}\OperatorTok{$}\NormalTok{statistic }\OperatorTok{*}\StringTok{ }\OperatorTok{-}\DecValTok{1}\NormalTok{)}
+\KeywordTok{sprintf}\NormalTok{(}\StringTok{"Number of runs on which shuffled t == observed t*-1: %d"}\NormalTok{, equalSumMinus)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6428,7 +6493,12 @@ value:
 \begin{Highlighting}[]
 \CommentTok{# compute p value using randomization}
 \NormalTok{pvalRandomization <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(shuffleDiff }\OperatorTok{>=}\StringTok{ }\NormalTok{tt}\OperatorTok{$}\NormalTok{statistic)}
-\KeywordTok{sprintf}\NormalTok{(}\StringTok{'p(t > %0.2f, df = 8) using randomization = %0.5f'}\NormalTok{,tt}\OperatorTok{$}\NormalTok{statistic,pvalRandomization)}
+
+\KeywordTok{sprintf}\NormalTok{(}
+  \StringTok{'p(t > %0.2f, df = 8) using randomization = %0.5f'}\NormalTok{,}
+\NormalTok{  tt}\OperatorTok{$}\NormalTok{statistic,}
+\NormalTok{  pvalRandomization}
+\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6455,24 +6525,29 @@ statistics from the shuffled datasets.
 \begin{Highlighting}[]
 \CommentTok{# create function to shuffle BMI data}
 
-\NormalTok{shuffleBMIstat <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{()\{}
-\NormalTok{  bmiDataShuffled <-}\StringTok{ }\NormalTok{NHANES_sample }\OperatorTok{%>%}
-\StringTok{    }\KeywordTok{subset}\NormalTok{(}
-      \DataTypeTok{select=}\KeywordTok{c}\NormalTok{(BMI,PhysActive)}
-\NormalTok{    ) }\OperatorTok{%>%}
+\NormalTok{shuffleBMIstat <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{() \{}
+\NormalTok{  bmiDataShuffled <-}\StringTok{ }
+\StringTok{    }\NormalTok{NHANES_sample }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{select}\NormalTok{(BMI, PhysActive) }\OperatorTok{%>%}
 \StringTok{    }\KeywordTok{mutate}\NormalTok{(}
-      \DataTypeTok{PhysActive=}\KeywordTok{sample}\NormalTok{(PhysActive)}
+      \DataTypeTok{PhysActive =} \KeywordTok{sample}\NormalTok{(PhysActive)}
 \NormalTok{    )}
   \CommentTok{# compute the difference}
-\NormalTok{  simResult <-}\StringTok{ }\KeywordTok{t.test}\NormalTok{(BMI}\OperatorTok{~}\NormalTok{PhysActive,}\DataTypeTok{data=}\NormalTok{bmiDataShuffled,}
-                      \DataTypeTok{var.equal=}\OtherTok{TRUE}\NormalTok{)}
+\NormalTok{  simResult <-}\StringTok{ }\KeywordTok{t.test}\NormalTok{(}
+\NormalTok{    BMI }\OperatorTok{~}\StringTok{ }\NormalTok{PhysActive,}
+    \DataTypeTok{data =}\NormalTok{ bmiDataShuffled,}
+    \DataTypeTok{var.equal =} \OtherTok{TRUE}
+\NormalTok{  )}
   \KeywordTok{return}\NormalTok{(simResult}\OperatorTok{$}\NormalTok{statistic)}
 \NormalTok{\}}
 
 \CommentTok{# run function 5000 times and save output}
 
 \NormalTok{nRuns <-}\StringTok{ }\DecValTok{5000}
-\NormalTok{meanDiffSimDf <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{meanDiffSim=}\KeywordTok{replicate}\NormalTok{(nRuns,}\KeywordTok{shuffleBMIstat}\NormalTok{()))}
+\NormalTok{meanDiffSimDf <-}\StringTok{ }
+\StringTok{  }\KeywordTok{data.frame}\NormalTok{(}
+    \DataTypeTok{meanDiffSim =} \KeywordTok{replicate}\NormalTok{(nRuns, }\KeywordTok{shuffleBMIstat}\NormalTok{())}
+\NormalTok{  )}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6485,11 +6560,22 @@ observed value:
 \begin{Highlighting}[]
 \CommentTok{# compute the empirical probability of t values larger than observed}
 \CommentTok{# value under the randomization null}
-\NormalTok{bmtTTest <-}\StringTok{ }\KeywordTok{t.test}\NormalTok{(BMI}\OperatorTok{~}\NormalTok{PhysActive,}\DataTypeTok{data=}\NormalTok{NHANES_sample,}
-                   \DataTypeTok{var.equal=}\OtherTok{TRUE}\NormalTok{,}\DataTypeTok{alternative=}\StringTok{'greater'}\NormalTok{)}
+\NormalTok{bmtTTest <-}\StringTok{ }
+\StringTok{  }\KeywordTok{t.test}\NormalTok{(}
+\NormalTok{  BMI }\OperatorTok{~}\StringTok{ }\NormalTok{PhysActive,}
+  \DataTypeTok{data =}\NormalTok{ NHANES_sample,}
+  \DataTypeTok{var.equal =} \OtherTok{TRUE}\NormalTok{, }
+  \DataTypeTok{alternative =} \StringTok{"greater"}
+\NormalTok{)}
 
-\NormalTok{bmiPvalRand <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(meanDiffSimDf}\OperatorTok{$}\NormalTok{meanDiffSim}\OperatorTok{>=}\NormalTok{bmtTTest}\OperatorTok{$}\NormalTok{statistic)}
-\KeywordTok{sprintf}\NormalTok{(}\StringTok{'p(mean > %0.2f, df = 248) using randomization = %0.5f'}\NormalTok{,bmtTTest}\OperatorTok{$}\NormalTok{statistic,bmiPvalRand)}
+\NormalTok{bmiPvalRand <-}\StringTok{ }
+\StringTok{  }\KeywordTok{mean}\NormalTok{(meanDiffSimDf}\OperatorTok{$}\NormalTok{meanDiffSim }\OperatorTok{>=}\StringTok{ }\NormalTok{bmtTTest}\OperatorTok{$}\NormalTok{statistic)}
+
+\KeywordTok{sprintf}\NormalTok{(}
+  \StringTok{"p(mean > %0.2f, df = 248) using randomization = %0.5f"}\NormalTok{, }
+\NormalTok{  bmtTTest}\OperatorTok{$}\NormalTok{statistic, }
+\NormalTok{  bmiPvalRand}
+\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6499,7 +6585,11 @@ observed value:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{sprintf}\NormalTok{(}\StringTok{'p(mean > %0.2f, df = 248) using parametric t-test = %0.5f'}\NormalTok{,bmtTTest}\OperatorTok{$}\NormalTok{statistic,bmtTTest}\OperatorTok{$}\NormalTok{p.value)}
+\KeywordTok{sprintf}\NormalTok{(}
+  \StringTok{"p(mean > %0.2f, df = 248) using parametric t-test = %0.5f"}\NormalTok{, }
+\NormalTok{  bmtTTest}\OperatorTok{$}\NormalTok{statistic, }
+\NormalTok{  bmtTTest}\OperatorTok{$}\NormalTok{p.value}
+\NormalTok{  )}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6602,8 +6692,8 @@ be wrong'' (J. Neyman and Pearson 1933)
 \end{quote}
 
 That is: We can't know which specific decisions are right or wrong, but
-if we follow the rules, we can at least how often our decisions will be
-wrong.
+if we follow the rules, we can at least know how often our decisions
+will be wrong.
 
 To understand the decision making framework that Neyman and Pearson
 developed, we first need to discuss statistical decision making in terms
@@ -6709,39 +6799,48 @@ sample size increases.
 \begin{Highlighting}[]
 \CommentTok{# create simulated data for weight loss trial}
 
-\NormalTok{weightLossTrial <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(nPerGroup,}\DataTypeTok{weightLossOz=}\DecValTok{1}\NormalTok{)\{}
+\NormalTok{weightLossTrial <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(nPerGroup, }\DataTypeTok{weightLossOz =} \DecValTok{1}\NormalTok{) \{}
   \CommentTok{# mean and SD in Kg based on NHANES adult dataset}
-\NormalTok{  kgToOz <-}\StringTok{ }\FloatTok{35.27396195}  \CommentTok{# conversion constant for Kg to Oz}
-\NormalTok{  meanOz <-}\StringTok{ }\FloatTok{81.78}\OperatorTok{*}\NormalTok{kgToOz}
-\NormalTok{  sdOz <-}\StringTok{ }\FloatTok{21.29}\OperatorTok{*}\NormalTok{kgToOz}
+\NormalTok{  kgToOz <-}\StringTok{ }\FloatTok{35.27396195} \CommentTok{# conversion constant for Kg to Oz}
+\NormalTok{  meanOz <-}\StringTok{ }\FloatTok{81.78} \OperatorTok{*}\StringTok{ }\NormalTok{kgToOz}
+\NormalTok{  sdOz <-}\StringTok{ }\FloatTok{21.29} \OperatorTok{*}\StringTok{ }\NormalTok{kgToOz}
   \CommentTok{# create data}
-\NormalTok{  controlGroup <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(nPerGroup)}\OperatorTok{*}\NormalTok{sdOz }\OperatorTok{+}\StringTok{ }\NormalTok{meanOz}
-\NormalTok{  expGroup <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(nPerGroup)}\OperatorTok{*}\NormalTok{sdOz }\OperatorTok{+}\StringTok{ }\NormalTok{meanOz }\OperatorTok{-}\StringTok{ }\NormalTok{weightLossOz}
-\NormalTok{  ttResult <-}\StringTok{ }\KeywordTok{t.test}\NormalTok{(expGroup,controlGroup)}
-  \KeywordTok{return}\NormalTok{(}\KeywordTok{c}\NormalTok{(nPerGroup,weightLossOz,ttResult}\OperatorTok{$}\NormalTok{p.value,}
-           \KeywordTok{diff}\NormalTok{(ttResult}\OperatorTok{$}\NormalTok{estimate))}
-\NormalTok{    )}
-
+\NormalTok{  controlGroup <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(nPerGroup) }\OperatorTok{*}\StringTok{ }\NormalTok{sdOz }\OperatorTok{+}\StringTok{ }\NormalTok{meanOz}
+\NormalTok{  expGroup <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(nPerGroup) }\OperatorTok{*}\StringTok{ }\NormalTok{sdOz }\OperatorTok{+}\StringTok{ }\NormalTok{meanOz }\OperatorTok{-}\StringTok{ }\NormalTok{weightLossOz}
+\NormalTok{  ttResult <-}\StringTok{ }\KeywordTok{t.test}\NormalTok{(expGroup, controlGroup)}
+  \KeywordTok{return}\NormalTok{(}\KeywordTok{c}\NormalTok{(}
+\NormalTok{    nPerGroup, weightLossOz, ttResult}\OperatorTok{$}\NormalTok{p.value,}
+    \KeywordTok{diff}\NormalTok{(ttResult}\OperatorTok{$}\NormalTok{estimate)}
+\NormalTok{  ))}
 \NormalTok{\}}
 
 \NormalTok{nRuns <-}\StringTok{ }\DecValTok{1000}
 \NormalTok{sampSizes <-}\StringTok{ }\DecValTok{2}\OperatorTok{**}\KeywordTok{seq}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{17}\NormalTok{) }\CommentTok{# powers of 2}
 
 \NormalTok{simResults <-}\StringTok{ }\KeywordTok{c}\NormalTok{() ## create an empty list to add results onto}
-\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(sampSizes))\{}
-\NormalTok{    tmpResults <-}\StringTok{ }\KeywordTok{replicate}\NormalTok{(nRuns,}
-                      \KeywordTok{weightLossTrial}\NormalTok{(sampSizes[i],}\DataTypeTok{weightLossOz =} \DecValTok{10}\NormalTok{))}
-\NormalTok{    summaryResults <-}\StringTok{ }\KeywordTok{c}\NormalTok{(tmpResults[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{],tmpResults[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{],}
-                     \KeywordTok{sum}\NormalTok{(tmpResults[}\DecValTok{3}\NormalTok{,]}\OperatorTok{<}\FloatTok{0.05}\NormalTok{),}
-                     \KeywordTok{mean}\NormalTok{(tmpResults[}\DecValTok{4}\NormalTok{,]))}
-\NormalTok{    simResults <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(simResults,summaryResults)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(sampSizes)) \{}
+\NormalTok{  tmpResults <-}\StringTok{ }\KeywordTok{replicate}\NormalTok{(}
+\NormalTok{    nRuns,}
+    \KeywordTok{weightLossTrial}\NormalTok{(sampSizes[i], }\DataTypeTok{weightLossOz =} \DecValTok{10}\NormalTok{)}
+\NormalTok{  )}
+\NormalTok{  summaryResults <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}
+\NormalTok{    tmpResults[}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{], tmpResults[}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{],}
+    \KeywordTok{sum}\NormalTok{(tmpResults[}\DecValTok{3}\NormalTok{, ] }\OperatorTok{<}\StringTok{ }\FloatTok{0.05}\NormalTok{),}
+    \KeywordTok{mean}\NormalTok{(tmpResults[}\DecValTok{4}\NormalTok{, ])}
+\NormalTok{  )}
+\NormalTok{  simResults <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(simResults, summaryResults)}
 \NormalTok{\}}
 
-\NormalTok{simResultsDf <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(simResults)}
-\KeywordTok{names}\NormalTok{(simResultsDf) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{'sampleSize'}\NormalTok{,}\StringTok{'effectSizeLbs'}\NormalTok{,}\StringTok{'nSigResults'}\NormalTok{,}\StringTok{'meanEffect'}\NormalTok{)}
+
 \NormalTok{simResultsDf <-}\StringTok{ }
-\StringTok{  }\NormalTok{simResultsDf }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{pSigResult=}\NormalTok{nSigResults}\OperatorTok{/}\NormalTok{nRuns)}
+\StringTok{  }\KeywordTok{as.tibble}\NormalTok{(simResults) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{rename}\NormalTok{(}
+    \DataTypeTok{sampleSize =}\NormalTok{ V1, }
+    \DataTypeTok{effectSizeLbs =}\NormalTok{ V2,}
+    \DataTypeTok{nSigResults =}\NormalTok{ V3, }
+    \DataTypeTok{meanEffect =}\NormalTok{ V4}
+\NormalTok{  ) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{pSigResult =}\NormalTok{ nSigResults }\OperatorTok{/}\StringTok{ }\NormalTok{nRuns)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6772,7 +6871,7 @@ individual. For example, in genetic studies that quantify the entire
 genome, there may be many millions of measures per individual, and in
 brain imaging we often collect data from more than 100,000 locations in
 the brain at once. When standard hypothesis testing is applied in these
-contexts, bad things can happen unless the appropriate care is taken.
+contexts, bad things can happen unless we take appropriate care.
 
 Let's look at an example to see how this might work. There is great
 interest in understanding the genetic factors that can predispose
@@ -6785,11 +6884,10 @@ in their genomes. One approach that has been used in recent years is
 known as a \emph{genome-wide association study} (GWAS), in which the
 genome of each individual is characterized at one million or more places
 in their genome to determine which letters of the genetic code (which we
-call ``variants'') they have at that location. Once these have been
-determined, then the researchers perform a statistical test at each
-location in the genome to determine whether people diagnosed with
-schizoprenia are more or less likely to have one specific variant at
-that location.
+call ``variants'') they have at that location. After these have been
+determined, the researchers perform a statistical test at each location
+in the genome to determine whether people diagnosed with schizoprenia
+are more or less likely to have one specific variant at that location.
 
 Let's imagine what would happen if the researchers simply asked whether
 the test was significant at p\textless{}.05 at each location, when in
@@ -6803,14 +6901,14 @@ as significant (see Figure \ref{fig:nullSim}).
 \begin{Highlighting}[]
 \CommentTok{# simulate 1500 studies with 10,000 tests each, thresholded at p < .05}
 
-\NormalTok{nRuns <-}\StringTok{ }\DecValTok{1500}  \CommentTok{# number of simulated studies to run}
+\NormalTok{nRuns <-}\StringTok{ }\DecValTok{1500} \CommentTok{# number of simulated studies to run}
 \NormalTok{nTests <-}\StringTok{ }\DecValTok{10000} \CommentTok{# number of simulated genes to test in each run}
 
 \NormalTok{uncAlpha <-}\StringTok{ }\FloatTok{0.05} \CommentTok{# alpha level}
 
-\NormalTok{uncOutcome <-}\StringTok{ }\KeywordTok{replicate}\NormalTok{(nRuns,}\KeywordTok{sum}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(nTests)}\OperatorTok{<}\KeywordTok{qnorm}\NormalTok{(uncAlpha)))}
+\NormalTok{uncOutcome <-}\StringTok{ }\KeywordTok{replicate}\NormalTok{(nRuns, }\KeywordTok{sum}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(nTests) }\OperatorTok{<}\StringTok{ }\KeywordTok{qnorm}\NormalTok{(uncAlpha)))}
 
-\KeywordTok{sprintf}\NormalTok{(}\StringTok{'mean proportion of significant tests per run: %0.2f'}\NormalTok{,}\KeywordTok{mean}\NormalTok{(uncOutcome)}\OperatorTok{/}\NormalTok{nTests)}
+\KeywordTok{sprintf}\NormalTok{(}\StringTok{"mean proportion of significant tests per run: %0.2f"}\NormalTok{, }\KeywordTok{mean}\NormalTok{(uncOutcome) }\OperatorTok{/}\StringTok{ }\NormalTok{nTests)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6820,9 +6918,9 @@ as significant (see Figure \ref{fig:nullSim}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# compute proportion of studies with at least one false positive result, }
+\CommentTok{# compute proportion of studies with at least one false positive result,}
 \CommentTok{# known as the familywise error rate}
-\KeywordTok{sprintf}\NormalTok{(}\StringTok{'familywise error rate: %0.3f'}\NormalTok{,}\KeywordTok{mean}\NormalTok{(uncOutcome}\OperatorTok{>}\DecValTok{0}\NormalTok{))}
+\KeywordTok{sprintf}\NormalTok{(}\StringTok{"familywise error rate: %0.3f"}\NormalTok{, }\KeywordTok{mean}\NormalTok{(uncOutcome }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6861,10 +6959,11 @@ in our study is controlled at right around .05.
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# compute Bonferroni-corrected alpha}
-\NormalTok{corAlpha <-}\StringTok{ }\FloatTok{0.05}\OperatorTok{/}\NormalTok{nTests}
+\NormalTok{corAlpha <-}\StringTok{ }\FloatTok{0.05} \OperatorTok{/}\StringTok{ }\NormalTok{nTests}
 
-\NormalTok{corOutcome <-}\StringTok{ }\KeywordTok{replicate}\NormalTok{(nRuns,}\KeywordTok{sum}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(nTests)}\OperatorTok{<}\NormalTok{(}\KeywordTok{qnorm}\NormalTok{(corAlpha))))}
-\KeywordTok{sprintf}\NormalTok{(}\StringTok{'corrected familywise error rate: %0.3f'}\NormalTok{,}\KeywordTok{mean}\NormalTok{(corOutcome}\OperatorTok{>}\DecValTok{0}\NormalTok{))}
+\NormalTok{corOutcome <-}\StringTok{ }\KeywordTok{replicate}\NormalTok{(nRuns, }\KeywordTok{sum}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(nTests) }\OperatorTok{<}\StringTok{ }\NormalTok{(}\KeywordTok{qnorm}\NormalTok{(corAlpha))))}
+
+\KeywordTok{sprintf}\NormalTok{(}\StringTok{"corrected familywise error rate: %0.3f"}\NormalTok{, }\KeywordTok{mean}\NormalTok{(corOutcome }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -9771,9 +9870,14 @@ relations between them as arrows. For example, Figure
 time and two variables that we think should be affected by it: exam
 grades and exam finishing times.
 
-\begin{figure}
-\includegraphics[height=0.5\textheight]{StatsThinking21_files/figure-latex/simpleCausalGraph-1} \caption{A graph showing causal relationships between three variables: study time, exam grades, and exam finishing time.  A green arrow represents a positive relationship (i.e. more study time causes exam grades to increase), and a red arrow represents a negative relationship (i.e. more study time causes faster completion of the exam).}\label{fig:simpleCausalGraph}
-\end{figure}
+\hypertarget{htmlwidget-5672838f2bcaf0ca47f5}{}
+
+\label{fig:simpleCausalGraph}A graph showing causal relationships between
+three variables: study time, exam grades, and exam finishing time. A
+green arrow represents a positive relationship (i.e.~more study time
+causes exam grades to increase), and a red arrow represents a negative
+relationship (i.e.~more study time causes faster completion of the
+exam).
 
 However, in reality the effects on finishing time and grades are not due
 directly to the amount of time spent studying, but rather to the amount
@@ -9783,9 +9887,11 @@ it directly but we can see it reflected in variables that we can measure
 (like grades and finishing times). Figure \ref{fig:latentCausalGraph}
 shows this.
 
-\begin{figure}
-\includegraphics[height=0.5\textheight]{StatsThinking21_files/figure-latex/latentCausalGraph-1} \caption{A graph showing the same causal relationships as above, but now also showing the latent variable (knowledge) using a square box.}\label{fig:latentCausalGraph}
-\end{figure}
+\hypertarget{htmlwidget-45c4a6fd972256d04367}{}
+
+\label{fig:latentCausalGraph}A graph showing the same causal relationships
+as above, but now also showing the latent variable (knowledge) using a
+square box.
 
 Here we would say that knowledge \emph{mediates} the relationship
 between study time and grades/finishing times. That means that if we
@@ -11759,7 +11865,6 @@ to only fit an intercept.
 ## Iteration: 2
 ## Iteration: 3
 ## Iteration: 4
-## Iteration: 5
 ## Iteration: 1
 ## Iteration: 2
 ## Iteration: 3
@@ -11768,7 +11873,7 @@ to only fit an intercept.
 \end{verbatim}
 
 \begin{verbatim}
-## Estimated Bayes factor in favor of bridge1 over bridge2: 99.34471
+## Estimated Bayes factor in favor of bridge1 over bridge2: 99.86593
 \end{verbatim}
 
 This shows us that there is very strong evidence (Bayes factor of nearly

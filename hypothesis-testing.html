@@ -46,7 +46,7 @@
 
 
 
-<script src="book_assets/htmlwidgets-1.2/htmlwidgets.js"></script>
+<script src="book_assets/htmlwidgets-1.3/htmlwidgets.js"></script>
 <script src="book_assets/viz-0.3/viz.js"></script>
 <link href="book_assets/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
 <script src="book_assets/grViz-binding-1.0.0/grViz.js"></script>
@@ -408,18 +408,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>In this chapter we will introduce the ideas behind the use of statistics to make decisions – in particular, decisions about whether a particular hypothesis is supported by the data.</p>
 <div id="null-hypothesis-statistical-testing-nhst" class="section level2">
 <h2><span class="header-section-number">9.1</span> Null Hypothesis Statistical Testing (NHST)</h2>
-<p>The specific type of hypothesis testing that we will discuss is known (for reasons that will become clear) as <em>null hypothesis staistical testing</em> (NHST). If you pick up almost any scientific or biomedical research publication, you will see NHST being used to test hypotheses, and in their introductory psycholology textbook, Gerrig &amp; Zimbardo (2002) referred to NHST as the “backbone of psychological research”. Thus, learning how to use and interpret the results from hypothesis testing is essential to understand the results from this research.</p>
+<p>The specific type of hypothesis testing that we will discuss is known (for reasons that will become clear) as <em>null hypothesis statistical testing</em> (NHST). If you pick up almost any scientific or biomedical research publication, you will see NHST being used to test hypotheses, and in their introductory psycholology textbook, Gerrig &amp; Zimbardo (2002) referred to NHST as the “backbone of psychological research”. Thus, learning how to use and interpret the results from hypothesis testing is essential to understand the results from this research.</p>
 <p>It is also important for you to know, however, that NHST is deeply flawed, and that many statisticians and researchers (including myself) think that it has been the cause of serious problems in science, which we will discuss in Chapter <a href="doing-reproducible-research.html#doing-reproducible-research">17</a>. For more than 50 years, there have been calls to abandon NHST in favor of other approaches (like those that we will discuss in the following chapters):</p>
 <ul>
 <li>“The test of statistical significance in psychological research may be taken as an instance of a kind of essential mindlessness in the conduct of research” (Bakan, 1966)</li>
 <li>Hypothesis testing is “a wrongheaded view about what constitutes scientific progress” (Luce, 1988)</li>
 </ul>
-<p>NHST is also widely misunderstood, largely because it violates out intuitions about how statistical hypothesis testing should work. Let’s look at an example to see.</p>
+<p>NHST is also widely misunderstood, largely because it violates our intuitions about how statistical hypothesis testing should work. Let’s look at an example to see.</p>
 </div>
 <div id="null-hypothesis-statistical-testing-an-example" class="section level2">
 <h2><span class="header-section-number">9.2</span> Null hypothesis statistical testing: An example</h2>
-<p>There is great interest in the use of body-worn cameras by police officers, which are thought to reduce the use of force and improve officer behavior. However, in order to establish this we need experimental evidence, and it has become increasingly common for governments to use randomized controlled trials to test such ideas. A randomized controlled trial of the effectiveness of body-worn cameras was performed by the Washington, DC government and DC Metropolitan Police Department in 2015/2016 in order to test this. Officers were randomly assigned to wear a body-worn camera or not, and their behavior was then tracked over time to determine whether the cameras resulted in less usee of force and fewer civilian complaints about officer behavior.</p>
-<p>Before we get to the results, let’s ask how you would think the statistical analysis might work. Let’s say we want to specifically test the hypothesis of whether the use of force is decreased by the wearing of cameras. The randomized controlled trial provides us with the data to test the hypothesis – namely, the rates of use of force by officers assigned to either the camera or control groups. The next obvious step is to look at the data and determine whether they provide convincing evidence for or against the hypothesis. That is: What is the likelihood that body-worn cameras reduce the use of force, given the data and everything else we know?</p>
+<p>There is great interest in the use of body-worn cameras by police officers, which are thought to reduce the use of force and improve officer behavior. However, in order to establish this we need experimental evidence, and it has become increasingly common for governments to use randomized controlled trials to test such ideas. A randomized controlled trial of the effectiveness of body-worn cameras was performed by the Washington, DC government and DC Metropolitan Police Department in 2015/2016 in order to test the hypothesis that body-worn cameras are effective. Officers were randomly assigned to wear a body-worn camera or not, and their behavior was then tracked over time to determine whether the cameras resulted in less use of force and fewer civilian complaints about officer behavior.</p>
+<p>Before we get to the results, let’s ask how you would think the statistical analysis might work. Let’s say we want to specifically test the hypothesis of whether the use of force is decreased by the wearing of cameras. The randomized controlled trial provides us with the data to test the hypothesis – namely, the rates of use of force by officers assigned to either the camera or control groups. The next obvious step is to look at the data and determine whether they provide convincing evidence for or against this hypothesis. That is: What is the likelihood that body-worn cameras reduce the use of force, given the data and everything else we know?</p>
 <p>It turns out that this is <em>not</em> how null hypothesis testing works. Instead, we first take our hypothesis of interest (i.e. whether body-worn cameras reduce use of force), and flip it on its head, creating a <em>null hypothesis</em> – in this case, the null hypothesis would be that cameras do not reduce use of force. Importantly, we then assume that the null hypothesis is true. We then look at the data, and determine whether the data are sufficiently unlikely under the null hypothesis that we can reject the null in favor of the <em>alternative hypothesis</em> which is our hypothesis of interest. If there is not sufficient evidence to reject the null, then we say that we “failed to reject” the null.</p>
 <p>Understanding some of the concepts of NHST, particularly the notorious “p-value”, is invariably challenging the first time one encounters them, because they are so counter-intuitive. As we will see later, there are other approaches that provide a much more intuitive way to address hypothesis testing (but have their own complexities). However, before we get to those, it’s important for you to have a deep understanding of how hypothesis testing works, because it’s clearly not going to go away any time soon.</p>
 </div>
@@ -445,24 +445,57 @@ BMI = \frac{weight(kg)}{height(m)^2}
 <div id="step-2-collect-some-data" class="section level3">
 <h3><span class="header-section-number">9.3.2</span> Step 2: Collect some data</h3>
 <p>For step 2, we collect some data. In this case, we will sample 250 individuals from the NHANES dataset. Figure <a href="hypothesis-testing.html#fig:bmiSample">9.1</a> shows an example of such a sample, with BMI shown separately for active and inactive individuals.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># sample 250 adults from NHANES and compute BMI separately for active</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># sample 250 adults from NHANES and compute mean BMI separately for active</span>
 <span class="co"># and inactive individuals</span>
 
 sampSize &lt;-<span class="st"> </span><span class="dv">250</span>
-NHANES_sample &lt;-<span class="st"> </span>NHANES_adult <span class="op">%&gt;%</span>
+
+NHANES_sample &lt;-<span class="st"> </span>
+<span class="st">  </span>NHANES_adult <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">sample_n</span>(sampSize)
 
 sampleSummary &lt;-
 <span class="st">  </span>NHANES_sample <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">group_by</span>(PhysActive) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(PhysActive) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarize</span>(
-    <span class="dt">N=</span><span class="kw">length</span>(BMI),
-    <span class="dt">mean=</span><span class="kw">mean</span>(BMI),
-    <span class="dt">sd=</span><span class="kw">sd</span>(BMI)
+    <span class="dt">N =</span> <span class="kw">length</span>(BMI),
+    <span class="dt">mean =</span> <span class="kw">mean</span>(BMI),
+    <span class="dt">sd =</span> <span class="kw">sd</span>(BMI)
   )
 
-meanDiff=sampleSummary[<span class="dv">1</span>,<span class="dv">3</span>] <span class="op">-</span><span class="st"> </span>sampleSummary[<span class="dv">2</span>,<span class="dv">3</span>]
+<span class="co"># calculate the mean difference in BMI between active </span>
+<span class="co"># and inactive individuals; we&#39;ll use this later to calculate the t-statistic</span>
+meanDiff &lt;-<span class="st"> </span>
+<span class="st">  </span>sampleSummary <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(
+    PhysActive,
+    mean
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">spread</span>(PhysActive, mean) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">meanDiff =</span> No <span class="op">-</span><span class="st"> </span>Yes
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pull</span>(meanDiff)
 
+<span class="co"># calculate the summed variances in BMI for active </span>
+<span class="co"># and inactive individuals; we&#39;ll use this later to calculate the t-statistic</span>
+sumVariance &lt;-<span class="st"> </span>
+<span class="st">  </span>sampleSummary <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(
+    PhysActive,
+    N,
+    sd
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">gather</span>(column, stat, N<span class="op">:</span>sd) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unite</span>(temp, PhysActive, column) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">spread</span>(temp, stat) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">sumVariance =</span> No_sd<span class="op">**</span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span>No_N <span class="op">+</span><span class="st"> </span>Yes_sd<span class="op">**</span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span>Yes_N
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pull</span>(sumVariance)
+
+
+<span class="co"># print sampleSummary table</span>
 <span class="kw">pander</span>(sampleSummary)</code></pre></div>
 <table style="width:49%;">
 <colgroup>
@@ -533,37 +566,40 @@ Figure 9.2: Each panel shows the t distribution (in blue dashed line) overlaid o
 <p>This is the step where NHST starts to violate our intuition – rather than determining the likelihood that the null hypothesis is true given the data, we instead determine the likelihood of the data under the null hypothesis - because we started out by assuming that the null hypothesis is true! To do this, we need to know the probability distribution for the statistic under the null hypothesis, so that we can ask how likely the data are under that distribution. Before we move to our BMI data, let’s start with some simpler examples.</p>
 <div id="randomization-a-very-simple-example" class="section level5">
 <h5><span class="header-section-number">9.3.5.0.1</span> Randomization: A very simple example</h5>
-<p>Let’s say that we wish to determine whether a coin is fair. To collect data, we flip the coin 100 times, and we count 70 heads. In this example, <span class="math inline">\(H_0: P(heads)=0.5\)</span> and <span class="math inline">\(H_A: P(heads) \neq 0.5\)</span>, and our test statistic is simply the number of heads that we counted. The question that we then want to as is: How likely is it that we would observe 70 heads if the true probability of heads is 0.5. We can imagine that it might happen very occasionally just by chance, but doesn’t seem very likely. To quantify this, we can use the <em>binomial distribution</em>:</p>
+<p>Let’s say that we wish to determine whether a coin is fair. To collect data, we flip the coin 100 times, and we count 70 heads. In this example, <span class="math inline">\(H_0: P(heads)=0.5\)</span> and <span class="math inline">\(H_A: P(heads) \neq 0.5\)</span>, and our test statistic is simply the number of heads that we counted. The question that we then want to as is: How likely is it that we would observe 70 heads if the true probability of heads is 0.5. We can imagine that this might happen very occasionally just by chance, but doesn’t seem very likely. To quantify this probability, we can use the <em>binomial distribution</em>:</p>
 <p><span class="math display">\[
 P(X &lt; k) = \sum_{i=0}^k \binom{N}{k} p^i (1-p)^{(n-i)}
-\]</span> This tells us the likelihood of a certain number of heads or fewer, given a particular probability of heads. However, what we really want to know is the probability of a certain number or more, which we can obtain by subtracting from one:</p>
+\]</span> This equation will tell us the likelihood of a certain number of heads or fewer, given a particular probability of heads. However, what we really want to know is the probability of a certain number or more, which we can obtain by subtracting from one:</p>
 <p><span class="math display">\[
 P(X \ge k) = 1 - P(X &lt; k)
 \]</span></p>
-<p>We can compute the probability for our example as follows:</p>
+<p>We can compute the probability for our example using the <code>pbinom()</code> function in R as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute the probability of 69 or fewer heads, when P(heads)=0.5</span>
-p_lt_<span class="dv">70</span> &lt;-<span class="st"> </span><span class="kw">pbinom</span>(<span class="dv">69</span>,<span class="dv">100</span>,<span class="fl">0.5</span>)
-<span class="kw">sprintf</span>(<span class="st">&#39;probability of 69 or fewer heads given P(heads)=0.5: %0.6f&#39;</span>,p_lt_<span class="dv">70</span>)</code></pre></div>
+p_lt_<span class="dv">70</span> &lt;-<span class="st"> </span><span class="kw">pbinom</span>(<span class="dv">69</span>, <span class="dv">100</span>, <span class="fl">0.5</span>) 
+<span class="kw">sprintf</span>(<span class="st">&quot;probability of 69 or fewer heads given P(heads)=0.5: %0.6f&quot;</span>, p_lt_<span class="dv">70</span>)</code></pre></div>
 <pre><code>## [1] &quot;probability of 69 or fewer heads given P(heads)=0.5: 0.999961&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the probability of 70 or more heads is simply the complement of p_lt_70</span>
 p_ge_<span class="dv">70</span> &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p_lt_<span class="dv">70</span>
-<span class="kw">sprintf</span>(<span class="st">&#39;probability of 70 or more heads given P(heads)=0.5: %0.6f&#39;</span>,p_ge_<span class="dv">70</span>)</code></pre></div>
+<span class="kw">sprintf</span>(<span class="st">&quot;probability of 70 or more heads given P(heads)=0.5: %0.6f&quot;</span>, p_ge_<span class="dv">70</span>)</code></pre></div>
 <pre><code>## [1] &quot;probability of 70 or more heads given P(heads)=0.5: 0.000039&quot;</code></pre>
-<p>This computation shows us that the likelihood of getting 70 heads if the coin is indeed fair is very small. Now, what if we didn’t have the <code>pbinom()</code> function to tell us the probability of that number of heads? We could instead determine it by simulation – we repeatly flip a coin 100 times using a true probability of 0.5, and then compute the distribution of number of heads across those simulation runs. Figure <a href="hypothesis-testing.html#fig:coinFlips">9.3</a> shows the result from this simulation.</p>
+<p>This computation shows us that the likelihood of getting 70 heads if the coin is indeed fair is very small. Now, what if we didn’t have the <code>pbinom()</code> function to tell us the probability of that number of heads? We could instead determine it by simulation – we repeatly flip a coin 100 times using a true probability of 0.5, and then compute the distribution of the number of heads across those simulation runs. Figure <a href="hypothesis-testing.html#fig:coinFlips">9.3</a> shows the result from this simulation.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># simulate tossing of 100,000 flips of 100 coins to identify empirical </span>
 <span class="co"># probability of 70 or more heads out of 100 flips</span>
 
 <span class="co"># create function to toss coins</span>
-tossCoins &lt;-<span class="st"> </span><span class="cf">function</span>(){
-  flips &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">100</span>)<span class="op">&gt;</span><span class="fl">0.5</span>
+tossCoins &lt;-<span class="st"> </span><span class="cf">function</span>() {
+  flips &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">100</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span> 
   <span class="kw">return</span>(<span class="kw">sum</span>(flips))
 }
 
 <span class="co"># use a large number of replications since this is fast</span>
-coinFlips &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">100000</span>,<span class="kw">tossCoins</span>())
+coinFlips &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">100000</span>, <span class="kw">tossCoins</span>())
 
-p_ge_70_sim &lt;-<span class="st"> </span><span class="kw">mean</span>(coinFlips<span class="op">&gt;=</span><span class="dv">70</span>)
-<span class="kw">sprintf</span>(<span class="st">&#39;empirical probability of 70 or more heads given P(heads)=0.5: %0.6f&#39;</span>,p_ge_70_sim)</code></pre></div>
+p_ge_70_sim &lt;-<span class="st"> </span><span class="kw">mean</span>(coinFlips <span class="op">&gt;=</span><span class="st"> </span><span class="dv">70</span>)
+<span class="kw">sprintf</span>(
+  <span class="st">&quot;empirical probability of 70 or more heads given P(heads)=0.5: %0.6f&quot;</span>, 
+  p_ge_70_sim
+)</code></pre></div>
 <pre><code>## [1] &quot;empirical probability of 70 or more heads given P(heads)=0.5: 0.000020&quot;</code></pre>
 <div class="figure"><span id="fig:coinFlips"></span>
 <img src="StatsThinking21_files/figure-html/coinFlips-1.png" alt="Distribution of numbers of heads (out of 100 flips) across 100,000 simulated runs." width="384" height="50%" />
@@ -571,21 +607,31 @@ p_ge_70_sim &lt;-<span class="st"> </span><span class="kw">mean</span>(coinFlips
 Figure 9.3: Distribution of numbers of heads (out of 100 flips) across 100,000 simulated runs.
 </p>
 </div>
-<p>Here we can see that the probability computed via simulation (.00002) is very close to the theoretical probability (.00004).</p>
-<p>Let’s do the analogous computation for our BMI example. First we compute the t statistic using the values from our sample:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tStat &lt;-<span class="st"> </span>(sampleSummary[<span class="dv">1</span>,<span class="dv">3</span>] <span class="op">-</span><span class="st"> </span>sampleSummary[<span class="dv">2</span>,<span class="dv">3</span>])<span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(sampleSummary[<span class="dv">1</span>,<span class="dv">4</span>]<span class="op">**</span><span class="dv">2</span><span class="op">/</span>sampleSummary[<span class="dv">1</span>,<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span>sampleSummary[<span class="dv">2</span>,<span class="dv">4</span>]<span class="op">**</span><span class="dv">2</span><span class="op">/</span>sampleSummary[<span class="dv">2</span>,<span class="dv">2</span>] )
-<span class="kw">sprintf</span>(<span class="st">&#39;t statistic = %0.3f&#39;</span>,tStat)</code></pre></div>
+<p>Here we can see that the probability computed via simulation (0.000020) is very close to the theoretical probability (.00004).</p>
+<p>Let’s do the analogous computation for our BMI example. First we compute the t statistic using the values from our sample that we calculated above:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tStat &lt;-<span class="st"> </span>
+<span class="st">  </span>meanDiff <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(sumVariance)
+
+<span class="kw">sprintf</span>(<span class="st">&quot;t statistic = %0.3f&quot;</span>, tStat)</code></pre></div>
 <pre><code>## [1] &quot;t statistic = 1.735&quot;</code></pre>
 <p>The question that we then want to ask is: What is the likelihood that we would find a t statistic of this size, if the true difference between groups is zero or less (i.e. the directional null hypothesis)?<br />
 We can use the t distribution to determine this probability. Our sample size is 250, so the appropriate t distribution has 248 degrees of freedom. We can use the <code>pt()</code> function in R to determine the probability of finding a value of the t-statistic greater than or equal to our observed value. Note that we want to know the probability of a value greater than our observed value, but by default <code>pt()</code> gives us the probability of a value less than the one that we provide it, so we have to tell it explicitly to provide us with the “upper tail” probability (by setting <code>lower.tail = FALSE</code>).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pvalue_tdist &lt;-<span class="st"> </span><span class="kw">pt</span>(tStat<span class="op">$</span>mean,<span class="dt">df=</span><span class="dv">248</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)
-<span class="kw">sprintf</span>(<span class="st">&#39;p(t &gt; %0.2f, df = 248) = %0.3f&#39;</span>,tStat<span class="op">$</span>mean,pvalue_tdist)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pvalue_tdist &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">pt</span>(tStat, <span class="dt">df =</span> <span class="dv">248</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)
+
+<span class="kw">sprintf</span>(<span class="st">&quot;p(t &gt; %0.2f, df = 248) = %0.3f&quot;</span>, tStat, pvalue_tdist)</code></pre></div>
 <pre><code>## [1] &quot;p(t &gt; 1.74, df = 248) = 0.042&quot;</code></pre>
 <p>This tells us that our observed t-statistic value of 1.74 is relatively unlikely if the null hypothesis really is true.</p>
 <p>In this case, we used a directional hypothesis, so we only had to look at one end of the null distribution. If we want to test a non-directional hypothesis, then we are interested in differences in either direction, so we have to add the probability that the observed value is as extreme in the other direction – which we get by simply multiplying the observed <em>t</em> value by -1, since the <em>t</em> distribution is centered around zero. Using this, we can get a <em>two-tailed</em> value:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pvalue_tdist_twotailed &lt;-<span class="st"> </span><span class="kw">pt</span>(tStat<span class="op">$</span>mean,<span class="dt">df=</span><span class="dv">248</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">pt</span>(<span class="op">-</span><span class="dv">1</span><span class="op">*</span>tStat<span class="op">$</span>mean,<span class="dt">df=</span><span class="dv">248</span>, <span class="dt">lower.tail =</span> <span class="ot">TRUE</span>)
-<span class="kw">sprintf</span>(<span class="st">&#39;p(t &gt; %0.2f or t&lt; %0.2f, df = 248) = %0.3f&#39;</span>,tStat<span class="op">$</span>mean,<span class="op">-</span><span class="dv">1</span><span class="op">*</span>tStat<span class="op">$</span>mean,pvalue_tdist_twotailed)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pvalue_tdist_twotailed &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">pt</span>(tStat, <span class="dt">df =</span> <span class="dv">248</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">pt</span>(<span class="op">-</span><span class="dv">1</span> <span class="op">*</span><span class="st"> </span>tStat, <span class="dt">df =</span> <span class="dv">248</span>, <span class="dt">lower.tail =</span> <span class="ot">TRUE</span>)
+
+<span class="kw">sprintf</span>(
+  <span class="st">&quot;p(t &gt; %0.2f or t&lt; %0.2f, df = 248) = %0.3f&quot;</span>, 
+  tStat, 
+  <span class="op">-</span><span class="dv">1</span> <span class="op">*</span><span class="st"> </span>tStat, pvalue_tdist_twotailed
+)</code></pre></div>
 <pre><code>## [1] &quot;p(t &gt; 1.74 or t&lt; -1.74, df = 248) = 0.084&quot;</code></pre>
 <p>Here we see that the p value for the two-tailed test is twice as large as that for the one-tailed test, which reflects the fact that an extreme value is less surprising since it could have occurred in either direction.</p>
 <p>How do you choose whether to use a one-tailed versus a two-tailed test? The two-tailed test is always going to be more conservative, so it’s always a good bet to use that one, unless you had a very strong prior reason for using a one-tailed test. In that case, you should have written down the hypothesis before you ever looked at the data. In Chapter (doing-reproducible-research) we will discuss the idea of pre-registration of hypotheses, which formalizes the idea of writing down your hypotheses before you ever see the actual data. You should <em>never</em> make a decision about how to perform a hypothesis test once you have looked at the data, as this can introduce serious bias into the results.</p>
@@ -602,15 +648,18 @@ We can use the t distribution to determine this probability. Our sample size is 
 <span class="co"># reset random seed for this example</span>
 <span class="kw">set.seed</span>(<span class="dv">12345678</span>)
 
-<span class="co"># create a function to round values to nearest product of 5, </span>
+<span class="co"># create a function to round values to nearest product of 5,</span>
 <span class="co"># to keep example simple</span>
-roundToNearest5 &lt;-<span class="st"> </span><span class="cf">function</span>(x,<span class="dt">base=</span><span class="dv">5</span>){ 
-        <span class="kw">return</span>(base<span class="op">*</span><span class="kw">round</span>(x<span class="op">/</span>base))
-} 
+roundToNearest5 &lt;-<span class="st"> </span><span class="cf">function</span>(x, <span class="dt">base =</span> <span class="dv">5</span>) {
+  <span class="kw">return</span>(base <span class="op">*</span><span class="st"> </span><span class="kw">round</span>(x <span class="op">/</span><span class="st"> </span>base))
+}
 
 <span class="co"># create and show data frame containing simulated data</span>
-squatDf &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">group=</span><span class="kw">as.factor</span>(<span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&#39;FB&#39;</span>,<span class="dv">5</span>),<span class="kw">rep</span>(<span class="st">&#39;XC&#39;</span>,<span class="dv">5</span>))),
-              <span class="dt">squat=</span><span class="kw">roundToNearest5</span>(<span class="kw">c</span>(<span class="kw">rnorm</span>(<span class="dv">5</span>)<span class="op">*</span><span class="dv">30</span> <span class="op">+</span><span class="st"> </span><span class="dv">300</span>,<span class="kw">rnorm</span>(<span class="dv">5</span>)<span class="op">*</span><span class="dv">30</span> <span class="op">+</span><span class="st"> </span><span class="dv">140</span>)))
+squatDf &lt;-<span class="st"> </span><span class="kw">tibble</span>(
+  <span class="dt">group =</span> <span class="kw">as.factor</span>(<span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;FB&quot;</span>, <span class="dv">5</span>), <span class="kw">rep</span>(<span class="st">&quot;XC&quot;</span>, <span class="dv">5</span>))),
+  <span class="dt">squat =</span> <span class="kw">roundToNearest5</span>(<span class="kw">c</span>(<span class="kw">rnorm</span>(<span class="dv">5</span>) <span class="op">*</span><span class="st"> </span><span class="dv">30</span> <span class="op">+</span><span class="st"> </span><span class="dv">300</span>, <span class="kw">rnorm</span>(<span class="dv">5</span>) <span class="op">*</span><span class="st"> </span><span class="dv">30</span> <span class="op">+</span><span class="st"> </span><span class="dv">140</span>))
+)
+
 <span class="kw">pander</span>(squatDf)</code></pre></div>
 <table style="width:22%;">
 <colgroup>
@@ -675,19 +724,26 @@ Figure 9.4: Box plots of simulated squatting ability for football players and cr
 <p>From the plot in Figure <a href="hypothesis-testing.html#fig:squatPlot">9.4</a> it’s clear that there is a large difference between the two groups. We can do a standard t-test to test our hypothesis, using the <code>t.test()</code> command in R:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute and print t statistic comparing two groups</span>
 
-tt &lt;-<span class="st"> </span><span class="kw">t.test</span>(squat<span class="op">~</span>group,<span class="dt">data=</span>squatDf,<span class="dt">alternative=</span><span class="st">&#39;greater&#39;</span>,<span class="dt">var.equal=</span><span class="ot">TRUE</span>)
+tt &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">t.test</span>(
+    squat <span class="op">~</span><span class="st"> </span>group, 
+    <span class="dt">data =</span> squatDf, 
+    <span class="dt">alternative =</span> <span class="st">&quot;greater&quot;</span>, 
+    <span class="dt">var.equal =</span> <span class="ot">TRUE</span>
+  )
 
-<span class="kw">sprintf</span>(<span class="st">&#39;p(t &gt; %0.2f, df = 8) = %0.5f&#39;</span>,tt<span class="op">$</span>statistic,tt<span class="op">$</span>p.value)</code></pre></div>
+<span class="kw">sprintf</span>(<span class="st">&quot;p(t &gt; %0.2f, df = 8) = %0.5f&quot;</span>, tt<span class="op">$</span>statistic, tt<span class="op">$</span>p.value)</code></pre></div>
 <pre><code>## [1] &quot;p(t &gt; 5.14, df = 8) = 0.00044&quot;</code></pre>
 <p>This shows that the likelihood of such a difference under the null hypothesis is very small, using the <em>t</em> distribution to define the null. Now let’s see how we could answer the same question using randomization. The basic idea is that if the null hypothesis of no difference between groups is true, then it shouldn’t matter which group one comes from (football players versus cross-country runners) – thus, to create data that are like our actual data but also conform to the null hypothesis, we can randomly reorder the group labels for the individuals in the dataset, and then recompute the difference between the groups. The results of such a shuffle are shown in Figure <a href="hypothesis-testing.html#fig:scramPlot">9.5</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create a scrambled version of the group membership variable</span>
 
-dfScram &lt;-<span class="st"> </span>
-<span class="st">  </span>squatDf <span class="op">%&gt;%</span><span class="st"> </span>
+dfScram &lt;-
+<span class="st">  </span>squatDf <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">scrambledGroup=</span><span class="kw">sample</span>(group)
+    <span class="dt">scrambledGroup =</span> <span class="kw">sample</span>(group)
   ) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="op">-</span>group)
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>group)
+
 <span class="kw">pander</span>(dfScram)</code></pre></div>
 <table style="width:33%;">
 <colgroup>
@@ -754,19 +810,24 @@ Figure 9.5: Box plots for subjects assigned to each group after scrambling group
 
 nRuns &lt;-<span class="st"> </span><span class="dv">10000</span>
 
-shuffleAndMeasure &lt;-<span class="st"> </span><span class="cf">function</span>(df){
-  dfScram &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span>
+shuffleAndMeasure &lt;-<span class="st"> </span><span class="cf">function</span>(df) {
+  dfScram &lt;-<span class="st"> </span>
+<span class="st">    </span>df <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">mutate</span>(
-      <span class="dt">scrambledGroup=</span><span class="kw">sample</span>(group)
-    ) 
-  tt &lt;-<span class="st"> </span><span class="kw">t.test</span>(squat<span class="op">~</span>scrambledGroup,<span class="dt">data=</span>dfScram,
-               <span class="dt">alternative=</span><span class="st">&#39;greater&#39;</span>,<span class="dt">var.equal=</span><span class="ot">TRUE</span>)
+      <span class="dt">scrambledGroup =</span> <span class="kw">sample</span>(group)
+    )
+  tt &lt;-<span class="st"> </span><span class="kw">t.test</span>(
+    squat <span class="op">~</span><span class="st"> </span>scrambledGroup,
+    <span class="dt">data =</span> dfScram,
+    <span class="dt">alternative =</span> <span class="st">&quot;greater&quot;</span>, 
+    <span class="dt">var.equal =</span> <span class="ot">TRUE</span>
+  )
   <span class="kw">return</span>(tt<span class="op">$</span>statistic)
 }
 
-shuffleDiff &lt;-<span class="st"> </span><span class="kw">replicate</span>(nRuns,<span class="kw">shuffleAndMeasure</span>(squatDf))
+shuffleDiff &lt;-<span class="st"> </span><span class="kw">replicate</span>(nRuns, <span class="kw">shuffleAndMeasure</span>(squatDf))
 
-<span class="kw">sprintf</span>(<span class="st">&#39;mean t value across shuffles = %0.3f&#39;</span>,<span class="kw">mean</span>(shuffleDiff))</code></pre></div>
+<span class="kw">sprintf</span>(<span class="st">&quot;mean t value across shuffles = %0.3f&quot;</span>, <span class="kw">mean</span>(shuffleDiff))</code></pre></div>
 <pre><code>## [1] &quot;mean t value across shuffles = -0.004&quot;</code></pre>
 <p>We can now look at the distribution of mean differences across the shuffled datasets. Figure <a href="hypothesis-testing.html#fig:shuffleHist">9.6</a> shows the histogram of the group differences across all of the random shuffles. As expected under the null hypothesis, this distribution is centered at zero.</p>
 <div class="figure"><span id="fig:shuffleHist"></span>
@@ -779,20 +840,25 @@ Figure 9.6: Histogram of differences between the football and cross-country grou
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute number of runs on which t statistic for shuffle data was </span>
 <span class="co"># equal to observed t statistic</span>
 
-equalSum &lt;-<span class="st"> </span><span class="kw">sum</span>(shuffleDiff<span class="op">==</span>tt<span class="op">$</span>statistic)
-<span class="kw">sprintf</span>(<span class="st">&#39;Number of runs on which shuffled t == observed t: %d&#39;</span>,equalSum)</code></pre></div>
+equalSum &lt;-<span class="st"> </span><span class="kw">sum</span>(shuffleDiff <span class="op">==</span><span class="st"> </span>tt<span class="op">$</span>statistic)
+<span class="kw">sprintf</span>(<span class="st">&quot;Number of runs on which shuffled t == observed t: %d&quot;</span>, equalSum)</code></pre></div>
 <pre><code>## [1] &quot;Number of runs on which shuffled t == observed t: 33&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute number of runs on which t statistic for shuffle data was </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute number of runs on which t statistic for shuffle data was</span>
 <span class="co"># equal to observed t statistic times -1</span>
 
-equalSumMinus &lt;-<span class="st"> </span><span class="kw">sum</span>(shuffleDiff<span class="op">==</span>tt<span class="op">$</span>statistic<span class="op">*-</span><span class="dv">1</span>)
-<span class="kw">sprintf</span>(<span class="st">&#39;Number of runs on which shuffled t == observed t*-1: %d&#39;</span>,equalSumMinus)</code></pre></div>
+equalSumMinus &lt;-<span class="st"> </span><span class="kw">sum</span>(shuffleDiff <span class="op">==</span><span class="st"> </span>tt<span class="op">$</span>statistic <span class="op">*</span><span class="st"> </span><span class="op">-</span><span class="dv">1</span>)
+<span class="kw">sprintf</span>(<span class="st">&quot;Number of runs on which shuffled t == observed t*-1: %d&quot;</span>, equalSumMinus)</code></pre></div>
 <pre><code>## [1] &quot;Number of runs on which shuffled t == observed t*-1: 28&quot;</code></pre>
 <p>There are 33 shuffle runs on which the t statistic for the shuffled data was exactly the same as the observed data – which means that shuffling resulted in the same labeling as the actual data! This is unlikely, but not <em>that</em> unlikely, and we can actually compute its likelihood using a bit of probability theory. The number of possible permutations of 10 items is <span class="math inline">\(10!\)</span> which comes out to 3628800. The number of possible rearrangements of each set of 5 is <span class="math inline">\(5!\)</span> which comes out to 120, so the number of possible rearrangements of two sets of five is <span class="math inline">\(5! * 5!\)</span> or 14400. Thus, we expect that 0.0039 of the random labelings should come out exactly the same as the original, which is fairly close to the 0.0033 that we see in our simulation. We have a similar expectation for the number of times that the labeling will be exactly opposite of the true labeling, giving us the negative of the observed t value.</p>
 <p>We can compute the p-value from the randomized data by measuring how many of the shuffled values are at least as extreme as the observed value:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute p value using randomization</span>
 pvalRandomization &lt;-<span class="st"> </span><span class="kw">mean</span>(shuffleDiff <span class="op">&gt;=</span><span class="st"> </span>tt<span class="op">$</span>statistic)
-<span class="kw">sprintf</span>(<span class="st">&#39;p(t &gt; %0.2f, df = 8) using randomization = %0.5f&#39;</span>,tt<span class="op">$</span>statistic,pvalRandomization)</code></pre></div>
+
+<span class="kw">sprintf</span>(
+  <span class="st">&#39;p(t &gt; %0.2f, df = 8) using randomization = %0.5f&#39;</span>,
+  tt<span class="op">$</span>statistic,
+  pvalRandomization
+)</code></pre></div>
 <pre><code>## [1] &quot;p(t &gt; 5.14, df = 8) using randomization = 0.00330&quot;</code></pre>
 <p>This p-value is very similar to the p-value that we obtained using the t distribution, and both are quite extreme, suggesting that the observed data are very unlikely to have arisen if the null hypothesis is true - and in this case we <em>know</em> that it’s not true, because we generated the data.</p>
 </div>
@@ -801,34 +867,54 @@ pvalRandomization &lt;-<span class="st"> </span><span class="kw">mean</span>(shu
 <p>Now let’s use randomization to compute the p-value for the BMI/activity example. In this case, we will randomly shuffle the <code>PhysActive</code> variable and compute the difference between groups after each shuffle, and then compare our observed t statistic to the distribution of t statistics from the shuffled datasets.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create function to shuffle BMI data</span>
 
-shuffleBMIstat &lt;-<span class="st"> </span><span class="cf">function</span>(){
-  bmiDataShuffled &lt;-<span class="st"> </span>NHANES_sample <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">subset</span>(
-      <span class="dt">select=</span><span class="kw">c</span>(BMI,PhysActive)
-    ) <span class="op">%&gt;%</span>
+shuffleBMIstat &lt;-<span class="st"> </span><span class="cf">function</span>() {
+  bmiDataShuffled &lt;-<span class="st"> </span>
+<span class="st">    </span>NHANES_sample <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">select</span>(BMI, PhysActive) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">mutate</span>(
-      <span class="dt">PhysActive=</span><span class="kw">sample</span>(PhysActive)
+      <span class="dt">PhysActive =</span> <span class="kw">sample</span>(PhysActive)
     )
   <span class="co"># compute the difference</span>
-  simResult &lt;-<span class="st"> </span><span class="kw">t.test</span>(BMI<span class="op">~</span>PhysActive,<span class="dt">data=</span>bmiDataShuffled,
-                      <span class="dt">var.equal=</span><span class="ot">TRUE</span>)
+  simResult &lt;-<span class="st"> </span><span class="kw">t.test</span>(
+    BMI <span class="op">~</span><span class="st"> </span>PhysActive,
+    <span class="dt">data =</span> bmiDataShuffled,
+    <span class="dt">var.equal =</span> <span class="ot">TRUE</span>
+  )
   <span class="kw">return</span>(simResult<span class="op">$</span>statistic)
 }
 
 <span class="co"># run function 5000 times and save output</span>
 
 nRuns &lt;-<span class="st"> </span><span class="dv">5000</span>
-meanDiffSimDf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">meanDiffSim=</span><span class="kw">replicate</span>(nRuns,<span class="kw">shuffleBMIstat</span>()))</code></pre></div>
+meanDiffSimDf &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">data.frame</span>(
+    <span class="dt">meanDiffSim =</span> <span class="kw">replicate</span>(nRuns, <span class="kw">shuffleBMIstat</span>())
+  )</code></pre></div>
 <p>Let’s look at the results. Figure <a href="hypothesis-testing.html#fig:simDiff">9.7</a> shows the distribution of t values from the shuffled samples, and we can also compute the probability of finding a value as large or larger than the observed value:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute the empirical probability of t values larger than observed</span>
 <span class="co"># value under the randomization null</span>
-bmtTTest &lt;-<span class="st"> </span><span class="kw">t.test</span>(BMI<span class="op">~</span>PhysActive,<span class="dt">data=</span>NHANES_sample,
-                   <span class="dt">var.equal=</span><span class="ot">TRUE</span>,<span class="dt">alternative=</span><span class="st">&#39;greater&#39;</span>)
+bmtTTest &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">t.test</span>(
+  BMI <span class="op">~</span><span class="st"> </span>PhysActive,
+  <span class="dt">data =</span> NHANES_sample,
+  <span class="dt">var.equal =</span> <span class="ot">TRUE</span>, 
+  <span class="dt">alternative =</span> <span class="st">&quot;greater&quot;</span>
+)
 
-bmiPvalRand &lt;-<span class="st"> </span><span class="kw">mean</span>(meanDiffSimDf<span class="op">$</span>meanDiffSim<span class="op">&gt;=</span>bmtTTest<span class="op">$</span>statistic)
-<span class="kw">sprintf</span>(<span class="st">&#39;p(mean &gt; %0.2f, df = 248) using randomization = %0.5f&#39;</span>,bmtTTest<span class="op">$</span>statistic,bmiPvalRand)</code></pre></div>
+bmiPvalRand &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">mean</span>(meanDiffSimDf<span class="op">$</span>meanDiffSim <span class="op">&gt;=</span><span class="st"> </span>bmtTTest<span class="op">$</span>statistic)
+
+<span class="kw">sprintf</span>(
+  <span class="st">&quot;p(mean &gt; %0.2f, df = 248) using randomization = %0.5f&quot;</span>, 
+  bmtTTest<span class="op">$</span>statistic, 
+  bmiPvalRand
+)</code></pre></div>
 <pre><code>## [1] &quot;p(mean &gt; 1.71, df = 248) using randomization = 0.04380&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sprintf</span>(<span class="st">&#39;p(mean &gt; %0.2f, df = 248) using parametric t-test = %0.5f&#39;</span>,bmtTTest<span class="op">$</span>statistic,bmtTTest<span class="op">$</span>p.value)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sprintf</span>(
+  <span class="st">&quot;p(mean &gt; %0.2f, df = 248) using parametric t-test = %0.5f&quot;</span>, 
+  bmtTTest<span class="op">$</span>statistic, 
+  bmtTTest<span class="op">$</span>p.value
+  )</code></pre></div>
 <pre><code>## [1] &quot;p(mean &gt; 1.71, df = 248) using parametric t-test = 0.04413&quot;</code></pre>
 <div class="figure"><span id="fig:simDiff"></span>
 <img src="StatsThinking21_files/figure-html/simDiff-1.png" alt="Histogram of t statistics after shuffling of group labels, with the observed value of the t statistic shown in the blue line, and values more extreme than the observed value shown in orange." width="384" height="50%" />
@@ -860,7 +946,7 @@ Figure 9.7: Histogram of t statistics after shuffling of group labels, with the 
 <blockquote>
 <p>“no test based upon a theory of probability can by itself provide any valuable evidence of the truth or falsehood of a hypothesis. But we may look at the purpose of tests from another viewpoint. Without hoping to know whether each separate hypothesis is true or false, we may search for rules to govern our behaviour with regard to them, in following which we insure that, in the long run of experience, we shall not often be wrong” <span class="citation">(J. Neyman and Pearson 1933)</span></p>
 </blockquote>
-<p>That is: We can’t know which specific decisions are right or wrong, but if we follow the rules, we can at least how often our decisions will be wrong.</p>
+<p>That is: We can’t know which specific decisions are right or wrong, but if we follow the rules, we can at least know how often our decisions will be wrong.</p>
 <p>To understand the decision making framework that Neyman and Pearson developed, we first need to discuss statistical decision making in terms of the kinds of outcomes that can occur. There are two possible states of reality (<span class="math inline">\(H_0\)</span> is true, or <span class="math inline">\(H_0\)</span> is false), and two possible decisions (reject <span class="math inline">\(H_0\)</span>, or fail to reject <span class="math inline">\(H_0\)</span>). There are two ways in which we can make a correct decision:</p>
 <ul>
 <li>We can decide to reject <span class="math inline">\(H_0\)</span> when it is false (in the language of decision theory, we call this a <em>hit</em>)</li>
@@ -899,39 +985,48 @@ Figure 9.7: Histogram of t statistics after shuffling of group labels, with the 
 <p>No. There is an important distinction between <em>statistical significance</em> and <em>practical significance</em>. As an example, let’s say that we performed a randomized controlled trial to examine the effect of a particular diet on body weight, and we find a statistically significant effect at p&lt;.05. What this doesn’t tell us is how much weight was actually lost, which we refer to as the <em>effect size</em> (to be discussed in more detail in Chapter <a href="ci-effect-size-power.html#ci-effect-size-power">10</a>). If we think about a study of weight loss, then we probably don’t think that the loss of ten ounces (i.e. the weight of a bag of potato chips) is practically significant. Let’s look at our ability to detect a significant difference of 1 ounce as the sample size increases.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create simulated data for weight loss trial</span>
 
-weightLossTrial &lt;-<span class="st"> </span><span class="cf">function</span>(nPerGroup,<span class="dt">weightLossOz=</span><span class="dv">1</span>){
+weightLossTrial &lt;-<span class="st"> </span><span class="cf">function</span>(nPerGroup, <span class="dt">weightLossOz =</span> <span class="dv">1</span>) {
   <span class="co"># mean and SD in Kg based on NHANES adult dataset</span>
-  kgToOz &lt;-<span class="st"> </span><span class="fl">35.27396195</span>  <span class="co"># conversion constant for Kg to Oz</span>
-  meanOz &lt;-<span class="st"> </span><span class="fl">81.78</span><span class="op">*</span>kgToOz
-  sdOz &lt;-<span class="st"> </span><span class="fl">21.29</span><span class="op">*</span>kgToOz
+  kgToOz &lt;-<span class="st"> </span><span class="fl">35.27396195</span> <span class="co"># conversion constant for Kg to Oz</span>
+  meanOz &lt;-<span class="st"> </span><span class="fl">81.78</span> <span class="op">*</span><span class="st"> </span>kgToOz
+  sdOz &lt;-<span class="st"> </span><span class="fl">21.29</span> <span class="op">*</span><span class="st"> </span>kgToOz
   <span class="co"># create data</span>
-  controlGroup &lt;-<span class="st"> </span><span class="kw">rnorm</span>(nPerGroup)<span class="op">*</span>sdOz <span class="op">+</span><span class="st"> </span>meanOz
-  expGroup &lt;-<span class="st"> </span><span class="kw">rnorm</span>(nPerGroup)<span class="op">*</span>sdOz <span class="op">+</span><span class="st"> </span>meanOz <span class="op">-</span><span class="st"> </span>weightLossOz
-  ttResult &lt;-<span class="st"> </span><span class="kw">t.test</span>(expGroup,controlGroup)
-  <span class="kw">return</span>(<span class="kw">c</span>(nPerGroup,weightLossOz,ttResult<span class="op">$</span>p.value,
-           <span class="kw">diff</span>(ttResult<span class="op">$</span>estimate))
-    )
-
+  controlGroup &lt;-<span class="st"> </span><span class="kw">rnorm</span>(nPerGroup) <span class="op">*</span><span class="st"> </span>sdOz <span class="op">+</span><span class="st"> </span>meanOz
+  expGroup &lt;-<span class="st"> </span><span class="kw">rnorm</span>(nPerGroup) <span class="op">*</span><span class="st"> </span>sdOz <span class="op">+</span><span class="st"> </span>meanOz <span class="op">-</span><span class="st"> </span>weightLossOz
+  ttResult &lt;-<span class="st"> </span><span class="kw">t.test</span>(expGroup, controlGroup)
+  <span class="kw">return</span>(<span class="kw">c</span>(
+    nPerGroup, weightLossOz, ttResult<span class="op">$</span>p.value,
+    <span class="kw">diff</span>(ttResult<span class="op">$</span>estimate)
+  ))
 }
 
 nRuns &lt;-<span class="st"> </span><span class="dv">1000</span>
 sampSizes &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">**</span><span class="kw">seq</span>(<span class="dv">5</span>,<span class="dv">17</span>) <span class="co"># powers of 2</span>
 
 simResults &lt;-<span class="st"> </span><span class="kw">c</span>() ## create an empty list to add results onto
-<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(sampSizes)){
-    tmpResults &lt;-<span class="st"> </span><span class="kw">replicate</span>(nRuns,
-                      <span class="kw">weightLossTrial</span>(sampSizes[i],<span class="dt">weightLossOz =</span> <span class="dv">10</span>))
-    summaryResults &lt;-<span class="st"> </span><span class="kw">c</span>(tmpResults[<span class="dv">1</span>,<span class="dv">1</span>],tmpResults[<span class="dv">2</span>,<span class="dv">1</span>],
-                     <span class="kw">sum</span>(tmpResults[<span class="dv">3</span>,]<span class="op">&lt;</span><span class="fl">0.05</span>),
-                     <span class="kw">mean</span>(tmpResults[<span class="dv">4</span>,]))
-    simResults &lt;-<span class="st"> </span><span class="kw">rbind</span>(simResults,summaryResults)
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(sampSizes)) {
+  tmpResults &lt;-<span class="st"> </span><span class="kw">replicate</span>(
+    nRuns,
+    <span class="kw">weightLossTrial</span>(sampSizes[i], <span class="dt">weightLossOz =</span> <span class="dv">10</span>)
+  )
+  summaryResults &lt;-<span class="st"> </span><span class="kw">c</span>(
+    tmpResults[<span class="dv">1</span>, <span class="dv">1</span>], tmpResults[<span class="dv">2</span>, <span class="dv">1</span>],
+    <span class="kw">sum</span>(tmpResults[<span class="dv">3</span>, ] <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>),
+    <span class="kw">mean</span>(tmpResults[<span class="dv">4</span>, ])
+  )
+  simResults &lt;-<span class="st"> </span><span class="kw">rbind</span>(simResults, summaryResults)
 }
 
-simResultsDf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(simResults)
-<span class="kw">names</span>(simResultsDf) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;sampleSize&#39;</span>,<span class="st">&#39;effectSizeLbs&#39;</span>,<span class="st">&#39;nSigResults&#39;</span>,<span class="st">&#39;meanEffect&#39;</span>)
+
 simResultsDf &lt;-<span class="st"> </span>
-<span class="st">  </span>simResultsDf <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">pSigResult=</span>nSigResults<span class="op">/</span>nRuns)</code></pre></div>
+<span class="st">  </span><span class="kw">as.tibble</span>(simResults) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">rename</span>(
+    <span class="dt">sampleSize =</span> V1, 
+    <span class="dt">effectSizeLbs =</span> V2,
+    <span class="dt">nSigResults =</span> V3, 
+    <span class="dt">meanEffect =</span> V4
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">pSigResult =</span> nSigResults <span class="op">/</span><span class="st"> </span>nRuns)</code></pre></div>
 <p>Figure <a href="hypothesis-testing.html#fig:sigResults">9.8</a> shows how the proportion of significant results increases as the sample size increases, such that with a very large sample size (about 262,000 total subjects), we will find a significant result in more than 90% of studies when there is a 1 ounce weight loss. While these are statistically significant, most physicians would not consider a weight loss of one ounce to be practically or clinically significant. We will explore this relationship in more detail when we return to the concept of <em>statistical power</em> in Section <a href="ci-effect-size-power.html#statistical-power">10.3</a>, but it should already be clear from this example that statistical significance is not necessarily indicative of practical significance.</p>
 <div class="figure"><span id="fig:sigResults"></span>
 <img src="StatsThinking21_files/figure-html/sigResults-1.png" alt="The proportion of signifcant results for a very small change (1 ounce, which is about .001 standard deviations) as a function of sample size." width="768" height="50%" />
@@ -944,23 +1039,23 @@ Figure 9.8: The proportion of signifcant results for a very small change (1 ounc
 </div>
 <div id="nhst-in-a-modern-context-multiple-testing" class="section level2">
 <h2><span class="header-section-number">9.4</span> NHST in a modern context: Multiple testing</h2>
-<p>So far we have discussed examples where we are interested in testing a single statistical hypothesis, and this is consistent with traditional science which often measured only a few variables at a time. However, in modern science we can often measure millions of variables per individual. For example, in genetic studies that quantify the entire genome, there may be many millions of measures per individual, and in brain imaging we often collect data from more than 100,000 locations in the brain at once. When standard hypothesis testing is applied in these contexts, bad things can happen unless the appropriate care is taken.</p>
-<p>Let’s look at an example to see how this might work. There is great interest in understanding the genetic factors that can predispose individuals to major mental illnesses such as schizophrenia, because we know that about 80% of the variation between individuals in the presence of schizophrenia is due to genetic differences. The Human Genome Project and the ensuing revolution in genome science has provided tools to examine the many ways in which humans differ from one another in their genomes. One approach that has been used in recent years is known as a <em>genome-wide association study</em> (GWAS), in which the genome of each individual is characterized at one million or more places in their genome to determine which letters of the genetic code (which we call “variants”) they have at that location. Once these have been determined, then the researchers perform a statistical test at each location in the genome to determine whether people diagnosed with schizoprenia are more or less likely to have one specific variant at that location.</p>
+<p>So far we have discussed examples where we are interested in testing a single statistical hypothesis, and this is consistent with traditional science which often measured only a few variables at a time. However, in modern science we can often measure millions of variables per individual. For example, in genetic studies that quantify the entire genome, there may be many millions of measures per individual, and in brain imaging we often collect data from more than 100,000 locations in the brain at once. When standard hypothesis testing is applied in these contexts, bad things can happen unless we take appropriate care.</p>
+<p>Let’s look at an example to see how this might work. There is great interest in understanding the genetic factors that can predispose individuals to major mental illnesses such as schizophrenia, because we know that about 80% of the variation between individuals in the presence of schizophrenia is due to genetic differences. The Human Genome Project and the ensuing revolution in genome science has provided tools to examine the many ways in which humans differ from one another in their genomes. One approach that has been used in recent years is known as a <em>genome-wide association study</em> (GWAS), in which the genome of each individual is characterized at one million or more places in their genome to determine which letters of the genetic code (which we call “variants”) they have at that location. After these have been determined, the researchers perform a statistical test at each location in the genome to determine whether people diagnosed with schizoprenia are more or less likely to have one specific variant at that location.</p>
 <p>Let’s imagine what would happen if the researchers simply asked whether the test was significant at p&lt;.05 at each location, when in fact there is no true effect at any of the locations. To do this, we generate a large number of simulated t values from a null distribution, and ask how many of them are significant at p&lt;.05. Let’s do this many times, and each time count up how many of the tests come out as significant (see Figure <a href="hypothesis-testing.html#fig:nullSim">9.9</a>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># simulate 1500 studies with 10,000 tests each, thresholded at p &lt; .05</span>
 
-nRuns &lt;-<span class="st"> </span><span class="dv">1500</span>  <span class="co"># number of simulated studies to run</span>
+nRuns &lt;-<span class="st"> </span><span class="dv">1500</span> <span class="co"># number of simulated studies to run</span>
 nTests &lt;-<span class="st"> </span><span class="dv">10000</span> <span class="co"># number of simulated genes to test in each run</span>
 
 uncAlpha &lt;-<span class="st"> </span><span class="fl">0.05</span> <span class="co"># alpha level</span>
 
-uncOutcome &lt;-<span class="st"> </span><span class="kw">replicate</span>(nRuns,<span class="kw">sum</span>(<span class="kw">rnorm</span>(nTests)<span class="op">&lt;</span><span class="kw">qnorm</span>(uncAlpha)))
+uncOutcome &lt;-<span class="st"> </span><span class="kw">replicate</span>(nRuns, <span class="kw">sum</span>(<span class="kw">rnorm</span>(nTests) <span class="op">&lt;</span><span class="st"> </span><span class="kw">qnorm</span>(uncAlpha)))
 
-<span class="kw">sprintf</span>(<span class="st">&#39;mean proportion of significant tests per run: %0.2f&#39;</span>,<span class="kw">mean</span>(uncOutcome)<span class="op">/</span>nTests)</code></pre></div>
+<span class="kw">sprintf</span>(<span class="st">&quot;mean proportion of significant tests per run: %0.2f&quot;</span>, <span class="kw">mean</span>(uncOutcome) <span class="op">/</span><span class="st"> </span>nTests)</code></pre></div>
 <pre><code>## [1] &quot;mean proportion of significant tests per run: 0.05&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute proportion of studies with at least one false positive result, </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute proportion of studies with at least one false positive result,</span>
 <span class="co"># known as the familywise error rate</span>
-<span class="kw">sprintf</span>(<span class="st">&#39;familywise error rate: %0.3f&#39;</span>,<span class="kw">mean</span>(uncOutcome<span class="op">&gt;</span><span class="dv">0</span>))</code></pre></div>
+<span class="kw">sprintf</span>(<span class="st">&quot;familywise error rate: %0.3f&quot;</span>, <span class="kw">mean</span>(uncOutcome <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>))</code></pre></div>
 <pre><code>## [1] &quot;familywise error rate: 1.000&quot;</code></pre>
 <div class="figure"><span id="fig:nullSim"></span>
 <img src="StatsThinking21_files/figure-html/nullSim-1.png" alt="A histogram of the number of significant results in each set of 1 million statistical tests, when there is in fact no true effect." width="384" height="50%" />
@@ -971,10 +1066,11 @@ Figure 9.9: A histogram of the number of significant results in each set of 1 mi
 <p>This shows that about 5% of all of the tests were significant in each run, meaning that if we were to use p &lt; .05 as our threshold for statistical significance, then even if there were no truly significant relationships present, we would still “find” about 500 genes that were seemingly significant (the expected number of significant results is simply <span class="math inline">\(n * \alpha\)</span>). That is because while we controlled for the error per test, we didn’t control the <em>familywise error</em>, or the error across all of the tests, which is what we really want to control if we are going to be looking at the results from a large number of tests. Using p&lt;.05, our familywise error rate in the above example is one – that is, we are pretty much guaranteed to make at least one error in any particular study.</p>
 <p>A simple way to control for the familywise error is to divide the alpha level by the number of tests; this is known as the <em>Bonferroni</em> correction, named after the Italian statistician Carlo Bonferroni. Using the data from our example above, we see in Figure <a href="hypothesis-testing.html#fig:bonferroniSim">9.10</a> that only about 5 percent of studies show any significant results using the corrected alpha level of 0.000005 instead of the nominal level of .05. We have effectively controlled the familywise error, such that the probability of making <em>any</em> errors in our study is controlled at right around .05.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute Bonferroni-corrected alpha</span>
-corAlpha &lt;-<span class="st"> </span><span class="fl">0.05</span><span class="op">/</span>nTests
+corAlpha &lt;-<span class="st"> </span><span class="fl">0.05</span> <span class="op">/</span><span class="st"> </span>nTests
 
-corOutcome &lt;-<span class="st"> </span><span class="kw">replicate</span>(nRuns,<span class="kw">sum</span>(<span class="kw">rnorm</span>(nTests)<span class="op">&lt;</span>(<span class="kw">qnorm</span>(corAlpha))))
-<span class="kw">sprintf</span>(<span class="st">&#39;corrected familywise error rate: %0.3f&#39;</span>,<span class="kw">mean</span>(corOutcome<span class="op">&gt;</span><span class="dv">0</span>))</code></pre></div>
+corOutcome &lt;-<span class="st"> </span><span class="kw">replicate</span>(nRuns, <span class="kw">sum</span>(<span class="kw">rnorm</span>(nTests) <span class="op">&lt;</span><span class="st"> </span>(<span class="kw">qnorm</span>(corAlpha))))
+
+<span class="kw">sprintf</span>(<span class="st">&quot;corrected familywise error rate: %0.3f&quot;</span>, <span class="kw">mean</span>(corOutcome <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>))</code></pre></div>
 <pre><code>## [1] &quot;corrected familywise error rate: 0.046&quot;</code></pre>
 <div class="figure"><span id="fig:bonferroniSim"></span>
 <img src="StatsThinking21_files/figure-html/bonferroniSim-1.png" alt="A histogram of the number of significant results across all simulation runs after applying the Bonferroni correction for multiple tests." width="384" height="50%" />
