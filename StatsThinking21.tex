@@ -299,7 +299,7 @@ Thanks to the following Twitter users for helpful suggestions:
 
 Thanks to the following individuals/usernames for submitting edits or
 issues via Github: Mehdi Rahim, Shanaathanan Modchalingam, Alan He,
-Wenjin Tao, basicv8vc, jiamingkong
+Wenjin Tao, Martijn Stegeman, Dan Kessler, basicv8vc, jiamingkong
 
 \chapter{Introduction}\label{introduction}
 
@@ -4165,7 +4165,7 @@ deviation above/below the mean.}
 
 The upper panel in Figure \ref{fig:zDensityCDF} shows that we expect
 about 16\% of values to fall in \(Z\ge 1\), and the same proportion to
-fall in \(Z\le 1\).
+fall in \(Z\le -1\).
 
 \begin{figure}
 \centering
@@ -4177,7 +4177,7 @@ deviations above/below the mean}
 
 Figure \ref{fig:zDensity2SD} shows the same plot for two standard
 deviations. Here we see that only about 2.3\% of values fall in
-\(Z \le 2\) and the same in \(Z \ge 2\). Thus, if we know the Z-score
+\(Z \le -2\) and the same in \(Z \ge 2\). Thus, if we know the Z-score
 for a particular data point, we can estimate how likely or unlikely we
 would be to find a value at least as extreme as that value, which lets
 us put values into better context.
@@ -5319,7 +5319,7 @@ following code:
 
 \NormalTok{p2 <-}
 \StringTok{  }\KeywordTok{tibble}\NormalTok{(}
-    \DataTypeTok{x =} \KeywordTok{runif}\NormalTok{(}\DecValTok{10000}\NormalTok{)}
+    \DataTypeTok{x =} \KeywordTok{rnorm}\NormalTok{(}\DecValTok{10000}\NormalTok{)}
 \NormalTok{  ) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(x)) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{bins =} \DecValTok{100}\NormalTok{) }\OperatorTok{+}
@@ -5357,7 +5357,7 @@ make sure that the examples are reproducible.
 \end{Shaded}
 
 \begin{verbatim}
-## [1]  0.7396  1.7826 -1.5350  0.0027  0.3085
+## [1]  1.48  0.18  0.21 -0.15 -1.72
 \end{verbatim}
 
 \begin{Shaded}
@@ -5367,7 +5367,7 @@ make sure that the examples are reproducible.
 \end{Shaded}
 
 \begin{verbatim}
-## [1]  2.171 -0.414 -0.754 -0.084 -1.593
+## [1] -0.691 -2.231  0.391  0.029 -0.647
 \end{verbatim}
 
 \begin{Shaded}
@@ -5475,13 +5475,13 @@ of the mean to compute the standard error of the mean and confidence
 intervals. But what if we can't assume that the estimates are normally
 distributed, or we don't know their distribution? The idea of the
 bootstrap is to use the data themselves to estimate an answer. The name
-comes from the idea of pulling one's self up by one's own boostraps,
+comes from the idea of pulling one's self up by one's own bootstraps,
 expressing the idea that we don't have any external source of leverage
 so we have to rely upon the data themselves. The bootstrap method was
 conceived by Bradley Efron of the Stanford Department of Statistics, who
 is one of the world's most influential statisticians.
 
-The idea behind the boostrap is that we repeatedly sample from the
+The idea behind the bootstrap is that we repeatedly sample from the
 actual dataset; importantly, we sample \emph{with replacement}, such
 that the same data point will often end up being represented multiple
 times within one of the samples. We then compute our statistic of
@@ -5494,7 +5494,7 @@ the mean (SEM) that we discussed earlier.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# perform the boostrap to compute SEM and compare to parametric method}
+\CommentTok{# perform the bootstrap to compute SEM and compare to parametric method}
 
 \NormalTok{nRuns <-}\StringTok{ }\DecValTok{2500}
 \NormalTok{sampleSize <-}\StringTok{ }\DecValTok{32}
@@ -5536,7 +5536,7 @@ the mean (SEM) that we discussed earlier.
 
 Figure \ref{fig:bootstrapSEM} shows that the distribution of means
 across bootstrap samples is fairly close to the theoretical estimate
-based on the assumption of normality. We can also use the boostrap
+based on the assumption of normality. We can also use the bootstrap
 samples to compute a confidence interval for the mean, simply by
 computing the quantiles of interest from the distribution of bootstrap
 samples.
@@ -5546,11 +5546,11 @@ samples.
 \CommentTok{# compute bootstrap confidence interval}
 
 \NormalTok{bootCI <-}\StringTok{ }\KeywordTok{quantile}\NormalTok{(bootMeans, }\KeywordTok{c}\NormalTok{(}\FloatTok{0.025}\NormalTok{, }\FloatTok{0.975}\NormalTok{))}
-\KeywordTok{pander}\NormalTok{(}\StringTok{"boostrap confidence limits:"}\NormalTok{)}
+\KeywordTok{pander}\NormalTok{(}\StringTok{"bootstrap confidence limits:"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-boostrap confidence limits:
+bootstrap confidence limits:
 
 \begin{Shaded}
 \begin{Highlighting}[]

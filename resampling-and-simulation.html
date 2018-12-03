@@ -442,7 +442,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 p2 &lt;-
 <span class="st">  </span><span class="kw">tibble</span>(
-    <span class="dt">x =</span> <span class="kw">runif</span>(<span class="dv">10000</span>)
+    <span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">10000</span>)
   ) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(x)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">100</span>) <span class="op">+</span>
@@ -459,9 +459,9 @@ Figure 8.1: Examples of random numbers generated from a uniform (left) or normal
 <p>By default, R will generate a different set of random numbers every time you run one of the random number generator functions described above. However, it is also possible to generate exactly the same set of random numbers, by setting what is called the <em>random seed</em> to a specific value. We will do this in many of the examples in this book, in order to make sure that the examples are reproducible.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># if we run the rnorm() command twice, it will give us different sets of pseudorandom numbers each time</span>
 <span class="kw">print</span>(<span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">5</span>))</code></pre></div>
-<pre><code>## [1]  0.7396  1.7826 -1.5350  0.0027  0.3085</code></pre>
+<pre><code>## [1]  1.48  0.18  0.21 -0.15 -1.72</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">5</span>))</code></pre></div>
-<pre><code>## [1]  2.171 -0.414 -0.754 -0.084 -1.593</code></pre>
+<pre><code>## [1] -0.691 -2.231  0.391  0.029 -0.647</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># if we set the random seed to the same value each time, then it will give us the same series of pseudorandom numbers each time.</span>
 <span class="kw">set.seed</span>(<span class="dv">12345</span>)
 <span class="kw">print</span>(<span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">5</span>))</code></pre></div>
@@ -507,10 +507,10 @@ Figure 8.3: Distribution of maximum finishing times across simulations.
 <p>So far we have used simulation to demonstrate statistical principles, but we can also use simulation to answer real statistical questions. In this section we will introduce a concept known as the <em>bootstrap</em> that lets us use simulation to quantify our uncertainty about statistical estimates. Later in the course, we will see other examples of how simulation can often be used to answer statistical questions, especially when theoretical statistical methods are not available or when their assumptions are too stifling.</p>
 <div id="computing-the-bootstrap" class="section level3">
 <h3><span class="header-section-number">8.5.1</span> Computing the bootstrap</h3>
-<p>In the section above, we used our knowledge of the sampling distribution of the mean to compute the standard error of the mean and confidence intervals. But what if we can’t assume that the estimates are normally distributed, or we don’t know their distribution? The idea of the bootstrap is to use the data themselves to estimate an answer. The name comes from the idea of pulling one’s self up by one’s own boostraps, expressing the idea that we don’t have any external source of leverage so we have to rely upon the data themselves. The bootstrap method was conceived by Bradley Efron of the Stanford Department of Statistics, who is one of the world’s most influential statisticians.</p>
-<p>The idea behind the boostrap is that we repeatedly sample from the actual dataset; importantly, we sample <em>with replacement</em>, such that the same data point will often end up being represented multiple times within one of the samples. We then compute our statistic of interest on each of the bootstrap samples, and use the distribution of those estimates</p>
+<p>In the section above, we used our knowledge of the sampling distribution of the mean to compute the standard error of the mean and confidence intervals. But what if we can’t assume that the estimates are normally distributed, or we don’t know their distribution? The idea of the bootstrap is to use the data themselves to estimate an answer. The name comes from the idea of pulling one’s self up by one’s own bootstraps, expressing the idea that we don’t have any external source of leverage so we have to rely upon the data themselves. The bootstrap method was conceived by Bradley Efron of the Stanford Department of Statistics, who is one of the world’s most influential statisticians.</p>
+<p>The idea behind the bootstrap is that we repeatedly sample from the actual dataset; importantly, we sample <em>with replacement</em>, such that the same data point will often end up being represented multiple times within one of the samples. We then compute our statistic of interest on each of the bootstrap samples, and use the distribution of those estimates</p>
 <p>Let’s start by using the bootstrap to estimate the sampling distribution of the mean, so that we can compare the result to the standard error of the mean (SEM) that we discussed earlier.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># perform the boostrap to compute SEM and compare to parametric method</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># perform the bootstrap to compute SEM and compare to parametric method</span>
 
 nRuns &lt;-<span class="st"> </span><span class="dv">2500</span>
 sampleSize &lt;-<span class="st"> </span><span class="dv">32</span>
@@ -538,12 +538,12 @@ SEM_standard &lt;-<span class="st"> </span><span class="kw">sd</span>(heightSamp
 Figure 8.4: An example of bootstrapping to compute the standard error of the mean. The histogram shows the distribution of means across bootstrap samples, while the red line shows the normal distribution based on the sample mean and standard deviation.
 </p>
 </div>
-<p>Figure <a href="resampling-and-simulation.html#fig:bootstrapSEM">8.4</a> shows that the distribution of means across bootstrap samples is fairly close to the theoretical estimate based on the assumption of normality. We can also use the boostrap samples to compute a confidence interval for the mean, simply by computing the quantiles of interest from the distribution of bootstrap samples.</p>
+<p>Figure <a href="resampling-and-simulation.html#fig:bootstrapSEM">8.4</a> shows that the distribution of means across bootstrap samples is fairly close to the theoretical estimate based on the assumption of normality. We can also use the bootstrap samples to compute a confidence interval for the mean, simply by computing the quantiles of interest from the distribution of bootstrap samples.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute bootstrap confidence interval</span>
 
 bootCI &lt;-<span class="st"> </span><span class="kw">quantile</span>(bootMeans, <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))
-<span class="kw">pander</span>(<span class="st">&quot;boostrap confidence limits:&quot;</span>)</code></pre></div>
-<p>boostrap confidence limits:</p>
+<span class="kw">pander</span>(<span class="st">&quot;bootstrap confidence limits:&quot;</span>)</code></pre></div>
+<p>bootstrap confidence limits:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pander</span>(bootCI)</code></pre></div>
 <table style="width:28%;">
 <colgroup>
