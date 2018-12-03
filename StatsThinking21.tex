@@ -123,7 +123,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{Draft: 2018-11-29}
+    \date{Draft: 2018-12-03}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -7017,14 +7017,14 @@ and estimate the mean:
 \begin{Highlighting}[]
 \CommentTok{# take a sample from adults in NHANES and summarize their weight}
 
-\NormalTok{sampSize=}\DecValTok{250}
-\NormalTok{NHANES_sample=}\KeywordTok{sample_n}\NormalTok{(NHANES_adult,sampSize)}
+\NormalTok{sampSize <-}\StringTok{ }\DecValTok{250}
+\NormalTok{NHANES_sample <-}\StringTok{ }\KeywordTok{sample_n}\NormalTok{(NHANES_adult, sampSize)}
 
-\NormalTok{sample_summary <-}\StringTok{ }
+\NormalTok{sample_summary <-}
 \StringTok{  }\NormalTok{NHANES_sample }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{summarize}\NormalTok{(}
-    \DataTypeTok{meanWeight=}\KeywordTok{mean}\NormalTok{(Weight),}
-    \DataTypeTok{sdWeight=}\KeywordTok{sd}\NormalTok{(Weight)}
+    \DataTypeTok{meanWeight =} \KeywordTok{mean}\NormalTok{(Weight),}
+    \DataTypeTok{sdWeight =} \KeywordTok{sd}\NormalTok{(Weight)}
 \NormalTok{  )}
 \KeywordTok{pander}\NormalTok{(sample_summary)}
 \end{Highlighting}
@@ -7139,13 +7139,13 @@ example (with sample size of 250), the confidence interval would be:
 \begin{Highlighting}[]
 \CommentTok{# compute confidence intervals for weight in NHANES data}
 
-\NormalTok{sample_summary <-}\StringTok{ }
+\NormalTok{sample_summary <-}
 \StringTok{  }\NormalTok{sample_summary }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}
-    \DataTypeTok{cutoff_lower =} \KeywordTok{qt}\NormalTok{(}\FloatTok{0.025}\NormalTok{,sampSize),}
-    \DataTypeTok{cutoff_upper =} \KeywordTok{qt}\NormalTok{(}\FloatTok{0.975}\NormalTok{,sampSize),}
-    \DataTypeTok{CI_lower =}\NormalTok{ meanWeight }\OperatorTok{+}\StringTok{ }\NormalTok{cutoff_lower}\OperatorTok{*}\NormalTok{sdWeight}\OperatorTok{/}\KeywordTok{sqrt}\NormalTok{(sampSize),}
-    \DataTypeTok{CI_upper =}\NormalTok{ meanWeight }\OperatorTok{+}\StringTok{ }\NormalTok{cutoff_upper}\OperatorTok{*}\NormalTok{sdWeight}\OperatorTok{/}\KeywordTok{sqrt}\NormalTok{(sampSize)}
+    \DataTypeTok{cutoff_lower =} \KeywordTok{qt}\NormalTok{(}\FloatTok{0.025}\NormalTok{, sampSize),}
+    \DataTypeTok{cutoff_upper =} \KeywordTok{qt}\NormalTok{(}\FloatTok{0.975}\NormalTok{, sampSize),}
+    \DataTypeTok{CI_lower =}\NormalTok{ meanWeight }\OperatorTok{+}\StringTok{ }\NormalTok{cutoff_lower }\OperatorTok{*}\StringTok{ }\NormalTok{sdWeight }\OperatorTok{/}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(sampSize),}
+    \DataTypeTok{CI_upper =}\NormalTok{ meanWeight }\OperatorTok{+}\StringTok{ }\NormalTok{cutoff_upper }\OperatorTok{*}\StringTok{ }\NormalTok{sdWeight }\OperatorTok{/}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(sampSize)}
 \NormalTok{  )}
 \KeywordTok{pander}\NormalTok{(sample_summary)}
 \end{Highlighting}
@@ -7196,9 +7196,9 @@ parameter.
 \subsection{Confidence intervals and sample
 size}\label{confidence-intervals-and-sample-size}
 
-Given that the standard error decreases with sample size, that means
-that the confidence interval should also get narrower as the sample size
-increases, providing tighter bounds on our estimate. Figure
+Because the standard error decreases with sample size, the means
+confidence interval should get narrowers as the sample size increases,
+providing progressively tighter bounds on our estimate. Figure
 \ref{fig:CISampSize} shows an example of how the confidence interval
 would change as a function of sample size for the weight example. From
 the figure it's evident that the confidence interval becomes
@@ -7231,14 +7231,15 @@ interval for weight in our NHANES sample.
 \begin{Highlighting}[]
 \CommentTok{# compute bootstrap confidence intervals on NHANES weight data}
 
-\NormalTok{meanWeight <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(df,foo)\{}
-  \KeywordTok{return}\NormalTok{(}\KeywordTok{mean}\NormalTok{(df[foo,]}\OperatorTok{$}\NormalTok{Weight))}
+\NormalTok{meanWeight <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(df, foo) \{}
+  \KeywordTok{return}\NormalTok{(}\KeywordTok{mean}\NormalTok{(df[foo, ]}\OperatorTok{$}\NormalTok{Weight))}
 \NormalTok{\}}
 
-\NormalTok{bs <-}\StringTok{ }\KeywordTok{boot}\NormalTok{(NHANES_sample,meanWeight,}\DecValTok{1000}\NormalTok{)}
+\NormalTok{bs <-}\StringTok{ }\KeywordTok{boot}\NormalTok{(NHANES_sample, meanWeight, }\DecValTok{1000}\NormalTok{)}
+
 \CommentTok{# use the percentile bootstrap}
-\NormalTok{bootci <-}\StringTok{ }\KeywordTok{boot.ci}\NormalTok{(bs,}\DataTypeTok{type=}\StringTok{'perc'}\NormalTok{)}
-\KeywordTok{print}\NormalTok{(}\StringTok{'Bootstrap confidence intervals:'}\NormalTok{)}
+\NormalTok{bootci <-}\StringTok{ }\KeywordTok{boot.ci}\NormalTok{(bs, }\DataTypeTok{type =} \StringTok{"perc"}\NormalTok{)}
+\KeywordTok{print}\NormalTok{(}\StringTok{"Bootstrap confidence intervals:"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -7248,8 +7249,10 @@ interval for weight in our NHANES sample.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{lower=}\NormalTok{bootci}\OperatorTok{$}\NormalTok{perc[}\DecValTok{4}\NormalTok{],}
-           \DataTypeTok{upper=}\NormalTok{bootci}\OperatorTok{$}\NormalTok{perc[}\DecValTok{5}\NormalTok{]) }\OperatorTok{%>%}
+\KeywordTok{tibble}\NormalTok{(}
+  \DataTypeTok{lower =}\NormalTok{ bootci}\OperatorTok{$}\NormalTok{perc[}\DecValTok{4}\NormalTok{],}
+  \DataTypeTok{upper =}\NormalTok{ bootci}\OperatorTok{$}\NormalTok{perc[}\DecValTok{5}\NormalTok{]}
+\NormalTok{) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{pander}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -7310,7 +7313,7 @@ magnitude -- not just, does a treatment affect people, but how much does
 it affect them.'' Gene Glass (REF)
 \end{quote}
 
-In the last chapter we discussed the idea that statistical significance
+In the last chapter, we discussed the idea that statistical significance
 may not necessarily reflect practical significance. In order to discuss
 practical significance, we need a standard way to describe the size of
 an effect in terms of the actual data, which we refer to as an
@@ -7319,10 +7322,10 @@ discuss various ways that effect sizes can be calculated.
 
 An effect size is a standarized measurement that compares the size of
 some statistical effect to a reference quantity, such as the variability
-of the statistic. In some fields of science and engineering this idea is
-referred to as a ``signal to noise ratio''. There are many different
-ways that this can be quantified, which depend on the nature of the
-data.
+of the statistic. In some fields of science and engineering, this idea
+is referred to as a ``signal to noise ratio''. There are many different
+ways that the effect size can be quantified, which depend on the nature
+of the data.
 
 \subsection{Cohen's D}\label{cohens-d}
 
@@ -7383,23 +7386,31 @@ understand these interpretations.
 \begin{Highlighting}[]
 \CommentTok{# compute effect size for gender difference in NHANES}
 
-\NormalTok{NHANES_sample <-}\StringTok{ }
-\StringTok{  }\NormalTok{NHANES_adult }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{NHANES_sample <-}
+\StringTok{  }\NormalTok{NHANES_adult }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{drop_na}\NormalTok{(Height) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{sample_n}\NormalTok{(}\DecValTok{250}\NormalTok{)}
 
-\NormalTok{hsum <-}\StringTok{ }
-\StringTok{  }\NormalTok{NHANES_sample  }\OperatorTok{%>%}
+\NormalTok{hsum <-}
+\StringTok{  }\NormalTok{NHANES_sample }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{group_by}\NormalTok{(Gender) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{summarize}\NormalTok{(}
-    \DataTypeTok{meanHeight=}\KeywordTok{mean}\NormalTok{(Height),}
-    \DataTypeTok{varHeight=}\KeywordTok{var}\NormalTok{(Height),}
-    \DataTypeTok{n=}\KeywordTok{n}\NormalTok{()}
+    \DataTypeTok{meanHeight =} \KeywordTok{mean}\NormalTok{(Height),}
+    \DataTypeTok{varHeight =} \KeywordTok{var}\NormalTok{(Height),}
+    \DataTypeTok{n =} \KeywordTok{n}\NormalTok{()}
 \NormalTok{  )}
 
-\NormalTok{s_height_gender <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(((hsum}\OperatorTok{$}\NormalTok{n[}\DecValTok{1}\NormalTok{]}\OperatorTok{-}\DecValTok{1}\NormalTok{)}\OperatorTok{*}\NormalTok{hsum}\OperatorTok{$}\NormalTok{varHeight[}\DecValTok{1}\NormalTok{] }\OperatorTok{+}\NormalTok{(hsum}\OperatorTok{$}\NormalTok{n[}\DecValTok{2}\NormalTok{]}\OperatorTok{-}\DecValTok{1}\NormalTok{)}\OperatorTok{*}\NormalTok{hsum}\OperatorTok{$}\NormalTok{varHeight[}\DecValTok{2}\NormalTok{])}\OperatorTok{/}\NormalTok{(hsum}\OperatorTok{$}\NormalTok{n[}\DecValTok{1}\NormalTok{]}\OperatorTok{+}\NormalTok{hsum}\OperatorTok{$}\NormalTok{n[}\DecValTok{2}\NormalTok{]}\OperatorTok{-}\DecValTok{2}\NormalTok{))}
-\NormalTok{d_height_gender <-}\StringTok{ }\NormalTok{(hsum}\OperatorTok{$}\NormalTok{meanHeight[}\DecValTok{2}\NormalTok{] }\OperatorTok{-}\StringTok{ }\NormalTok{hsum}\OperatorTok{$}\NormalTok{meanHeight[}\DecValTok{1}\NormalTok{])}\OperatorTok{/}\NormalTok{s_height_gender}
-\KeywordTok{sprintf}\NormalTok{(}\StringTok{'Cohens d for male vs. female height = %0.2f'}\NormalTok{,d_height_gender)}
+
+\CommentTok{#pooled SD}
+\NormalTok{s_height_gender <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}
+\NormalTok{  ((hsum}\OperatorTok{$}\NormalTok{n[}\DecValTok{1}\NormalTok{] }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\NormalTok{hsum}\OperatorTok{$}\NormalTok{varHeight[}\DecValTok{1}\NormalTok{] }\OperatorTok{+}\StringTok{ }\NormalTok{(hsum}\OperatorTok{$}\NormalTok{n[}\DecValTok{2}\NormalTok{] }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\NormalTok{hsum}\OperatorTok{$}\NormalTok{varHeight[}\DecValTok{2}\NormalTok{]) }\OperatorTok{/}\StringTok{ }
+\StringTok{    }\NormalTok{(hsum}\OperatorTok{$}\NormalTok{n[}\DecValTok{1}\NormalTok{] }\OperatorTok{+}\StringTok{ }\NormalTok{hsum}\OperatorTok{$}\NormalTok{n[}\DecValTok{2}\NormalTok{] }\OperatorTok{-}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{)}
+
+\CommentTok{#cohen's d}
+\NormalTok{d_height_gender <-}\StringTok{ }\NormalTok{(hsum}\OperatorTok{$}\NormalTok{meanHeight[}\DecValTok{2}\NormalTok{] }\OperatorTok{-}\StringTok{ }\NormalTok{hsum}\OperatorTok{$}\NormalTok{meanHeight[}\DecValTok{1}\NormalTok{]) }\OperatorTok{/}\StringTok{ }\NormalTok{s_height_gender}
+
+\KeywordTok{sprintf}\NormalTok{(}\StringTok{"Cohens d for male vs. female height = %0.2f"}\NormalTok{, d_height_gender)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -7429,7 +7440,7 @@ questionable research practices rather than truly huge effects in
 nature. It is also worth noting that even for such a huge effect, the
 two distributions still overlap - there will be some females who are
 taller than the average male, and vice versa. For most interesting
-scientific effects the degree of overlap will be much great, so we
+scientific effects, the degree of overlap will be much greater, so we
 shouldn't immediately jump to strong conclusions about different
 populations based on even a large effect size.
 
@@ -7439,7 +7450,7 @@ Pearson's \emph{r}, also known as the \emph{correlation coefficient}, is
 a measure of the strength of the linear relationship between two
 continuous variables. We will discuss correlation in much more detail in
 Chapter \ref{modeling-continuous-relationships}, so we will save the
-details for that chapter; here we simply introduce \emph{r} as a way to
+details for that chapter; here, we simply introduce \emph{r} as a way to
 quantify the relation between two variables.
 
 \emph{r} is a measure that varies from -1 to 1, where a value of 1
@@ -7455,7 +7466,7 @@ of correlation using randomly generated data.
 \subsection{Odds ratio}\label{odds-ratio}
 
 In our earlier discussion of probability we discussed the concept of
-odds -- that is the relative likelihood of some event happening versus
+odds -- that is, the relative likelihood of some event happening versus
 not happening:
 
 \[
@@ -7477,9 +7488,11 @@ and smoking.
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# create table for cancer occurrence depending on smoking status}
-\NormalTok{smokingDf <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{NeverSmoked=}\KeywordTok{c}\NormalTok{(}\DecValTok{2883}\NormalTok{,}\DecValTok{220}\NormalTok{),}
-                    \DataTypeTok{CurrentSmoker=}\KeywordTok{c}\NormalTok{(}\DecValTok{3829}\NormalTok{,}\DecValTok{6784}\NormalTok{),}
-                    \DataTypeTok{row.names=}\KeywordTok{c}\NormalTok{(}\StringTok{'NoCancer'}\NormalTok{,}\StringTok{'Cancer'}\NormalTok{))}
+\NormalTok{smokingDf <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}
+  \DataTypeTok{NeverSmoked =} \KeywordTok{c}\NormalTok{(}\DecValTok{2883}\NormalTok{, }\DecValTok{220}\NormalTok{),}
+  \DataTypeTok{CurrentSmoker =} \KeywordTok{c}\NormalTok{(}\DecValTok{3829}\NormalTok{, }\DecValTok{6784}\NormalTok{),}
+  \DataTypeTok{row.names =} \KeywordTok{c}\NormalTok{(}\StringTok{"NoCancer"}\NormalTok{, }\StringTok{"Cancer"}\NormalTok{)}
+\NormalTok{)}
 \KeywordTok{pander}\NormalTok{(smokingDf)}
 \end{Highlighting}
 \end{Shaded}
@@ -7518,20 +7531,21 @@ We can convert these numbers to odds ratios for each of the groups:
 \begin{Highlighting}[]
 \CommentTok{# convert smoking data to odds}
 
-\NormalTok{smokingDf <-}\StringTok{ }
+\NormalTok{smokingDf <-}
 \StringTok{  }\NormalTok{smokingDf }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}
-    \DataTypeTok{pNeverSmoked=}\NormalTok{NeverSmoked}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(NeverSmoked),}
-    \DataTypeTok{pCurrentSmoker=}\NormalTok{CurrentSmoker}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(CurrentSmoker)}
+    \DataTypeTok{pNeverSmoked =}\NormalTok{ NeverSmoked }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(NeverSmoked),}
+    \DataTypeTok{pCurrentSmoker =}\NormalTok{ CurrentSmoker }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(CurrentSmoker)}
 \NormalTok{  )}
-\NormalTok{oddsCancerNeverSmoked <-}\StringTok{ }\NormalTok{smokingDf}\OperatorTok{$}\NormalTok{NeverSmoked[}\DecValTok{2}\NormalTok{]}\OperatorTok{/}\NormalTok{smokingDf}\OperatorTok{$}\NormalTok{NeverSmoked[}\DecValTok{1}\NormalTok{]}
-\NormalTok{oddsCancerCurrentSmoker <-}\StringTok{ }\NormalTok{smokingDf}\OperatorTok{$}\NormalTok{CurrentSmoker[}\DecValTok{2}\NormalTok{]}\OperatorTok{/}\NormalTok{smokingDf}\OperatorTok{$}\NormalTok{CurrentSmoker[}\DecValTok{1}\NormalTok{]}
+
+\NormalTok{oddsCancerNeverSmoked <-}\StringTok{ }\NormalTok{smokingDf}\OperatorTok{$}\NormalTok{NeverSmoked[}\DecValTok{2}\NormalTok{] }\OperatorTok{/}\StringTok{ }\NormalTok{smokingDf}\OperatorTok{$}\NormalTok{NeverSmoked[}\DecValTok{1}\NormalTok{]}
+\NormalTok{oddsCancerCurrentSmoker <-}\StringTok{ }\NormalTok{smokingDf}\OperatorTok{$}\NormalTok{CurrentSmoker[}\DecValTok{2}\NormalTok{] }\OperatorTok{/}\StringTok{ }\NormalTok{smokingDf}\OperatorTok{$}\NormalTok{CurrentSmoker[}\DecValTok{1}\NormalTok{]}
 \end{Highlighting}
 \end{Shaded}
 
 The odds of someone having lung cancer who has never smoked is 0.08
 whereas the odds of a current smoker having lung cancer is 1.77. The
-ratio of these odds tells us about the relatively likelihood of cancer
+ratio of these odds tells us about the relative likelihood of cancer
 between the two groups:
 
 \begin{Shaded}
@@ -7558,8 +7572,8 @@ for two kinds of errors: False positives (which they called \emph{Type I
 error}) and false negatives (which they called \emph{Type II error}).
 People often focus heavily on Type I error, because making a false
 positive claim is generally viewed as a very bad thing; for example, the
-now discredited claims by wake:1999 that autism was associated with
-vaccination led to anti-vaccine sentiment that has resulted in
+now discredited claims by Wakefield (1999) that autism was associated
+with vaccination led to anti-vaccine sentiment that has resulted in
 substantial increases in childhood diseases such as measles. Similarly,
 we don't want to claim that a drug cures a disease if it really doesn't.
 That's why the tolerance for Type I errors is generally set fairly low,
@@ -7587,9 +7601,9 @@ There are three factors that can affect power:
 \begin{itemize}
 \tightlist
 \item
-  sample size: Larger samples provide greater statistical power
+  Sample size: Larger samples provide greater statistical power
 \item
-  effect size: A given design will always have greater power to find a
+  Effect size: A given design will always have greater power to find a
   large effect than a small effect (because finding large effects is
   easier)
 \item
@@ -7611,30 +7625,33 @@ of how power changes as a function of these factors.
 \CommentTok{# Simulate power as a function of sample size, effect size, and alpha}
 
 \CommentTok{# create a set of functions to generate simulated results}
-\NormalTok{powerDf <-}\StringTok{ }
-\StringTok{  }\KeywordTok{expand.grid}\NormalTok{(}\DataTypeTok{sampSizePerGroup =} \KeywordTok{c}\NormalTok{(}\DecValTok{12}\NormalTok{,}\DecValTok{24}\NormalTok{,}\DecValTok{48}\NormalTok{,}\DecValTok{96}\NormalTok{),}
-              \DataTypeTok{effectSize=}\KeywordTok{c}\NormalTok{(.}\DecValTok{2}\NormalTok{,.}\DecValTok{5}\NormalTok{,.}\DecValTok{8}\NormalTok{),}
-              \DataTypeTok{alpha=}\KeywordTok{c}\NormalTok{(}\FloatTok{0.005}\NormalTok{,}\FloatTok{0.05}\NormalTok{)}
-\NormalTok{    ) }\OperatorTok{%>%}
-\StringTok{  }\NormalTok{tidyr}\OperatorTok{::}\KeywordTok{expand}\NormalTok{(effectSize,sampSizePerGroup,alpha) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(effectSize,sampSizePerGroup,alpha)}
+\NormalTok{powerDf <-}
+\StringTok{  }\KeywordTok{expand.grid}\NormalTok{(}
+    \DataTypeTok{sampSizePerGroup =} \KeywordTok{c}\NormalTok{(}\DecValTok{12}\NormalTok{, }\DecValTok{24}\NormalTok{, }\DecValTok{48}\NormalTok{, }\DecValTok{96}\NormalTok{),}
+    \DataTypeTok{effectSize =} \KeywordTok{c}\NormalTok{(.}\DecValTok{2}\NormalTok{, .}\DecValTok{5}\NormalTok{, .}\DecValTok{8}\NormalTok{),}
+    \DataTypeTok{alpha =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.005}\NormalTok{, }\FloatTok{0.05}\NormalTok{)}
+\NormalTok{  ) }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{tidyr}\OperatorTok{::}\KeywordTok{expand}\NormalTok{(effectSize, sampSizePerGroup, alpha) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(effectSize, sampSizePerGroup, alpha)}
 
-\NormalTok{runPowerSim <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(df,}\DataTypeTok{nsims=}\DecValTok{1000}\NormalTok{)\{}
-\NormalTok{  p <-}\StringTok{ }\KeywordTok{array}\NormalTok{(}\OtherTok{NA}\NormalTok{,}\DataTypeTok{dim=}\NormalTok{nsims)}
-  \ControlFlowTok{for}\NormalTok{ (s }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{nsims)\{}
-\NormalTok{    data <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{y=}\KeywordTok{rnorm}\NormalTok{(df}\OperatorTok{$}\NormalTok{sampSizePerGroup}\OperatorTok{*}\DecValTok{2}\NormalTok{),}
-                    \DataTypeTok{group=}\KeywordTok{array}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DataTypeTok{dim=}\NormalTok{df}\OperatorTok{$}\NormalTok{sampSizePerGroup}\OperatorTok{*}\DecValTok{2}\NormalTok{))}
-    
-\NormalTok{    data}\OperatorTok{$}\NormalTok{group[}\DecValTok{1}\OperatorTok{:}\NormalTok{df}\OperatorTok{$}\NormalTok{sampSizePerGroup]=}\DecValTok{1}
-\NormalTok{    data}\OperatorTok{$}\NormalTok{y[data}\OperatorTok{$}\NormalTok{group}\OperatorTok{==}\DecValTok{1}\NormalTok{]=data}\OperatorTok{$}\NormalTok{y[data}\OperatorTok{$}\NormalTok{group}\OperatorTok{==}\DecValTok{1}\NormalTok{]}\OperatorTok{+}\NormalTok{df}\OperatorTok{$}\NormalTok{effectSize}
-\NormalTok{    tt <-}\StringTok{ }\KeywordTok{t.test}\NormalTok{(y}\OperatorTok{~}\NormalTok{group,}\DataTypeTok{data=}\NormalTok{data)}
+\NormalTok{runPowerSim <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(df, }\DataTypeTok{nsims =} \DecValTok{1000}\NormalTok{) \{}
+\NormalTok{  p <-}\StringTok{ }\KeywordTok{array}\NormalTok{(}\OtherTok{NA}\NormalTok{, }\DataTypeTok{dim =}\NormalTok{ nsims)}
+  \ControlFlowTok{for}\NormalTok{ (s }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{nsims) \{}
+\NormalTok{    data <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}
+      \DataTypeTok{y =} \KeywordTok{rnorm}\NormalTok{(df}\OperatorTok{$}\NormalTok{sampSizePerGroup }\OperatorTok{*}\StringTok{ }\DecValTok{2}\NormalTok{),}
+      \DataTypeTok{group =} \KeywordTok{array}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DataTypeTok{dim =}\NormalTok{ df}\OperatorTok{$}\NormalTok{sampSizePerGroup }\OperatorTok{*}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{    )}
+
+\NormalTok{    data}\OperatorTok{$}\NormalTok{group[}\DecValTok{1}\OperatorTok{:}\NormalTok{df}\OperatorTok{$}\NormalTok{sampSizePerGroup] <-}\StringTok{ }\DecValTok{1}
+\NormalTok{    data}\OperatorTok{$}\NormalTok{y[data}\OperatorTok{$}\NormalTok{group }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{] <-}\StringTok{ }\NormalTok{data}\OperatorTok{$}\NormalTok{y[data}\OperatorTok{$}\NormalTok{group }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{] }\OperatorTok{+}\StringTok{ }\NormalTok{df}\OperatorTok{$}\NormalTok{effectSize}
+\NormalTok{    tt <-}\StringTok{ }\KeywordTok{t.test}\NormalTok{(y }\OperatorTok{~}\StringTok{ }\NormalTok{group, }\DataTypeTok{data =}\NormalTok{ data)}
 \NormalTok{    p[s] <-}\StringTok{ }\NormalTok{tt}\OperatorTok{$}\NormalTok{p.value}
 \NormalTok{  \}}
-  \KeywordTok{return}\NormalTok{(}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{power=}\KeywordTok{mean}\NormalTok{(p}\OperatorTok{<}\NormalTok{df}\OperatorTok{$}\NormalTok{alpha)))}
+  \KeywordTok{return}\NormalTok{(}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{power =} \KeywordTok{mean}\NormalTok{(p }\OperatorTok{<}\StringTok{ }\NormalTok{df}\OperatorTok{$}\NormalTok{alpha)))}
 \NormalTok{\}}
 
 \CommentTok{# run the simulation}
-\NormalTok{powerSimResults <-}\StringTok{ }\NormalTok{powerDf }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{powerSimResults <-}\StringTok{ }\NormalTok{powerDf }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{do}\NormalTok{(}\KeywordTok{runPowerSim}\NormalTok{(.))}
 \end{Highlighting}
 \end{Shaded}
@@ -7657,9 +7674,9 @@ There are at least two important reasons to care about statistical
 power, one of which we discuss here and the other of which we will
 return to in Chapter \ref{doing-reproducible-science}. If you are a
 researcher, you probably don't want to spend your time doing futile
-experiments. However, running an underpowered study is essentially
-futile, because it means that there is a very low likelihood that one
-will find an effect, even if it exists.
+experiments. Running an underpowered study is essentially futile,
+because it means that there is a very low likelihood that one will find
+an effect, even if it exists.
 
 \subsection{Power analysis}\label{power-analysis}
 
@@ -7679,7 +7696,7 @@ order to determine the necessary sample size, we can use the
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# power analysis for Cohen's d = 0.5, for 80% power with alpha = 0.05}
-\KeywordTok{pwr.t.test}\NormalTok{(}\DataTypeTok{d=}\FloatTok{0.5}\NormalTok{,}\DataTypeTok{power=}\FloatTok{0.8}\NormalTok{,}\DataTypeTok{sig.level=}\FloatTok{0.05}\NormalTok{)}
+\KeywordTok{pwr.t.test}\NormalTok{(}\DataTypeTok{d =} \FloatTok{0.5}\NormalTok{, }\DataTypeTok{power =} \FloatTok{0.8}\NormalTok{, }\DataTypeTok{sig.level =} \FloatTok{0.05}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -12695,6 +12712,11 @@ Wisdom}. Harvard University Press.
 
 \hypertarget{ref-teic:2014}{}
 Teicholz, Nina. 2014. \emph{The Big Fat Surprise}. Simon \& Schuster.
+
+\hypertarget{ref-wake:1999}{}
+Wakefield, A J. 1999. ``MMR Vaccination and Autism.'' \emph{Lancet} 354
+(9182): 949--50.
+doi:\href{https://doi.org/10.1016/S0140-6736(05)75696-8}{10.1016/S0140-6736(05)75696-8}.
 
 \hypertarget{ref-wans:just:payn:2012}{}
 Wansink, Brian, David R Just, and Collin R Payne. 2012. ``Can Branding

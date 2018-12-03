@@ -406,14 +406,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>So far in the book we have focused on estimating the specific value of a statistic. For example, let’s say we want to estimate the mean weight of adults in the NHANES dataset. We could take a sample from the dataset and estimate the mean:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># take a sample from adults in NHANES and summarize their weight</span>
 
-sampSize=<span class="dv">250</span>
-NHANES_sample=<span class="kw">sample_n</span>(NHANES_adult,sampSize)
+sampSize &lt;-<span class="st"> </span><span class="dv">250</span>
+NHANES_sample &lt;-<span class="st"> </span><span class="kw">sample_n</span>(NHANES_adult, sampSize)
 
-sample_summary &lt;-<span class="st"> </span>
+sample_summary &lt;-
 <span class="st">  </span>NHANES_sample <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarize</span>(
-    <span class="dt">meanWeight=</span><span class="kw">mean</span>(Weight),
-    <span class="dt">sdWeight=</span><span class="kw">sd</span>(Weight)
+    <span class="dt">meanWeight =</span> <span class="kw">mean</span>(Weight),
+    <span class="dt">sdWeight =</span> <span class="kw">sd</span>(Weight)
   )
 <span class="kw">pander</span>(sample_summary)</code></pre></div>
 <table style="width:32%;">
@@ -462,13 +462,13 @@ CI = \bar{X} \pm t_{crit}*SE
 \]</span> where <span class="math inline">\(t_{crit}\)</span> is the critical t value. For the NHANES weight example (with sample size of 250), the confidence interval would be:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute confidence intervals for weight in NHANES data</span>
 
-sample_summary &lt;-<span class="st"> </span>
+sample_summary &lt;-
 <span class="st">  </span>sample_summary <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">cutoff_lower =</span> <span class="kw">qt</span>(<span class="fl">0.025</span>,sampSize),
-    <span class="dt">cutoff_upper =</span> <span class="kw">qt</span>(<span class="fl">0.975</span>,sampSize),
-    <span class="dt">CI_lower =</span> meanWeight <span class="op">+</span><span class="st"> </span>cutoff_lower<span class="op">*</span>sdWeight<span class="op">/</span><span class="kw">sqrt</span>(sampSize),
-    <span class="dt">CI_upper =</span> meanWeight <span class="op">+</span><span class="st"> </span>cutoff_upper<span class="op">*</span>sdWeight<span class="op">/</span><span class="kw">sqrt</span>(sampSize)
+    <span class="dt">cutoff_lower =</span> <span class="kw">qt</span>(<span class="fl">0.025</span>, sampSize),
+    <span class="dt">cutoff_upper =</span> <span class="kw">qt</span>(<span class="fl">0.975</span>, sampSize),
+    <span class="dt">CI_lower =</span> meanWeight <span class="op">+</span><span class="st"> </span>cutoff_lower <span class="op">*</span><span class="st"> </span>sdWeight <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(sampSize),
+    <span class="dt">CI_upper =</span> meanWeight <span class="op">+</span><span class="st"> </span>cutoff_upper <span class="op">*</span><span class="st"> </span>sdWeight <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(sampSize)
   )
 <span class="kw">pander</span>(sample_summary)</code></pre></div>
 <table>
@@ -505,7 +505,7 @@ sample_summary &lt;-<span class="st"> </span>
 </div>
 <div id="confidence-intervals-and-sample-size" class="section level3">
 <h3><span class="header-section-number">10.1.3</span> Confidence intervals and sample size</h3>
-<p>Given that the standard error decreases with sample size, that means that the confidence interval should also get narrower as the sample size increases, providing tighter bounds on our estimate. Figure <a href="ci-effect-size-power.html#fig:CISampSize">10.1</a> shows an example of how the confidence interval would change as a function of sample size for the weight example. From the figure it’s evident that the confidence interval becomes increasingly tighter as the sample size increases, but increasing samples provide diminishing returns, consistent with the fact that the denominator of the confidence interval term is proportional to the square root of the sample size.</p>
+<p>Because the standard error decreases with sample size, the means confidence interval should get narrowers as the sample size increases, providing progressively tighter bounds on our estimate. Figure <a href="ci-effect-size-power.html#fig:CISampSize">10.1</a> shows an example of how the confidence interval would change as a function of sample size for the weight example. From the figure it’s evident that the confidence interval becomes increasingly tighter as the sample size increases, but increasing samples provide diminishing returns, consistent with the fact that the denominator of the confidence interval term is proportional to the square root of the sample size.</p>
 <div class="figure"><span id="fig:CISampSize"></span>
 <img src="StatsThinking21_files/figure-html/CISampSize-1.png" alt="An example of the effect of sample size on the width of the confidence interval for the mean." width="384" height="50%" />
 <p class="caption">
@@ -519,17 +519,20 @@ Figure 10.1: An example of the effect of sample size on the width of the confide
 <p>Earlier we ran the bootstrap using hand-crafted code, but R includes a package called <code>boot</code> that we can use to run the bootstrap and compute confidence intervals. Let’s use it to compute the confidence interval for weight in our NHANES sample.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute bootstrap confidence intervals on NHANES weight data</span>
 
-meanWeight &lt;-<span class="st"> </span><span class="cf">function</span>(df,foo){
-  <span class="kw">return</span>(<span class="kw">mean</span>(df[foo,]<span class="op">$</span>Weight))
+meanWeight &lt;-<span class="st"> </span><span class="cf">function</span>(df, foo) {
+  <span class="kw">return</span>(<span class="kw">mean</span>(df[foo, ]<span class="op">$</span>Weight))
 }
 
-bs &lt;-<span class="st"> </span><span class="kw">boot</span>(NHANES_sample,meanWeight,<span class="dv">1000</span>)
+bs &lt;-<span class="st"> </span><span class="kw">boot</span>(NHANES_sample, meanWeight, <span class="dv">1000</span>)
+
 <span class="co"># use the percentile bootstrap</span>
-bootci &lt;-<span class="st"> </span><span class="kw">boot.ci</span>(bs,<span class="dt">type=</span><span class="st">&#39;perc&#39;</span>)
-<span class="kw">print</span>(<span class="st">&#39;Bootstrap confidence intervals:&#39;</span>)</code></pre></div>
+bootci &lt;-<span class="st"> </span><span class="kw">boot.ci</span>(bs, <span class="dt">type =</span> <span class="st">&quot;perc&quot;</span>)
+<span class="kw">print</span>(<span class="st">&quot;Bootstrap confidence intervals:&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;Bootstrap confidence intervals:&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data.frame</span>(<span class="dt">lower=</span>bootci<span class="op">$</span>perc[<span class="dv">4</span>],
-           <span class="dt">upper=</span>bootci<span class="op">$</span>perc[<span class="dv">5</span>]) <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tibble</span>(
+  <span class="dt">lower =</span> bootci<span class="op">$</span>perc[<span class="dv">4</span>],
+  <span class="dt">upper =</span> bootci<span class="op">$</span>perc[<span class="dv">5</span>]
+) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pander</span>()</code></pre></div>
 <table style="width:22%;">
 <colgroup>
@@ -562,8 +565,8 @@ bootci &lt;-<span class="st"> </span><span class="kw">boot.ci</span>(bs,<span cl
 <blockquote>
 <p>“Statistical significance is the least interesting thing about the results. You should describe the results in terms of measures of magnitude – not just, does a treatment affect people, but how much does it affect them.” Gene Glass (REF)</p>
 </blockquote>
-<p>In the last chapter we discussed the idea that statistical significance may not necessarily reflect practical significance. In order to discuss practical significance, we need a standard way to describe the size of an effect in terms of the actual data, which we refer to as an <em>effect size</em>. In this section we will introduce the concept and discuss various ways that effect sizes can be calculated.</p>
-<p>An effect size is a standarized measurement that compares the size of some statistical effect to a reference quantity, such as the variability of the statistic. In some fields of science and engineering this idea is referred to as a “signal to noise ratio”. There are many different ways that this can be quantified, which depend on the nature of the data.</p>
+<p>In the last chapter, we discussed the idea that statistical significance may not necessarily reflect practical significance. In order to discuss practical significance, we need a standard way to describe the size of an effect in terms of the actual data, which we refer to as an <em>effect size</em>. In this section we will introduce the concept and discuss various ways that effect sizes can be calculated.</p>
+<p>An effect size is a standarized measurement that compares the size of some statistical effect to a reference quantity, such as the variability of the statistic. In some fields of science and engineering, this idea is referred to as a “signal to noise ratio”. There are many different ways that the effect size can be quantified, which depend on the nature of the data.</p>
 <div id="cohens-d" class="section level3">
 <h3><span class="header-section-number">10.2.1</span> Cohen’s D</h3>
 <p>One of the most common measures of effect size is known as <em>Cohen’s d</em>, named after the statistician Jacob Cohen (who is most famous for his 1994 paper titled “The Earth Is Round (p &lt; .05)”). It is used to quantify the difference between two means, in terms of their standard deviation:</p>
@@ -604,23 +607,31 @@ s = \sqrt{\frac{(n_1 - 1)s^2_1 + (n_2 - 1)s^2_2 }{n_1 +n_2 -2}}
 <p>It can be useful to look at some commonly understood effects to help understand these interpretations.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute effect size for gender difference in NHANES</span>
 
-NHANES_sample &lt;-<span class="st"> </span>
-<span class="st">  </span>NHANES_adult <span class="op">%&gt;%</span><span class="st"> </span>
+NHANES_sample &lt;-
+<span class="st">  </span>NHANES_adult <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">drop_na</span>(Height) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">250</span>)
 
-hsum &lt;-<span class="st"> </span>
-<span class="st">  </span>NHANES_sample  <span class="op">%&gt;%</span>
+hsum &lt;-
+<span class="st">  </span>NHANES_sample <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">group_by</span>(Gender) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarize</span>(
-    <span class="dt">meanHeight=</span><span class="kw">mean</span>(Height),
-    <span class="dt">varHeight=</span><span class="kw">var</span>(Height),
-    <span class="dt">n=</span><span class="kw">n</span>()
+    <span class="dt">meanHeight =</span> <span class="kw">mean</span>(Height),
+    <span class="dt">varHeight =</span> <span class="kw">var</span>(Height),
+    <span class="dt">n =</span> <span class="kw">n</span>()
   )
 
-s_height_gender &lt;-<span class="st"> </span><span class="kw">sqrt</span>(((hsum<span class="op">$</span>n[<span class="dv">1</span>]<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span>hsum<span class="op">$</span>varHeight[<span class="dv">1</span>] <span class="op">+</span>(hsum<span class="op">$</span>n[<span class="dv">2</span>]<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span>hsum<span class="op">$</span>varHeight[<span class="dv">2</span>])<span class="op">/</span>(hsum<span class="op">$</span>n[<span class="dv">1</span>]<span class="op">+</span>hsum<span class="op">$</span>n[<span class="dv">2</span>]<span class="op">-</span><span class="dv">2</span>))
-d_height_gender &lt;-<span class="st"> </span>(hsum<span class="op">$</span>meanHeight[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>hsum<span class="op">$</span>meanHeight[<span class="dv">1</span>])<span class="op">/</span>s_height_gender
-<span class="kw">sprintf</span>(<span class="st">&#39;Cohens d for male vs. female height = %0.2f&#39;</span>,d_height_gender)</code></pre></div>
+
+<span class="co">#pooled SD</span>
+s_height_gender &lt;-<span class="st"> </span><span class="kw">sqrt</span>(
+  ((hsum<span class="op">$</span>n[<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>hsum<span class="op">$</span>varHeight[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>(hsum<span class="op">$</span>n[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>hsum<span class="op">$</span>varHeight[<span class="dv">2</span>]) <span class="op">/</span><span class="st"> </span>
+<span class="st">    </span>(hsum<span class="op">$</span>n[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>hsum<span class="op">$</span>n[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span><span class="dv">2</span>)
+)
+
+<span class="co">#cohen&#39;s d</span>
+d_height_gender &lt;-<span class="st"> </span>(hsum<span class="op">$</span>meanHeight[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>hsum<span class="op">$</span>meanHeight[<span class="dv">1</span>]) <span class="op">/</span><span class="st"> </span>s_height_gender
+
+<span class="kw">sprintf</span>(<span class="st">&quot;Cohens d for male vs. female height = %0.2f&quot;</span>, d_height_gender)</code></pre></div>
 <pre><code>## [1] &quot;Cohens d for male vs. female height = 1.95&quot;</code></pre>
 <p>The effect size for gender differences in height (d = 1.95) is huge by reference to our table above. We can also see this by looking at the distributions of male and female heights in our sample. Figure <a href="ci-effect-size-power.html#fig:genderHist">10.2</a> shows that the two distributions are quite well separated, though still overlapping, highlighting the fact that even when there is a very large effect size for the difference between two groups, there will be individuals from each group that are more like the other group.</p>
 <div class="figure"><span id="fig:genderHist"></span>
@@ -629,11 +640,11 @@ d_height_gender &lt;-<span class="st"> </span>(hsum<span class="op">$</span>mean
 Figure 10.2: Smoothed histogram plots for male and female heights in the NHANES dataset, showing clearly distinct but also clearly overlapping distributions.
 </p>
 </div>
-<p>It is also worth nothing that we rarely encounter effects of this magnitude in science, in part because they are such obvious effects that we don’t need scientific research to find them. As we will see in Chapter <a href="doing-reproducible-research.html#doing-reproducible-research">17</a> on reproducibility, very large reported effects in scientific research often reflect the use of questionable research practices rather than truly huge effects in nature. It is also worth noting that even for such a huge effect, the two distributions still overlap - there will be some females who are taller than the average male, and vice versa. For most interesting scientific effects the degree of overlap will be much great, so we shouldn’t immediately jump to strong conclusions about different populations based on even a large effect size.</p>
+<p>It is also worth nothing that we rarely encounter effects of this magnitude in science, in part because they are such obvious effects that we don’t need scientific research to find them. As we will see in Chapter <a href="doing-reproducible-research.html#doing-reproducible-research">17</a> on reproducibility, very large reported effects in scientific research often reflect the use of questionable research practices rather than truly huge effects in nature. It is also worth noting that even for such a huge effect, the two distributions still overlap - there will be some females who are taller than the average male, and vice versa. For most interesting scientific effects, the degree of overlap will be much greater, so we shouldn’t immediately jump to strong conclusions about different populations based on even a large effect size.</p>
 </div>
 <div id="pearsons-r" class="section level3">
 <h3><span class="header-section-number">10.2.2</span> Pearson’s r</h3>
-<p>Pearson’s <em>r</em>, also known as the <em>correlation coefficient</em>, is a measure of the strength of the linear relationship between two continuous variables. We will discuss correlation in much more detail in Chapter <a href="modeling-continuous-relationships.html#modeling-continuous-relationships">13</a>, so we will save the details for that chapter; here we simply introduce <em>r</em> as a way to quantify the relation between two variables.</p>
+<p>Pearson’s <em>r</em>, also known as the <em>correlation coefficient</em>, is a measure of the strength of the linear relationship between two continuous variables. We will discuss correlation in much more detail in Chapter <a href="modeling-continuous-relationships.html#modeling-continuous-relationships">13</a>, so we will save the details for that chapter; here, we simply introduce <em>r</em> as a way to quantify the relation between two variables.</p>
 <p><em>r</em> is a measure that varies from -1 to 1, where a value of 1 represents a perfect positive relationship between the variables, 0 represents no relationship, and -1 represents a perfect negative relationship. Figure <a href="ci-effect-size-power.html#fig:corrFig">10.3</a> shows examples of various levels of correlation using randomly generated data.</p>
 <div class="figure"><span id="fig:corrFig"></span>
 <img src="StatsThinking21_files/figure-html/corrFig-1.png" alt="Examples of various levels of Pearson's r." width="768" height="50%" />
@@ -644,15 +655,17 @@ Figure 10.3: Examples of various levels of Pearson’s r.
 </div>
 <div id="odds-ratio" class="section level3">
 <h3><span class="header-section-number">10.2.3</span> Odds ratio</h3>
-<p>In our earlier discussion of probability we discussed the concept of odds – that is the relative likelihood of some event happening versus not happening:</p>
+<p>In our earlier discussion of probability we discussed the concept of odds – that is, the relative likelihood of some event happening versus not happening:</p>
 <p><span class="math display">\[
 odds\ of\ A = \frac{P(A)}{P(\neg A)}
 \]</span></p>
 <p>The odds ratio is simply the ratio of two odds. For example, let’s take the case of smoking and lung cancer. A study published in the International Journal of Cancer in 2012 <span class="citation">(Pesch et al. 2012)</span> combined data regarding the occurrence of lung cancer in smokers and individuals who have never smoked across a number of different studies. Note that these data come from case-control studies, which means that participants in the studies were recruited because they either did or did not have cancer; their smoking status was then examined. These numbers thus do not represent the prevalence of cancer amongst smokers in the general population – but they can tell us about the relationship between cancer and smoking.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create table for cancer occurrence depending on smoking status</span>
-smokingDf &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">NeverSmoked=</span><span class="kw">c</span>(<span class="dv">2883</span>,<span class="dv">220</span>),
-                    <span class="dt">CurrentSmoker=</span><span class="kw">c</span>(<span class="dv">3829</span>,<span class="dv">6784</span>),
-                    <span class="dt">row.names=</span><span class="kw">c</span>(<span class="st">&#39;NoCancer&#39;</span>,<span class="st">&#39;Cancer&#39;</span>))
+smokingDf &lt;-<span class="st"> </span><span class="kw">tibble</span>(
+  <span class="dt">NeverSmoked =</span> <span class="kw">c</span>(<span class="dv">2883</span>, <span class="dv">220</span>),
+  <span class="dt">CurrentSmoker =</span> <span class="kw">c</span>(<span class="dv">3829</span>, <span class="dv">6784</span>),
+  <span class="dt">row.names =</span> <span class="kw">c</span>(<span class="st">&quot;NoCancer&quot;</span>, <span class="st">&quot;Cancer&quot;</span>)
+)
 <span class="kw">pander</span>(smokingDf)</code></pre></div>
 <table style="width:57%;">
 <colgroup>
@@ -683,15 +696,16 @@ smokingDf &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span cla
 <p>We can convert these numbers to odds ratios for each of the groups:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># convert smoking data to odds</span>
 
-smokingDf &lt;-<span class="st"> </span>
+smokingDf &lt;-
 <span class="st">  </span>smokingDf <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">pNeverSmoked=</span>NeverSmoked<span class="op">/</span><span class="kw">sum</span>(NeverSmoked),
-    <span class="dt">pCurrentSmoker=</span>CurrentSmoker<span class="op">/</span><span class="kw">sum</span>(CurrentSmoker)
+    <span class="dt">pNeverSmoked =</span> NeverSmoked <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(NeverSmoked),
+    <span class="dt">pCurrentSmoker =</span> CurrentSmoker <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(CurrentSmoker)
   )
-oddsCancerNeverSmoked &lt;-<span class="st"> </span>smokingDf<span class="op">$</span>NeverSmoked[<span class="dv">2</span>]<span class="op">/</span>smokingDf<span class="op">$</span>NeverSmoked[<span class="dv">1</span>]
-oddsCancerCurrentSmoker &lt;-<span class="st"> </span>smokingDf<span class="op">$</span>CurrentSmoker[<span class="dv">2</span>]<span class="op">/</span>smokingDf<span class="op">$</span>CurrentSmoker[<span class="dv">1</span>]</code></pre></div>
-<p>The odds of someone having lung cancer who has never smoked is 0.08 whereas the odds of a current smoker having lung cancer is 1.77. The ratio of these odds tells us about the relatively likelihood of cancer between the two groups:</p>
+
+oddsCancerNeverSmoked &lt;-<span class="st"> </span>smokingDf<span class="op">$</span>NeverSmoked[<span class="dv">2</span>] <span class="op">/</span><span class="st"> </span>smokingDf<span class="op">$</span>NeverSmoked[<span class="dv">1</span>]
+oddsCancerCurrentSmoker &lt;-<span class="st"> </span>smokingDf<span class="op">$</span>CurrentSmoker[<span class="dv">2</span>] <span class="op">/</span><span class="st"> </span>smokingDf<span class="op">$</span>CurrentSmoker[<span class="dv">1</span>]</code></pre></div>
+<p>The odds of someone having lung cancer who has never smoked is 0.08 whereas the odds of a current smoker having lung cancer is 1.77. The ratio of these odds tells us about the relative likelihood of cancer between the two groups:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#compute odds ratio</span>
 
 oddsRatio &lt;-<span class="st"> </span>oddsCancerCurrentSmoker<span class="op">/</span>oddsCancerNeverSmoked
@@ -702,7 +716,7 @@ oddsRatio &lt;-<span class="st"> </span>oddsCancerCurrentSmoker<span class="op">
 </div>
 <div id="statistical-power" class="section level2">
 <h2><span class="header-section-number">10.3</span> Statistical power</h2>
-<p>Remember from the previous chapter that under the Neyman-Pearson hypothesis testing approach, we have to specify our level of tolerance for two kinds of errors: False positives (which they called <em>Type I error</em>) and false negatives (which they called <em>Type II error</em>). People often focus heavily on Type I error, because making a false positive claim is generally viewed as a very bad thing; for example, the now discredited claims by wake:1999 that autism was associated with vaccination led to anti-vaccine sentiment that has resulted in substantial increases in childhood diseases such as measles. Similarly, we don’t want to claim that a drug cures a disease if it really doesn’t. That’s why the tolerance for Type I errors is generally set fairly low, usually at <span class="math inline">\(\alpha = 0.05\)</span>. But what about Type II errors?</p>
+<p>Remember from the previous chapter that under the Neyman-Pearson hypothesis testing approach, we have to specify our level of tolerance for two kinds of errors: False positives (which they called <em>Type I error</em>) and false negatives (which they called <em>Type II error</em>). People often focus heavily on Type I error, because making a false positive claim is generally viewed as a very bad thing; for example, the now discredited claims by <span class="citation">Wakefield (1999)</span> that autism was associated with vaccination led to anti-vaccine sentiment that has resulted in substantial increases in childhood diseases such as measles. Similarly, we don’t want to claim that a drug cures a disease if it really doesn’t. That’s why the tolerance for Type I errors is generally set fairly low, usually at <span class="math inline">\(\alpha = 0.05\)</span>. But what about Type II errors?</p>
 <p>The concept of <em>statistical power</em> is the complement of Type II error – that is, it is the likelihood of finding a positive result given that it exists:</p>
 <p><span class="math display">\[ 
 power = 1 - \beta
@@ -710,38 +724,41 @@ power = 1 - \beta
 <p>Another important aspect of the Neyman-Pearson model that we didn’t discuss above is the fact that in addition to specifying the acceptable levels of Type I and Type II errors, we also have to describe a specific alternative hypothesis – that is, what is the size of the effect that we wish to detect? Otherwise, we can’t interpret <span class="math inline">\(\beta\)</span> – the likelihood of finding a large effect is always going to be higher than finding a small effect, so <span class="math inline">\(\beta\)</span> will be different depending on the size of effect we are trying to detect.</p>
 <p>There are three factors that can affect power:</p>
 <ul>
-<li>sample size: Larger samples provide greater statistical power</li>
-<li>effect size: A given design will always have greater power to find a large effect than a small effect (because finding large effects is easier)</li>
+<li>Sample size: Larger samples provide greater statistical power</li>
+<li>Effect size: A given design will always have greater power to find a large effect than a small effect (because finding large effects is easier)</li>
 <li>Type I error rate: There is a relationship between Type I error and power such that (all else being equal) decreasing Type I error will also decrease power.</li>
 </ul>
 <p>We can see this through simulation. First let’s simulate a single experiment, in which we compare the means of two groups using a standard t-test. We will vary the size of the effect (specified in terms of Cohen’s d), the Type I error rate, and the sample size, and for each of these we will examine how the proportion of significant results (i.e. power) is affected. Figure <a href="ci-effect-size-power.html#fig:plotPowerSim">10.4</a> shows an example of how power changes as a function of these factors.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Simulate power as a function of sample size, effect size, and alpha</span>
 
 <span class="co"># create a set of functions to generate simulated results</span>
-powerDf &lt;-<span class="st"> </span>
-<span class="st">  </span><span class="kw">expand.grid</span>(<span class="dt">sampSizePerGroup =</span> <span class="kw">c</span>(<span class="dv">12</span>,<span class="dv">24</span>,<span class="dv">48</span>,<span class="dv">96</span>),
-              <span class="dt">effectSize=</span><span class="kw">c</span>(.<span class="dv">2</span>,.<span class="dv">5</span>,.<span class="dv">8</span>),
-              <span class="dt">alpha=</span><span class="kw">c</span>(<span class="fl">0.005</span>,<span class="fl">0.05</span>)
-    ) <span class="op">%&gt;%</span>
-<span class="st">  </span>tidyr<span class="op">::</span><span class="kw">expand</span>(effectSize,sampSizePerGroup,alpha) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">group_by</span>(effectSize,sampSizePerGroup,alpha)
+powerDf &lt;-
+<span class="st">  </span><span class="kw">expand.grid</span>(
+    <span class="dt">sampSizePerGroup =</span> <span class="kw">c</span>(<span class="dv">12</span>, <span class="dv">24</span>, <span class="dv">48</span>, <span class="dv">96</span>),
+    <span class="dt">effectSize =</span> <span class="kw">c</span>(.<span class="dv">2</span>, .<span class="dv">5</span>, .<span class="dv">8</span>),
+    <span class="dt">alpha =</span> <span class="kw">c</span>(<span class="fl">0.005</span>, <span class="fl">0.05</span>)
+  ) <span class="op">%&gt;%</span>
+<span class="st">  </span>tidyr<span class="op">::</span><span class="kw">expand</span>(effectSize, sampSizePerGroup, alpha) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(effectSize, sampSizePerGroup, alpha)
 
-runPowerSim &lt;-<span class="st"> </span><span class="cf">function</span>(df,<span class="dt">nsims=</span><span class="dv">1000</span>){
-  p &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="ot">NA</span>,<span class="dt">dim=</span>nsims)
-  <span class="cf">for</span> (s <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nsims){
-    data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">y=</span><span class="kw">rnorm</span>(df<span class="op">$</span>sampSizePerGroup<span class="op">*</span><span class="dv">2</span>),
-                    <span class="dt">group=</span><span class="kw">array</span>(<span class="dv">0</span>,<span class="dt">dim=</span>df<span class="op">$</span>sampSizePerGroup<span class="op">*</span><span class="dv">2</span>))
-    
-    data<span class="op">$</span>group[<span class="dv">1</span><span class="op">:</span>df<span class="op">$</span>sampSizePerGroup]=<span class="dv">1</span>
-    data<span class="op">$</span>y[data<span class="op">$</span>group<span class="op">==</span><span class="dv">1</span>]=data<span class="op">$</span>y[data<span class="op">$</span>group<span class="op">==</span><span class="dv">1</span>]<span class="op">+</span>df<span class="op">$</span>effectSize
-    tt &lt;-<span class="st"> </span><span class="kw">t.test</span>(y<span class="op">~</span>group,<span class="dt">data=</span>data)
+runPowerSim &lt;-<span class="st"> </span><span class="cf">function</span>(df, <span class="dt">nsims =</span> <span class="dv">1000</span>) {
+  p &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="ot">NA</span>, <span class="dt">dim =</span> nsims)
+  <span class="cf">for</span> (s <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nsims) {
+    data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+      <span class="dt">y =</span> <span class="kw">rnorm</span>(df<span class="op">$</span>sampSizePerGroup <span class="op">*</span><span class="st"> </span><span class="dv">2</span>),
+      <span class="dt">group =</span> <span class="kw">array</span>(<span class="dv">0</span>, <span class="dt">dim =</span> df<span class="op">$</span>sampSizePerGroup <span class="op">*</span><span class="st"> </span><span class="dv">2</span>)
+    )
+
+    data<span class="op">$</span>group[<span class="dv">1</span><span class="op">:</span>df<span class="op">$</span>sampSizePerGroup] &lt;-<span class="st"> </span><span class="dv">1</span>
+    data<span class="op">$</span>y[data<span class="op">$</span>group <span class="op">==</span><span class="st"> </span><span class="dv">1</span>] &lt;-<span class="st"> </span>data<span class="op">$</span>y[data<span class="op">$</span>group <span class="op">==</span><span class="st"> </span><span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>df<span class="op">$</span>effectSize
+    tt &lt;-<span class="st"> </span><span class="kw">t.test</span>(y <span class="op">~</span><span class="st"> </span>group, <span class="dt">data =</span> data)
     p[s] &lt;-<span class="st"> </span>tt<span class="op">$</span>p.value
   }
-  <span class="kw">return</span>(<span class="kw">data.frame</span>(<span class="dt">power=</span><span class="kw">mean</span>(p<span class="op">&lt;</span>df<span class="op">$</span>alpha)))
+  <span class="kw">return</span>(<span class="kw">data.frame</span>(<span class="dt">power =</span> <span class="kw">mean</span>(p <span class="op">&lt;</span><span class="st"> </span>df<span class="op">$</span>alpha)))
 }
 
 <span class="co"># run the simulation</span>
-powerSimResults &lt;-<span class="st"> </span>powerDf <span class="op">%&gt;%</span><span class="st"> </span>
+powerSimResults &lt;-<span class="st"> </span>powerDf <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">do</span>(<span class="kw">runPowerSim</span>(.))</code></pre></div>
 <div class="figure"><span id="fig:plotPowerSim"></span>
 <img src="StatsThinking21_files/figure-html/plotPowerSim-1.png" alt="Results from power simulation, showing power as a function of sample size, with effect sizes shown as different colors, and alpha shown as line type. The standard criterion of 80% power is shown by the dotted black line." width="576" height="50%" />
@@ -750,13 +767,13 @@ Figure 10.4: Results from power simulation, showing power as a function of sampl
 </p>
 </div>
 <p>This simulation shows us that even with a sample size of 96, we will have relatively little power to find a small effect (<span class="math inline">\(d = 0.2\)</span>) with <span class="math inline">\(\alpha = 0.005\)</span>. This means that a study designed to do this would be <em>futile</em> – that is, it is almost guaranteed to find nothing even if a true effect of that size exists.</p>
-<p>There are at least two important reasons to care about statistical power, one of which we discuss here and the other of which we will return to in Chapter <a href="#doing-reproducible-science"><strong>??</strong></a>. If you are a researcher, you probably don’t want to spend your time doing futile experiments. However, running an underpowered study is essentially futile, because it means that there is a very low likelihood that one will find an effect, even if it exists.</p>
+<p>There are at least two important reasons to care about statistical power, one of which we discuss here and the other of which we will return to in Chapter <a href="#doing-reproducible-science"><strong>??</strong></a>. If you are a researcher, you probably don’t want to spend your time doing futile experiments. Running an underpowered study is essentially futile, because it means that there is a very low likelihood that one will find an effect, even if it exists.</p>
 <div id="power-analysis" class="section level3">
 <h3><span class="header-section-number">10.3.1</span> Power analysis</h3>
 <p>Fortunately, there are tools available that allow us to determine the statistical power of an experiment. The most common use of these tools is in planning an experiment, when we would like to determine how large our sample needs to be in order to have sufficient power to find our effect of interest.</p>
 <p>Let’s say that we are interested in running a study of how a particular personality trait differs between users of iOS versus Android devices. Our plan is collect two groups of individuals and measure them on the personality trait, and then compare the two groups using a t-test. In order to determine the necessary sample size, we can use the <code>pwr.t.test()</code> function from the <code>pwr</code> library.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># power analysis for Cohen&#39;s d = 0.5, for 80% power with alpha = 0.05</span>
-<span class="kw">pwr.t.test</span>(<span class="dt">d=</span><span class="fl">0.5</span>,<span class="dt">power=</span><span class="fl">0.8</span>,<span class="dt">sig.level=</span><span class="fl">0.05</span>)</code></pre></div>
+<span class="kw">pwr.t.test</span>(<span class="dt">d =</span> <span class="fl">0.5</span>, <span class="dt">power =</span> <span class="fl">0.8</span>, <span class="dt">sig.level =</span> <span class="fl">0.05</span>)</code></pre></div>
 <pre><code>## 
 ##      Two-sample t test power calculation 
 ## 
