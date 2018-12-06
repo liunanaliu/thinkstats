@@ -123,7 +123,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{Draft: 2018-12-04}
+    \date{Draft: 2018-12-06}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -7762,10 +7762,10 @@ kept in mind.
 
 In this chapter we will take up the approach to statistical modeling and
 inference that stands in contrast to the null hypothesis testing
-framework that you encountered Chapter \ref{hypothesis-testing}. This is
-known as ``Bayesian statistics'' after the Reverend Thomas Bayes, whose
-theorem you have already encountered in Chapter \ref{probability}. In
-this chapter you will learn how Bayes' theorem provides a way of
+framework that you encountered in Chapter \ref{hypothesis-testing}. This
+is known as ``Bayesian statistics'' after the Reverend Thomas Bayes,
+whose theorem you have already encountered in Chapter \ref{probability}.
+In this chapter you will learn how Bayes' theorem provides a way of
 understanding data that solves many of the conceptual problems that we
 discussed regarding null hypothesis testing.
 
@@ -7805,9 +7805,9 @@ inference}\label{bayes-theorem-and-inverse-inference}
 The reason that Bayesian statistics has its name is because it takes
 advantage of Bayes' theorem to make inferences from data back to some
 features of the (latent) model that generated the data. Let's say that
-want to know whether a coin is fair. To test this, we flip the coin 10
-times and come up with 7 heads. Before this we were pretty sure that the
-coin was fair (i.e., that \(p_{heads}=0.5\)), but these data would
+we want to know whether a coin is fair. To test this, we flip the coin
+10 times and come up with 7 heads. Before this test we were pretty sure
+that the coin was fair (i.e., that \(p_{heads}=0.5\)), but these data
 certainly give us pause. We already know how to compute the conditional
 probability that we would flip 7 or more heads out of 10 if the coin is
 really fair (\(P(n\ge7|p_{heads}=0.5)\)), using the binomial
@@ -7816,8 +7816,10 @@ distribution:
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# compute the conditional probability of 7 or more heads when p(heads)=0.5}
-\KeywordTok{sprintf}\NormalTok{(}\StringTok{'p(7 or more heads | p(heads) = 0.5) = %.3f'}\NormalTok{,}
-        \KeywordTok{pbinom}\NormalTok{(}\DecValTok{7}\NormalTok{,}\DecValTok{10}\NormalTok{,.}\DecValTok{5}\NormalTok{,}\DataTypeTok{lower.tail=}\OtherTok{FALSE}\NormalTok{))}
+\KeywordTok{sprintf}\NormalTok{(}
+  \StringTok{"p(7 or more heads | p(heads) = 0.5) = %.3f"}\NormalTok{,}
+  \KeywordTok{pbinom}\NormalTok{(}\DecValTok{7}\NormalTok{, }\DecValTok{10}\NormalTok{, .}\DecValTok{5}\NormalTok{, }\DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{)}
+\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -7859,13 +7861,13 @@ We can think of this theorem as having four parts:
 
 Here we see one of the primary differences between frequentist and
 Bayesian statsistics. Frequentists do not believe in the idea of a
-probability of a hypothesis -- for them, a hypothesis is either true or
-it isn't. Another way to say this is that for the frequentist, the
-hypothesis is fixed and the data are random, which is why frequentist
-inference focused on describing the probability of data given a
-hypothesis (i.e.~the p-value). Bayesians, on the other hand, are
-comfortable making probability statements about both data and
-hypotheses.
+probability of a hypothesis (i.e., our degree of belief about a
+hypothesis) -- for them, a hypothesis is either true or it isn't.
+Another way to say this is that for the frequentist, the hypothesis is
+fixed and the data are random, which is why frequentist inference
+focuses on describing the probability of data given a hypothesis
+(i.e.~the p-value). Bayesians, on the other hand, are comfortable making
+probability statements about both data and hypotheses.
 
 \section{Doing Bayesian estimation}\label{doing-bayesian-estimation}
 
@@ -7876,13 +7878,12 @@ Bayesian estimation. Let's use another screening example: Airport
 security screening. If you fly a lot like I do, it's just a matter of
 time until one of the random explosive screenings comes back positive; I
 had the particularly unfortunate experience of this happening soon after
-September 11, 2001, when airport security staff were particularly on
-edge.
+September 11, 2001, when airport security staff were especially on edge.
 
 What the security staff want to know is what is the likelihood that a
 person is carrying an explosive, given that the machine has given a
-positive test. Let's walk through how to do this using Bayesian
-analysis.
+positive test. Let's walk through how to calculate this value using
+Bayesian analysis.
 
 \subsection{Specifying the prior}\label{specifying-the-prior}
 
@@ -7924,7 +7925,7 @@ model using a binomial distribution.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{likelihood <-}\StringTok{ }\KeywordTok{dbinom}\NormalTok{(nPositives,nTests,}\FloatTok{0.99}\NormalTok{)}
+\NormalTok{likelihood <-}\StringTok{ }\KeywordTok{dbinom}\NormalTok{(nPositives, nTests, }\FloatTok{0.99}\NormalTok{)}
 \NormalTok{likelihood}
 \end{Highlighting}
 \end{Shaded}
@@ -7938,10 +7939,9 @@ likelihood}\label{computing-the-marginal-likelihood}
 
 We also need to know the overall likelihood of the data -- that is,
 finding 9 positives out of 10 tests. Computing the marginal likelihood
-is in general often one of the most difficult aspects of Bayesian
-analysis, but for our example it's simple because we can take advantage
-of the specific form of Bayes' theorem that we introduced in Section
-\ref{bayestheorem}:
+is often one of the most difficult aspects of Bayesian analysis, but for
+our example it's simple because we can take advantage of the specific
+form of Bayes' theorem that we introduced in Section \ref{bayestheorem}:
 
 \[
 P(B|A) = \frac{P(A|B)*P(B)}{P(A|B)*P(B) + P(A|\neg B)*P(\neg B)}
@@ -7958,10 +7958,20 @@ We can compute this in R as follows:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{p_test_explosive =}\StringTok{ }\FloatTok{0.99} \CommentTok{# known sensitivity of the test}
-\NormalTok{p_test_noExplosive =}\StringTok{ }\DecValTok{1} \OperatorTok{-}\StringTok{ }\FloatTok{0.9} \CommentTok{# 1 - known specificity of test}
-\NormalTok{marginal_likelihood <-}\StringTok{ }\KeywordTok{dbinom}\NormalTok{(nPositives,nTests,p_test_explosive)}\OperatorTok{*}\NormalTok{prior }\OperatorTok{+}\StringTok{ }\KeywordTok{dbinom}\NormalTok{(nPositives,nTests,p_test_noExplosive)}\OperatorTok{*}\NormalTok{(}\DecValTok{1}\OperatorTok{-}\NormalTok{prior)}
-\KeywordTok{sprintf}\NormalTok{(}\StringTok{'marginal likelihood = %.3e'}\NormalTok{,marginal_likelihood)}
+\NormalTok{marginal_likelihood <-}\StringTok{ }
+\StringTok{  }\KeywordTok{dbinom}\NormalTok{(}
+    \DataTypeTok{x =}\NormalTok{ nPositives, }
+    \DataTypeTok{size =}\NormalTok{ nTests, }
+    \DataTypeTok{prob =} \FloatTok{0.99}
+\NormalTok{  ) }\OperatorTok{*}\StringTok{ }\NormalTok{prior }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{dbinom}\NormalTok{(}
+    \DataTypeTok{x =}\NormalTok{ nPositives, }
+    \DataTypeTok{size =}\NormalTok{ nTests, }
+    \DataTypeTok{prob =}\NormalTok{ .}\DecValTok{1}
+\NormalTok{  ) }\OperatorTok{*}\StringTok{ }
+\StringTok{  }\NormalTok{(}\DecValTok{1} \OperatorTok{-}\StringTok{ }\NormalTok{prior)}
+
+\KeywordTok{sprintf}\NormalTok{(}\StringTok{"marginal likelihood = %.3e"}\NormalTok{, marginal_likelihood)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -7972,12 +7982,12 @@ We can compute this in R as follows:
 \subsection{Computing the posterior}\label{computing-the-posterior}
 
 We now have all of the parts that we need to compute the posterior
-probability of of an explosive being present, given the observed 9
-positive outcomes out of 10 tests.
+probability of an explosive being present, given the observed 9 positive
+outcomes out of 10 tests.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{posterior <-}\StringTok{ }\NormalTok{(likelihood}\OperatorTok{*}\NormalTok{prior)}\OperatorTok{/}\NormalTok{marginal_likelihood}
+\NormalTok{posterior <-}\StringTok{ }\NormalTok{(likelihood }\OperatorTok{*}\StringTok{ }\NormalTok{prior) }\OperatorTok{/}\StringTok{ }\NormalTok{marginal_likelihood}
 \NormalTok{posterior}
 \end{Highlighting}
 \end{Shaded}
@@ -7989,7 +7999,7 @@ positive outcomes out of 10 tests.
 This result shows us that the probability of an explosive in the bag is
 much higher than the prior, but nowhere near certainty, again
 highlighting the fact that testing for rare events is almost always
-liable to high numbers of false positives.
+liable to produce high numbers of false positives.
 
 \section{Estimating posterior
 distributions}\label{estimating-posterior-distributions}
@@ -8010,23 +8020,23 @@ effectiveness of the drug, so we will use a \emph{uniform distribution}
 as our prior, since all values are equally likely under a uniform
 distribution. In order to simplify the example, we will only look at a
 subset of 99 possible values of effectiveness (from .01 to .99, in steps
-of .01), so in this case each possible value has a prior probability of
-1/99.
+of .01). Therefore, each possible value has a prior probability of 1/99.
 
 \subsection{Collect some data}\label{collect-some-data-1}
 
 We need some data in order to estimate the effect of the drug. Let's say
-that we administer the drug to 100 individuals, with the results show in
-the table:
+that we administer the drug to 100 individuals, and get the following
+results:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# create a table with results}
-\NormalTok{nResponders=}\DecValTok{64}
-\NormalTok{nTested=}\DecValTok{100}
+\NormalTok{nResponders <-}\StringTok{ }\DecValTok{64}
+\NormalTok{nTested <-}\StringTok{ }\DecValTok{100}
+
 \NormalTok{drugDf <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}
-  \DataTypeTok{outcome=}\KeywordTok{c}\NormalTok{(}\StringTok{'improved'}\NormalTok{,}\StringTok{'not improved'}\NormalTok{),}
-  \DataTypeTok{number=}\KeywordTok{c}\NormalTok{(nResponders,nTested}\OperatorTok{-}\NormalTok{nResponders)}
+  \DataTypeTok{outcome =} \KeywordTok{c}\NormalTok{(}\StringTok{"improved"}\NormalTok{, }\StringTok{"not improved"}\NormalTok{),}
+  \DataTypeTok{number =} \KeywordTok{c}\NormalTok{(nResponders, nTested }\OperatorTok{-}\StringTok{ }\NormalTok{nResponders)}
 \NormalTok{)}
 \KeywordTok{pander}\NormalTok{(drugDf)}
 \end{Highlighting}
@@ -8069,27 +8079,39 @@ parameter of interest that makes the data most likely, while also taking
 into account our prior knowledge.
 
 \begin{figure}
-\includegraphics[height=0.5\textheight]{StatsThinking21_files/figure-latex/like2-1} \caption{Likelihood of each possible number of responders under several different hypotheses (p(respond)=0.5 (red), 0.7 (green), 0.3 (black).  Observed value shown blue.}\label{fig:like2}
+\includegraphics[height=0.5\textheight]{StatsThinking21_files/figure-latex/like2-1} \caption{Likelihood of each possible number of responders under several different hypotheses (p(respond)=0.5 (red), 0.7 (green), 0.3 (black).  Observed value shown in blue.}\label{fig:like2}
 \end{figure}
 
 \subsection{Computing the marginal
 likelihood}\label{computing-the-marginal-likelihood-1}
 
-We also need to know the overall likelihood of the data, which is used
-as a normalizing constant to ensure that the posterior values are true
-probabilities. In this case, our use of a set of discrete possible
+In addition to the likelihood of the data under different hypotheses, we
+need to know the overall likelihood of the data, combining across all
+hypotheses (i.e., the marginal likelihood). This marginal likelihood is
+used as a normalizing constant to ensure that the posterior values are
+true probabilities. In this case, our use of a set of discrete possible
 parameter values makes it easy to compute the marginal likelihood,
-because we can just compute each one and add them up.
+because we can just compute the likelihood of each parameter value under
+each hypothesis and add them up.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# compute marginal likelihood}
-\NormalTok{likeDf <-}\StringTok{ }\NormalTok{likeDf }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{uniform_prior =} \KeywordTok{array}\NormalTok{(}\DecValTok{1}\OperatorTok{/}\KeywordTok{n}\NormalTok{()))}
+\NormalTok{likeDf <-}\StringTok{ }
+\StringTok{  }\NormalTok{likeDf }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{uniform_prior =} \KeywordTok{array}\NormalTok{(}\DecValTok{1} \OperatorTok{/}\StringTok{ }\KeywordTok{n}\NormalTok{()))}
 
 \CommentTok{# multiply each likelihood by prior and add them up}
-\NormalTok{marginal_likelihood=}\KeywordTok{sum}\NormalTok{(}\KeywordTok{dbinom}\NormalTok{(nResponders,}\DecValTok{100}\NormalTok{,likeDf}\OperatorTok{$}\NormalTok{presp)}\OperatorTok{*}\NormalTok{likeDf}\OperatorTok{$}\NormalTok{uniform_prior)}
-\KeywordTok{sprintf}\NormalTok{(}\StringTok{'marginal likelihood = %0.4f'}\NormalTok{,marginal_likelihood)}
+\NormalTok{marginal_likelihood <-}\StringTok{ }
+\StringTok{  }\KeywordTok{sum}\NormalTok{(}
+    \KeywordTok{dbinom}\NormalTok{(}
+      \DataTypeTok{x =}\NormalTok{ nResponders, }\CommentTok{# the number who responded to the drug}
+      \DataTypeTok{size =} \DecValTok{100}\NormalTok{, }\CommentTok{# the number tested}
+\NormalTok{      likeDf}\OperatorTok{$}\NormalTok{presp }\CommentTok{# the likelihood of each response }
+\NormalTok{    ) }\OperatorTok{*}\StringTok{ }\NormalTok{likeDf}\OperatorTok{$}\NormalTok{uniform_prior}
+\NormalTok{  )}
+
+\KeywordTok{sprintf}\NormalTok{(}\StringTok{"marginal likelihood = %0.4f"}\NormalTok{, marginal_likelihood)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -8106,16 +8128,19 @@ as shown in Figure \ref{fig:posteriorDist}.
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# Create data for use in figure}
-
 \NormalTok{bayesDf <-}
 \StringTok{  }\KeywordTok{tibble}\NormalTok{(}
-    \DataTypeTok{steps =} \KeywordTok{seq}\NormalTok{(}\FloatTok{0.01}\NormalTok{,}\FloatTok{0.99}\NormalTok{,}\FloatTok{0.01}\NormalTok{)}
+    \DataTypeTok{steps =} \KeywordTok{seq}\NormalTok{(}\DataTypeTok{from =} \FloatTok{0.01}\NormalTok{, }\DataTypeTok{to =} \FloatTok{0.99}\NormalTok{, }\DataTypeTok{by =} \FloatTok{0.01}\NormalTok{)}
 \NormalTok{  ) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}
-    \DataTypeTok{likelihoods =} \KeywordTok{dbinom}\NormalTok{(drugDf}\OperatorTok{$}\NormalTok{number[}\DecValTok{1}\NormalTok{],}\DecValTok{100}\NormalTok{,steps),}
-    \DataTypeTok{priors =} \KeywordTok{dunif}\NormalTok{(steps)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(steps),}
-    \DataTypeTok{posteriors =}\NormalTok{ (likelihoods}\OperatorTok{*}\NormalTok{priors)}\OperatorTok{/}\NormalTok{marginal_likelihood}
-\NormalTok{ )}
+    \DataTypeTok{likelihoods =} \KeywordTok{dbinom}\NormalTok{(}
+      \DataTypeTok{x =}\NormalTok{ nResponders, }
+      \DataTypeTok{size =} \DecValTok{100}\NormalTok{, }
+      \DataTypeTok{prob =}\NormalTok{ steps}
+\NormalTok{    ),}
+    \DataTypeTok{priors =} \KeywordTok{dunif}\NormalTok{(steps) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(steps),}
+    \DataTypeTok{posteriors =}\NormalTok{ (likelihoods }\OperatorTok{*}\StringTok{ }\NormalTok{priors) }\OperatorTok{/}\StringTok{ }\NormalTok{marginal_likelihood}
+\NormalTok{  )}
 \end{Highlighting}
 \end{Shaded}
 
@@ -8135,9 +8160,13 @@ can find this from the data in \ref{fig:posteriorDist}:
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# compute MAP estimate}
+\NormalTok{MAP_estimate <-}\StringTok{ }
+\StringTok{  }\NormalTok{bayesDf }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(posteriors)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{slice}\NormalTok{(}\DecValTok{1}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{pull}\NormalTok{(steps)}
 
-\NormalTok{MAP_estimate <-}\StringTok{ }\NormalTok{bayesDf}\OperatorTok{$}\NormalTok{steps[}\KeywordTok{which.max}\NormalTok{(bayesDf}\OperatorTok{$}\NormalTok{posteriors)]}
-\KeywordTok{sprintf}\NormalTok{(}\StringTok{'MAP estimate = %0.4f'}\NormalTok{,MAP_estimate)}
+\KeywordTok{sprintf}\NormalTok{(}\StringTok{"MAP estimate = %0.4f"}\NormalTok{, MAP_estimate)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -8163,7 +8192,7 @@ which we call a \emph{credible interval}.
 In some cases the credible interval can be computed \emph{numerically}
 based on a known distribution, but it's more common to generate a
 credible interval by sampling from the posterior distribution and then
-compute quantiles of the samples. This is particularly useful when we
+to compute quantiles of the samples. This is particularly useful when we
 don't have an easy way to express the posterior distribution
 numerically, which is often the case in real Bayesian data analysis.
 
@@ -8172,12 +8201,12 @@ algorithm known as
 \href{https://am207.github.io/2017/wiki/rejectionsampling.html}{\emph{rejection
 sampling}}. The idea is that we choose a random value of x (in this case
 \(p_{respond}\)) and a random value of y (in this case, the posterior
-probability of \(p_{respond}\)) each from a uniform distribution, and we
-accept the sample only if \(y < f(x)\) - in this case, if the randomly
-selected value of y is less than the actual posterior probability of y.
-Figure \ref{fig:rejectionSampling} shows an example of a histogram of
-samples using rejection sampling, along with the 95\% credible intervals
-obtained using this method.
+probability of \(p_{respond}\)) each from a uniform distribution. We
+then only accept the sample if \(y < f(x)\) - in this case, if the
+randomly selected value of y is less than the actual posterior
+probability of y. Figure \ref{fig:rejectionSampling} shows an example of
+a histogram of samples using rejection sampling, along with the 95\%
+credible intervals obtained using this method.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -8190,13 +8219,13 @@ obtained using this method.
 \NormalTok{y <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(nsamples)}
 
 \CommentTok{# create f(x)}
-\NormalTok{fx <-}\StringTok{ }\KeywordTok{dbinom}\NormalTok{(drugDf}\OperatorTok{$}\NormalTok{number[}\DecValTok{1}\NormalTok{],}\DecValTok{100}\NormalTok{,x)}
+\NormalTok{fx <-}\StringTok{ }\KeywordTok{dbinom}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ nResponders, }\DataTypeTok{size =} \DecValTok{100}\NormalTok{, }\DataTypeTok{prob =}\NormalTok{ x)}
 
 \CommentTok{# accept samples where y < f(x)}
-\NormalTok{accept <-}\StringTok{ }\KeywordTok{which}\NormalTok{(y}\OperatorTok{<}\NormalTok{fx)}
+\NormalTok{accept <-}\StringTok{ }\KeywordTok{which}\NormalTok{(y }\OperatorTok{<}\StringTok{ }\NormalTok{fx)}
 \NormalTok{accepted_samples <-}\StringTok{ }\NormalTok{x[accept]}
 
-\NormalTok{credible_interval <-}\StringTok{ }\KeywordTok{quantile}\NormalTok{(accepted_samples,}\KeywordTok{c}\NormalTok{(}\FloatTok{0.025}\NormalTok{,}\FloatTok{0.975}\NormalTok{))}
+\NormalTok{credible_interval <-}\StringTok{ }\KeywordTok{quantile}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ accepted_samples, }\DataTypeTok{probs =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.025}\NormalTok{, }\FloatTok{0.975}\NormalTok{))}
 \KeywordTok{pander}\NormalTok{(credible_interval)}
 \end{Highlighting}
 \end{Shaded}
@@ -8224,7 +8253,7 @@ obtained using this method.
 the density of all possible values of p(respond); the blue lines show
 the 2.5th and 97.5th percentiles of the distribution, which represent
 the 95\% credible interval for the estimate of
-p(heads).\}\label{fig:rejectionSampling} \textbackslash{}end\{figure\}
+p(respond).\}\label{fig:rejectionSampling} \textbackslash{}end\{figure\}
 
 The interpretation of this credible interval is much closer to what we
 had hoped we could get from a confidence interval (but could not): It
@@ -8243,29 +8272,36 @@ instead started with some previous data: In a previous study,
 researchers had tested 20 people and found that 10 of them had responded
 positively. This would have lead us to start with a prior belief that
 the treatment has an effect in 50\% of people. We can do the same
-computation as above, but using the information about our previous study
-as the prior (see Figure \ref{fig:posteriorDistPrior}).
+computation as above, but using the information from our previous study
+to inform our prior (see Figure \ref{fig:posteriorDistPrior}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# compute likelihoods for data under all values of p(heads) using a flat or empirical prior.  here we use the quantized values from .01 to .99 in steps of 0.01}
 
+\NormalTok{df <-}
+\StringTok{  }\KeywordTok{tibble}\NormalTok{(}
+    \DataTypeTok{steps =} \KeywordTok{seq}\NormalTok{(}\DataTypeTok{from =} \FloatTok{0.01}\NormalTok{, }\DataTypeTok{to =} \FloatTok{0.99}\NormalTok{, }\DataTypeTok{by =} \FloatTok{0.01}\NormalTok{)}
+\NormalTok{  ) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}
+    \DataTypeTok{likelihoods =} \KeywordTok{dbinom}\NormalTok{(nResponders, }\DecValTok{100}\NormalTok{, steps),}
+    \DataTypeTok{priors_flat =} \KeywordTok{dunif}\NormalTok{(steps) }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\KeywordTok{dunif}\NormalTok{(steps)),}
+    \DataTypeTok{priors_empirical =} \KeywordTok{dbinom}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{, steps) }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\KeywordTok{dbinom}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{, steps))}
+\NormalTok{  )}
+
+\NormalTok{marginal_likelihood_flat <-}\StringTok{ }
+\StringTok{  }\KeywordTok{sum}\NormalTok{(}\KeywordTok{dbinom}\NormalTok{(nResponders, }\DecValTok{100}\NormalTok{, df}\OperatorTok{$}\NormalTok{steps) }\OperatorTok{*}\StringTok{ }\NormalTok{df}\OperatorTok{$}\NormalTok{priors_flat)}
+
+\NormalTok{marginal_likelihood_empirical <-}\StringTok{ }
+\StringTok{  }\KeywordTok{sum}\NormalTok{(}\KeywordTok{dbinom}\NormalTok{(nResponders, }\DecValTok{100}\NormalTok{, df}\OperatorTok{$}\NormalTok{steps) }\OperatorTok{*}\StringTok{ }\NormalTok{df}\OperatorTok{$}\NormalTok{priors_empirical)}
 
 \NormalTok{df <-}\StringTok{ }
-\StringTok{  }\KeywordTok{tibble}\NormalTok{(}
-    \DataTypeTok{steps=}\KeywordTok{seq}\NormalTok{(}\FloatTok{0.01}\NormalTok{,}\FloatTok{0.99}\NormalTok{,}\FloatTok{0.01}\NormalTok{)}
-\NormalTok{  ) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{df }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}
-    \DataTypeTok{likelihoods =} \KeywordTok{dbinom}\NormalTok{(drugDf}\OperatorTok{$}\NormalTok{number[}\DecValTok{1}\NormalTok{],}\DecValTok{100}\NormalTok{,steps),}
-    \DataTypeTok{priors_flat =} \KeywordTok{dunif}\NormalTok{(steps)}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(}\KeywordTok{dunif}\NormalTok{(steps)),}
-    \DataTypeTok{priors_empirical =} \KeywordTok{dbinom}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{20}\NormalTok{,steps)}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(}\KeywordTok{dbinom}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{20}\NormalTok{,steps)),}
-\NormalTok{)}
-\NormalTok{marginal_likelihood_flat=}\KeywordTok{sum}\NormalTok{(}\KeywordTok{dbinom}\NormalTok{(nResponders,}\DecValTok{100}\NormalTok{,df}\OperatorTok{$}\NormalTok{steps)}\OperatorTok{*}\NormalTok{df}\OperatorTok{$}\NormalTok{priors_flat)}
-\NormalTok{marginal_likelihood_empirical=}\KeywordTok{sum}\NormalTok{(}\KeywordTok{dbinom}\NormalTok{(nResponders,}\DecValTok{100}\NormalTok{,df}\OperatorTok{$}\NormalTok{steps)}\OperatorTok{*}\NormalTok{df}\OperatorTok{$}\NormalTok{priors_empirical)}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}
-    \DataTypeTok{posteriors_flat =}\NormalTok{ (likelihoods}\OperatorTok{*}\NormalTok{priors_flat)}\OperatorTok{/}\NormalTok{marginal_likelihood_flat,}
-    \DataTypeTok{posteriors_empirical=}\NormalTok{(likelihoods}\OperatorTok{*}\NormalTok{priors_empirical)}\OperatorTok{/}\NormalTok{marginal_likelihood_empirical}
+    \DataTypeTok{posteriors_flat =} 
+\NormalTok{      (likelihoods }\OperatorTok{*}\StringTok{ }\NormalTok{priors_flat) }\OperatorTok{/}\StringTok{ }\NormalTok{marginal_likelihood_flat,}
+    \DataTypeTok{posteriors_empirical =} 
+\NormalTok{      (likelihoods }\OperatorTok{*}\StringTok{ }\NormalTok{priors_empirical) }\OperatorTok{/}\StringTok{ }\NormalTok{marginal_likelihood_empirical}
 \NormalTok{  )}
 \end{Highlighting}
 \end{Shaded}
@@ -8296,15 +8332,16 @@ strength of each.
 \NormalTok{df <-}
 \StringTok{  }\NormalTok{df }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}
-    \DataTypeTok{priors_strong =} \KeywordTok{dbinom}\NormalTok{(}\DecValTok{250}\NormalTok{,}\DecValTok{500}\NormalTok{,steps)}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(}\KeywordTok{dbinom}\NormalTok{(}\DecValTok{250}\NormalTok{,}\DecValTok{500}\NormalTok{,steps)),}
+    \DataTypeTok{priors_strong =} \KeywordTok{dbinom}\NormalTok{(}\DecValTok{250}\NormalTok{, }\DecValTok{500}\NormalTok{, steps) }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\KeywordTok{dbinom}\NormalTok{(}\DecValTok{250}\NormalTok{, }\DecValTok{500}\NormalTok{, steps))}
 \NormalTok{  )}
 
-\NormalTok{marginal_likelihood_strong=}\KeywordTok{sum}\NormalTok{(}\KeywordTok{dbinom}\NormalTok{(nResponders,}\DecValTok{100}\NormalTok{,df}\OperatorTok{$}\NormalTok{steps)}\OperatorTok{*}\NormalTok{df}\OperatorTok{$}\NormalTok{priors_strong)}
+\NormalTok{marginal_likelihood_strong <-}\StringTok{ }
+\StringTok{  }\KeywordTok{sum}\NormalTok{(}\KeywordTok{dbinom}\NormalTok{(nResponders, }\DecValTok{100}\NormalTok{, df}\OperatorTok{$}\NormalTok{steps) }\OperatorTok{*}\StringTok{ }\NormalTok{df}\OperatorTok{$}\NormalTok{priors_strong)}
 
 \NormalTok{df <-}
 \StringTok{  }\NormalTok{df }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}
-    \DataTypeTok{posteriors_strongprior =}\NormalTok{ (likelihoods}\OperatorTok{*}\NormalTok{priors_strong)}\OperatorTok{/}\NormalTok{marginal_likelihood_strong}
+    \DataTypeTok{posteriors_strongprior =}\NormalTok{ (likelihoods }\OperatorTok{*}\StringTok{ }\NormalTok{priors_strong) }\OperatorTok{/}\StringTok{ }\NormalTok{marginal_likelihood_strong}
 \NormalTok{  )}
 \end{Highlighting}
 \end{Shaded}
@@ -8329,16 +8366,22 @@ then compute the posterior?
 \NormalTok{df <-}
 \StringTok{  }\NormalTok{df }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}
-    \DataTypeTok{priors_absolute =} \KeywordTok{array}\NormalTok{(}\DataTypeTok{data=}\DecValTok{0}\NormalTok{,}\DataTypeTok{dim=}\KeywordTok{length}\NormalTok{(steps))}
+    \DataTypeTok{priors_absolute =} \KeywordTok{array}\NormalTok{(}\DataTypeTok{data =} \DecValTok{0}\NormalTok{, }\DataTypeTok{dim =} \KeywordTok{length}\NormalTok{(steps)),}
+    \DataTypeTok{priors_absolute =} \KeywordTok{if_else}\NormalTok{(}
+\NormalTok{      steps }\OperatorTok{>=}\StringTok{ }\FloatTok{0.8}\NormalTok{,}
+      \DecValTok{1}\NormalTok{, priors_absolute}
+\NormalTok{    ),}
+    \DataTypeTok{priors_absolute =}\NormalTok{ priors_absolute }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(priors_absolute)}
 \NormalTok{  )}
-\NormalTok{df}\OperatorTok{$}\NormalTok{priors_absolute[}\KeywordTok{which}\NormalTok{(df}\OperatorTok{$}\NormalTok{steps}\OperatorTok{>=}\FloatTok{0.8}\NormalTok{)] <-}\StringTok{ }\DecValTok{1}
-\NormalTok{df}\OperatorTok{$}\NormalTok{priors_absolute <-}\StringTok{ }\NormalTok{df}\OperatorTok{$}\NormalTok{priors_absolute}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(df}\OperatorTok{$}\NormalTok{priors_absolute)}
-\NormalTok{marginal_likelihood_absolute=}\KeywordTok{sum}\NormalTok{(}\KeywordTok{dbinom}\NormalTok{(nResponders,}\DecValTok{100}\NormalTok{,df}\OperatorTok{$}\NormalTok{steps)}\OperatorTok{*}\NormalTok{df}\OperatorTok{$}\NormalTok{priors_absolute)}
+
+\NormalTok{marginal_likelihood_absolute <-}\StringTok{ }
+\StringTok{  }\KeywordTok{sum}\NormalTok{(}\KeywordTok{dbinom}\NormalTok{(nResponders, }\DecValTok{100}\NormalTok{, df}\OperatorTok{$}\NormalTok{steps) }\OperatorTok{*}\StringTok{ }\NormalTok{df}\OperatorTok{$}\NormalTok{priors_absolute)}
 
 \NormalTok{df <-}
-\StringTok{  }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{df }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}
-    \DataTypeTok{posteriors_absolute=}\NormalTok{(likelihoods}\OperatorTok{*}\NormalTok{priors_absolute)}\OperatorTok{/}\NormalTok{marginal_likelihood_absolute}
+    \DataTypeTok{posteriors_absolute =} 
+\NormalTok{      (likelihoods }\OperatorTok{*}\StringTok{ }\NormalTok{priors_absolute) }\OperatorTok{/}\StringTok{ }\NormalTok{marginal_likelihood_absolute}
 \NormalTok{  )}
 \end{Highlighting}
 \end{Shaded}
@@ -8360,7 +8403,7 @@ inferences. \emph{Uninformative priors} attempt to bias the resulting
 posterior as little as possible, as we saw in the example of the uniform
 prior above. It's also common to use \emph{weakly informative priors}
 (or \emph{default priors}), which bias the result only very slightly.
-For example, if we had used a binomial distribution based on a one heads
+For example, if we had used a binomial distribution based on one heads
 out of two coin flips, this would have been centered around 0.5 but
 fairly flat, biasing the posterior only slightly.
 
@@ -8376,15 +8419,15 @@ in an important way based on the prior.
 
 Having learned how to perform Bayesian estimation, we now turn to the
 use of Bayesian methods for hypothesis testing. Let's say that there are
-two politicians who differ in their beliefs about support for the death
-penalty. Senator Smith thinks that only 40\% of people support the death
-penalty, whereas Senator Jones thinks that 60\% of people support the
-death penalty. They arrange to have a poll done to test this, which asks
-1000 randomly selected people whether they support the death penalty,
-which finds that 490 of people in the sample support the death penalty.
-Based on these data, we would like to know: Do the data support the
-claims of one senator over the other? We can test this using a concept
-known as the
+two politicians who differ in their beliefs about whether the public
+supports the death penalty. Senator Smith thinks that only 40\% of
+people support the death penalty, whereas Senator Jones thinks that 60\%
+of people support the death penalty. They arrange to have a poll done to
+test this, which asks 1000 randomly selected people whether they support
+the death penalty. The results are that 490 of the people in the polled
+sample support the death penalty. Based on these data, we would like to
+know: Do the data support the claims of one senator over the other? We
+can test this using a concept known as the
 \href{https://bayesfactor.blogspot.com/2014/02/the-bayesfactor-package-this-blog-is.html}{Bayes
 factor}.
 
@@ -8406,8 +8449,18 @@ value less than one will reflect greater evidence for Senator Jones.
 \begin{Highlighting}[]
 \CommentTok{# compute Bayes factor for Smith vs. Jones}
 
-\NormalTok{bf <-}\StringTok{ }\KeywordTok{dbinom}\NormalTok{(}\DecValTok{490}\NormalTok{,}\DecValTok{1000}\NormalTok{,}\FloatTok{0.4}\NormalTok{)}\OperatorTok{/}\KeywordTok{dbinom}\NormalTok{(}\DecValTok{490}\NormalTok{,}\DecValTok{1000}\NormalTok{,}\FloatTok{0.6}\NormalTok{)}
-\KeywordTok{sprintf}\NormalTok{(}\StringTok{'Bayes factor = %0.2f'}\NormalTok{,bf)}
+\NormalTok{bf <-}
+\StringTok{  }\KeywordTok{dbinom}\NormalTok{(}
+    \DataTypeTok{x =} \DecValTok{490}\NormalTok{,}
+    \DataTypeTok{size =} \DecValTok{1000}\NormalTok{,}
+    \DataTypeTok{prob =} \FloatTok{0.4} \CommentTok{#Smith's hypothesis}
+\NormalTok{  ) }\OperatorTok{/}\StringTok{ }\KeywordTok{dbinom}\NormalTok{(}
+    \DataTypeTok{x =} \DecValTok{490}\NormalTok{, }
+    \DataTypeTok{size =} \DecValTok{1000}\NormalTok{, }
+    \DataTypeTok{prob =} \FloatTok{0.6} \CommentTok{#Jones' hypothesis}
+\NormalTok{  )}
+
+\KeywordTok{sprintf}\NormalTok{(}\StringTok{"Bayes factor = %0.2f"}\NormalTok{, bf)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -8417,7 +8470,7 @@ value less than one will reflect greater evidence for Senator Jones.
 
 This number provides a measure of the evidence that the data provides
 regarding the two hypotheses - in this case, it tells us the data
-support Senator Smith more than 3000 times more strongly than the
+support Senator Smith more than 3000 times more strongly than they
 support Senator Jones.
 
 \subsection{Bayes factors for statistical
@@ -8451,12 +8504,12 @@ testing (see Figure \ref{fig:bayesTesting}).
 \NormalTok{effect_size <-}\StringTok{ }\FloatTok{0.1}
 
 \CommentTok{# randomize indiviuals to drug (1) or placebo (0)}
-\NormalTok{drugDf <-}\StringTok{ }
+\NormalTok{drugDf <-}
 \StringTok{  }\KeywordTok{tibble}\NormalTok{(}
-    \DataTypeTok{group=}\KeywordTok{as.integer}\NormalTok{(}\KeywordTok{runif}\NormalTok{(nsubs)}\OperatorTok{>}\FloatTok{0.5}\NormalTok{)}
+    \DataTypeTok{group =} \KeywordTok{as.integer}\NormalTok{(}\KeywordTok{runif}\NormalTok{(nsubs) }\OperatorTok{>}\StringTok{ }\FloatTok{0.5}\NormalTok{)}
 \NormalTok{  ) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}
-    \DataTypeTok{hbchange=}\KeywordTok{rnorm}\NormalTok{(nsubs) }\OperatorTok{-}\StringTok{ }\NormalTok{group}\OperatorTok{*}\NormalTok{effect_size}
+    \DataTypeTok{hbchange =} \KeywordTok{rnorm}\NormalTok{(nsubs) }\OperatorTok{-}\StringTok{ }\NormalTok{group }\OperatorTok{*}\StringTok{ }\NormalTok{effect_size}
 \NormalTok{  )}
 \end{Highlighting}
 \end{Shaded}
@@ -8471,7 +8524,7 @@ significant difference between the groups:
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# compute t-test for drug example}
-\NormalTok{drugTT <-}\StringTok{ }\KeywordTok{t.test}\NormalTok{(hbchange}\OperatorTok{~}\NormalTok{group,}\DataTypeTok{data=}\NormalTok{drugDf,}\DataTypeTok{alternative=}\StringTok{'greater'}\NormalTok{)}
+\NormalTok{drugTT <-}\StringTok{ }\KeywordTok{t.test}\NormalTok{(hbchange }\OperatorTok{~}\StringTok{ }\NormalTok{group, }\DataTypeTok{alternative =} \StringTok{"greater"}\NormalTok{, }\DataTypeTok{data =}\NormalTok{ drugDf)}
 \KeywordTok{print}\NormalTok{(drugTT)}
 \end{Highlighting}
 \end{Shaded}
@@ -8493,13 +8546,17 @@ significant difference between the groups:
 This test tells us that there is a significant difference between the
 groups, but it doesn't quantify how strongly the evidence supports the
 null versus alternative hypotheses. To measure that, we can compute a
-Bayes factor using the BayesFactor package in R:
+Bayes factor using \texttt{ttestBF} function from the BayesFactor
+package in R:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# compute Bayes factor for drug data}
-\NormalTok{bf_drug <-}\StringTok{ }\KeywordTok{ttestBF}\NormalTok{(}\DataTypeTok{formula=}\NormalTok{hbchange}\OperatorTok{~}\NormalTok{group,}\DataTypeTok{data=}\NormalTok{drugDf,}
-                  \DataTypeTok{nullInterval =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\OtherTok{Inf}\NormalTok{))}
+\NormalTok{bf_drug <-}\StringTok{ }\KeywordTok{ttestBF}\NormalTok{(}
+  \DataTypeTok{formula =}\NormalTok{ hbchange }\OperatorTok{~}\StringTok{ }\NormalTok{group, }\DataTypeTok{data =}\NormalTok{ drugDf,}
+  \DataTypeTok{nullInterval =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\OtherTok{Inf}\NormalTok{)}
+\NormalTok{)}
+
 \NormalTok{bf_drug}
 \end{Highlighting}
 \end{Shaded}
@@ -8517,10 +8574,10 @@ Bayes factor using the BayesFactor package in R:
 \end{verbatim}
 
 The Bayes factor here tells us that the alternative hypothesis
-(i.e.~that the difference is greater than zero) that is about 2.4 times
-more likely than the null hypothesis given the data. This doesn't seem
-that strong, but how can we determine that? There is a general guideline
-for interpretation of Bayes factors suggested by
+(i.e.~that the difference is greater than zero) is about 2.4 times more
+likely than the null hypothesis given the data. This doesn't seem that
+strong, but how can we determine that? There is a general guideline for
+interpretation of Bayes factors suggested by
 \href{https://www.andrew.cmu.edu/user/kk3n/simplicity/KassRaftery1995.pdf}{Kass
 \& Rafferty (1995)}:
 
@@ -8544,7 +8601,7 @@ Because the Bayes factor is comparing evidence for two hypotheses, it
 also allows us to assess whether there is evidence in favor of the null
 hypothesis, which we couldn't do with standard null hypothesis testing
 (because it starts with the assumption that the null is true). This can
-be very useful to determine whether a non-significant result really
+be very useful for determining whether a non-significant result really
 provides strong evidence that there is no effect, or instead just
 reflects weak evidence overall.
 

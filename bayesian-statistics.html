@@ -399,7 +399,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="bayesian-statistics" class="section level1">
 <h1><span class="header-section-number">Chapter 11</span> Bayesian statistics</h1>
-<p>In this chapter we will take up the approach to statistical modeling and inference that stands in contrast to the null hypothesis testing framework that you encountered Chapter <a href="hypothesis-testing.html#hypothesis-testing">9</a>. This is known as “Bayesian statistics” after the Reverend Thomas Bayes, whose theorem you have already encountered in Chapter <a href="probability.html#probability">3</a>. In this chapter you will learn how Bayes’ theorem provides a way of understanding data that solves many of the conceptual problems that we discussed regarding null hypothesis testing.</p>
+<p>In this chapter we will take up the approach to statistical modeling and inference that stands in contrast to the null hypothesis testing framework that you encountered in Chapter <a href="hypothesis-testing.html#hypothesis-testing">9</a>. This is known as “Bayesian statistics” after the Reverend Thomas Bayes, whose theorem you have already encountered in Chapter <a href="probability.html#probability">3</a>. In this chapter you will learn how Bayes’ theorem provides a way of understanding data that solves many of the conceptual problems that we discussed regarding null hypothesis testing.</p>
 <div id="generative-models" class="section level2">
 <h2><span class="header-section-number">11.1</span> Generative models</h2>
 <p>Say you are walking down the street and a friend of yours walks right by but doesn’t say hello. You would probably try to decide why this happened – Did they not see you? Are they mad at you? Are you suddenly cloaked in a magic invisibility shield? One of the basic ideas behind Bayesian statistics is that we want to infer the details of how the data are being generated, based on the data themselves. In this case, you want to use the data (i.e. the fact that your friend did not say hello) to infer the process that generated the data (e.g. whether or not they actually saw you, how they feel about you, etc).</p>
@@ -408,10 +408,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="bayes-theorem-and-inverse-inference" class="section level2">
 <h2><span class="header-section-number">11.2</span> Bayes’ theorem and inverse inference</h2>
-<p>The reason that Bayesian statistics has its name is because it takes advantage of Bayes’ theorem to make inferences from data back to some features of the (latent) model that generated the data. Let’s say that want to know whether a coin is fair. To test this, we flip the coin 10 times and come up with 7 heads. Before this we were pretty sure that the coin was fair (i.e., that <span class="math inline">\(p_{heads}=0.5\)</span>), but these data would certainly give us pause. We already know how to compute the conditional probability that we would flip 7 or more heads out of 10 if the coin is really fair (<span class="math inline">\(P(n\ge7|p_{heads}=0.5)\)</span>), using the binomial distribution:</p>
+<p>The reason that Bayesian statistics has its name is because it takes advantage of Bayes’ theorem to make inferences from data back to some features of the (latent) model that generated the data. Let’s say that we want to know whether a coin is fair. To test this, we flip the coin 10 times and come up with 7 heads. Before this test we were pretty sure that the coin was fair (i.e., that <span class="math inline">\(p_{heads}=0.5\)</span>), but these data certainly give us pause. We already know how to compute the conditional probability that we would flip 7 or more heads out of 10 if the coin is really fair (<span class="math inline">\(P(n\ge7|p_{heads}=0.5)\)</span>), using the binomial distribution:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute the conditional probability of 7 or more heads when p(heads)=0.5</span>
-<span class="kw">sprintf</span>(<span class="st">&#39;p(7 or more heads | p(heads) = 0.5) = %.3f&#39;</span>,
-        <span class="kw">pbinom</span>(<span class="dv">7</span>,<span class="dv">10</span>,.<span class="dv">5</span>,<span class="dt">lower.tail=</span><span class="ot">FALSE</span>))</code></pre></div>
+<span class="kw">sprintf</span>(
+  <span class="st">&quot;p(7 or more heads | p(heads) = 0.5) = %.3f&quot;</span>,
+  <span class="kw">pbinom</span>(<span class="dv">7</span>, <span class="dv">10</span>, .<span class="dv">5</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)
+)</code></pre></div>
 <pre><code>## [1] &quot;p(7 or more heads | p(heads) = 0.5) = 0.055&quot;</code></pre>
 <p>That is an fairly small number, but this number doesn’t really answer the question that we are asking – it is telling us about the likelihood of the data given some parameter, whereas what we really want to know is the parameter value. This should sound familiar, as it’s exactly the situation that we were in with null hypothesis testing, which told us about the likelihood of data rather than the likelihood of hypotheses.</p>
 <p>Remember that Bayes’ theorem provides us with the tool that we need to invert a conditional probability:</p>
@@ -425,12 +427,12 @@ P(H|D) = \frac{P(D|H)*P(H)}{P(D)}
 <li>marginal likelihood (<span class="math inline">\(P(D)\)</span>): How likely are the observed data, combining over all possible hypotheses?</li>
 <li>posterior (<span class="math inline">\(P(H|D)\)</span>): Our updated belief about hypothesis H, given the data D</li>
 </ul>
-<p>Here we see one of the primary differences between frequentist and Bayesian statsistics. Frequentists do not believe in the idea of a probability of a hypothesis – for them, a hypothesis is either true or it isn’t. Another way to say this is that for the frequentist, the hypothesis is fixed and the data are random, which is why frequentist inference focused on describing the probability of data given a hypothesis (i.e. the p-value). Bayesians, on the other hand, are comfortable making probability statements about both data and hypotheses.</p>
+<p>Here we see one of the primary differences between frequentist and Bayesian statsistics. Frequentists do not believe in the idea of a probability of a hypothesis (i.e., our degree of belief about a hypothesis) – for them, a hypothesis is either true or it isn’t. Another way to say this is that for the frequentist, the hypothesis is fixed and the data are random, which is why frequentist inference focuses on describing the probability of data given a hypothesis (i.e. the p-value). Bayesians, on the other hand, are comfortable making probability statements about both data and hypotheses.</p>
 </div>
 <div id="doing-bayesian-estimation" class="section level2">
 <h2><span class="header-section-number">11.3</span> Doing Bayesian estimation</h2>
-<p>We ultimately want to use Bayesian statistics to test hypotheses, but before we do that we need to estimate the parameters that are necessary to test the hypothesis. Here we will walk through the process of Bayesian estimation. Let’s use another screening example: Airport security screening. If you fly a lot like I do, it’s just a matter of time until one of the random explosive screenings comes back positive; I had the particularly unfortunate experience of this happening soon after September 11, 2001, when airport security staff were particularly on edge.</p>
-<p>What the security staff want to know is what is the likelihood that a person is carrying an explosive, given that the machine has given a positive test. Let’s walk through how to do this using Bayesian analysis.</p>
+<p>We ultimately want to use Bayesian statistics to test hypotheses, but before we do that we need to estimate the parameters that are necessary to test the hypothesis. Here we will walk through the process of Bayesian estimation. Let’s use another screening example: Airport security screening. If you fly a lot like I do, it’s just a matter of time until one of the random explosive screenings comes back positive; I had the particularly unfortunate experience of this happening soon after September 11, 2001, when airport security staff were especially on edge.</p>
+<p>What the security staff want to know is what is the likelihood that a person is carrying an explosive, given that the machine has given a positive test. Let’s walk through how to calculate this value using Bayesian analysis.</p>
 <div id="specifying-the-prior" class="section level3">
 <h3><span class="header-section-number">11.3.1</span> Specifying the prior</h3>
 <p>To use Bayes’ theorem, we first need to specify the prior probability for the hypothesis. In this case, we don’t know the real number but we can assume that it’s quite small – for this example, let’s say that one out of every 5 million travelers is expected to have an explosive device.</p>
@@ -445,31 +447,41 @@ nPositives &lt;-<span class="st"> </span><span class="dv">9</span></code></pre><
 <div id="computing-the-likelihood" class="section level3">
 <h3><span class="header-section-number">11.3.3</span> Computing the likelihood</h3>
 <p>We want to compute the likelihood of the data under the hypothesis that there is an explosive in the bag. Let’s say that we know that the sensitivity of the test is 0.99 – that is, when a device is present, it will detect it 99% of the time. To determine the likelihood of our data under the hypothesis that a device is present, we can treat each test as a Bernoulli trial with a probability of success of 0.99, which we can model using a binomial distribution.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">likelihood &lt;-<span class="st"> </span><span class="kw">dbinom</span>(nPositives,nTests,<span class="fl">0.99</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">likelihood &lt;-<span class="st"> </span><span class="kw">dbinom</span>(nPositives, nTests, <span class="fl">0.99</span>)
 likelihood</code></pre></div>
 <pre><code>## [1] 0.091</code></pre>
 </div>
 <div id="computing-the-marginal-likelihood" class="section level3">
 <h3><span class="header-section-number">11.3.4</span> Computing the marginal likelihood</h3>
-<p>We also need to know the overall likelihood of the data – that is, finding 9 positives out of 10 tests. Computing the marginal likelihood is in general often one of the most difficult aspects of Bayesian analysis, but for our example it’s simple because we can take advantage of the specific form of Bayes’ theorem that we introduced in Section <a href="probability.html#bayestheorem">3.7</a>:</p>
+<p>We also need to know the overall likelihood of the data – that is, finding 9 positives out of 10 tests. Computing the marginal likelihood is often one of the most difficult aspects of Bayesian analysis, but for our example it’s simple because we can take advantage of the specific form of Bayes’ theorem that we introduced in Section <a href="probability.html#bayestheorem">3.7</a>:</p>
 <p><span class="math display">\[
 P(B|A) = \frac{P(A|B)*P(B)}{P(A|B)*P(B) + P(A|\neg B)*P(\neg B)}
 \]</span></p>
 <p>The marginal likelihood in this case is a weighted average of the likelihood of the data under either presence or absence of the explosive, multiplied by the probability of the explosive being present (i.e. the prior). In this case, let’s say that we know that the specificity of the test is 0.9, such that the likelihood of a positive result when there is no explosive is 0.1.</p>
 <p>We can compute this in R as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p_test_explosive =<span class="st"> </span><span class="fl">0.99</span> <span class="co"># known sensitivity of the test</span>
-p_test_noExplosive =<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.9</span> <span class="co"># 1 - known specificity of test</span>
-marginal_likelihood &lt;-<span class="st"> </span><span class="kw">dbinom</span>(nPositives,nTests,p_test_explosive)<span class="op">*</span>prior <span class="op">+</span><span class="st"> </span><span class="kw">dbinom</span>(nPositives,nTests,p_test_noExplosive)<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>prior)
-<span class="kw">sprintf</span>(<span class="st">&#39;marginal likelihood = %.3e&#39;</span>,marginal_likelihood)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">marginal_likelihood &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">dbinom</span>(
+    <span class="dt">x =</span> nPositives, 
+    <span class="dt">size =</span> nTests, 
+    <span class="dt">prob =</span> <span class="fl">0.99</span>
+  ) <span class="op">*</span><span class="st"> </span>prior <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">dbinom</span>(
+    <span class="dt">x =</span> nPositives, 
+    <span class="dt">size =</span> nTests, 
+    <span class="dt">prob =</span> .<span class="dv">1</span>
+  ) <span class="op">*</span><span class="st"> </span>
+<span class="st">  </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>prior)
+
+<span class="kw">sprintf</span>(<span class="st">&quot;marginal likelihood = %.3e&quot;</span>, marginal_likelihood)</code></pre></div>
 <pre><code>## [1] &quot;marginal likelihood = 2.727e-08&quot;</code></pre>
 </div>
 <div id="computing-the-posterior" class="section level3">
 <h3><span class="header-section-number">11.3.5</span> Computing the posterior</h3>
-<p>We now have all of the parts that we need to compute the posterior probability of of an explosive being present, given the observed 9 positive outcomes out of 10 tests.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">posterior &lt;-<span class="st"> </span>(likelihood<span class="op">*</span>prior)<span class="op">/</span>marginal_likelihood
+<p>We now have all of the parts that we need to compute the posterior probability of an explosive being present, given the observed 9 positive outcomes out of 10 tests.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">posterior &lt;-<span class="st"> </span>(likelihood <span class="op">*</span><span class="st"> </span>prior) <span class="op">/</span><span class="st"> </span>marginal_likelihood
 posterior</code></pre></div>
 <pre><code>## [1] 0.67</code></pre>
-<p>This result shows us that the probability of an explosive in the bag is much higher than the prior, but nowhere near certainty, again highlighting the fact that testing for rare events is almost always liable to high numbers of false positives.</p>
+<p>This result shows us that the probability of an explosive in the bag is much higher than the prior, but nowhere near certainty, again highlighting the fact that testing for rare events is almost always liable to produce high numbers of false positives.</p>
 </div>
 </div>
 <div id="estimating-posterior-distributions" class="section level2">
@@ -477,17 +489,18 @@ posterior</code></pre></div>
 <p>In the previous example there were only two possible outcomes - the explosive is either there or it’s not. However, in other cases we want to use Bayesian estimation to estimate the value of a parameter. Let’s say that we want to know about the effectiveness of a new drug for pain; to test this, we can administer the drug to a group of patients and then ask them whether their pain improved or not after taking the drug. We can use Bayesian analysis to estimate the proportion of people for whom the drug will be effective using these data.</p>
 <div id="specifying-the-prior-1" class="section level3">
 <h3><span class="header-section-number">11.4.1</span> Specifying the prior</h3>
-<p>In this case, we don’t have any prior information about the effectiveness of the drug, so we will use a <em>uniform distribution</em> as our prior, since all values are equally likely under a uniform distribution. In order to simplify the example, we will only look at a subset of 99 possible values of effectiveness (from .01 to .99, in steps of .01), so in this case each possible value has a prior probability of 1/99.</p>
+<p>In this case, we don’t have any prior information about the effectiveness of the drug, so we will use a <em>uniform distribution</em> as our prior, since all values are equally likely under a uniform distribution. In order to simplify the example, we will only look at a subset of 99 possible values of effectiveness (from .01 to .99, in steps of .01). Therefore, each possible value has a prior probability of 1/99.</p>
 </div>
 <div id="collect-some-data-1" class="section level3">
 <h3><span class="header-section-number">11.4.2</span> Collect some data</h3>
-<p>We need some data in order to estimate the effect of the drug. Let’s say that we administer the drug to 100 individuals, with the results show in the table:</p>
+<p>We need some data in order to estimate the effect of the drug. Let’s say that we administer the drug to 100 individuals, and get the following results:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create a table with results</span>
-nResponders=<span class="dv">64</span>
-nTested=<span class="dv">100</span>
+nResponders &lt;-<span class="st"> </span><span class="dv">64</span>
+nTested &lt;-<span class="st"> </span><span class="dv">100</span>
+
 drugDf &lt;-<span class="st"> </span><span class="kw">tibble</span>(
-  <span class="dt">outcome=</span><span class="kw">c</span>(<span class="st">&#39;improved&#39;</span>,<span class="st">&#39;not improved&#39;</span>),
-  <span class="dt">number=</span><span class="kw">c</span>(nResponders,nTested<span class="op">-</span>nResponders)
+  <span class="dt">outcome =</span> <span class="kw">c</span>(<span class="st">&quot;improved&quot;</span>, <span class="st">&quot;not improved&quot;</span>),
+  <span class="dt">number =</span> <span class="kw">c</span>(nResponders, nTested <span class="op">-</span><span class="st"> </span>nResponders)
 )
 <span class="kw">pander</span>(drugDf)</code></pre></div>
 <table style="width:32%;">
@@ -517,38 +530,50 @@ drugDf &lt;-<span class="st"> </span><span class="kw">tibble</span>(
 <h3><span class="header-section-number">11.4.3</span> Computing the likelihood</h3>
 <p>We can compute the likelihood of the data under the any particular value of the effectiveness parameter using the <code>dbinom()</code> function in R. In Figure <a href="bayesian-statistics.html#fig:like2">11.1</a> you can see the likelihood curves over numbers of responders for several different values of <span class="math inline">\(p_{respond}\)</span>. Looking at this, it seems that our observed data are relatively more likely under the hypothesis of <span class="math inline">\(p_{respond}=0.7\)</span>, somewhat less likely under the hypothesis of <span class="math inline">\(p_{respond}=0.5\)</span>, and quite unlikely under the hypothesis of <span class="math inline">\(p_{respond}=0.3\)</span>. One of the fundamental ideas of Bayesian inference is that we will try to find the value of our parameter of interest that makes the data most likely, while also taking into account our prior knowledge.</p>
 <div class="figure"><span id="fig:like2"></span>
-<img src="StatsThinking21_files/figure-html/like2-1.png" alt="Likelihood of each possible number of responders under several different hypotheses (p(respond)=0.5 (red), 0.7 (green), 0.3 (black).  Observed value shown blue." width="384" height="50%" />
+<img src="StatsThinking21_files/figure-html/like2-1.png" alt="Likelihood of each possible number of responders under several different hypotheses (p(respond)=0.5 (red), 0.7 (green), 0.3 (black).  Observed value shown in blue." width="384" height="50%" />
 <p class="caption">
-Figure 11.1: Likelihood of each possible number of responders under several different hypotheses (p(respond)=0.5 (red), 0.7 (green), 0.3 (black). Observed value shown blue.
+Figure 11.1: Likelihood of each possible number of responders under several different hypotheses (p(respond)=0.5 (red), 0.7 (green), 0.3 (black). Observed value shown in blue.
 </p>
 </div>
 </div>
 <div id="computing-the-marginal-likelihood-1" class="section level3">
 <h3><span class="header-section-number">11.4.4</span> Computing the marginal likelihood</h3>
-<p>We also need to know the overall likelihood of the data, which is used as a normalizing constant to ensure that the posterior values are true probabilities. In this case, our use of a set of discrete possible parameter values makes it easy to compute the marginal likelihood, because we can just compute each one and add them up.</p>
+<p>In addition to the likelihood of the data under different hypotheses, we need to know the overall likelihood of the data, combining across all hypotheses (i.e., the marginal likelihood). This marginal likelihood is used as a normalizing constant to ensure that the posterior values are true probabilities. In this case, our use of a set of discrete possible parameter values makes it easy to compute the marginal likelihood, because we can just compute the likelihood of each parameter value under each hypothesis and add them up.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute marginal likelihood</span>
-likeDf &lt;-<span class="st"> </span>likeDf <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">uniform_prior =</span> <span class="kw">array</span>(<span class="dv">1</span><span class="op">/</span><span class="kw">n</span>()))
+likeDf &lt;-<span class="st"> </span>
+<span class="st">  </span>likeDf <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">uniform_prior =</span> <span class="kw">array</span>(<span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="kw">n</span>()))
 
 <span class="co"># multiply each likelihood by prior and add them up</span>
-marginal_likelihood=<span class="kw">sum</span>(<span class="kw">dbinom</span>(nResponders,<span class="dv">100</span>,likeDf<span class="op">$</span>presp)<span class="op">*</span>likeDf<span class="op">$</span>uniform_prior)
-<span class="kw">sprintf</span>(<span class="st">&#39;marginal likelihood = %0.4f&#39;</span>,marginal_likelihood)</code></pre></div>
+marginal_likelihood &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">sum</span>(
+    <span class="kw">dbinom</span>(
+      <span class="dt">x =</span> nResponders, <span class="co"># the number who responded to the drug</span>
+      <span class="dt">size =</span> <span class="dv">100</span>, <span class="co"># the number tested</span>
+      likeDf<span class="op">$</span>presp <span class="co"># the likelihood of each response </span>
+    ) <span class="op">*</span><span class="st"> </span>likeDf<span class="op">$</span>uniform_prior
+  )
+
+<span class="kw">sprintf</span>(<span class="st">&quot;marginal likelihood = %0.4f&quot;</span>, marginal_likelihood)</code></pre></div>
 <pre><code>## [1] &quot;marginal likelihood = 0.0100&quot;</code></pre>
 </div>
 <div id="computing-the-posterior-1" class="section level3">
 <h3><span class="header-section-number">11.4.5</span> Computing the posterior</h3>
 <p>We now have all of the parts that we need to compute the posterior probability distribution across all possible values of <span class="math inline">\(p_{respond}\)</span>, as shown in Figure <a href="bayesian-statistics.html#fig:posteriorDist">11.2</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create data for use in figure</span>
-
 bayesDf &lt;-
 <span class="st">  </span><span class="kw">tibble</span>(
-    <span class="dt">steps =</span> <span class="kw">seq</span>(<span class="fl">0.01</span>,<span class="fl">0.99</span>,<span class="fl">0.01</span>)
+    <span class="dt">steps =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="fl">0.01</span>, <span class="dt">to =</span> <span class="fl">0.99</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)
   ) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">likelihoods =</span> <span class="kw">dbinom</span>(drugDf<span class="op">$</span>number[<span class="dv">1</span>],<span class="dv">100</span>,steps),
-    <span class="dt">priors =</span> <span class="kw">dunif</span>(steps)<span class="op">/</span><span class="kw">length</span>(steps),
-    <span class="dt">posteriors =</span> (likelihoods<span class="op">*</span>priors)<span class="op">/</span>marginal_likelihood
- )</code></pre></div>
+    <span class="dt">likelihoods =</span> <span class="kw">dbinom</span>(
+      <span class="dt">x =</span> nResponders, 
+      <span class="dt">size =</span> <span class="dv">100</span>, 
+      <span class="dt">prob =</span> steps
+    ),
+    <span class="dt">priors =</span> <span class="kw">dunif</span>(steps) <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(steps),
+    <span class="dt">posteriors =</span> (likelihoods <span class="op">*</span><span class="st"> </span>priors) <span class="op">/</span><span class="st"> </span>marginal_likelihood
+  )</code></pre></div>
 <div class="figure"><span id="fig:posteriorDist"></span>
 <img src="StatsThinking21_files/figure-html/posteriorDist-1.png" alt="Posterior probability distribution plotted in blue against uniform prior distribution (dotted black line)." width="384" height="50%" />
 <p class="caption">
@@ -560,17 +585,21 @@ Figure 11.2: Posterior probability distribution plotted in blue against uniform 
 <h3><span class="header-section-number">11.4.6</span> Maximum a posteriori (MAP) estimation</h3>
 <p>Given our data we would like to obtain an estimate of <span class="math inline">\(p_{respond}\)</span> for our sample. One way to do this is to find the value of <span class="math inline">\(p_{respond}\)</span> for which the posterior probability is the highest, which we refer to as the <em>maximum a posteriori</em> (MAP) estimate. We can find this from the data in <a href="bayesian-statistics.html#fig:posteriorDist">11.2</a>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute MAP estimate</span>
+MAP_estimate &lt;-<span class="st"> </span>
+<span class="st">  </span>bayesDf <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(posteriors)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pull</span>(steps)
 
-MAP_estimate &lt;-<span class="st"> </span>bayesDf<span class="op">$</span>steps[<span class="kw">which.max</span>(bayesDf<span class="op">$</span>posteriors)]
-<span class="kw">sprintf</span>(<span class="st">&#39;MAP estimate = %0.4f&#39;</span>,MAP_estimate)</code></pre></div>
+<span class="kw">sprintf</span>(<span class="st">&quot;MAP estimate = %0.4f&quot;</span>, MAP_estimate)</code></pre></div>
 <pre><code>## [1] &quot;MAP estimate = 0.6400&quot;</code></pre>
 <p>Note that this is simply the proportion of responders from our sample – this occurs because the prior was uniform and thus didn’t bias our response.</p>
 </div>
 <div id="credible-intervals" class="section level3">
 <h3><span class="header-section-number">11.4.7</span> Credible intervals</h3>
 <p>Often we would like to know not just a single estimate for the posterior, but an interval in which we are confident that the posterior falls. We previously discussed the concept of confidence intervals in the context of frequentist inference, and you may remember that the interpretation of confidence intervals was particularly convoluted. What we really want is an interval in which we are confident that the true parameter falls, and Bayesian statistics can give us such an interval, which we call a <em>credible interval</em>.</p>
-<p>In some cases the credible interval can be computed <em>numerically</em> based on a known distribution, but it’s more common to generate a credible interval by sampling from the posterior distribution and then compute quantiles of the samples. This is particularly useful when we don’t have an easy way to express the posterior distribution numerically, which is often the case in real Bayesian data analysis.</p>
-<p>We will generate samples from our posterior distribution using a simple algorithm known as <a href="https://am207.github.io/2017/wiki/rejectionsampling.html"><em>rejection sampling</em></a>. The idea is that we choose a random value of x (in this case <span class="math inline">\(p_{respond}\)</span>) and a random value of y (in this case, the posterior probability of <span class="math inline">\(p_{respond}\)</span>) each from a uniform distribution, and we accept the sample only if <span class="math inline">\(y &lt; f(x)\)</span> - in this case, if the randomly selected value of y is less than the actual posterior probability of y. Figure <a href="bayesian-statistics.html#fig:rejectionSampling">11.3</a> shows an example of a histogram of samples using rejection sampling, along with the 95% credible intervals obtained using this method.</p>
+<p>In some cases the credible interval can be computed <em>numerically</em> based on a known distribution, but it’s more common to generate a credible interval by sampling from the posterior distribution and then to compute quantiles of the samples. This is particularly useful when we don’t have an easy way to express the posterior distribution numerically, which is often the case in real Bayesian data analysis.</p>
+<p>We will generate samples from our posterior distribution using a simple algorithm known as <a href="https://am207.github.io/2017/wiki/rejectionsampling.html"><em>rejection sampling</em></a>. The idea is that we choose a random value of x (in this case <span class="math inline">\(p_{respond}\)</span>) and a random value of y (in this case, the posterior probability of <span class="math inline">\(p_{respond}\)</span>) each from a uniform distribution. We then only accept the sample if <span class="math inline">\(y &lt; f(x)\)</span> - in this case, if the randomly selected value of y is less than the actual posterior probability of y. Figure <a href="bayesian-statistics.html#fig:rejectionSampling">11.3</a> shows an example of a histogram of samples using rejection sampling, along with the 95% credible intervals obtained using this method.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Compute credible intervals for example</span>
 
 nsamples &lt;-<span class="st"> </span><span class="dv">100000</span>
@@ -580,13 +609,13 @@ x &lt;-<span class="st"> </span><span class="kw">runif</span>(nsamples)
 y &lt;-<span class="st"> </span><span class="kw">runif</span>(nsamples)
 
 <span class="co"># create f(x)</span>
-fx &lt;-<span class="st"> </span><span class="kw">dbinom</span>(drugDf<span class="op">$</span>number[<span class="dv">1</span>],<span class="dv">100</span>,x)
+fx &lt;-<span class="st"> </span><span class="kw">dbinom</span>(<span class="dt">x =</span> nResponders, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">prob =</span> x)
 
 <span class="co"># accept samples where y &lt; f(x)</span>
-accept &lt;-<span class="st"> </span><span class="kw">which</span>(y<span class="op">&lt;</span>fx)
+accept &lt;-<span class="st"> </span><span class="kw">which</span>(y <span class="op">&lt;</span><span class="st"> </span>fx)
 accepted_samples &lt;-<span class="st"> </span>x[accept]
 
-credible_interval &lt;-<span class="st"> </span><span class="kw">quantile</span>(accepted_samples,<span class="kw">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>))
+credible_interval &lt;-<span class="st"> </span><span class="kw">quantile</span>(<span class="dt">x =</span> accepted_samples, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))
 <span class="kw">pander</span>(credible_interval)</code></pre></div>
 <table style="width:19%;">
 <colgroup>
@@ -607,34 +636,41 @@ credible_interval &lt;-<span class="st"> </span><span class="kw">quantile</span>
 </tbody>
 </table>
 <div class="figure"><span id="fig:rejectionSampling"></span>
-<img src="StatsThinking21_files/figure-html/rejectionSampling-1.png" alt="Rejection sampling example.The black line shows the density of all possible values of p(respond); the blue lines show the 2.5th and 97.5th percentiles of the distribution, which represent the 95% credible interval for the estimate of p(heads)." width="384" height="50%" />
+<img src="StatsThinking21_files/figure-html/rejectionSampling-1.png" alt="Rejection sampling example.The black line shows the density of all possible values of p(respond); the blue lines show the 2.5th and 97.5th percentiles of the distribution, which represent the 95% credible interval for the estimate of p(respond)." width="384" height="50%" />
 <p class="caption">
-Figure 11.3: Rejection sampling example.The black line shows the density of all possible values of p(respond); the blue lines show the 2.5th and 97.5th percentiles of the distribution, which represent the 95% credible interval for the estimate of p(heads).
+Figure 11.3: Rejection sampling example.The black line shows the density of all possible values of p(respond); the blue lines show the 2.5th and 97.5th percentiles of the distribution, which represent the 95% credible interval for the estimate of p(respond).
 </p>
 </div>
 <p>The interpretation of this credible interval is much closer to what we had hoped we could get from a confidence interval (but could not): It tells us that there is a 95% probability that the value of <span class="math inline">\(p_{respond}\)</span> falls between these two values. Importantly, it shows that we have high confidence that <span class="math inline">\(p_{respond} &gt; 0.0\)</span>, meaning that the drug seems to have a positive effect.</p>
 </div>
 <div id="effects-of-different-priors" class="section level3">
 <h3><span class="header-section-number">11.4.8</span> Effects of different priors</h3>
-<p>In the previous example we used a <em>flat prior</em>, meaning that we didn’t have any reason to believe that any particular value of <span class="math inline">\(p_{respond}\)</span> was more or less likely. However, let’s say that we had instead started with some previous data: In a previous study, researchers had tested 20 people and found that 10 of them had responded positively. This would have lead us to start with a prior belief that the treatment has an effect in 50% of people. We can do the same computation as above, but using the information about our previous study as the prior (see Figure <a href="bayesian-statistics.html#fig:posteriorDistPrior">11.4</a>).</p>
+<p>In the previous example we used a <em>flat prior</em>, meaning that we didn’t have any reason to believe that any particular value of <span class="math inline">\(p_{respond}\)</span> was more or less likely. However, let’s say that we had instead started with some previous data: In a previous study, researchers had tested 20 people and found that 10 of them had responded positively. This would have lead us to start with a prior belief that the treatment has an effect in 50% of people. We can do the same computation as above, but using the information from our previous study to inform our prior (see Figure <a href="bayesian-statistics.html#fig:posteriorDistPrior">11.4</a>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute likelihoods for data under all values of p(heads) using a flat or empirical prior.  here we use the quantized values from .01 to .99 in steps of 0.01</span>
 
+df &lt;-
+<span class="st">  </span><span class="kw">tibble</span>(
+    <span class="dt">steps =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="fl">0.01</span>, <span class="dt">to =</span> <span class="fl">0.99</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)
+  ) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">likelihoods =</span> <span class="kw">dbinom</span>(nResponders, <span class="dv">100</span>, steps),
+    <span class="dt">priors_flat =</span> <span class="kw">dunif</span>(steps) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">dunif</span>(steps)),
+    <span class="dt">priors_empirical =</span> <span class="kw">dbinom</span>(<span class="dv">10</span>, <span class="dv">20</span>, steps) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">dbinom</span>(<span class="dv">10</span>, <span class="dv">20</span>, steps))
+  )
+
+marginal_likelihood_flat &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">sum</span>(<span class="kw">dbinom</span>(nResponders, <span class="dv">100</span>, df<span class="op">$</span>steps) <span class="op">*</span><span class="st"> </span>df<span class="op">$</span>priors_flat)
+
+marginal_likelihood_empirical &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">sum</span>(<span class="kw">dbinom</span>(nResponders, <span class="dv">100</span>, df<span class="op">$</span>steps) <span class="op">*</span><span class="st"> </span>df<span class="op">$</span>priors_empirical)
 
 df &lt;-<span class="st"> </span>
-<span class="st">  </span><span class="kw">tibble</span>(
-    <span class="dt">steps=</span><span class="kw">seq</span>(<span class="fl">0.01</span>,<span class="fl">0.99</span>,<span class="fl">0.01</span>)
-  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>df <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">likelihoods =</span> <span class="kw">dbinom</span>(drugDf<span class="op">$</span>number[<span class="dv">1</span>],<span class="dv">100</span>,steps),
-    <span class="dt">priors_flat =</span> <span class="kw">dunif</span>(steps)<span class="op">/</span><span class="kw">sum</span>(<span class="kw">dunif</span>(steps)),
-    <span class="dt">priors_empirical =</span> <span class="kw">dbinom</span>(<span class="dv">10</span>,<span class="dv">20</span>,steps)<span class="op">/</span><span class="kw">sum</span>(<span class="kw">dbinom</span>(<span class="dv">10</span>,<span class="dv">20</span>,steps)),
-)
-marginal_likelihood_flat=<span class="kw">sum</span>(<span class="kw">dbinom</span>(nResponders,<span class="dv">100</span>,df<span class="op">$</span>steps)<span class="op">*</span>df<span class="op">$</span>priors_flat)
-marginal_likelihood_empirical=<span class="kw">sum</span>(<span class="kw">dbinom</span>(nResponders,<span class="dv">100</span>,df<span class="op">$</span>steps)<span class="op">*</span>df<span class="op">$</span>priors_empirical)
-df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">posteriors_flat =</span> (likelihoods<span class="op">*</span>priors_flat)<span class="op">/</span>marginal_likelihood_flat,
-    <span class="dt">posteriors_empirical=</span>(likelihoods<span class="op">*</span>priors_empirical)<span class="op">/</span>marginal_likelihood_empirical
+    <span class="dt">posteriors_flat =</span> 
+      (likelihoods <span class="op">*</span><span class="st"> </span>priors_flat) <span class="op">/</span><span class="st"> </span>marginal_likelihood_flat,
+    <span class="dt">posteriors_empirical =</span> 
+      (likelihoods <span class="op">*</span><span class="st"> </span>priors_empirical) <span class="op">/</span><span class="st"> </span>marginal_likelihood_empirical
   )</code></pre></div>
 <div class="figure"><span id="fig:posteriorDistPrior"></span>
 <img src="StatsThinking21_files/figure-html/posteriorDistPrior-1.png" alt="Effects of priors on the posterior distribution.  The original posterior distribution based on a flat prior is plotted in blue. The prior based on the observation of 10 responders out of 20 people is plotted in the dotted black line, and the posterior using this prior is plotted in red." width="384" height="50%" />
@@ -649,15 +685,16 @@ Figure 11.4: Effects of priors on the posterior distribution. The original poste
 df &lt;-
 <span class="st">  </span>df <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">priors_strong =</span> <span class="kw">dbinom</span>(<span class="dv">250</span>,<span class="dv">500</span>,steps)<span class="op">/</span><span class="kw">sum</span>(<span class="kw">dbinom</span>(<span class="dv">250</span>,<span class="dv">500</span>,steps)),
+    <span class="dt">priors_strong =</span> <span class="kw">dbinom</span>(<span class="dv">250</span>, <span class="dv">500</span>, steps) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">dbinom</span>(<span class="dv">250</span>, <span class="dv">500</span>, steps))
   )
 
-marginal_likelihood_strong=<span class="kw">sum</span>(<span class="kw">dbinom</span>(nResponders,<span class="dv">100</span>,df<span class="op">$</span>steps)<span class="op">*</span>df<span class="op">$</span>priors_strong)
+marginal_likelihood_strong &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">sum</span>(<span class="kw">dbinom</span>(nResponders, <span class="dv">100</span>, df<span class="op">$</span>steps) <span class="op">*</span><span class="st"> </span>df<span class="op">$</span>priors_strong)
 
 df &lt;-
 <span class="st">  </span>df <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">posteriors_strongprior =</span> (likelihoods<span class="op">*</span>priors_strong)<span class="op">/</span>marginal_likelihood_strong
+    <span class="dt">posteriors_strongprior =</span> (likelihoods <span class="op">*</span><span class="st"> </span>priors_strong) <span class="op">/</span><span class="st"> </span>marginal_likelihood_strong
   )</code></pre></div>
 <div class="figure"><span id="fig:strongPrior"></span>
 <img src="StatsThinking21_files/figure-html/strongPrior-1.png" alt="Effects of the strength of the prior on the posterior distribution. The blue line shows the posterior obtained using the prior based on 50 heads out of 100 people.  The dotted black line shows the prior based on 550 heasd out of 500 flips, and the red line shows the posterior based on that prior." width="384" height="50%" />
@@ -671,16 +708,22 @@ Figure 11.5: Effects of the strength of the prior on the posterior distribution.
 df &lt;-
 <span class="st">  </span>df <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">priors_absolute =</span> <span class="kw">array</span>(<span class="dt">data=</span><span class="dv">0</span>,<span class="dt">dim=</span><span class="kw">length</span>(steps))
+    <span class="dt">priors_absolute =</span> <span class="kw">array</span>(<span class="dt">data =</span> <span class="dv">0</span>, <span class="dt">dim =</span> <span class="kw">length</span>(steps)),
+    <span class="dt">priors_absolute =</span> <span class="kw">if_else</span>(
+      steps <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.8</span>,
+      <span class="dv">1</span>, priors_absolute
+    ),
+    <span class="dt">priors_absolute =</span> priors_absolute <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(priors_absolute)
   )
-df<span class="op">$</span>priors_absolute[<span class="kw">which</span>(df<span class="op">$</span>steps<span class="op">&gt;=</span><span class="fl">0.8</span>)] &lt;-<span class="st"> </span><span class="dv">1</span>
-df<span class="op">$</span>priors_absolute &lt;-<span class="st"> </span>df<span class="op">$</span>priors_absolute<span class="op">/</span><span class="kw">sum</span>(df<span class="op">$</span>priors_absolute)
-marginal_likelihood_absolute=<span class="kw">sum</span>(<span class="kw">dbinom</span>(nResponders,<span class="dv">100</span>,df<span class="op">$</span>steps)<span class="op">*</span>df<span class="op">$</span>priors_absolute)
+
+marginal_likelihood_absolute &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">sum</span>(<span class="kw">dbinom</span>(nResponders, <span class="dv">100</span>, df<span class="op">$</span>steps) <span class="op">*</span><span class="st"> </span>df<span class="op">$</span>priors_absolute)
 
 df &lt;-
-<span class="st">  </span>df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>df <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">posteriors_absolute=</span>(likelihoods<span class="op">*</span>priors_absolute)<span class="op">/</span>marginal_likelihood_absolute
+    <span class="dt">posteriors_absolute =</span> 
+      (likelihoods <span class="op">*</span><span class="st"> </span>priors_absolute) <span class="op">/</span><span class="st"> </span>marginal_likelihood_absolute
   )</code></pre></div>
 <div class="figure"><span id="fig:absolutePrior"></span>
 <img src="StatsThinking21_files/figure-html/absolutePrior-1.png" alt="Effects of the strength of the prior on the posterior distribution. The blue line shows the posterior obtained using the prior based on 50 responders out of 100 people, using an absolute prior which states that p(respond) is 0.8 or greater.  The prior is shown in the dotted red line. " width="384" height="50%" />
@@ -693,12 +736,12 @@ Figure 11.6: Effects of the strength of the prior on the posterior distribution.
 </div>
 <div id="choosing-a-prior" class="section level2">
 <h2><span class="header-section-number">11.5</span> Choosing a prior</h2>
-<p>The impact of priors on the resulting inferences are the most controversial aspect of Bayesian statistics. There are various ways to choose one’s priors, which (as we saw above) can impact the resulting inferences. <em>Uninformative priors</em> attempt to bias the resulting posterior as little as possible, as we saw in the example of the uniform prior above. It’s also common to use <em>weakly informative priors</em> (or <em>default priors</em>), which bias the result only very slightly. For example, if we had used a binomial distribution based on a one heads out of two coin flips, this would have been centered around 0.5 but fairly flat, biasing the posterior only slightly.</p>
+<p>The impact of priors on the resulting inferences are the most controversial aspect of Bayesian statistics. There are various ways to choose one’s priors, which (as we saw above) can impact the resulting inferences. <em>Uninformative priors</em> attempt to bias the resulting posterior as little as possible, as we saw in the example of the uniform prior above. It’s also common to use <em>weakly informative priors</em> (or <em>default priors</em>), which bias the result only very slightly. For example, if we had used a binomial distribution based on one heads out of two coin flips, this would have been centered around 0.5 but fairly flat, biasing the posterior only slightly.</p>
 <p>It is also possible to use priors based on the scientific literature or pre-existing data, which we would call <em>empirical priors</em>. In general, however, we will stick to the use of uninformative/weakly informative priors, since they raise the least concern about biasing our results. In general it is a good idea to try any Bayesian analysis using multiple reasonable priors, and make sure that the results don’t change in an important way based on the prior.</p>
 </div>
 <div id="bayesian-hypothesis-testing" class="section level2">
 <h2><span class="header-section-number">11.6</span> Bayesian hypothesis testing</h2>
-<p>Having learned how to perform Bayesian estimation, we now turn to the use of Bayesian methods for hypothesis testing. Let’s say that there are two politicians who differ in their beliefs about support for the death penalty. Senator Smith thinks that only 40% of people support the death penalty, whereas Senator Jones thinks that 60% of people support the death penalty. They arrange to have a poll done to test this, which asks 1000 randomly selected people whether they support the death penalty, which finds that 490 of people in the sample support the death penalty. Based on these data, we would like to know: Do the data support the claims of one senator over the other? We can test this using a concept known as the <a href="https://bayesfactor.blogspot.com/2014/02/the-bayesfactor-package-this-blog-is.html">Bayes factor</a>.</p>
+<p>Having learned how to perform Bayesian estimation, we now turn to the use of Bayesian methods for hypothesis testing. Let’s say that there are two politicians who differ in their beliefs about whether the public supports the death penalty. Senator Smith thinks that only 40% of people support the death penalty, whereas Senator Jones thinks that 60% of people support the death penalty. They arrange to have a poll done to test this, which asks 1000 randomly selected people whether they support the death penalty. The results are that 490 of the people in the polled sample support the death penalty. Based on these data, we would like to know: Do the data support the claims of one senator over the other? We can test this using a concept known as the <a href="https://bayesfactor.blogspot.com/2014/02/the-bayesfactor-package-this-blog-is.html">Bayes factor</a>.</p>
 <div id="bayes-factors" class="section level3">
 <h3><span class="header-section-number">11.6.1</span> Bayes factors</h3>
 <p>The Bayes factor characterizes the relative likelihood of the data under two different hypotheses. It is defined as:</p>
@@ -707,10 +750,20 @@ BF = \frac{p(data|H_1)}{p(data|H_2)}
 \]</span> for two hypotheses <span class="math inline">\(H_1\)</span> and <span class="math inline">\(H_2\)</span>. In the case of our two senators, we know how to compute the likelihood of the data under each hypothesis using the binomial distribution. We will put Senator Smith in the numerator and Senator Jones in the denominator, so that a value greater than one will reflect greater evidence for Senator Smith, and a value less than one will reflect greater evidence for Senator Jones.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute Bayes factor for Smith vs. Jones</span>
 
-bf &lt;-<span class="st"> </span><span class="kw">dbinom</span>(<span class="dv">490</span>,<span class="dv">1000</span>,<span class="fl">0.4</span>)<span class="op">/</span><span class="kw">dbinom</span>(<span class="dv">490</span>,<span class="dv">1000</span>,<span class="fl">0.6</span>)
-<span class="kw">sprintf</span>(<span class="st">&#39;Bayes factor = %0.2f&#39;</span>,bf)</code></pre></div>
+bf &lt;-
+<span class="st">  </span><span class="kw">dbinom</span>(
+    <span class="dt">x =</span> <span class="dv">490</span>,
+    <span class="dt">size =</span> <span class="dv">1000</span>,
+    <span class="dt">prob =</span> <span class="fl">0.4</span> <span class="co">#Smith&#39;s hypothesis</span>
+  ) <span class="op">/</span><span class="st"> </span><span class="kw">dbinom</span>(
+    <span class="dt">x =</span> <span class="dv">490</span>, 
+    <span class="dt">size =</span> <span class="dv">1000</span>, 
+    <span class="dt">prob =</span> <span class="fl">0.6</span> <span class="co">#Jones&#39; hypothesis</span>
+  )
+
+<span class="kw">sprintf</span>(<span class="st">&quot;Bayes factor = %0.2f&quot;</span>, bf)</code></pre></div>
 <pre><code>## [1] &quot;Bayes factor = 3325.26&quot;</code></pre>
-<p>This number provides a measure of the evidence that the data provides regarding the two hypotheses - in this case, it tells us the data support Senator Smith more than 3000 times more strongly than the support Senator Jones.</p>
+<p>This number provides a measure of the evidence that the data provides regarding the two hypotheses - in this case, it tells us the data support Senator Smith more than 3000 times more strongly than they support Senator Jones.</p>
 </div>
 <div id="bayes-factors-for-statistical-hypotheses" class="section level3">
 <h3><span class="header-section-number">11.6.2</span> Bayes factors for statistical hypotheses</h3>
@@ -724,12 +777,12 @@ nsubs &lt;-<span class="st"> </span><span class="dv">40</span>
 effect_size &lt;-<span class="st"> </span><span class="fl">0.1</span>
 
 <span class="co"># randomize indiviuals to drug (1) or placebo (0)</span>
-drugDf &lt;-<span class="st"> </span>
+drugDf &lt;-
 <span class="st">  </span><span class="kw">tibble</span>(
-    <span class="dt">group=</span><span class="kw">as.integer</span>(<span class="kw">runif</span>(nsubs)<span class="op">&gt;</span><span class="fl">0.5</span>)
+    <span class="dt">group =</span> <span class="kw">as.integer</span>(<span class="kw">runif</span>(nsubs) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>)
   ) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">hbchange=</span><span class="kw">rnorm</span>(nsubs) <span class="op">-</span><span class="st"> </span>group<span class="op">*</span>effect_size
+    <span class="dt">hbchange =</span> <span class="kw">rnorm</span>(nsubs) <span class="op">-</span><span class="st"> </span>group <span class="op">*</span><span class="st"> </span>effect_size
   )</code></pre></div>
 <div class="figure"><span id="fig:bayesTesting"></span>
 <img src="StatsThinking21_files/figure-html/bayesTesting-1.png" alt="Box plots showing data for drug and placebo groups." width="384" height="50%" />
@@ -739,7 +792,7 @@ Figure 11.7: Box plots showing data for drug and placebo groups.
 </div>
 <p>Let’s perform an independent-samples t-test, which shows that there is a significant difference between the groups:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute t-test for drug example</span>
-drugTT &lt;-<span class="st"> </span><span class="kw">t.test</span>(hbchange<span class="op">~</span>group,<span class="dt">data=</span>drugDf,<span class="dt">alternative=</span><span class="st">&#39;greater&#39;</span>)
+drugTT &lt;-<span class="st"> </span><span class="kw">t.test</span>(hbchange <span class="op">~</span><span class="st"> </span>group, <span class="dt">alternative =</span> <span class="st">&quot;greater&quot;</span>, <span class="dt">data =</span> drugDf)
 <span class="kw">print</span>(drugTT)</code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
@@ -752,10 +805,13 @@ drugTT &lt;-<span class="st"> </span><span class="kw">t.test</span>(hbchange<spa
 ## sample estimates:
 ## mean in group 0 mean in group 1 
 ##            0.12           -0.48</code></pre>
-<p>This test tells us that there is a significant difference between the groups, but it doesn’t quantify how strongly the evidence supports the null versus alternative hypotheses. To measure that, we can compute a Bayes factor using the BayesFactor package in R:</p>
+<p>This test tells us that there is a significant difference between the groups, but it doesn’t quantify how strongly the evidence supports the null versus alternative hypotheses. To measure that, we can compute a Bayes factor using <code>ttestBF</code> function from the BayesFactor package in R:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute Bayes factor for drug data</span>
-bf_drug &lt;-<span class="st"> </span><span class="kw">ttestBF</span>(<span class="dt">formula=</span>hbchange<span class="op">~</span>group,<span class="dt">data=</span>drugDf,
-                  <span class="dt">nullInterval =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="ot">Inf</span>))
+bf_drug &lt;-<span class="st"> </span><span class="kw">ttestBF</span>(
+  <span class="dt">formula =</span> hbchange <span class="op">~</span><span class="st"> </span>group, <span class="dt">data =</span> drugDf,
+  <span class="dt">nullInterval =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="ot">Inf</span>)
+)
+
 bf_drug</code></pre></div>
 <pre><code>## Bayes factor analysis
 ## --------------
@@ -766,7 +822,7 @@ bf_drug</code></pre></div>
 ##   Null, mu1-mu2 = 0 
 ## ---
 ## Bayes factor type: BFindepSample, JZS</code></pre>
-<p>The Bayes factor here tells us that the alternative hypothesis (i.e. that the difference is greater than zero) that is about 2.4 times more likely than the null hypothesis given the data. This doesn’t seem that strong, but how can we determine that? There is a general guideline for interpretation of Bayes factors suggested by <a href="https://www.andrew.cmu.edu/user/kk3n/simplicity/KassRaftery1995.pdf">Kass &amp; Rafferty (1995)</a>:</p>
+<p>The Bayes factor here tells us that the alternative hypothesis (i.e. that the difference is greater than zero) is about 2.4 times more likely than the null hypothesis given the data. This doesn’t seem that strong, but how can we determine that? There is a general guideline for interpretation of Bayes factors suggested by <a href="https://www.andrew.cmu.edu/user/kk3n/simplicity/KassRaftery1995.pdf">Kass &amp; Rafferty (1995)</a>:</p>
 <table>
 <thead>
 <tr class="header">
@@ -794,7 +850,7 @@ bf_drug</code></pre></div>
 </tbody>
 </table>
 <p>Based on this, even though the statisical result is significant, the amount of evidence in favor of the alternative vs. the null hypothesis is weak enough that it’s not worth even mentioning.</p>
-<p>Because the Bayes factor is comparing evidence for two hypotheses, it also allows us to assess whether there is evidence in favor of the null hypothesis, which we couldn’t do with standard null hypothesis testing (because it starts with the assumption that the null is true). This can be very useful to determine whether a non-significant result really provides strong evidence that there is no effect, or instead just reflects weak evidence overall.</p>
+<p>Because the Bayes factor is comparing evidence for two hypotheses, it also allows us to assess whether there is evidence in favor of the null hypothesis, which we couldn’t do with standard null hypothesis testing (because it starts with the assumption that the null is true). This can be very useful for determining whether a non-significant result really provides strong evidence that there is no effect, or instead just reflects weak evidence overall.</p>
 </div>
 </div>
 <div id="suggested-readings-8" class="section level2">
