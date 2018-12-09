@@ -784,7 +784,7 @@ P_diabetes_given_inactive &lt;-
 
 P_diabetes_given_inactive</code></pre></div>
 <pre><code>## [1] 0.1411812</code></pre>
-<p>The first line of code in this chunk computed <span class="math inline">\(P(inactive)\)</span> by taking the mean of a test for whether the PhysActive variable was equal to “No” for each indivdual. This trick works because TRUE/FALSE values are treated as 1/0 respectively by R; thus, if we want to know the probaility of some event, we can generate a Boolean variable that tests for that event, and then simply take the mean of that variable. We then use that value to compute the conditional probability, where we find that the probability of someone having diabetes given that they are physically active is 0.141.</p>
+<p>The first line of code in this chunk computed <span class="math inline">\(P(inactive)\)</span> by taking the mean of a test for whether the PhysActive variable was equal to “No” for each indivdual. This trick works because TRUE/FALSE values are treated as 1/0 respectively by R; thus, if we want to know the probaility of some event, we can generate a Boolean variable that tests for that event, and then simply take the mean of that variable. We then use that value to compute the conditional probability, where we find that the probability of someone having diabetes given that they are physically inactive is 0.141.</p>
 </div>
 <div id="independence" class="section level2">
 <h2><span class="header-section-number">3.6</span> Independence</h2>
