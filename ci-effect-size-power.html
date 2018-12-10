@@ -447,7 +447,7 @@ CI = point\ estimate\ \pm critical\ value
 <div id="confidence-intervals-using-the-normal-distribution" class="section level3">
 <h3><span class="header-section-number">10.1.1</span> Confidence intervals using the normal distribution</h3>
 <p>If we know the population standard deviation, then we can use the normal distribution to compute a confidence interval. We usually don’t, but for our example of the NHANES dataset we do (it’s 21.3 for weight).</p>
-<p>Let’s say that we want to compute a 95% confidence interval for the mean. The critical value would then be the values of the normal distribution that capture 95% of the distribution; these are simply the 2.5th percentile and the 97.5th percentile of the distribution, which we can compute using the <code>qnorm()</code> function in R, and come out to <span class="math inline">\(\pm 1.96\)</span>. Thus, the confidence interval for the mean (<span class="math inline">\(\bar{X}\)</span>) is:</p>
+<p>Let’s say that we want to compute a 95% confidence interval for the mean. The critical value would then be the values of the standard normal distribution that capture 95% of the distribution; these are simply the 2.5th percentile and the 97.5th percentile of the distribution, which we can compute using the <code>qnorm()</code> function in R, and come out to <span class="math inline">\(\pm 1.96\)</span>. Thus, the confidence interval for the mean (<span class="math inline">\(\bar{X}\)</span>) is:</p>
 <p><span class="math display">\[
 CI = \bar{X} \pm 1.96*SE
 \]</span></p>
