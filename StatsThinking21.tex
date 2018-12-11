@@ -1233,7 +1233,7 @@ equally likely to occur. (No loaded dice allowed!) Given this, we can
 compute the probability of any individual outcome as:
 
 \[
-P(outcome_i) = \frac{1}{number\ of\ possible\ outcomes}
+P(outcome_i) = \frac{1}{\text{number of possible outcomes}}
 \]
 
 For the six-sided die, the probability of each individual outcome is
@@ -1284,7 +1284,7 @@ we can just take it for granted that the two die throws are independent
 events.
 
 \[
-P(A \cap B) = P(A) * P(B)\ iff\ A\ and\ B\ are\ independent
+P(A \cap B) = P(A) * P(B)\ \text{iff A and B are independent}
 \] Thus, the probability of throwing a six on each of two rolls is
 \(\frac{1}{6}*\frac{1}{6}=\frac{1}{36}\).
 
@@ -1330,7 +1330,7 @@ least one six in four rolls, he instead computed the probability of no
 sixes across all rolls:
 
 \[
-P(no\ sixes\ in\ four\ rolls) = \frac{5}{6}*\frac{5}{6}*\frac{5}{6}*\frac{5}{6}=\bigg(\frac{5}{6}\bigg)^4=0.482
+P(\text{no sixes in four rolls}) = \frac{5}{6}*\frac{5}{6}*\frac{5}{6}*\frac{5}{6}=\bigg(\frac{5}{6}\bigg)^4=0.482
 \]
 
 He then used the fact that the probability of no sixes in four rolls is
@@ -1339,7 +1339,7 @@ one), and used the rule of subtraction to compute the probability of
 interest:
 
 \[
-P(at\ least\ one\ six\ in\ four\ rolls) = 1 - \bigg(\frac{5}{6}\bigg)^4=0.517
+P(\text{at least one six in four rolls}) = 1 - \bigg(\frac{5}{6}\bigg)^4=0.517
 \]
 
 de Méré's gamble that he would throw at least one six in four rolls has
@@ -1349,9 +1349,9 @@ this bet on average.
 But what about de Méré's second bet? Pascal used the same trick:
 
 \[
-P(no\ double\ six\ in\ 24\ rolls) = \bigg(\frac{35}{36}\bigg)^{24}=0.509
+P(\text{no double six in 24 rolls}) = \bigg(\frac{35}{36}\bigg)^{24}=0.509
 \] \[
-P(at\ least\ one\ double\ six\ in\ 24\ rolls) = 1 - \bigg(\frac{35}{36}\bigg)^{24}=0.491
+P(\text{at least one double six in 24 rolls}) = 1 - \bigg(\frac{35}{36}\bigg)^{24}=0.491
 \]
 
 The probability of this outcome was slightly below 0.5, showing why de
@@ -1785,16 +1785,16 @@ move by a small group of California citizens to declare a new
 independent state called Jefferson, which would comprise a number of
 counties in northern California and Oregon. If this were to happen, then
 the probability that a current California resident would now live in the
-state of Jefferson would be \(P(Jefferson)=0.014\), whereas the
+state of Jefferson would be \(P(\text{Jefferson})=0.014\), whereas the
 proability that they would remain a California resident would be
-\(P(California)=0.986\). The new states might be politically
+\(P(\text{California})=0.986\). The new states might be politically
 independent, but they would \emph{not} be statistically independent,
-because \(P(California|Jefferson) = 0\)! That is, while independence in
-common language often refers to sets that are exclusive, statistical
-independence refers to the case where one cannot predict anything about
-one variable from the value of another variable. For example, knowing a
-person's hair color is unlikely to tell you whether they prefer
-chocolate or strawberry ice cream.
+because \(P(\text{California|Jefferson}) = 0\)! That is, while
+independence in common language often refers to sets that are exclusive,
+statistical independence refers to the case where one cannot predict
+anything about one variable from the value of another variable. For
+example, knowing a person's hair color is unlikely to tell you whether
+they prefer chocolate or strawberry ice cream.
 
 Let's look at another example, using the NHANES data: Are physical
 health and mental health independent of one another? NHANES includes two
@@ -1873,8 +1873,8 @@ Yes\strut
 \bottomrule
 \end{longtable}
 
-From this we see that \(P(bad\ mental\ health)\) is 0.1640567 while
-\(P(bad\ mental\ health|physically\ active)\) is 0.1320808. Thus, it
+From this we see that \(P(\text{bad mental health})\) is 0.1640567 while
+\(P(\text{bad mental health|physically active})\) is 0.1320808. Thus, it
 seems that the conditional probability is somewhat smaller than the
 overall probability, suggesting that they are not independent, though we
 can't know for sure just by looking at the numbers. Later in the course
@@ -1886,21 +1886,21 @@ rule}\label{bayestheorem}
 
 In many cases, we know \(P(A|B)\) but we really want to know \(P(B|A)\).
 This commonly occurs in medical screening, where we know
-\(P(positive\ test\ result|disease)\) but what we want to know is
-\(P(disease|positive\ test\ result)\). For example, some doctors
+\(P(\text{positive test result|disease})\) but what we want to know is
+\(P(\text{disease|positive test result})\). For example, some doctors
 recommend that men over the age of 50 undergo screening using a test
 called prostate specific antigen (PSA) to screen for possible prostate
 cancer. Before a test is approved for use in medical practice, the
 manufacturer needs to test two aspects of the test's performance. First,
 they need to show how \emph{sensitive} it is -- that is, how likely is
 it to find the disease when it is present:
-\(sensitivity = P(positive\ test| disease)\). They also need to show how
-\emph{specific} it is: that is, how likely is it to give a negative
-result when there is no disease present:
-\(specificity = P(negative\ test|no\ disease)\). For the PSA test, we
-know that sensitivity is about 80\% and specificity is about 70\%.
-However, these don't answer the question that the physician wants to
-answer for any particular patient: what is the likelihood that they
+\(\text{sensitivity} = P(\text{positive test| disease})\). They also
+need to show how \emph{specific} it is: that is, how likely is it to
+give a negative result when there is no disease present:
+\(\text{specificity} = P(\text{negative test|no disease})\). For the PSA
+test, we know that sensitivity is about 80\% and specificity is about
+70\%. However, these don't answer the question that the physician wants
+to answer for any particular patient: what is the likelihood that they
 actually have cancer, given that the test comes back positive? This
 requires that we reverse the conditional probability that defines
 sensitivity: instead of \(P(positive\ test| disease)\) we want to know
@@ -1958,7 +1958,7 @@ we outlined above, we can compute the individual's likelihood of having
 cancer given a positive test:
 
 \[
-P(cancer|test) = \frac{P(test|cancer)*P(cancer)}{P(test|disease)*P(disease) + P(test|\neg disease)*P(\neg disease)} = \frac{0.8*0.058}{0.8*0.058 +0.3*0.942 } = 0.14
+P(\text{cancer|test}) = \frac{P(\text{test|cancer})*P(\text{cancer})}{P(\text{test|disease})*P(\text{disease}) + P(\text{test|}\neg\text{disease})*P(\neg\text{disease})} = \frac{0.8*0.058}{0.8*0.058 +0.3*0.942 } = 0.14
 \]
 
 That's pretty small -- do you find that surprising? Many people do, and
@@ -2020,14 +2020,14 @@ between probabilities more directly, which we can do by converting them
 into \emph{odds} which express the relative likelihood of something
 happening or not:\\
 \[
-odds\ of\ A = \frac{P(A)}{P(\neg A)}
+\text{odds of A} = \frac{P(A)}{P(\neg A)}
 \]
 
 In our PSA example, the odds of having cancer (given the positive test)
 are:
 
 \[
-odds\ of\ cancer = \frac{P(cancer)}{P(\neg cancer)} =\frac{0.14}{1 - 0.14} = 0.16
+\text{odds of cancer} = \frac{P(\text{cancer})}{P(\neg \text{cancer})} =\frac{0.14}{1 - 0.14} = 0.16
 \]
 
 This tells us that the that the odds are fairly low of having cancer,
@@ -2035,7 +2035,7 @@ even though the test was positive. For comparison, the odds of rolling a
 6 in a single dice throw are:
 
 \[
-odds\ of\ 6 = \frac{1}{5} = 0.2
+\text{odds of 6} = \frac{1}{5} = 0.2
 \]
 
 As an aside, this is a reason why many medical researchers have become
@@ -2051,14 +2051,14 @@ compute the \emph{prior odds} -- that is, the odds before we knew that
 the person had tested positvely. These are computed using the base rate:
 
 \[
-prior\ odds = \frac{P(cancer)}{P(\neg cancer)} =\frac{0.058}{1 - 0.058} = 0.061
+\text{prior odds} = \frac{P(\text{cancer})}{P(\neg \text{cancer})} =\frac{0.058}{1 - 0.058} = 0.061
 \]
 
 We can then compare these with the posterior odds, which are computed
 using the posterior probability:
 
 \[
-odds\ ratio = \frac{posterior\ odds}{prior\ odds} = \frac{0.16}{0.061} = 2.62
+\text{odds ratio} = \frac{\text{posterior odds}}{\text{prior odds}} = \frac{0.16}{0.061} = 2.62
 \]
 
 This tells us that the odds of having cancer are increased by 2.62 given
