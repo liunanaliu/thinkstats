@@ -123,7 +123,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{Draft: 2018-12-10}
+    \date{Draft: 2018-12-11}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -5752,8 +5752,8 @@ of steps:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Make predictions based on your hypothesis (\emph{before seeing the
-  data})
+  Formulate a hypothesis that embodies our prediction (\emph{before
+  seeing the data})
 \item
   Collect some data relevant to the hypothesis
 \item
@@ -5780,11 +5780,10 @@ BMI = \frac{weight(kg)}{height(m)^2}
 \]
 
 \subsection{Step 1: Formulate a
-prediction}\label{step-1-formulate-a-prediction}
+hypothesis}\label{step-1-formulate-a-hypothesis}
 
-For step 1, we formulate a prediction based on our hypothesis: BMI
-should be greater for people who do not engage in physical activity,
-compared to those who do.
+For step 1, we hypothesize that BMI should be greater for people who do
+not engage in physical activity, compared to those who do.
 
 \subsection{Step 2: Collect some data}\label{step-2-collect-some-data}
 
@@ -6122,13 +6121,15 @@ This tells us that our observed t-statistic value of 1.74 is relatively
 unlikely if the null hypothesis really is true.
 
 In this case, we used a directional hypothesis, so we only had to look
-at one end of the null distribution. If we want to test a
-non-directional hypothesis, then we are interested in differences in
-either direction, so we have to add the probability that the observed
-value is as extreme in the other direction -- which we get by simply
-multiplying the observed \emph{t} value by -1, since the \emph{t}
-distribution is centered around zero. Using this, we can get a
-\emph{two-tailed} value:
+at one end of the null distribution. If we wanted to test a
+non-directional hypothesis, then we would need to be able to identify
+how unexpected the size of the effect is, regardless of its direction.
+In the context of the t-test, this means that we need to know how likely
+it is that the statistic would be as extreme in either the positive or
+negative direction. To do this, we multiply the observed \emph{t} value
+by -1, since the \emph{t} distribution is centered around zero, and then
+add together the two tail probabilities to get a \emph{two-tailed}
+p-value:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7834,10 +7835,11 @@ distribution:
 
 That is an fairly small number, but this number doesn't really answer
 the question that we are asking -- it is telling us about the likelihood
-of the data given some parameter, whereas what we really want to know is
-the parameter value. This should sound familiar, as it's exactly the
-situation that we were in with null hypothesis testing, which told us
-about the likelihood of data rather than the likelihood of hypotheses.
+of 7 or more heads given some particular probability of heads, whereas
+what we really want to know is the probability of heads. This should
+sound familiar, as it's exactly the situation that we were in with null
+hypothesis testing, which told us about the likelihood of data rather
+than the likelihood of hypotheses.
 
 Remember that Bayes' theorem provides us with the tool that we need to
 invert a conditional probability:
@@ -7925,8 +7927,9 @@ there is an explosive in the bag. Let's say that we know that the
 sensitivity of the test is 0.99 -- that is, when a device is present, it
 will detect it 99\% of the time. To determine the likelihood of our data
 under the hypothesis that a device is present, we can treat each test as
-a Bernoulli trial with a probability of success of 0.99, which we can
-model using a binomial distribution.
+a Bernoulli trial (that is, a trial with an outcome of true or false)
+with a probability of success of 0.99, which we can model using a
+binomial distribution.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -8009,14 +8012,15 @@ liable to produce high numbers of false positives.
 \section{Estimating posterior
 distributions}\label{estimating-posterior-distributions}
 
-In the previous example there were only two possible outcomes - the
-explosive is either there or it's not. However, in other cases we want
-to use Bayesian estimation to estimate the value of a parameter. Let's
-say that we want to know about the effectiveness of a new drug for pain;
-to test this, we can administer the drug to a group of patients and then
-ask them whether their pain improved or not after taking the drug. We
-can use Bayesian analysis to estimate the proportion of people for whom
-the drug will be effective using these data.
+In the previous example there were only two possible outcomes -- the
+explosive is either there or it's not -- and we wanted to know which
+outcome was most likely given the data. However, in other cases we want
+to use Bayesian estimation to estimate the numeric value of a parameter.
+Let's say that we want to know about the effectiveness of a new drug for
+pain; to test this, we can administer the drug to a group of patients
+and then ask them whether their pain improved or not after taking the
+drug. We can use Bayesian analysis to estimate the proportion of people
+for whom the drug will be effective using these data.
 
 \subsection{Specifying the prior}\label{specifying-the-prior-1}
 
@@ -8071,14 +8075,14 @@ not improved\strut
 
 \subsection{Computing the likelihood}\label{computing-the-likelihood-1}
 
-We can compute the likelihood of the data under the any particular value
-of the effectiveness parameter using the \texttt{dbinom()} function in
-R. In Figure \ref{fig:like2} you can see the likelihood curves over
-numbers of responders for several different values of \(p_{respond}\).
-Looking at this, it seems that our observed data are relatively more
-likely under the hypothesis of \(p_{respond}=0.7\), somewhat less likely
-under the hypothesis of \(p_{respond}=0.5\), and quite unlikely under
-the hypothesis of \(p_{respond}=0.3\). One of the fundamental ideas of
+We can compute the likelihood of the data under any particular value of
+the effectiveness parameter using the \texttt{dbinom()} function in R.
+In Figure \ref{fig:like2} you can see the likelihood curves over numbers
+of responders for several different values of \(p_{respond}\). Looking
+at this, it seems that our observed data are relatively more likely
+under the hypothesis of \(p_{respond}=0.7\), somewhat less likely under
+the hypothesis of \(p_{respond}=0.5\), and quite unlikely under the
+hypothesis of \(p_{respond}=0.3\). One of the fundamental ideas of
 Bayesian inference is that we will try to find the value of our
 parameter of interest that makes the data most likely, while also taking
 into account our prior knowledge.
@@ -8093,11 +8097,11 @@ likelihood}\label{computing-the-marginal-likelihood-1}
 In addition to the likelihood of the data under different hypotheses, we
 need to know the overall likelihood of the data, combining across all
 hypotheses (i.e., the marginal likelihood). This marginal likelihood is
-used as a normalizing constant to ensure that the posterior values are
-true probabilities. In this case, our use of a set of discrete possible
-parameter values makes it easy to compute the marginal likelihood,
-because we can just compute the likelihood of each parameter value under
-each hypothesis and add them up.
+primarily important beacuse it helps to ensure that the posterior values
+are true probabilities. In this case, our use of a set of discrete
+possible parameter values makes it easy to compute the marginal
+likelihood, because we can just compute the likelihood of each parameter
+value under each hypothesis and add them up.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -8409,7 +8413,7 @@ posterior as little as possible, as we saw in the example of the uniform
 prior above. It's also common to use \emph{weakly informative priors}
 (or \emph{default priors}), which bias the result only very slightly.
 For example, if we had used a binomial distribution based on one heads
-out of two coin flips, this would have been centered around 0.5 but
+out of two coin flips, the prior would have been centered around 0.5 but
 fairly flat, biasing the posterior only slightly.
 
 It is also possible to use priors based on the scientific literature or

@@ -236,7 +236,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#null-hypothesis-statistical-testing-nhst"><i class="fa fa-check"></i><b>9.1</b> Null Hypothesis Statistical Testing (NHST)</a></li>
 <li class="chapter" data-level="9.2" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#null-hypothesis-statistical-testing-an-example"><i class="fa fa-check"></i><b>9.2</b> Null hypothesis statistical testing: An example</a></li>
 <li class="chapter" data-level="9.3" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#the-process-of-null-hypothesis-testing"><i class="fa fa-check"></i><b>9.3</b> The process of null hypothesis testing</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#step-1-formulate-a-prediction"><i class="fa fa-check"></i><b>9.3.1</b> Step 1: Formulate a prediction</a></li>
+<li class="chapter" data-level="9.3.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#step-1-formulate-a-hypothesis"><i class="fa fa-check"></i><b>9.3.1</b> Step 1: Formulate a hypothesis</a></li>
 <li class="chapter" data-level="9.3.2" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#step-2-collect-some-data"><i class="fa fa-check"></i><b>9.3.2</b> Step 2: Collect some data</a></li>
 <li class="chapter" data-level="9.3.3" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#step-3-specify-the-null-and-alternative-hypotheses"><i class="fa fa-check"></i><b>9.3.3</b> Step 3: Specify the null and alternative hypotheses</a></li>
 <li class="chapter" data-level="9.3.4" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#step-4-fit-a-model-to-the-data-and-compute-a-test-statistic"><i class="fa fa-check"></i><b>9.3.4</b> Step 4: Fit a model to the data and compute a test statistic</a></li>
@@ -427,7 +427,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">9.3</span> The process of null hypothesis testing</h2>
 <p>We can break the process of null hypothesis testing down into a number of steps:</p>
 <ol style="list-style-type: decimal">
-<li>Make predictions based on your hypothesis (<em>before seeing the data</em>)</li>
+<li>Formulate a hypothesis that embodies our prediction (<em>before seeing the data</em>)</li>
 <li>Collect some data relevant to the hypothesis</li>
 <li>Specify null and alternative hypotheses</li>
 <li>Fit a model to the data that represents the alternative hypothesis and compute a test statistic</li>
@@ -438,9 +438,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><span class="math display">\[
 BMI = \frac{weight(kg)}{height(m)^2}
 \]</span></p>
-<div id="step-1-formulate-a-prediction" class="section level3">
-<h3><span class="header-section-number">9.3.1</span> Step 1: Formulate a prediction</h3>
-<p>For step 1, we formulate a prediction based on our hypothesis: BMI should be greater for people who do not engage in physical activity, compared to those who do.</p>
+<div id="step-1-formulate-a-hypothesis" class="section level3">
+<h3><span class="header-section-number">9.3.1</span> Step 1: Formulate a hypothesis</h3>
+<p>For step 1, we hypothesize that BMI should be greater for people who do not engage in physical activity, compared to those who do.</p>
 </div>
 <div id="step-2-collect-some-data" class="section level3">
 <h3><span class="header-section-number">9.3.2</span> Step 2: Collect some data</h3>
@@ -622,7 +622,7 @@ We can use the t distribution to determine this probability. Our sample size is 
 <span class="kw">sprintf</span>(<span class="st">&quot;p(t &gt; %0.2f, df = 248) = %0.3f&quot;</span>, tStat, pvalue_tdist)</code></pre></div>
 <pre><code>## [1] &quot;p(t &gt; 1.74, df = 248) = 0.042&quot;</code></pre>
 <p>This tells us that our observed t-statistic value of 1.74 is relatively unlikely if the null hypothesis really is true.</p>
-<p>In this case, we used a directional hypothesis, so we only had to look at one end of the null distribution. If we want to test a non-directional hypothesis, then we are interested in differences in either direction, so we have to add the probability that the observed value is as extreme in the other direction – which we get by simply multiplying the observed <em>t</em> value by -1, since the <em>t</em> distribution is centered around zero. Using this, we can get a <em>two-tailed</em> value:</p>
+<p>In this case, we used a directional hypothesis, so we only had to look at one end of the null distribution. If we wanted to test a non-directional hypothesis, then we would need to be able to identify how unexpected the size of the effect is, regardless of its direction. In the context of the t-test, this means that we need to know how likely it is that the statistic would be as extreme in either the positive or negative direction. To do this, we multiply the observed <em>t</em> value by -1, since the <em>t</em> distribution is centered around zero, and then add together the two tail probabilities to get a <em>two-tailed</em> p-value:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pvalue_tdist_twotailed &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">pt</span>(tStat, <span class="dt">df =</span> <span class="dv">248</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">pt</span>(<span class="op">-</span><span class="dv">1</span> <span class="op">*</span><span class="st"> </span>tStat, <span class="dt">df =</span> <span class="dv">248</span>, <span class="dt">lower.tail =</span> <span class="ot">TRUE</span>)
