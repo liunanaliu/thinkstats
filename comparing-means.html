@@ -401,15 +401,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1><span class="header-section-number">Chapter 15</span> Comparing means</h1>
 <p>One of the most common questions that we want to ask in statistics is whether there is a difference between the means of two different groups. Let’s say that we would like to know whether regular marijuana smokers watch more television. We can ask this question using the NHANES dataset; let’s take a sample of 200 individuals from the dataset and test whether the number of hours of television watching per day is related to regular marijuana use. Figure <a href="comparing-means.html#fig:PotTVViolin">15.1</a> shows these data using a violin plot.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create sample with tv watching and marijuana use</span>
-NHANES_sample &lt;-<span class="st"> </span>
-<span class="st">  </span>NHANES_adult <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">drop_na</span>(TVHrsDay,RegularMarij) <span class="op">%&gt;%</span>
+NHANES_sample &lt;-
+<span class="st">  </span>NHANES_adult <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">drop_na</span>(TVHrsDay, RegularMarij) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">TVHrsNum=</span><span class="kw">recode</span>(TVHrsDay,<span class="st">&#39;More_4_hr&#39;</span>=<span class="dv">5</span>,
-                         <span class="st">&#39;4_hr&#39;</span>=<span class="dv">4</span>,<span class="st">&#39;2_hr&#39;</span>=<span class="dv">2</span>,
-                         <span class="st">&#39;1_hr&#39;</span>=<span class="dv">1</span>,<span class="st">&#39;3_hr&#39;</span>=<span class="dv">3</span>,<span class="st">&#39;0_to_1_hr&#39;</span>=<span class="fl">0.5</span>,
-                         <span class="st">&#39;0_hrs&#39;</span>=<span class="dv">0</span>)
-    ) <span class="op">%&gt;%</span>
+    <span class="dt">TVHrsNum =</span> <span class="kw">recode</span>( <span class="co">#recode character values into numerical values</span>
+      TVHrsDay,
+      <span class="st">&quot;More_4_hr&quot;</span> =<span class="st"> </span><span class="dv">5</span>,
+      <span class="st">&quot;4_hr&quot;</span> =<span class="st"> </span><span class="dv">4</span>, 
+      <span class="st">&quot;2_hr&quot;</span> =<span class="st"> </span><span class="dv">2</span>,
+      <span class="st">&quot;1_hr&quot;</span> =<span class="st"> </span><span class="dv">1</span>, 
+      <span class="st">&quot;3_hr&quot;</span> =<span class="st"> </span><span class="dv">3</span>, 
+      <span class="st">&quot;0_to_1_hr&quot;</span> =<span class="st"> </span><span class="fl">0.5</span>,
+      <span class="st">&quot;0_hrs&quot;</span> =<span class="st"> </span><span class="dv">0</span>
+    )
+  ) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">200</span>)</code></pre></div>
 <div class="figure"><span id="fig:PotTVViolin"></span>
 <img src="StatsThinking21_files/figure-html/PotTVViolin-1.png" alt="Violin plot showing distributions of TV watching separated by regular marijuana use." width="384" height="50%" />
@@ -425,8 +431,11 @@ t = \frac{\bar{X_1} - \bar{X_2}}{\sqrt{\frac{S_1^2}{n_1} + \frac{S_2^2}{n_2}}}
 \]</span></p>
 <p>where <span class="math inline">\(\bar{X}_1\)</span> and <span class="math inline">\(\bar{X}_2\)</span> are the means of the two groups, <span class="math inline">\(S^2_1\)</span> and <span class="math inline">\(S^2_2\)</span> are the variances for each the groups, and <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span> are the sizes of the two groups. Under the null hypothesis of no difference between means, this statistic is distributed according to a t distribution with n-2 degrees of freedom (since we have computed two parameter estimates, namely the means of the two groups). We can compute the t-test in R using the <code>t.test()</code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute t test for tv watching as function of marijuana use</span>
-<span class="kw">t.test</span>(TVHrsNum<span class="op">~</span>RegularMarij,<span class="dt">data=</span>NHANES_sample,
-       <span class="dt">var.equal=</span><span class="ot">TRUE</span>)</code></pre></div>
+<span class="kw">t.test</span>(
+  TVHrsNum <span class="op">~</span><span class="st"> </span>RegularMarij,
+  <span class="dt">data =</span> NHANES_sample,
+  <span class="dt">var.equal =</span> <span class="ot">TRUE</span>
+)</code></pre></div>
 <pre><code>## 
 ##  Two Sample t-test
 ## 
@@ -445,9 +454,9 @@ t = \frac{\bar{X_1} - \bar{X_2}}{\sqrt{\frac{S_1^2}{n_1} + \frac{S_2^2}{n_2}}}
 <p>The t-test is often presented as a specialized tool for comparing means, but it can also be viewed as an application of the general linear model. In this case, the model would look like this:</p>
 <p><span class="math display">\[
 \hat{BP} = \hat{\beta_1}*Smoking + \hat{\beta_0}
-\]</span> However, smoking is a binary variable, so we treat as a <em>dummy variable</em> like we discussed in the previous chapter, setting it to a value of 1 for smokers and zero for nonsmokers. In that case, <span class="math inline">\(\hat{\beta_1}\)</span> is simply the difference in means between the two groups, and <span class="math inline">\(\hat{\beta_0}\)</span> is the mean for the group that was coded as zero. We can fit this model using the <code>lm()</code> function, and see that it gives the same t statistic as the t-test above:</p>
+\]</span> However, smoking is a binary variable, so we treat it as a <em>dummy variable</em> like we discussed in the previous chapter, setting it to a value of 1 for smokers and zero for nonsmokers. In that case, <span class="math inline">\(\hat{\beta_1}\)</span> is simply the difference in means between the two groups, and <span class="math inline">\(\hat{\beta_0}\)</span> is the mean for the group that was coded as zero. We can fit this model using the <code>lm()</code> function, and see that it gives the same t statistic as the t-test above:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># print summary of linear regression to perform t-test</span>
-s &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">lm</span>(TVHrsNum<span class="op">~</span>RegularMarij,<span class="dt">data=</span>NHANES_sample))
+s &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">lm</span>(TVHrsNum <span class="op">~</span><span class="st"> </span>RegularMarij, <span class="dt">data =</span> NHANES_sample))
 s</code></pre></div>
 <pre><code>## 
 ## Call:
@@ -489,8 +498,10 @@ d = \frac{\hat{beta_1}}{SE_{residual}}
 <h2><span class="header-section-number">15.3</span> Bayes factor for mean differences</h2>
 <p>As we discussed in the chapter on Bayesian analysis, Bayes factors provide a way to better quantify evidence in favor or against the null hypothesis of no difference.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute bayes factor for group comparison</span>
-bf &lt;-<span class="st"> </span><span class="kw">ttestBF</span>(<span class="dt">formula =</span> 
-    TVHrsNum<span class="op">~</span>RegularMarij,<span class="dt">data=</span>NHANES_sample)
+bf &lt;-<span class="st"> </span><span class="kw">ttestBF</span>(
+  <span class="dt">formula =</span> TVHrsNum <span class="op">~</span><span class="st"> </span>RegularMarij, 
+  <span class="dt">data =</span> NHANES_sample
+)
 bf</code></pre></div>
 <pre><code>## Bayes factor analysis
 ## --------------
@@ -504,16 +515,20 @@ bf</code></pre></div>
 </div>
 <div id="paired-t-tests" class="section level2">
 <h2><span class="header-section-number">15.4</span> Paired t-tests</h2>
-<p>In experimental research, we often use <em>within-subjects</em> designs, in which we compare the same person on multiple measurements. For example, in the NHANES dataset blood pressure was measured three times. Let’s say that we are interested in testing whether there is a difference in blood pressure between the first and second measurement (Figure <a href="comparing-means.html#fig:BPfig">15.3</a>).</p>
+<p>In experimental research, we often use <em>within-subjects</em> designs, in which we compare the same person on multiple measurements. For example, in the NHANES dataset blood pressure was measured three times. Let’s say that we are interested in testing whether there is a difference in mean blood pressure between the first and second measurement (Figure <a href="comparing-means.html#fig:BPfig">15.3</a>).</p>
 <div class="figure"><span id="fig:BPfig"></span>
 <img src="StatsThinking21_files/figure-html/BPfig-1.png" alt="Violin plot of systolic blood pressure on first and second recording, from NHANES." width="384" height="50%" />
 <p class="caption">
 Figure 15.3: Violin plot of systolic blood pressure on first and second recording, from NHANES.
 </p>
 </div>
-<p>We see that there does not seem to be much of a difference overall between time points (about one point). First let’s test for a difference using an independent samples t-test, which ignores the fact that pairs of data points come from the the same individuals.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(BPsys<span class="op">~</span>timepoint,<span class="dt">data=</span>NHANES_sample_tidy,
-       <span class="dt">paired=</span><span class="ot">FALSE</span>,<span class="dt">var.equal=</span><span class="ot">TRUE</span>)</code></pre></div>
+<p>We see that there does not seem to be much of a difference in mean blood pressure between time points (about one point). First let’s test for a difference using an independent samples t-test, which ignores the fact that pairs of data points come from the the same individuals.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(
+  BPsys <span class="op">~</span><span class="st"> </span>timepoint,
+  <span class="dt">data =</span> NHANES_sample_tidy,
+  <span class="dt">paired =</span> <span class="ot">FALSE</span>, 
+  <span class="dt">var.equal =</span> <span class="ot">TRUE</span>
+)</code></pre></div>
 <pre><code>## 
 ##  Two Sample t-test
 ## 
@@ -541,10 +556,10 @@ Figure 15.5: Histogram of difference scores between first and second BP measurem
 </div>
 <div id="sign-test" class="section level3">
 <h3><span class="header-section-number">15.4.1</span> Sign test</h3>
-<p>One simple way to test for differences is using a test called the <em>sign test</em>, which asks whether the proportion of positive differences (ignoring their magnitude) is different than what we would espect by chance. To do this, we take the differences and compute their sign, and then we use a binomial test to ask whether the proportion of positive signs differs from 0.5.</p>
+<p>One simple way to test for differences is using a test called the <em>sign test</em>, which asks whether the proportion of positive differences (ignoring their magnitude) is different than what we would expect by chance. To do this, we take the differences and compute their sign, and then we use a binomial test to ask whether the proportion of positive signs differs from 0.5.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute sign test for differences between first and second measurement</span>
 npos &lt;-<span class="st"> </span><span class="kw">sum</span>(NHANES_sample<span class="op">$</span>diffPos)
-bt &lt;-<span class="st"> </span><span class="kw">binom.test</span>(npos,<span class="kw">nrow</span>(NHANES_sample))
+bt &lt;-<span class="st"> </span><span class="kw">binom.test</span>(npos, <span class="kw">nrow</span>(NHANES_sample))
 bt</code></pre></div>
 <pre><code>## 
 ##  Exact binomial test
@@ -563,7 +578,7 @@ bt</code></pre></div>
 <h3><span class="header-section-number">15.4.2</span> Paired t-test</h3>
 <p>A more common strategy is to use a <em>paired t-test</em>, which is equivalent to a one-sample t-test for whether the mean difference between the measurements is zero. We can compute this using the <code>t.test()</code> function in R and setting <code>paired=TRUE</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute paired t-test</span>
-<span class="kw">t.test</span>(BPsys<span class="op">~</span>timepoint,<span class="dt">data=</span>NHANES_sample_tidy,<span class="dt">paired=</span><span class="ot">TRUE</span>)</code></pre></div>
+<span class="kw">t.test</span>(BPsys <span class="op">~</span><span class="st"> </span>timepoint, <span class="dt">data =</span> NHANES_sample_tidy, <span class="dt">paired =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## 
 ##  Paired t-test
 ## 
@@ -577,7 +592,7 @@ bt</code></pre></div>
 ##                    0.93</code></pre>
 <p>With this analyses we see that there is in fact a significant difference between the two measurements. Let’s compute the Bayes factor to see how strong this effect is:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute Bayes factor for paired t-test</span>
-<span class="kw">ttestBF</span>(<span class="dt">x=</span>NHANES_sample<span class="op">$</span>BPSys1,<span class="dt">y=</span>NHANES_sample<span class="op">$</span>BPSys2,<span class="dt">paired=</span><span class="ot">TRUE</span>)</code></pre></div>
+<span class="kw">ttestBF</span>(<span class="dt">x =</span> NHANES_sample<span class="op">$</span>BPSys1, <span class="dt">y =</span> NHANES_sample<span class="op">$</span>BPSys2, <span class="dt">paired =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## Bayes factor analysis
 ## --------------
 ## [1] Alt., r=0.707 : 1.3 ±0%
@@ -593,8 +608,7 @@ bt</code></pre></div>
 <p>We can also define the paired t-test in terms of a general linear model. To do this, we include all of the measurements for each subject as data points (within a tidy data frame). We then include in the model a variable that codes for the identity of each individual (in this case, the ID variable that contains a subject ID for each person). This is known as a <em>mixed model</em>, since it includes effects of independent variables as well as effects of individuals. The standard model fitting procedure <code>lm()</code> can’t do this, but we can do it using the <code>lmer()</code> function from a popular R package called <em>lme4</em>, which is specialized for estimating mixed models. The <code>(1|ID)</code> in the formula tells <code>lmer()</code> to estimate a separate intercept (which is what the <code>1</code> refers to) for each value of the <code>ID</code> variable (i.e. for each individual in the dataset), and then estimate a common slope relating timepoint to BP.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute mixed model for paired test</span>
 
-lmrResult &lt;-<span class="st"> </span><span class="kw">lmer</span>(BPsys<span class="op">~</span>timepoint <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>ID),<span class="dt">data=</span>NHANES_sample_tidy)
-
+lmrResult &lt;-<span class="st"> </span><span class="kw">lmer</span>(BPsys <span class="op">~</span><span class="st"> </span>timepoint <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>ID), <span class="dt">data =</span> NHANES_sample_tidy)
 <span class="kw">summary</span>(lmrResult)</code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
@@ -654,15 +668,15 @@ Figure 15.7: F distributions under the null hypothesis, for different values of 
 </div>
 <p>To create an ANOVA model, we extend the idea of <em>dummy coding</em> that you encountered in the last chapter. Remember that for the t-test comparing two means, we created a single dummy variable that took the value of 1 for one of the conditions and zero for the others. Here we extend that idea by creating two dummy variables, one that codes for the Drug 1 condition and the other that codes for the Drug 2 condition. Just as in the t-test, we will have one condition (in this case, placebo) that doesn’t have a dummy variable, and thus represents the baseline against which the others are compared; its mean defines the intercept of the model. Let’s create the dummy coding for drugs 1 and 2.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create dummy variables for drug1 and drug2</span>
-df &lt;-<span class="st"> </span>
-<span class="st">  </span>df <span class="op">%&gt;%</span><span class="st"> </span>
+df &lt;-
+<span class="st">  </span>df <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">d1=</span><span class="kw">as.integer</span>(group<span class="op">==</span><span class="st">&#39;drug1&#39;</span>),
-    <span class="dt">d2=</span><span class="kw">as.integer</span>(group<span class="op">==</span><span class="st">&#39;drug2&#39;</span>)
+    <span class="dt">d1 =</span> <span class="kw">as.integer</span>(group <span class="op">==</span><span class="st"> &quot;drug1&quot;</span>), <span class="co"># 1s for drug1, 0s for all other drugs</span>
+    <span class="dt">d2 =</span> <span class="kw">as.integer</span>(group <span class="op">==</span><span class="st"> &quot;drug2&quot;</span>)  <span class="co"># 1s for drug2, 0s for all other drugs</span>
   )</code></pre></div>
 <p>Now we can fit a model using the same approach that we used in the previous chapter:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># fit ANOVA model  </span>
-lmResultANOVA &lt;-<span class="st"> </span><span class="kw">lm</span>(sysBP <span class="op">~</span><span class="st"> </span>d1 <span class="op">+</span><span class="st"> </span>d2, <span class="dt">data=</span>df)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># fit ANOVA model</span>
+lmResultANOVA &lt;-<span class="st"> </span><span class="kw">lm</span>(sysBP <span class="op">~</span><span class="st"> </span>d1 <span class="op">+</span><span class="st"> </span>d2, <span class="dt">data =</span> df)
 <span class="kw">summary</span>(lmResultANOVA)</code></pre></div>
 <pre><code>## 
 ## Call:
@@ -684,7 +698,7 @@ lmResultANOVA &lt;-<span class="st"> </span><span class="kw">lm</span>(sysBP <sp
 ## Multiple R-squared:  0.169,  Adjusted R-squared:  0.154 
 ## F-statistic: 10.7 on 2 and 105 DF,  p-value: 5.83e-05</code></pre>
 <p>The output from this command provides us with two things. First, it shows us the result of a t-test for each of the dummy variables, which basically tell us whether each of the conditions separately differs from placebo; it appears that Drug 1 does whereas Drug 2 does not. However, keep in mind that if we wanted to interpret these tests, we would need to correct the p-values to account for the fact that we have done multiple hypothesis tests; we will see an example of how to do this in the next chapter.</p>
-<p>Remember that the hypothesis that we started out wanting to test was whether there was any difference between any of the conditions; we refer to this as an <em>omnibus</em> hypothesis test, and it is the test that is provided by the F statistic, which basically tells us whether our model is better than a simple model that just includes an intercept. In this case we see that the F test is highly significant, consistent with our impression that there did seem to be a difference between the groups (which in fact we know there was, because we created the data).</p>
+<p>Remember that the hypothesis that we started out wanting to test was whether there was any difference between any of the conditions; we refer to this as an <em>omnibus</em> hypothesis test, and it is the test that is provided by the F statistic. The F statistic basically tells us whether our model is better than a simple model that just includes an intercept. In this case we see that the F test is highly significant, consistent with our impression that there did seem to be differences between the groups (which in fact we know there were, because we created the data).</p>
 
 </div>
 </div>

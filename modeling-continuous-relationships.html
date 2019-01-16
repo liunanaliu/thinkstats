@@ -419,7 +419,7 @@ G = \frac{\displaystyle{\sum_{i=1}^n \sum_{j=1}^n \left| x_i - x_j \right|}}{\di
 Figure 13.1: Lorenz curves for A) perfect equality, B) normally distributed income, and C) high inequality (equal income except for one very wealthy individual).
 </p>
 </div>
-<p>Figure <a href="modeling-continuous-relationships.html#fig:gini0">13.1</a> shows the Lorenz curves for several different income distributions. The top left panel (A) shows an example with 10 people where everyone has exactly the same income. The top right panel (B) shows an example where income is normally distributed. The bottom left panel shows an example with high inequality; everyone has equal income ($40,000) except for one person, who has income of $40,000,000. According to the US Census, the United States had a Gini index of 0.469 in 2010, falling roughly half way between our normally distributed and maximally inequal examples.</p>
+<p>Figure <a href="modeling-continuous-relationships.html#fig:gini0">13.1</a> shows the Lorenz curves for several different income distributions. The top left panel (A) shows an example with 10 people where everyone has exactly the same income. The length of the intervals between points are equal, indicating each person earns an identical share of the total income in the population. The top right panel (B) shows an example where income is normally distributed. The bottom left panel shows an example with high inequality; everyone has equal income ($40,000) except for one person, who has income of $40,000,000. According to the US Census, the United States had a Gini index of 0.469 in 2010, falling roughly half way between our normally distributed and maximally inequal examples.</p>
 </div>
 </div>
 <div id="is-income-inequality-related-to-hate-crimes" class="section level2">
@@ -459,14 +459,14 @@ covariance = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{N - 1}
 \]</span></p>
 <p>This value will be far from zero when x and y are both highly deviant from the mean; if they are deviant in the same direction then the covariance is positive, whereas if they are deviant in opposite directions the covariance is negative. Let’s look at a toy example first.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create data for toy example of covariance</span>
-df &lt;-<span class="st"> </span>
-<span class="st">  </span><span class="kw">data.frame</span>(<span class="dt">x=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">12</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y=</span>x<span class="op">+</span><span class="kw">round</span>(<span class="kw">rnorm</span>(<span class="dv">5</span>,<span class="dt">sd=</span><span class="dv">2</span>))) <span class="op">%&gt;%</span>
+df &lt;-
+<span class="st">  </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">12</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y =</span> x <span class="op">+</span><span class="st"> </span><span class="kw">round</span>(<span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">5</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">2</span>))) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">y_dev=</span>y<span class="op">-</span><span class="kw">mean</span>(y),
-    <span class="dt">x_dev=</span>x<span class="op">-</span><span class="kw">mean</span>(x)
+    <span class="dt">y_dev =</span> y <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(y),
+    <span class="dt">x_dev =</span> x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x)
   ) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">crossproduct=</span>y_dev<span class="op">*</span>x_dev)
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">crossproduct =</span> y_dev <span class="op">*</span><span class="st"> </span>x_dev)
 
 <span class="kw">pander</span>(df)</code></pre></div>
 <table style="width:56%;">
@@ -526,10 +526,10 @@ df &lt;-<span class="st"> </span>
 </table>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute covariance</span>
 
-<span class="kw">sprintf</span>(<span class="st">&#39;sum of cross products = %.2f&#39;</span>,<span class="kw">sum</span>(df<span class="op">$</span>crossproduct))</code></pre></div>
+<span class="kw">sprintf</span>(<span class="st">&quot;sum of cross products = %.2f&quot;</span>, <span class="kw">sum</span>(df<span class="op">$</span>crossproduct))</code></pre></div>
 <pre><code>## [1] &quot;sum of cross products = 81.20&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">covXY &lt;-<span class="st"> </span><span class="kw">sum</span>(df<span class="op">$</span>crossproduct)<span class="op">/</span>(<span class="kw">nrow</span>(df)<span class="op">-</span><span class="dv">1</span>)
-<span class="kw">sprintf</span>(<span class="st">&#39;covariance: %.2f&#39;</span>,covXY)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">covXY &lt;-<span class="st"> </span><span class="kw">sum</span>(df<span class="op">$</span>crossproduct) <span class="op">/</span><span class="st"> </span>(<span class="kw">nrow</span>(df) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)
+<span class="kw">sprintf</span>(<span class="st">&quot;covariance: %.2f&quot;</span>, covXY)</code></pre></div>
 <pre><code>## [1] &quot;covariance: 20.30&quot;</code></pre>
 <p>We don’t usually use the covariance to describe relationships between variables, because it varies with the overall level of variance in the data. Instead, we would usually use the <em>correlation coefficient</em> (often referred to as <em>Pearson’s correlation</em> after the statistician Karl Pearson). The correlation is computed by scaling the covariance by the standard deviations of the two variables:</p>
 <p><span class="math display">\[
@@ -537,19 +537,22 @@ r = \frac{covariance}{s_xs_y} = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y}
 \]</span></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute the correlation coefficient</span>
 
-corXY &lt;-<span class="st"> </span><span class="kw">sum</span>(df<span class="op">$</span>crossproduct)<span class="op">/</span>((<span class="kw">nrow</span>(df)<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span><span class="kw">sd</span>(df<span class="op">$</span>x)<span class="op">*</span><span class="kw">sd</span>(df<span class="op">$</span>y))
-<span class="kw">sprintf</span>(<span class="st">&#39;correlation coefficient = %.2f&#39;</span>,corXY)</code></pre></div>
+corXY &lt;-<span class="st"> </span><span class="kw">sum</span>(df<span class="op">$</span>crossproduct) <span class="op">/</span><span class="st"> </span>((<span class="kw">nrow</span>(df) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span><span class="kw">sd</span>(df<span class="op">$</span>x) <span class="op">*</span><span class="st"> </span><span class="kw">sd</span>(df<span class="op">$</span>y))
+<span class="kw">sprintf</span>(<span class="st">&quot;correlation coefficient = %.2f&quot;</span>, corXY)</code></pre></div>
 <pre><code>## [1] &quot;correlation coefficient = 0.99&quot;</code></pre>
 <p>We can also compute the correlation value easily using the <code>cor()</code> function in R:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute r using built-in function</span>
 
-c &lt;-<span class="st"> </span><span class="kw">cor</span>(df<span class="op">$</span>x,df<span class="op">$</span>y)
-<span class="kw">sprintf</span>(<span class="st">&#39;correlation coefficient = %.2f&#39;</span>,c)</code></pre></div>
+c &lt;-<span class="st"> </span><span class="kw">cor</span>(df<span class="op">$</span>x, df<span class="op">$</span>y)
+<span class="kw">sprintf</span>(<span class="st">&quot;correlation coefficient = %.2f&quot;</span>, c)</code></pre></div>
 <pre><code>## [1] &quot;correlation coefficient = 0.99&quot;</code></pre>
 <p>The correlation coefficient is useful because it varies between -1 and 1 regardless of the nature of the data - in fact, we already discussed the correlation coefficient earlier in the discussion of effect sizes. As we saw in the previous chapter on effect sizes, a correlation of 1 indicates a perfect linear relationship, a correlation of -1 indicates a perfect negative relationship, and a correlation of zero indicates no linear relationship.</p>
 <p>We can compute the correlation coefficient for the hate crime data:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">corGiniHC &lt;-<span class="st"> </span><span class="kw">cor</span>(hateCrimes<span class="op">$</span>gini_index,
-                 hateCrimes<span class="op">$</span>avg_hatecrimes_per_100k_fbi)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">corGiniHC &lt;-
+<span class="st">  </span><span class="kw">cor</span>(
+    hateCrimes<span class="op">$</span>gini_index,
+    hateCrimes<span class="op">$</span>avg_hatecrimes_per_100k_fbi
+  )
 <span class="kw">sprintf</span>(<span class="st">&#39;correlation coefficient = %.2f&#39;</span>,corGiniHC)</code></pre></div>
 <pre><code>## [1] &quot;correlation coefficient = 0.42&quot;</code></pre>
 <div id="hypothesis-testing-for-correlations" class="section level3">
@@ -560,8 +563,10 @@ c &lt;-<span class="st"> </span><span class="kw">cor</span>(df<span class="op">$
 \]</span></p>
 <p>Under the null hypothesis <span class="math inline">\(H_0:r=0\)</span>, this statistic is distributed as a t distribution with <span class="math inline">\(N - 2\)</span> degrees of freedom. We can compute this using the <code>cor.test()</code> function in R:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># perform correlation test on hate crime data</span>
-<span class="kw">cor.test</span>(hateCrimes<span class="op">$</span>avg_hatecrimes_per_100k_fbi,
-         hateCrimes<span class="op">$</span>gini_index)</code></pre></div>
+<span class="kw">cor.test</span>(
+  hateCrimes<span class="op">$</span>avg_hatecrimes_per_100k_fbi,
+  hateCrimes<span class="op">$</span>gini_index
+)</code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s product-moment correlation
 ## 
@@ -575,14 +580,20 @@ c &lt;-<span class="st"> </span><span class="kw">cor</span>(df<span class="op">$
 ## 0.42</code></pre>
 <p>This test shows that the likelihood of an r value this extreme or more is quite low, so we would reject the null hypothesis of <span class="math inline">\(r=0\)</span>. Note that this test assumes that both variables are normally distributed.</p>
 <p>We could also test this by randomization, in which we repeatedly shuffle the values of one of the variables and compute the correlation, and then compare our observed correlation value to this null distribution to determine how likely our observed value would be under the null hypothesis. The results are shown in Figure <a href="modeling-continuous-relationships.html#fig:shuffleCorr">13.3</a>. The p-value computed using randomization is reasonably similar to the answer give by the t-test.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute null distribution by shuffling order of variables</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute null distribution by shuffling order of variable values</span>
 
-shuffleCorr &lt;-<span class="st"> </span><span class="cf">function</span>(x,y){
-  xShuffled=<span class="kw">sample</span>(x)
-  <span class="kw">return</span>(<span class="kw">cor</span>(xShuffled,y))
+<span class="co"># create a function to compute the correlation on the shuffled values </span>
+shuffleCorr &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) {
+  xShuffled &lt;-<span class="st"> </span><span class="kw">sample</span>(x)
+  <span class="kw">return</span>(<span class="kw">cor</span>(xShuffled, y))
 }
 
-shuffleDist &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">2500</span>,<span class="kw">shuffleCorr</span>(hateCrimes<span class="op">$</span>avg_hatecrimes_per_100k_fbi,hateCrimes<span class="op">$</span>gini_index))</code></pre></div>
+<span class="co"># run this function 2500 times </span>
+shuffleDist &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">replicate</span>(
+    <span class="dv">2500</span>, 
+    <span class="kw">shuffleCorr</span>(hateCrimes<span class="op">$</span>avg_hatecrimes_per_100k_fbi, hateCrimes<span class="op">$</span>gini_index)
+  )</code></pre></div>
 <div class="figure"><span id="fig:shuffleCorr"></span>
 <img src="StatsThinking21_files/figure-html/shuffleCorr-1.png" alt="Histogram of correlation values under the null hypothesis, obtained by shuffling values. Observed value is denoted by blue line." width="384" height="50%" />
 <p class="caption">
@@ -601,7 +612,7 @@ Figure 13.4: An example of the effects of outliers on correlation. Without the o
 </div>
 <p>One way to address outliers is to compute the correlation on the ranks of the data after ordering them, rather than on the data themselves; this is known as <em>Spearman’s correlation</em>. Whereas the Pearson correlation for the example in Figure <a href="modeling-continuous-relationships.html#fig:outlierCorr">13.4</a> was 0.83, the Spearman correlation is -0.45, showing that the rank correlation reduces the effect of the outlier.</p>
 <p>We can compute the rank correlation on the hate crime data using the <code>cor.test</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">corTestSpearman &lt;-<span class="st"> </span><span class="kw">cor.test</span>(dfOutlier<span class="op">$</span>x,dfOutlier<span class="op">$</span>y,<span class="dt">method=</span><span class="st">&#39;spearman&#39;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">corTestSpearman &lt;-<span class="st"> </span><span class="kw">cor.test</span>(dfOutlier<span class="op">$</span>x, dfOutlier<span class="op">$</span>y, <span class="dt">method =</span> <span class="st">&quot;spearman&quot;</span>)
 corTestSpearman</code></pre></div>
 <pre><code>## 
 ##  Spearman&#39;s rank correlation rho
@@ -617,8 +628,10 @@ corTestSpearman</code></pre></div>
 <div id="bayesian-correlation-analysis" class="section level3">
 <h3><span class="header-section-number">13.3.3</span> Bayesian correlation analysis</h3>
 <p>We can also analyze the FiveThirtyEight data using Bayesian analysis, which has two advantages. First, it provides us with a posterior probability – in this case, the probability that the correlation value exceeds zero. Second, the Bayesian estimate combines the observed evidence with a <em>prior</em>, which has the effect of <em>regularizing</em> the correlation estimate, effectively pulling it towards zero. Here we can compute it using the <code>jzs_cor</code> function from the BayesMed package.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bayesCor &lt;-<span class="st"> </span><span class="kw">jzs_cor</span>(hateCrimes<span class="op">$</span>avg_hatecrimes_per_100k_fbi,
-        hateCrimes<span class="op">$</span>gini_index)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bayesCor &lt;-<span class="st"> </span><span class="kw">jzs_cor</span>(
+  hateCrimes<span class="op">$</span>avg_hatecrimes_per_100k_fbi,
+  hateCrimes<span class="op">$</span>gini_index
+)</code></pre></div>
 <pre><code>## Compiling model graph
 ##    Resolving undeclared variables
 ##    Allocating nodes

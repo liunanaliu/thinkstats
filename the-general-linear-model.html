@@ -415,16 +415,19 @@ outcome = model + error
 <span class="kw">set.seed</span>(<span class="dv">12345</span>)
 
 <span class="co"># the number of points that having a prior class increases grades</span>
-betas &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">6</span>,<span class="dv">5</span>)  
+betas &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">6</span>, <span class="dv">5</span>)
 
-df &lt;-<span class="st"> </span>
-<span class="st">  </span><span class="kw">data.frame</span>(
-    <span class="dt">studyTime=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">12</span>)<span class="op">/</span><span class="dv">3</span>,
-    <span class="dt">priorClass=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>)
+df &lt;-
+<span class="st">  </span><span class="kw">tibble</span>(
+    <span class="dt">studyTime =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">12</span>) <span class="op">/</span><span class="st"> </span><span class="dv">3</span>,
+    <span class="dt">priorClass =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>)
   ) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">grade=</span>studyTime<span class="op">*</span>betas[<span class="dv">1</span>]<span class="op">+</span>priorClass<span class="op">*</span>betas[<span class="dv">2</span>] <span class="op">+</span><span class="kw">round</span>(<span class="kw">rnorm</span>(<span class="dv">8</span>,<span class="dt">mean=</span><span class="dv">70</span>,<span class="dt">sd=</span><span class="dv">5</span>))) 
-
-lmResult &lt;-<span class="st"> </span><span class="kw">lm</span>(grade<span class="op">~</span>studyTime,<span class="dt">data=</span>df)</code></pre></div>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">grade =</span> 
+      studyTime <span class="op">*</span><span class="st"> </span>betas[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>
+<span class="st">      </span>priorClass <span class="op">*</span><span class="st"> </span>betas[<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span>
+<span class="st">      </span><span class="kw">round</span>(<span class="kw">rnorm</span>(<span class="dv">8</span>, <span class="dt">mean =</span> <span class="dv">70</span>, <span class="dt">sd =</span> <span class="dv">5</span>))
+  )</code></pre></div>
 <div class="figure"><span id="fig:StudytimeGrades"></span>
 <img src="StatsThinking21_files/figure-html/StudytimeGrades-1.png" alt="Relation between study time and grades" width="384" height="50%" />
 <p class="caption">
@@ -439,7 +442,7 @@ Figure 14.1: Relation between study time and grades
 </ul>
 <p>In the last chapter we learned how to describe the relationship between two variables using the correlation coefficient, so we can use that to describe the relationship here, and to test whether the correlation is statistically significant:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute correlation between grades and study time</span>
-corTestResult &lt;-<span class="st"> </span><span class="kw">cor.test</span>(df<span class="op">$</span>grade,df<span class="op">$</span>studyTime,<span class="dt">alternative=</span><span class="st">&#39;greater&#39;</span>)
+corTestResult &lt;-<span class="st"> </span><span class="kw">cor.test</span>(df<span class="op">$</span>grade, df<span class="op">$</span>studyTime, <span class="dt">alternative =</span> <span class="st">&quot;greater&quot;</span>)
 corTestResult</code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s product-moment correlation
@@ -455,7 +458,7 @@ corTestResult</code></pre></div>
 <p>The correlation is quite high, but just barely reaches statistical significance because the sample size is so small.</p>
 <div id="linear-regression" class="section level2">
 <h2><span class="header-section-number">14.1</span> Linear regression</h2>
-<p>We can also use the general linear model to describe the relation between two variables and to decide whether that relationship is statistically significant; in addition, the model allows us to predict the value of the dependent variable given some new value of the independent variables. Most importantly, the general linear model will allow us to build models that incorporate multiple independent variables, whereas correlation can only tell us about the relationship between two individual variables.</p>
+<p>We can also use the general linear model to describe the relation between two variables and to decide whether that relationship is statistically significant; in addition, the model allows us to predict the value of the dependent variable given some new value(s) of the independent variable(s). Most importantly, the general linear model will allow us to build models that incorporate multiple independent variables, whereas correlation can only tell us about the relationship between two individual variables.</p>
 <p>The specific version of the GLM that we use for this is referred to as as <em>linear regression</em>. The term <em>regression</em> was coined by Francis Galton, who had noted that when he compared parents and their children on some feature (such as height), the children of extreme parents (i.e. the very tall or very short parents) generally fell closer to the mean than their parents. This is an extremely important point that we return to below.</p>
 <p>The simplest version of the linear regression model (with a single independent variable) can be expressed as follows:</p>
 <p><span class="math display">\[
@@ -465,9 +468,9 @@ y = x * \beta_x + \beta_0 + \epsilon
 \hat{y} = x * \beta_x + \beta_0 
 \]</span> Figure <a href="the-general-linear-model.html#fig:LinearRegression">14.2</a> shows an example of this model applied to the study time example.</p>
 <div class="figure"><span id="fig:LinearRegression"></span>
-<img src="StatsThinking21_files/figure-html/LinearRegression-1.png" alt="The linear regression solution for the study time data is shown in blue. The value of the intercept is equivalent to the predicted value of the y variable when the x variable is equal to zero; this is shown with a dotted black line.  The value of beta is equal to the slope of the line -- that is, how much it changes in y for a unit change in x.  This is shown schematically in the red dashed lines, which show the degree of increase in grade for a single unit increase in study time." width="576" height="50%" />
+<img src="StatsThinking21_files/figure-html/LinearRegression-1.png" alt="The linear regression solution for the study time data is shown in blue. The value of the intercept is equivalent to the predicted value of the y variable when the x variable is equal to zero; this is shown with a dotted black line.  The value of beta is equal to the slope of the line -- that is, how much y changes for a unit change in x.  This is shown schematically in the red dashed lines, which show the degree of increase in grade for a single unit increase in study time." width="576" height="50%" />
 <p class="caption">
-Figure 14.2: The linear regression solution for the study time data is shown in blue. The value of the intercept is equivalent to the predicted value of the y variable when the x variable is equal to zero; this is shown with a dotted black line. The value of beta is equal to the slope of the line – that is, how much it changes in y for a unit change in x. This is shown schematically in the red dashed lines, which show the degree of increase in grade for a single unit increase in study time.
+Figure 14.2: The linear regression solution for the study time data is shown in blue. The value of the intercept is equivalent to the predicted value of the y variable when the x variable is equal to zero; this is shown with a dotted black line. The value of beta is equal to the slope of the line – that is, how much y changes for a unit change in x. This is shown schematically in the red dashed lines, which show the degree of increase in grade for a single unit increase in study time.
 </p>
 </div>
 <div id="regression-to-the-mean" class="section level3">
@@ -475,51 +478,36 @@ Figure 14.2: The linear regression solution for the study time data is shown in 
 <p>The concept of <em>regression to the mean</em> was one of Galton’s essential contributions to science, and it remains a critical point to understand when we interpret the results of experimental data analyses. Let’s say that we want to study the effects of a reading intervention on the performance of poor readers. To test our hypothesis, we might go into a school and recruit those individuals in the bottom 25% of the distribution on some reading test, administer the intervention, and then examine their performance. Let’s say that the intervention actually has no effect, and that reading scores for each individual are simply independent samples from a normal distribution. We can simulate this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create simulated data for regression to the mean example</span>
 
-nstudents &lt;-<span class="st"> </span><span class="dv">100</span>
-readingScores  &lt;-<span class="st">  </span><span class="kw">data.frame</span>(
-  <span class="dt">test1=</span><span class="kw">rnorm</span>(nstudents)<span class="op">*</span><span class="dv">10</span> <span class="op">+</span><span class="st"> </span><span class="dv">100</span>,
-  <span class="dt">test2=</span><span class="kw">rnorm</span>(nstudents)<span class="op">*</span><span class="dv">10</span> <span class="op">+</span><span class="st"> </span><span class="dv">100</span>
+nstudents &lt;-<span class="st"> </span><span class="dv">100</span> 
+
+readingScores &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+  <span class="co">#random normal distribution of scores for test 1</span>
+  <span class="dt">test1 =</span> <span class="kw">rnorm</span>(<span class="dt">n =</span> nstudents, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>) <span class="op">*</span><span class="st"> </span><span class="dv">10</span> <span class="op">+</span><span class="st"> </span><span class="dv">100</span>, 
+  <span class="co">#random normal distribution of scores for test 2</span>
+  <span class="dt">test2 =</span> <span class="kw">rnorm</span>(<span class="dt">n =</span> nstudents, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>) <span class="op">*</span><span class="st"> </span><span class="dv">10</span> <span class="op">+</span><span class="st"> </span><span class="dv">100</span> 
 )
 
 <span class="co"># select the students in the bottom 25% on the first test</span>
-cutoff &lt;-<span class="st"> </span><span class="kw">quantile</span>(readingScores<span class="op">$</span>test1,<span class="fl">0.25</span>)
-readingScores &lt;-<span class="st"> </span>
-<span class="st">  </span>readingScores <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">badTest1=</span>test1<span class="op">&lt;</span>cutoff)
+cutoff &lt;-<span class="st"> </span><span class="kw">quantile</span>(readingScores<span class="op">$</span>test1, <span class="fl">0.25</span>)
 
-readingScores <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">subset</span>(badTest1<span class="op">==</span><span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+readingScores &lt;-
+<span class="st">  </span>readingScores <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">badTest1 =</span> test1 <span class="op">&lt;</span><span class="st"> </span>cutoff) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(badTest1 <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarize</span>(
-    <span class="dt">test1mean=</span><span class="kw">mean</span>(test1),
-    <span class="dt">test2mean=</span><span class="kw">mean</span>(test2)
+    <span class="dt">test1mean =</span> <span class="kw">mean</span>(test1),
+    <span class="dt">test2mean =</span> <span class="kw">mean</span>(test2)
   ) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pander</span>()</code></pre></div>
-<table style="width:33%;">
-<colgroup>
-<col width="16%" />
-<col width="16%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="center">test1mean</th>
-<th align="center">test2mean</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center">87.89</td>
-<td align="center">100.72</td>
-</tr>
-</tbody>
-</table>
 <p>If we look at the difference between the mean test performance at the first and second test, it appears that the intervention has helped these students substantially, as their scores have gone up by more than ten points on the test! However, we know that in fact the students didn’t improve at all, since in both cases the scores were simply selected from a random normal distribution. What has happened is that some subjects scored badly on the first test simply due to random chance. If we select just those subjects on the basis of their first test scores, they are guaranteed to move back towards the mean of the entire group on the second test, even if there is no effect of training. This is the reason that we need an untreated <em>control group</em> in order to interpret any changes in reading over time; otherwise we are likely to be tricked by regression to the mean.</p>
 </div>
 <div id="estimating-linear-regression-parameters" class="section level3">
 <h3><span class="header-section-number">14.1.2</span> Estimating linear regression parameters</h3>
 <p>We generally estimate the parameters of a linear model from data using <em>linear algebra</em>, which is the form of algebra that is applied to vectors and matrices. If you aren’t familiar with linear algebra, don’t worry – you won’t actually need to use it here, as R will do all the work for us. However, a brief excursion in linear algebra can provide some insight into how the model parameters are estimated in practice.</p>
 <p>First, let’s introduce the idea of vectors and matrices; you’ve already encountered them in the context of R, but we will review them here. A matrix is a set of numbers that are arranged in a square or rectangle, such that there are one or more <em>dimensions</em> across which the matrix varies. It is customary to place different observation units (such as people) in the rows, and different variables in the columns. Let’s take our study time data from above. We could arrange these numbers in a matrix, which would have eight rows (one for each student) and two columns (one for study time, and one for grade). If you are thinking “that sounds like a data frame in R” you are exactly right! In fact, a data frame is a specialized version of a matrix, and we can convert a data frame to a matrix using the <code>as.matrix()</code> function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_matrix &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(studyTime,grade) <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_matrix &lt;-<span class="st"> </span>
+<span class="st">  </span>df <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(studyTime, grade) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">as.matrix</span>()</code></pre></div>
 <p>We can write the general linear model in linear algebra as follows:</p>
 <p><span class="math display">\[
@@ -532,7 +520,7 @@ Y = X*\beta + E
 Figure 14.3: A depiction of the linear model for the study time data in terms of matrix algebra.
 </p>
 </div>
-<p>The rules of matrix multiplication tell us that the dimensions of the matrices have to match with one another; in this case, the design matrix has dimensions of 8 (rows) X 2 (columns) and the Y variable has dimensions of 8 X 1, so the <span class="math inline">\(\beta\)</span> matrix needs to have dimensions 2 X 1, since an 8 X 2 matrix multiplied by a 2 X 1 matrix results in an 8 X 1 matrix (as the matching middle dimensions drop out). The interpretation of the two values in the <span class="math inline">\(\beta\)</span> matrix is that they are the values to be multipled by study time and 1 respectively to obtain the estimated grade for each individual. We can also view the linear model as a set of individual equations for each individual:</p>
+<p>The rules of matrix multiplication tell us that the dimensions of the matrices have to match with one another; in this case, the design matrix has dimensions of 8 (rows) X 2 (columns) and the Y variable has dimensions of 8 X 1. Therfore, the <span class="math inline">\(\beta\)</span> matrix needs to have dimensions 2 X 1, since an 8 X 2 matrix multiplied by a 2 X 1 matrix results in an 8 X 1 matrix (as the matching middle dimensions drop out). The interpretation of the two values in the <span class="math inline">\(\beta\)</span> matrix is that they are the values to be multipled by study time and 1 respectively to obtain the estimated grade for each individual. We can also view the linear model as a set of individual equations for each individual:</p>
 <p><span class="math inline">\(\hat{y}_1 = studyTime_1*\beta_1 + 1*\beta_2\)</span></p>
 <p><span class="math inline">\(\hat{y}_2 = studyTime_2*\beta_1 + 1*\beta_2\)</span></p>
 <p>…</p>
@@ -544,15 +532,15 @@ Figure 14.3: A depiction of the linear model for the study time data in terms of
 <p>The challenge here is that <span class="math inline">\(X\)</span> and <span class="math inline">\(\beta\)</span> are now matrices, not single numbers – but the rules of linear algebra tell us how to divide by a matrix, which is the same as multiplying by the <em>inverse</em> of the matrix (referred to as <span class="math inline">\(X^{-1}\)</span>). We can do this in R:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute beta estimates using linear algebra</span>
 
-Y &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(df<span class="op">$</span>grade)
-X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>,<span class="dt">nrow=</span><span class="kw">dim</span>(Y)[<span class="dv">1</span>],<span class="dt">ncol=</span><span class="dv">2</span>)
-X[,<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(df<span class="op">$</span>studyTime)
-X[,<span class="dv">2</span>] &lt;-<span class="st"> </span><span class="dv">1</span>
+Y &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(df<span class="op">$</span>grade) <span class="co">#create Y variable 8 x 1 matrix</span>
+X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow =</span> <span class="dv">8</span>, <span class="dt">ncol =</span> <span class="dv">2</span>) <span class="co">#create X variable 8 x 2 matrix</span>
+X[, <span class="dv">1</span>] &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(df<span class="op">$</span>studyTime) <span class="co">#assign studyTime values to first column in X matrix</span>
+X[, <span class="dv">2</span>] &lt;-<span class="st"> </span><span class="dv">1</span> <span class="co">#assign constant of 1 to second column in X matrix</span>
 
 <span class="co"># compute inverse of X using ginv()</span>
 <span class="co"># %*% is the R matrix multiplication operator</span>
 
-beta_hat &lt;-<span class="st">  </span><span class="kw">ginv</span>(X) <span class="op">%*%</span><span class="st"> </span>Y
+beta_hat &lt;-<span class="st"> </span><span class="kw">ginv</span>(X) <span class="op">%*%</span><span class="st"> </span>Y <span class="co">#multiple the inverse of X by Y</span>
 <span class="kw">print</span>(beta_hat)</code></pre></div>
 <pre><code>##      [,1]
 ## [1,]  4.3
@@ -578,7 +566,7 @@ covariance_{xy} = \hat{r} * s_x * s_y
 </div>
 <div id="standard-errors-for-regression-models" class="section level3">
 <h3><span class="header-section-number">14.1.4</span> Standard errors for regression models</h3>
-<p>If we want to make inferences about the regression parameter estimates, then we also need an estimate of their variability. To compute this, we first need to compute the <em>residual variance</em> or <em>error variance</em> for the model – that is, how much variability is not explained by the model. We can compute the model residuals as follows:</p>
+<p>If we want to make inferences about the regression parameter estimates, then we also need an estimate of their variability. To compute this, we first need to compute the <em>residual variance</em> or <em>error variance</em> for the model – that is, how much variability in the dependent variable is not explained by the model. We can compute the model residuals as follows:</p>
 <p><span class="math display">\[
 residual = y - \hat{y} = y - (x*\hat{\beta_x} + \hat{\beta_0})
 \]</span> We then compute the <em>sum of squared errors (SSE)</em>:</p>
@@ -591,7 +579,7 @@ MS_{error} = \frac{SS_{error}}{df} = \frac{\sum_{i=1}^n{(y_i - \hat{y_i})^2} }{N
 <p><span class="math display">\[
 SE_{model} = \sqrt{MS_{error}}
 \]</span></p>
-<p>In order to get the standard error for a specific regression parameter estimate, we need to rescale <span class="math inline">\(SE_{model}\)</span> into the units of the particular parameter, by dividing it by the standard deviation of the X variable:</p>
+<p>In order to get the standard error for a specific regression parameter estimate, <span class="math inline">\(SE_{\beta_x}\)</span>, we need to rescale <span class="math inline">\(SE_{model}\)</span> into the units of the particular parameter, by dividing it by the standard deviation of the X variable:</p>
 <p><span class="math display">\[
 SE_{\beta_x} = \frac{SE_{model}}{S_x}
 \]</span></p>
@@ -662,7 +650,7 @@ Figure 14.4: The relationship between study time and grades, with color identify
 <span class="co"># must change priorClass to a factor variable</span>
 df<span class="op">$</span>priorClass &lt;-<span class="st"> </span><span class="kw">as.factor</span>(df<span class="op">$</span>priorClass)
 
-lmResultTwoVars &lt;-<span class="st"> </span><span class="kw">lm</span>(grade <span class="op">~</span><span class="st"> </span>studyTime <span class="op">+</span><span class="st"> </span>priorClass,<span class="dt">data=</span>df)
+lmResultTwoVars &lt;-<span class="st"> </span><span class="kw">lm</span>(grade <span class="op">~</span><span class="st"> </span>studyTime <span class="op">+</span><span class="st"> </span>priorClass, <span class="dt">data =</span> df)
 <span class="kw">summary</span>(lmResultTwoVars)</code></pre></div>
 <pre><code>## 
 ## Call:
@@ -692,7 +680,7 @@ Figure 14.5: The relation between study time and grade including prior experienc
 </div>
 <div id="interactions-between-variables" class="section level2">
 <h2><span class="header-section-number">14.3</span> Interactions between variables</h2>
-<p>In the previous model, we assumed that the effect of study time was the same for both groups. However, in some cases we might imagine that the effect of one variable might differ depending on the value of another variable, which we refer to as an <em>interaction</em> between variables.</p>
+<p>In the previous model, we assumed that the effect of study time on grade (i.e., the regression slope) was the same for both groups. However, in some cases we might imagine that the effect of one variable might differ depending on the value of another variable, which we refer to as an <em>interaction</em> between variables.</p>
 <div class="figure"><span id="fig:CaffeineSpeaking"></span>
 <img src="StatsThinking21_files/figure-html/CaffeineSpeaking-1.png" alt="The relationship between caffeine and public speaking" width="384" height="50%" />
 <p class="caption">
@@ -701,7 +689,7 @@ Figure 14.6: The relationship between caffeine and public speaking
 </div>
 <p>Let’s use a new example that asks the question: What is the effect of caffeine on public speaking? First let’s generate some data and plot them. Looking at Figure <a href="the-general-linear-model.html#fig:CaffeineSpeaking">14.6</a>, there doesn’t seem to be a relationship, and we can confirm that by performing linear regression on the data:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># perform linear regression with caffeine as independent variable</span>
-lmResultCaffeine &lt;-<span class="st"> </span><span class="kw">lm</span>(speaking<span class="op">~</span>caffeine,<span class="dt">data=</span>df)
+lmResultCaffeine &lt;-<span class="st"> </span><span class="kw">lm</span>(speaking <span class="op">~</span><span class="st"> </span>caffeine, <span class="dt">data =</span> df)
 <span class="kw">summary</span>(lmResultCaffeine)</code></pre></div>
 <pre><code>## 
 ## Call:
@@ -728,7 +716,7 @@ Figure 14.7: The relationship between caffeine and public speaking, with anxiety
 </div>
 <p>As we see from Figure <a href="the-general-linear-model.html#fig:CaffeineSpeakingAnxiety">14.7</a>, it appears that the relationship between speaking and caffeine is different for the two groups, with caffeine improving performance for people without anxiety and degrading performance for those with anxiety. We’d like to create a statistical model that addresses this question. First let’s see what happens if we just include anxiety in the model.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute linear regression adding anxiety to model</span>
-lmResultCafAnx &lt;-<span class="st"> </span><span class="kw">lm</span>(speaking <span class="op">~</span><span class="st"> </span>caffeine <span class="op">+</span><span class="st"> </span>anxiety,<span class="dt">data=</span>df)
+lmResultCafAnx &lt;-<span class="st"> </span><span class="kw">lm</span>(speaking <span class="op">~</span><span class="st"> </span>caffeine <span class="op">+</span><span class="st"> </span>anxiety, <span class="dt">data =</span> df)
 <span class="kw">summary</span>(lmResultCafAnx)</code></pre></div>
 <pre><code>## 
 ## Call:
@@ -749,8 +737,10 @@ lmResultCafAnx &lt;-<span class="st"> </span><span class="kw">lm</span>(speaking
 ## F-statistic: 2.18 on 2 and 17 DF,  p-value: 0.144</code></pre>
 <p>Here we see there are no significant effects of either caffeine or anxiety, which might seem a bit confusing. The problem is that this model is trying to fit the same line relating speaking to caffeine for both groups. If we want to fit them using separate lines, we need to include an <em>interaction</em> in the model, which is equivalent to fitting different lines for each of the two groups; in R this is denoted by the <span class="math inline">\(*\)</span> symbol.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute linear regression including caffine X anxiety interaction</span>
-lmResultInteraction &lt;-<span class="st"> </span><span class="kw">lm</span>(speaking <span class="op">~</span><span class="st"> </span>caffeine <span class="op">+</span><span class="st"> </span>anxiety <span class="op">+</span><span class="st"> </span>caffeine<span class="op">*</span>anxiety,
-                          <span class="dt">data=</span>df)
+lmResultInteraction &lt;-<span class="st"> </span><span class="kw">lm</span>(
+  speaking <span class="op">~</span><span class="st"> </span>caffeine <span class="op">+</span><span class="st"> </span>anxiety <span class="op">+</span><span class="st"> </span>caffeine <span class="op">*</span><span class="st"> </span>anxiety,
+  <span class="dt">data =</span> df
+)
 <span class="kw">summary</span>(lmResultInteraction)</code></pre></div>
 <pre><code>## 
 ## Call:
@@ -781,7 +771,7 @@ Figure 14.8: The relationship between public speaking and caffeine, including an
 </p>
 </div>
 <p>Sometimes we want to compare the relative fit of two different models, in order to determine which is a better model; we refer to this as <em>model comparison</em>. For the models above, we can compare the goodness of fit of the model with and without the interaction, using the<code>anova()</code> command in R:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">anova</span>(lmResultCafAnx,lmResultInteraction)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">anova</span>(lmResultCafAnx, lmResultInteraction)</code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Model 1: speaking ~ caffeine + anxiety
@@ -797,48 +787,57 @@ Figure 14.8: The relationship between public speaking and caffeine, including an
 <h2><span class="header-section-number">14.4</span> What does “predict” really mean?</h2>
 <p>When we talk about “prediction” in daily life, we are generally referring to the ability to estimate the value of some variable in advance of seeing the data. However, the term is often used in the context of linear regression to refer to the fitting of a model to the data; the estimated values (<span class="math inline">\(\hat{y}\)</span>) are sometimes referred to as “predictions” and the independent variables are referred to as “predictors”. This has an unfortunate connotation, as it implies that our model should also be able to predict the values of new data points in the future. In reality, the fit of a model to the dataset used to obtain the parameters will nearly always be better than the fit of the model to a new dataset <span class="citation">(Copas 1983)</span>.</p>
 <p>As an example, let’s take a sample of 48 children from NHANES and fit a regression model for weight that includes several regressors (age, height, hours spent watching TV and using the computer, and household income) along with their interactions.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get children with good values of all variables</span>
-NHANES_child &lt;-<span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create dataframe with children with complete data on all variables</span>
+NHANES_child &lt;-
 <span class="st">  </span>NHANES <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">drop_na</span>(Height,Weight,TVHrsDayChild,HHIncomeMid,CompHrsDayChild,Age) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">subset</span>(Age<span class="op">&lt;</span><span class="dv">18</span>)
+<span class="st">  </span><span class="kw">drop_na</span>(Height, Weight, TVHrsDayChild, HHIncomeMid, CompHrsDayChild, Age) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(Age <span class="op">&lt;</span><span class="st"> </span><span class="dv">18</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create function to sample data and compute regression on in-sample and out-of-sample data</span>
 
-<span class="co"># create function to sample data and compute regression on in-sample and out-of-sample data</span>
-
-get_sample_predictions &lt;-<span class="st"> </span><span class="cf">function</span>(sample_size,<span class="dt">shuffle=</span><span class="ot">FALSE</span>) {
-  
-  orig_sample &lt;-<span class="st"> </span>
+get_sample_predictions &lt;-<span class="st"> </span><span class="cf">function</span>(sample_size, <span class="dt">shuffle =</span> <span class="ot">FALSE</span>) {
+  orig_sample &lt;-
 <span class="st">    </span>NHANES_child <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">sample_n</span>(sample_size)
-  
-  <span class="cf">if</span> (shuffle){
+
+  <span class="cf">if</span> (shuffle) {
     orig_sample<span class="op">$</span>Weight &lt;-<span class="st"> </span><span class="kw">sample</span>(orig_sample<span class="op">$</span>Weight)
   }
-  heightRegressOrig &lt;-<span class="st"> </span><span class="kw">lm</span>(Weight <span class="op">~</span><span class="st"> </span>Height<span class="op">*</span>TVHrsDayChild<span class="op">*</span>CompHrsDayChild<span class="op">*</span>HHIncomeMid<span class="op">*</span>Age,
-                          <span class="dt">data=</span>orig_sample)
   
+  heightRegressOrig &lt;-<span class="st"> </span><span class="kw">lm</span>(
+    Weight <span class="op">~</span><span class="st"> </span>Height <span class="op">*</span><span class="st"> </span>TVHrsDayChild <span class="op">*</span><span class="st"> </span>CompHrsDayChild <span class="op">*</span><span class="st"> </span>HHIncomeMid <span class="op">*</span><span class="st"> </span>Age,
+    <span class="dt">data =</span> orig_sample
+  )
+
   pred_orig &lt;-<span class="st"> </span><span class="kw">predict</span>(heightRegressOrig)
-  
-  new_sample &lt;-<span class="st"> </span>
+
+  new_sample &lt;-
 <span class="st">    </span>NHANES_child <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">sample_n</span>(sample_size)
-  
-  pred_new &lt;-<span class="st"> </span><span class="kw">predict</span>(heightRegressOrig,new_sample)
+
+  pred_new &lt;-<span class="st"> </span><span class="kw">predict</span>(heightRegressOrig, new_sample)
   <span class="co"># return r-squared and rmse for original and new data</span>
-  <span class="kw">return</span>(<span class="kw">c</span>(<span class="kw">cor</span>(pred_orig,orig_sample<span class="op">$</span>Weight)<span class="op">**</span><span class="dv">2</span>,
-           <span class="kw">cor</span>(pred_new,new_sample<span class="op">$</span>Weight)<span class="op">**</span><span class="dv">2</span>,
-           <span class="kw">sqrt</span>(<span class="kw">mean</span>((pred_orig <span class="op">-</span><span class="st"> </span>orig_sample<span class="op">$</span>Weight)<span class="op">**</span><span class="dv">2</span>)),
-          <span class="kw">sqrt</span>(<span class="kw">mean</span>((pred_new <span class="op">-</span><span class="st"> </span>new_sample<span class="op">$</span>Weight)<span class="op">**</span><span class="dv">2</span>))))
+  <span class="kw">return</span>(<span class="kw">c</span>(
+    <span class="kw">cor</span>(pred_orig, orig_sample<span class="op">$</span>Weight)<span class="op">**</span><span class="dv">2</span>,
+    <span class="kw">cor</span>(pred_new, new_sample<span class="op">$</span>Weight)<span class="op">**</span><span class="dv">2</span>,
+    <span class="kw">sqrt</span>(<span class="kw">mean</span>((pred_orig <span class="op">-</span><span class="st"> </span>orig_sample<span class="op">$</span>Weight)<span class="op">**</span><span class="dv">2</span>)),
+    <span class="kw">sqrt</span>(<span class="kw">mean</span>((pred_new <span class="op">-</span><span class="st"> </span>new_sample<span class="op">$</span>Weight)<span class="op">**</span><span class="dv">2</span>))
+  ))
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># implement the function</span>
+sim_results &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">replicate</span>(<span class="dv">100</span>, <span class="kw">get_sample_predictions</span>(<span class="dt">sample_size =</span> <span class="dv">48</span>, <span class="dt">shuffle =</span> <span class="ot">FALSE</span>))
 
-}
-
-sim_results &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">100</span>,<span class="kw">get_sample_predictions</span>(<span class="dv">48</span>))
-sim_results &lt;-<span class="st"> </span><span class="kw">t</span>(sim_results) <span class="op">%&gt;%</span>
+sim_results &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">t</span>(sim_results) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">data.frame</span>()
-mean_rsquared &lt;-<span class="st"> </span>
-<span class="st">  </span>sim_results<span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">rmse_original_data =</span> <span class="kw">mean</span>(X3),
-            <span class="dt">rmse_new_data =</span> <span class="kw">mean</span>(X4))
+
+mean_rsquared &lt;-
+<span class="st">  </span>sim_results <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarize</span>(
+    <span class="dt">rmse_original_data =</span> <span class="kw">mean</span>(X3),
+    <span class="dt">rmse_new_data =</span> <span class="kw">mean</span>(X4)
+  )
+
 <span class="kw">pander</span>(mean_rsquared)</code></pre></div>
 <table style="width:50%;">
 <colgroup>
@@ -858,17 +857,23 @@ mean_rsquared &lt;-<span class="st"> </span>
 </tr>
 </tbody>
 </table>
-<p>Here we see that whereas the model fit on the original data showed a very good fit (only off by a few pounds per individual), the same model does a much worse job of predicting the weight values for new children sampled from the same population (off by more than 25 pounds per individual). This happens because the model that we specified is quite complex, since it includes not just each of the individual variables, but also all possible combinations of them (i.e. their <em>interactions</em>), resulting in a model with 32 parameters. Since this is almost as many coefficients as there are data points, the model <em>overfits</em> the data, just like the complex polynomial curve in our initial example of overfitting in Section <a href="fitting-models-to-data.html#overfitting">5.4</a>.</p>
-<p>Another way to see the effects of overfitting is to look at what happens if we randomly shuffle the values of the weight variable, such that it should be impossible in principle to predict weight from the other variables, since they should have no systematic relationship.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="st">&#39;using shuffled y variable to simulate null effect&#39;</span>)</code></pre></div>
+<p>Here we see that whereas the model fit on the original data showed a very good fit (only off by a few pounds per individual), the same model does a much worse job of predicting the weight values for new children sampled from the same population (off by more than 25 pounds per individual). This happens because the model that we specified is quite complex, since it includes not just each of the individual variables, but also all possible combinations of them (i.e. their <em>interactions</em>), resulting in a model with 32 parameters. Since this is almost as many coefficients as there are data points (i.e., the heights of 48 children), the model <em>overfits</em> the data, just like the complex polynomial curve in our initial example of overfitting in Section <a href="fitting-models-to-data.html#overfitting">5.4</a>.</p>
+<p>Another way to see the effects of overfitting is to look at what happens if we randomly shuffle the values of the weight variable. Randomly shuffiling the value should make it impossible to predict weight from the other variables, because they should have no systematic relationship.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="st">&quot;using shuffled y variable to simulate null effect&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;using shuffled y variable to simulate null effect&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sim_results &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">100</span>,<span class="kw">get_sample_predictions</span>(<span class="dv">48</span>,<span class="dt">shuffle=</span><span class="ot">TRUE</span>))
-sim_results &lt;-<span class="st"> </span><span class="kw">t</span>(sim_results) <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sim_results &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">replicate</span>(<span class="dv">100</span>, <span class="kw">get_sample_predictions</span>(<span class="dt">sample_size =</span> <span class="dv">48</span>, <span class="dt">shuffle =</span> <span class="ot">TRUE</span>))
+
+sim_results &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">t</span>(sim_results) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">data.frame</span>()
-mean_rsquared &lt;-<span class="st"> </span>
-<span class="st">  </span>sim_results<span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">rmse_original_data =</span> <span class="kw">mean</span>(X3),
-            <span class="dt">rmse_new_data =</span> <span class="kw">mean</span>(X4))
+
+mean_rsquared &lt;-
+<span class="st">  </span>sim_results <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarize</span>(
+    <span class="dt">rmse_original_data =</span> <span class="kw">mean</span>(X3),
+    <span class="dt">rmse_new_data =</span> <span class="kw">mean</span>(X4)
+  )
 <span class="kw">pander</span>(mean_rsquared)</code></pre></div>
 <table style="width:50%;">
 <colgroup>
@@ -902,19 +907,37 @@ Figure 14.9: A schematic of the crossvalidation procedure.
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create a function to run cross-validation</span>
 <span class="co"># returns the r-squared for the out-of-sample prediction</span>
 
-compute_cv &lt;-<span class="st"> </span><span class="cf">function</span>(d,<span class="dt">nfolds=</span><span class="dv">12</span>) {
+compute_cv &lt;-<span class="st"> </span><span class="cf">function</span>(d, <span class="dt">nfolds =</span> <span class="dv">12</span>) {
   <span class="co"># based on https://quantdev.ssri.psu.edu/tutorials/cross-validation-tutorial</span>
   train_ctrl &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> nfolds)
-  model_caret &lt;-<span class="st"> </span><span class="kw">train</span>(Weight <span class="op">~</span><span class="st"> </span>Height<span class="op">*</span>TVHrsDayChild<span class="op">*</span>CompHrsDayChild<span class="op">*</span>HHIncomeMid<span class="op">*</span>Age,
-                            <span class="dt">data=</span>d,        
-                       <span class="dt">trControl =</span> train_ctrl,  <span class="co"># folds</span>
-                       <span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>)   <span class="co"># specifying regression model</span>
-  
+  model_caret &lt;-<span class="st"> </span><span class="kw">train</span>(
+    Weight <span class="op">~</span><span class="st"> </span>Height <span class="op">*</span><span class="st"> </span>TVHrsDayChild <span class="op">*</span><span class="st"> </span>CompHrsDayChild <span class="op">*</span><span class="st"> </span>HHIncomeMid <span class="op">*</span><span class="st"> </span>Age,
+    <span class="dt">data =</span> d,
+    <span class="dt">trControl =</span> train_ctrl, <span class="co"># folds</span>
+    <span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>
+  ) <span class="co"># specifying regression model</span>
+
   r2_cv &lt;-<span class="st"> </span><span class="kw">mean</span>(model_caret<span class="op">$</span>resample<span class="op">$</span>Rsquared)
   rmse_cv &lt;-<span class="st"> </span><span class="kw">mean</span>(model_caret<span class="op">$</span>resample<span class="op">$</span>RMSE)
-  <span class="kw">return</span>(<span class="kw">c</span>(r2_cv,rmse_cv))
+  <span class="kw">return</span>(<span class="kw">c</span>(r2_cv, rmse_cv))
 }</code></pre></div>
 <p>Using this function we can run cross-validation on 100 samples from the NHANES dataset, and compute the RMSE for cross-validation, along with the RMSE for the original data and a new dataset, as we computed above.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#implement the function</span>
+sim_results &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">replicate</span>(<span class="dv">100</span>, <span class="kw">get_sample_predictions_cv</span>(<span class="dt">sample_size =</span> <span class="dv">48</span>, <span class="dt">shuffle =</span> <span class="ot">FALSE</span>))
+
+sim_results &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">t</span>(sim_results) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">data.frame</span>()
+
+mean_rsquared &lt;-
+<span class="st">  </span>sim_results <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarize</span>(
+    <span class="dt">mse_original_data =</span> <span class="kw">mean</span>(X4),
+    <span class="dt">mse_new_data =</span> <span class="kw">mean</span>(X5),
+    <span class="dt">mse_crossvalidation =</span> <span class="kw">mean</span>(X6)
+  )
+<span class="kw">pander</span>(mean_rsquared)</code></pre></div>
 <table style="width:78%;">
 <colgroup>
 <col width="27%" />
