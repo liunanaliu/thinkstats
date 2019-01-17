@@ -123,7 +123,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{Draft: 2019-01-16}
+    \date{Draft: 2019-01-17}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -306,7 +306,7 @@ Thanks to the following individuals/usernames for submitting edits or
 issues via Github: Mehdi Rahim, Shanaathanan Modchalingam, Alan He,
 Wenjin Tao, Martijn Stegeman, Dan Kessler, Philipp Kuhnke, James Kent,
 Michael Waskom, Alexander Wang, basicv8vc, jiamingkong, carlosivanr,
-hktang .
+hktang, ttaweel.
 
 \chapter{Introduction}\label{introduction}
 
@@ -1959,7 +1959,7 @@ we outlined above, we can compute the individual's likelihood of having
 cancer given a positive test:
 
 \[
-P(\text{cancer|test}) = \frac{P(\text{test|cancer})*P(\text{cancer})}{P(\text{test|disease})*P(\text{disease}) + P(\text{test|}\neg\text{disease})*P(\neg\text{disease})} 
+P(\text{cancer|test}) = \frac{P(\text{test|cancer})*P(\text{cancer})}{P(\text{test|cancer})*P(\text{cancer}) + P(\text{test|}\neg\text{cancer})*P(\neg\text{cancer})} 
 \] \[
 = \frac{0.8*0.058}{0.8*0.058 +0.3*0.942 } = 0.14
 \] That's pretty small -- do you find that surprising? Many people do,
