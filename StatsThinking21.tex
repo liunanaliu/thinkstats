@@ -123,7 +123,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{Draft: 2019-01-17}
+    \date{Draft: 2019-01-19}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -306,7 +306,7 @@ Thanks to the following individuals/usernames for submitting edits or
 issues via Github: Mehdi Rahim, Shanaathanan Modchalingam, Alan He,
 Wenjin Tao, Martijn Stegeman, Dan Kessler, Philipp Kuhnke, James Kent,
 Michael Waskom, Alexander Wang, basicv8vc, jiamingkong, carlosivanr,
-hktang, ttaweel.
+hktang, ttaweel, epetsen.
 
 \chapter{Introduction}\label{introduction}
 
@@ -1303,7 +1303,9 @@ probability of rolling 6 on either of two throws. According to our
 rules:
 
 \[
-P(Roll1_{throw1} \cup Roll1_{throw2}) = P(Roll1_{throw1}) + P(Roll1_{throw2}) - P(Roll1_{throw1} \cap Roll1_{throw2}) = \frac{1}{6} + \frac{1}{6} - \frac{1}{36} = \frac{11}{36}
+P(Roll1_{throw1} \cup Roll1_{throw2}) = P(Roll1_{throw1}) + P(Roll1_{throw2}) - P(Roll1_{throw1} \cap Roll1_{throw2}) 
+\] \[
+= \frac{1}{6} + \frac{1}{6} - \frac{1}{36} = \frac{11}{36}
 \]
 
 \begin{figure}
@@ -2049,7 +2051,8 @@ what is called an \emph{odds ratio} - which is exactly what it sounds
 like. For example, let's say that we want to know how much the positive
 test increases the individual's odds of having cancer. We can first
 compute the \emph{prior odds} -- that is, the odds before we knew that
-the person had tested positvely. These are computed using the base rate:
+the person had tested positively. These are computed using the base
+rate:
 
 \[
 \text{prior odds} = \frac{P(\text{cancer})}{P(\neg \text{cancer})} =\frac{0.058}{1 - 0.058} = 0.061

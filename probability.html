@@ -511,7 +511,9 @@ P(A \cap B) = P(A) * P(B)\ \text{iff A and B are independent}
 P(A \cup B) = P(A) + P(B) - P(A \cap B)
 \]</span> That is, the probability of A or B occurring is determined by adding together the individual probabilities, but then subtracting the likelihood of both occurring together. In a sense, this prevents us from counting those instances twice. Let’s say that we want to find the probability of rolling 6 on either of two throws. According to our rules:</p>
 <p><span class="math display">\[
-P(Roll1_{throw1} \cup Roll1_{throw2}) = P(Roll1_{throw1}) + P(Roll1_{throw2}) - P(Roll1_{throw1} \cap Roll1_{throw2}) = \frac{1}{6} + \frac{1}{6} - \frac{1}{36} = \frac{11}{36}
+P(Roll1_{throw1} \cup Roll1_{throw2}) = P(Roll1_{throw1}) + P(Roll1_{throw2}) - P(Roll1_{throw1} \cap Roll1_{throw2}) 
+\]</span> <span class="math display">\[
+= \frac{1}{6} + \frac{1}{6} - \frac{1}{36} = \frac{11}{36}
 \]</span></p>
 <div class="figure"><span id="fig:ThrowMatrix"></span>
 <img src="StatsThinking21_files/figure-html/ThrowMatrix-1.png" alt="Each cell in this matrix represents one outcome of two throws of a die, with the columns representing the first throw and the rows representing the second throw. Cells shown in light blue represent the cells with a one in either the first or second throw; the rest are shown in dark blue." width="384" height="50%" />
@@ -916,7 +918,7 @@ P(B|A) = \frac{P(A|B)}{P(A)}*P(B)
 \text{odds of 6} = \frac{1}{5} = 0.2
 \]</span></p>
 <p>As an aside, this is a reason why many medical researchers have become increasingly wary of the use of widespread screening tests for relatively uncommon conditions; most positive results will turn out to be false positives.</p>
-<p>We can also use odds to compare different probabilities, by computing what is called an <em>odds ratio</em> - which is exactly what it sounds like. For example, let’s say that we want to know how much the positive test increases the individual’s odds of having cancer. We can first compute the <em>prior odds</em> – that is, the odds before we knew that the person had tested positvely. These are computed using the base rate:</p>
+<p>We can also use odds to compare different probabilities, by computing what is called an <em>odds ratio</em> - which is exactly what it sounds like. For example, let’s say that we want to know how much the positive test increases the individual’s odds of having cancer. We can first compute the <em>prior odds</em> – that is, the odds before we knew that the person had tested positively. These are computed using the base rate:</p>
 <p><span class="math display">\[
 \text{prior odds} = \frac{P(\text{cancer})}{P(\neg \text{cancer})} =\frac{0.058}{1 - 0.058} = 0.061
 \]</span></p>
