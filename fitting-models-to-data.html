@@ -440,8 +440,8 @@ height_i = 166.5 + error
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute error compared to the mode and plot histogram</span>
 
 error_mode &lt;-<span class="st"> </span>NHANES_child<span class="op">$</span>Height <span class="op">-</span><span class="st"> </span>height_mode
-<span class="kw">sprintf</span>(<span class="st">&quot;average error from mode (inches): %0.2f&quot;</span>, <span class="kw">mean</span>(error_mode))</code></pre></div>
-<pre><code>## [1] &quot;average error from mode (inches): -28.80&quot;</code></pre>
+<span class="kw">sprintf</span>(<span class="st">&quot;average error from mode (cm): %0.2f&quot;</span>, <span class="kw">mean</span>(error_mode))</code></pre></div>
+<pre><code>## [1] &quot;average error from mode (cm): -28.80&quot;</code></pre>
 <p>What we find is that the average individual has a fairly large error of -28.8 centimeters. We would like to have a model where the average error is zero, and it turns out that if we use the arithmetic mean (commonly known as the <em>average</em>) as our model then this will be the case.</p>
 <p>The mean (often denoted by a bar over the variable, such as <span class="math inline">\(\bar{X}\)</span>) is defined as:</p>
 <p><span class="math display">\[
@@ -467,8 +467,8 @@ error = \sum_{i=1}^{n}(x_i - \bar{X}) = 0
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute error from mean</span>
 
 error_mean &lt;-<span class="st"> </span>NHANES_child<span class="op">$</span>Height <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(NHANES_child<span class="op">$</span>Height)
-<span class="kw">sprintf</span>(<span class="st">&quot;average error for mean (inches): %e&quot;</span>, <span class="kw">mean</span>(error_mean))</code></pre></div>
-<pre><code>## [1] &quot;average error for mean (inches): -9.864171e-15&quot;</code></pre>
+<span class="kw">sprintf</span>(<span class="st">&quot;average error for mean (cm): %e&quot;</span>, <span class="kw">mean</span>(error_mean))</code></pre></div>
+<pre><code>## [1] &quot;average error for mean (cm): -9.864171e-15&quot;</code></pre>
 <div class="figure"><span id="fig:meanError"></span>
 <img src="StatsThinking21_files/figure-html/meanError-1.png" alt="Distribution of errors from the mean." width="384" height="50%" />
 <p class="caption">

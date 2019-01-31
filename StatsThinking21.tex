@@ -306,7 +306,8 @@ Thanks to the following individuals/usernames for submitting edits or
 issues via Github: Mehdi Rahim, Shanaathanan Modchalingam, Alan He,
 Wenjin Tao, Martijn Stegeman, Dan Kessler, Philipp Kuhnke, James Kent,
 Michael Waskom, Alexander Wang, Isis Anderson, Albane Valenzuela,
-basicv8vc, jiamingkong, carlosivanr, hktang, ttaweel, epetsen.
+basicv8vc, jiamingkong, carlosivanr, hktang, ttaweel, epetsen,
+brettelizabeth .
 
 \chapter{Introduction}\label{introduction}
 
@@ -3002,12 +3003,12 @@ lower error is the better model.
 \CommentTok{# compute error compared to the mode and plot histogram}
 
 \NormalTok{error_mode <-}\StringTok{ }\NormalTok{NHANES_child}\OperatorTok{$}\NormalTok{Height }\OperatorTok{-}\StringTok{ }\NormalTok{height_mode}
-\KeywordTok{sprintf}\NormalTok{(}\StringTok{"average error from mode (inches): %0.2f"}\NormalTok{, }\KeywordTok{mean}\NormalTok{(error_mode))}
+\KeywordTok{sprintf}\NormalTok{(}\StringTok{"average error from mode (cm): %0.2f"}\NormalTok{, }\KeywordTok{mean}\NormalTok{(error_mode))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "average error from mode (inches): -28.80"
+## [1] "average error from mode (cm): -28.80"
 \end{verbatim}
 
 What we find is that the average individual has a fairly large error of
@@ -3054,12 +3055,12 @@ Let's confirm that it comes out correctly.
 \CommentTok{# compute error from mean}
 
 \NormalTok{error_mean <-}\StringTok{ }\NormalTok{NHANES_child}\OperatorTok{$}\NormalTok{Height }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(NHANES_child}\OperatorTok{$}\NormalTok{Height)}
-\KeywordTok{sprintf}\NormalTok{(}\StringTok{"average error for mean (inches): %e"}\NormalTok{, }\KeywordTok{mean}\NormalTok{(error_mean))}
+\KeywordTok{sprintf}\NormalTok{(}\StringTok{"average error for mean (cm): %e"}\NormalTok{, }\KeywordTok{mean}\NormalTok{(error_mean))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "average error for mean (inches): -9.864171e-15"
+## [1] "average error for mean (cm): -9.864171e-15"
 \end{verbatim}
 
 \begin{figure}
