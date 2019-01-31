@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="bayesian-statistics.html">
-<link rel="next" href="modeling-continuous-relationships.html">
+<link rel="prev" href="data-visualization.html">
+<link rel="next" href="sampling-1.html">
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -399,589 +399,191 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="modeling-categorical-relationships" class="section level1">
-<h1><span class="header-section-number">Chapter 13</span> Modeling categorical relationships</h1>
-<p>So far we have discussed the general concept of statistical modeling and hypothesis testing, and applied them to some simple analyses. In this chapter we will focus on the modeling of <em>categorical</em> relationships, by which we mean relationships between variables that are measured on a nominal (and sometimes ordinal) scale. These data are usually expressed in terms of counts; that is, for each value of the variable (or combination of values of multiple variables), how many observations take that value? For example, when we count how many people from each major are in our class, we are fitting a categorical model to the data.</p>
-<div id="example-candy-colors" class="section level2">
-<h2><span class="header-section-number">13.1</span> Example: Candy colors</h2>
-<p>Let’s say that I have purchased a bag of 100 candies, which are labeled as having 1/3 chocolates, 1/3 licorices, and 1/3 gumballs. When I count the candies in the bag, we get the following numbers:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">candyDf &lt;-
-<span class="st">  </span><span class="kw">tibble</span>(
-    <span class="dt">candyType =</span> <span class="kw">c</span>(<span class="st">&quot;chocolate&quot;</span>, <span class="st">&quot;licorice&quot;</span>, <span class="st">&quot;gumball&quot;</span>),
-    <span class="dt">count =</span> <span class="kw">c</span>(<span class="dv">30</span>, <span class="dv">33</span>, <span class="dv">37</span>)
-  )
-<span class="kw">pander</span>(candyDf)</code></pre></div>
-<table style="width:26%;">
-<colgroup>
-<col width="16%" />
-<col width="9%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="center">candyType</th>
-<th align="center">count</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center">chocolate</td>
-<td align="center">30</td>
-</tr>
-<tr class="even">
-<td align="center">licorice</td>
-<td align="center">33</td>
-</tr>
-<tr class="odd">
-<td align="center">gumball</td>
-<td align="center">37</td>
-</tr>
-</tbody>
-</table>
-<p>Because I like chocolate much more than licorice or gumballs, I feel slightly ripped off. What I would like to know is: What is the likelihood that the count would come out this way if the true probability of each candy type is the averaged proportion of 1/3 each?</p>
-</div>
-<div id="pearsons-chi-squared-test" class="section level2">
-<h2><span class="header-section-number">13.2</span> Pearson’s chi-squared test</h2>
-<p>The Pearson chi-squared test provides us with a way to test whether observed count data differs from some specific expected values that define the null hypothesis:</p>
-<p><span class="math display">\[
-\chi^2 = \sum_i\frac{(observed_i - expected_i)^2}{expected_i}
-\]</span></p>
-<p>In the case of our candy example, the null hypothesis is that the proportion of each type of candies is equal. We can compute the chi-squared statistic for our observed counts of candy as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute chi-squared statistic</span>
-
-nullExpectation &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">3</span>, <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">3</span>, <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">3</span>) <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>(candyDf<span class="op">$</span>count)
-
-chisqVal &lt;-<span class="st"> </span>
-<span class="st">  </span><span class="kw">sum</span>(
-    ((candyDf<span class="op">$</span>count <span class="op">-</span><span class="st"> </span>nullExpectation)<span class="op">**</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>nullExpectation
-  )</code></pre></div>
-<p>The chi-squared statistic for this analysis comes out to 0.74, which on its own is not interpretable, since it depends on the number of different values that were added together. However, we can take advantage of the fact that the chi-squared statistic is distributed according to a specific distribution under the null hypothesis, which is known as the <em>chi-squared</em> distribution. This distribution is defined as the sum of squares of a set of standard normal random variables; it has a number of degrees of freedom that is equal to the number of variables being added together. The shape of the distribution depends on the number of degrees of freedom. Figure <a href="modeling-categorical-relationships.html#fig:chisqDist">13.1</a> shows examples of the distribution for several different degrees of freedom.</p>
-<div class="figure"><span id="fig:chisqDist"></span>
-<img src="StatsThinking21_files/figure-html/chisqDist-1.png" alt="Examples of the chi-squared distribution for various degrees of freedom." width="384" height="50%" />
-<p class="caption">
-Figure 13.1: Examples of the chi-squared distribution for various degrees of freedom.
-</p>
-</div>
-<p>Let’s verify that the chi-squared distribution accurately describes the sum of squares of a set of standard normal random variables, using simulation.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># simulate 50,000 sums of 8 standard normal random variables and compare</span>
-<span class="co"># to theoretical chi-squared distribution</span>
-
-<span class="co"># create a matrix with 50k columns of 8 rows of squared normal random variables</span>
-d &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">50000</span>, <span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">8</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span>) 
-<span class="co"># sum each column of 8 variables</span>
-dMean &lt;-<span class="st"> </span><span class="kw">apply</span>(d, <span class="dv">2</span>, sum)
-
-<span class="co"># create a data frame of the theoretical chi-square distribution </span>
-<span class="co"># with 8 degrees of freedom</span>
-csDf &lt;-
-<span class="st">  </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">seq</span>(<span class="fl">0.01</span>, <span class="dv">30</span>, <span class="fl">0.01</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">chisq =</span> <span class="kw">dchisq</span>(x, <span class="dv">8</span>))</code></pre></div>
-<p>Figure <a href="modeling-categorical-relationships.html#fig:chisqSim">13.2</a> shows that the theoretical distribution matches closely with the results of a simulation that repeatedly added</p>
-<div class="figure"><span id="fig:chisqSim"></span>
-<img src="StatsThinking21_files/figure-html/chisqSim-1.png" alt="Simulation of sum of squared random normal variables.   The histogram is based on the sum of squares of 50,000 sets of 8 random normal variables; the blue line shows the values of the theoretical chi-squared distribution with 8 degrees of freedom." width="384" height="50%" />
-<p class="caption">
-Figure 13.2: Simulation of sum of squared random normal variables. The histogram is based on the sum of squares of 50,000 sets of 8 random normal variables; the blue line shows the values of the theoretical chi-squared distribution with 8 degrees of freedom.
-</p>
-</div>
-<p>For the candy example, we can compute the likelihood of our observed chi-squared value of 0.74 under the null hypothesis of equal frequency across all candies. We use a chi-squared distribution with degrees of freedom equal to n - 1, since we lost one degree of freedom when we computed the mean in order to generate the expected values.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pval &lt;-<span class="st"> </span><span class="kw">pchisq</span>(chisqVal, <span class="dt">df =</span> <span class="dv">2</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>) <span class="co">#df = degrees of freedom</span>
-<span class="kw">sprintf</span>(<span class="st">&quot;p-value = %0.3f&quot;</span>, pval)</code></pre></div>
-<pre><code>## [1] &quot;p-value = 0.691&quot;</code></pre>
-<p>This shows that the observed counts of candies are not particularly surprising based on the proportions printed on the bag of candy, and we would not reject the null hypothesis of equal proportions.</p>
-</div>
-<div id="contingency-tables-and-the-two-way-test" class="section level2">
-<h2><span class="header-section-number">13.3</span> Contingency tables and the two-way test</h2>
-<p>Another way that we often use the chi-squared test is to ask whether two categorical variables are related to one another. As a more realistic example, let’s take the question of whether a black driver is more likely to be searched when they are pulled over by a police officer, compared to a white driver The Stanford Open Policing Project (<a href="https://openpolicing.stanford.edu/" class="uri">https://openpolicing.stanford.edu/</a>) has studied this, and provides data that we can use to analyze the question. We will use the data from the State of Connecticut since they are fairly small. These data were first cleaned up to remove all unnecessary data (see code/process_CT_data.py).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load police stop data</span>
-stopData &lt;-
-<span class="st">  </span><span class="kw">read_csv</span>(<span class="st">&quot;data/CT_data_cleaned.csv&quot;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">rename</span>(<span class="dt">searched =</span> search_conducted)</code></pre></div>
-<p>The standard way to represent data from a categorical analysis is through a <em>contingency table</em>, which presents the number or proportion of observations falling into each possible combination of values for each of the variables.</p>
-<p>Let’s compute the contingency table for the police search data:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute and print two-way contingency table</span>
-summaryDf2way &lt;-
-<span class="st">  </span>stopData <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">count</span>(searched, driver_race) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">arrange</span>(driver_race, searched) 
-
-summaryContingencyTable &lt;-
-<span class="st">  </span>summaryDf2way <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">spread</span>(driver_race, n)
-
-<span class="kw">pander</span>(summaryContingencyTable)</code></pre></div>
-<table style="width:38%;">
-<colgroup>
-<col width="15%" />
-<col width="11%" />
-<col width="11%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="center">searched</th>
-<th align="center">Black</th>
-<th align="center">White</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center">FALSE</td>
-<td align="center">36244</td>
-<td align="center">239241</td>
-</tr>
-<tr class="even">
-<td align="center">TRUE</td>
-<td align="center">1219</td>
-<td align="center">3108</td>
-</tr>
-</tbody>
-</table>
-<p>It can also be useful to look at the contingency table using proportions rather than raw numbers, since they are easier to compare visually.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Compute and print contingency table using proportions </span>
-<span class="co"># rather than raw frequencies</span>
-summaryContingencyTableProportion &lt;-
-<span class="st">  </span>summaryContingencyTable <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">Black =</span> Black <span class="op">/</span><span class="st"> </span><span class="kw">nrow</span>(stopData), <span class="co">#count of Black individuals searched / total searched</span>
-    <span class="dt">White =</span> White <span class="op">/</span><span class="st"> </span><span class="kw">nrow</span>(stopData)
-  )
-<span class="kw">pander</span>(summaryContingencyTableProportion, <span class="dt">round =</span> <span class="dv">4</span>)</code></pre></div>
-<table style="width:40%;">
-<colgroup>
-<col width="15%" />
-<col width="12%" />
-<col width="12%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="center">searched</th>
-<th align="center">Black</th>
-<th align="center">White</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center">FALSE</td>
-<td align="center">0.1295</td>
-<td align="center">0.855</td>
-</tr>
-<tr class="even">
-<td align="center">TRUE</td>
-<td align="center">0.0044</td>
-<td align="center">0.0111</td>
-</tr>
-</tbody>
-</table>
-<p>The Pearson chi-squared test allows us to test whether observed frequencies are different from expected frequencies, so we need to determine what frequencies we would expect in each cell if searches and race were unrelated – which we can define as being <em>independent.</em> Remember from the chapter on probability that if X and Y are independent, then:</p>
-<p><span class="math display">\[
-P(X \cap Y) = P(X) * P(Y)
-\]</span> That is, the joint probability under the null hypothesis of independence is simply the product of the <em>marginal</em> probabilities of each individual variable. The marginal probabilities are simply the probabilities of each event occuring regardless of other events. We can compute those marginal probabilities, and then multiply them together to get the expected proportions under independence.</p>
-<table>
-<thead>
-<tr class="header">
-<th></th>
-<th>Black</th>
-<th>White</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Not searched</td>
-<td>P(NS)*P(B)</td>
-<td>P(NS)*P(W)</td>
-<td>P(NS)</td>
-</tr>
-<tr class="even">
-<td>Searched</td>
-<td>P(S)*P(B)</td>
-<td>P(S)*P(W)</td>
-<td>P(S)</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>P(B)</td>
-<td>P(W)</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>We can use a linear algebra trick known as the “outer product” (via the <code>outer()</code> function) to compute this easily.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># first, compute the marginal probabilities</span>
-
-<span class="co"># probability of being each race</span>
-summaryDfRace &lt;-
-<span class="st">  </span>stopData <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">count</span>(driver_race) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#count the number of drivers of each race</span>
-<span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">prop =</span> n <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(n) <span class="co">#compute the proportion of each race out of all drivers</span>
-  )
-
-<span class="co"># probability of being searched </span>
-summaryDfStop &lt;-
-<span class="st">  </span>stopData <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">count</span>(searched) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#count the number of searched vs. not searched</span>
-<span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">prop =</span> n <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(n) <span class="co"># compute proportion of each outcome out all traffic stops</span>
-  )</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># second, multiply outer product by n (all stops) to compute expected frequencies</span>
-expected &lt;-<span class="st"> </span><span class="kw">outer</span>(summaryDfRace<span class="op">$</span>prop, summaryDfStop<span class="op">$</span>prop) <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(stopData)
-
-<span class="co"># create a data frame of expected frequences for each race </span>
-expectedDf &lt;-<span class="st"> </span>
-<span class="st">  </span><span class="kw">data.frame</span>(expected, <span class="dt">driverRace =</span> <span class="kw">c</span>(<span class="st">&quot;Black&quot;</span>, <span class="st">&quot;White&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">rename</span>(
-    <span class="dt">NotSearched =</span> X1,
-    <span class="dt">Searched =</span> X2
-  )
-
-<span class="co"># tidy the data frame</span>
-expectedDfTidy &lt;-
-<span class="st">  </span><span class="kw">gather</span>(expectedDf, searched, n, <span class="op">-</span>driverRace) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">arrange</span>(driverRace, searched)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># third, add expected frequencies to the original summary table</span>
-<span class="co"># and fourth, compute the standardized squared difference between </span>
-<span class="co"># the observed and expected frequences</span>
-
-summaryDf2way &lt;-
-<span class="st">  </span>summaryDf2way <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">expected =</span> expectedDfTidy<span class="op">$</span>n)
-
-summaryDf2way &lt;-
-<span class="st">  </span>summaryDf2way <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">stdSqDiff =</span> (n <span class="op">-</span><span class="st"> </span>expected)<span class="op">**</span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span>expected)
-
-<span class="kw">pander</span>(summaryDf2way)</code></pre></div>
-<table style="width:78%;">
-<colgroup>
-<col width="15%" />
-<col width="19%" />
-<col width="12%" />
-<col width="15%" />
-<col width="15%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="center">searched</th>
-<th align="center">driver_race</th>
-<th align="center">n</th>
-<th align="center">expected</th>
-<th align="center">stdSqDiff</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center">FALSE</td>
-<td align="center">Black</td>
-<td align="center">36244</td>
-<td align="center">36883.67</td>
-<td align="center">11.09</td>
-</tr>
-<tr class="even">
-<td align="center">TRUE</td>
-<td align="center">Black</td>
-<td align="center">1219</td>
-<td align="center">579.33</td>
-<td align="center">706.31</td>
-</tr>
-<tr class="odd">
-<td align="center">FALSE</td>
-<td align="center">White</td>
-<td align="center">239241</td>
-<td align="center">238601.3</td>
-<td align="center">1.71</td>
-</tr>
-<tr class="even">
-<td align="center">TRUE</td>
-<td align="center">White</td>
-<td align="center">3108</td>
-<td align="center">3747.67</td>
-<td align="center">109.18</td>
-</tr>
-</tbody>
-</table>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># finally, compute chi-squared statistic by </span>
-<span class="co"># summing the standarized squared differences</span>
-chisq &lt;-<span class="st"> </span><span class="kw">sum</span>(summaryDf2way<span class="op">$</span>stdSqDiff)
-<span class="kw">sprintf</span>(<span class="st">&quot;Chi-squared value = %0.2f&quot;</span>, chisq)</code></pre></div>
-<pre><code>## [1] &quot;Chi-squared value = 828.30&quot;</code></pre>
-<p>Having computed the chi-squared statistic, we now need to compare it to the chi-squared distribution in order to determine how extreme it is compared to our expectation under the null hypothesis. The degrees of freedom for this distribution are <span class="math inline">\(df = (nRows - 1) * (nColumns - 1)\)</span> - thus, for a 2X2 table like the one here, <span class="math inline">\(df = (2-1)*(2-1)=1\)</span>. The intuition here is that computing the expected frequencies requires us to use three values: the total number of observations and the marginal probability for each of the two variables. Thus, once those values are computed, there is only one number that is free to vary, and thus there is one degree of freedom. Given this, we can compute the p-value for the chi-squared statistic:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pval &lt;-<span class="st"> </span><span class="kw">pchisq</span>(chisq, <span class="dt">df =</span> <span class="dv">1</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)
-<span class="kw">sprintf</span>(<span class="st">&quot;p-value = %e&quot;</span>, pval)</code></pre></div>
-<pre><code>## [1] &quot;p-value = 3.795669e-182&quot;</code></pre>
-<p>The p value of <span class="math inline">\(3.79e^{-182}\)</span> is exceedingly small, showing that the observed data would be highly unlikely if there was truly no relationship between race and police searches, and thus we should reject the null hypothesis of independence.</p>
-<p>We can also perform this test easily using the <code>chisq.test()</code> function in R:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># first need to rearrange the data into a 2x2 table</span>
-summaryDf2wayTable &lt;-
-<span class="st">  </span>summaryDf2way <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="op">-</span>expected, <span class="op">-</span>stdSqDiff) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">spread</span>(searched, n) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="op">-</span>driver_race)
-
-chisqTestResult &lt;-<span class="st"> </span><span class="kw">chisq.test</span>(summaryDf2wayTable, <span class="dv">1</span>, <span class="dt">correct =</span> <span class="ot">FALSE</span>)
-chisqTestResult</code></pre></div>
-<pre><code>## 
-##  Pearson&#39;s Chi-squared test
-## 
-## data:  summaryDf2wayTable
-## X-squared = 800, df = 1, p-value &lt;2e-16</code></pre>
-</div>
-<div id="standardized-residuals" class="section level2">
-<h2><span class="header-section-number">13.4</span> Standardized residuals</h2>
-<p>When we find a significant effect with the chi-squared test, this tells us that the data are unlikely under the null hypothesis, but it doesn’t tell us <em>how</em> the data differ. To get a deeper insight into how the data differ from what we would expect under the null hypothesis, we can examine the residuals from a model, which reflects the deviation of the data (i.e., the observed frequencies) from the model in each cell (i.e., the expected frequencies). Rather than looking at the raw residuals (which will vary simply depending on the number of observations in the data), it’s more common to look at ther <em>standardized residuals</em>, which are computed as:</p>
-<p><span class="math display">\[
-standardized\ residual_{ij} = \frac{observed_{ij} - expected_{ij}}{\sqrt{expected_{ij}}}
-\]</span> where <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> are the indices for the rows and columns respectively. We can compute these for the police stop data:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute standardized residuals</span>
-summaryDf2way &lt;-<span class="st"> </span>
-<span class="st">  </span>summaryDf2way <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">stdRes =</span> (n <span class="op">-</span><span class="st"> </span>expected)<span class="op">/</span><span class="kw">sqrt</span>(expected))
-
-<span class="kw">pander</span>(summaryDf2way)</code></pre></div>
-<table style="width:90%;">
-<colgroup>
-<col width="15%" />
-<col width="19%" />
-<col width="12%" />
-<col width="15%" />
-<col width="16%" />
-<col width="11%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="center">searched</th>
-<th align="center">driver_race</th>
-<th align="center">n</th>
-<th align="center">expected</th>
-<th align="center">stdSqDiff</th>
-<th align="center">stdRes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center">FALSE</td>
-<td align="center">Black</td>
-<td align="center">36244</td>
-<td align="center">36883.67</td>
-<td align="center">11.09</td>
-<td align="center">-3.33</td>
-</tr>
-<tr class="even">
-<td align="center">TRUE</td>
-<td align="center">Black</td>
-<td align="center">1219</td>
-<td align="center">579.33</td>
-<td align="center">706.31</td>
-<td align="center">26.58</td>
-</tr>
-<tr class="odd">
-<td align="center">FALSE</td>
-<td align="center">White</td>
-<td align="center">239241</td>
-<td align="center">238601.3</td>
-<td align="center">1.71</td>
-<td align="center">1.31</td>
-</tr>
-<tr class="even">
-<td align="center">TRUE</td>
-<td align="center">White</td>
-<td align="center">3108</td>
-<td align="center">3747.67</td>
-<td align="center">109.18</td>
-<td align="center">-10.45</td>
-</tr>
-</tbody>
-</table>
-<p>These standardized residuals can be interpreted as Z scores – in this case, we see that the number of searches for black individuals are substantially higher than expected based on independence, and the number of searches for white individuals are substantially lower than expected. This provides us with the context that we need to interpret the signficant chi-squared result.</p>
-</div>
-<div id="odds-ratios" class="section level2">
-<h2><span class="header-section-number">13.5</span> Odds ratios</h2>
-<p>We can also represent the relative likelihood of different outcomes in the contingency table using the odds ratio that we introduced earlier, in order to better understand the size of the effect. First, we represent the odds of being stopped for each race:</p>
-<p><span class="math display">\[
-odds_{searched|black} = \frac{N_{searched\cap black}}{N_{not\ searched\cap black}} = \frac{1219}{36244} = 0.034
-\]</span></p>
-<p><span class="math display">\[
-odds_{searched|white} = \frac{N_{searched\cap white}}{N_{not\ searched\cap white}} = \frac{3108}{239241} = 0.013
-\]</span> <span class="math display">\[
-odds\ ratio = \frac{odds_{searched|black}}{odds_{searched|white}} = 2.59
-\]</span></p>
-<p>The odds ratio shows that the odds of being searched are 2.59 times higher for black versus white drivers, based on this dataset.</p>
-</div>
-<div id="bayes-factor" class="section level2">
-<h2><span class="header-section-number">13.6</span> Bayes factor</h2>
-<p>We discussed Bayes factors in the earlier chapter on Bayesian statistics – you may remember that it represents the ratio of the likelihood of the data under each of the two hypotheses: <span class="math display">\[ 
-K = \frac{P(data|H_A)}{P(data|H_0)} = \frac{P(H_A|data)*P(H_A)}{P(H_0|data)*P(H_0)}
-\]</span> Bayes factors are similar to p-values and effect sizes in one way, which is that their interpretation is somewhat subjective. There are various guidelines for their interpretation – here is one from <span class="citation">Kass and Raftery (1995)</span> :</p>
-<table>
-<thead>
-<tr class="header">
-<th>BF</th>
-<th>Interpretation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1 to 3</td>
-<td>barely worth mention</td>
-</tr>
-<tr class="even">
-<td>3 to 20</td>
-<td>positive</td>
-</tr>
-<tr class="odd">
-<td>20 to 150</td>
-<td>strong</td>
-</tr>
-<tr class="even">
-<td>150 and above</td>
-<td>very strong</td>
-</tr>
-</tbody>
-</table>
-<p>We can compute the Bayes factor for the police search data using the <code>contingencyTableBF()</code> function from the BayesFactor package:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute Bayes factor </span>
-<span class="co"># using independent multinomial sampling plan in which row totals (driver race)</span>
-<span class="co"># are fixed</span>
-
-bf &lt;-<span class="st"> </span>
-<span class="st">  </span><span class="kw">contingencyTableBF</span>(<span class="kw">as.matrix</span>(summaryDf2wayTable),
-  <span class="dt">sampleType =</span> <span class="st">&quot;indepMulti&quot;</span>,
-  <span class="dt">fixedMargin =</span> <span class="st">&quot;cols&quot;</span>
-)
-bf</code></pre></div>
-<pre><code>## Bayes factor analysis
-## --------------
-## [1] Non-indep. (a=1) : 1.8e+142 ±0%
-## 
-## Against denominator:
-##   Null, independence, a = 1 
-## ---
-## Bayes factor type: BFcontingencyTable, independent multinomial</code></pre>
-<p>This shows that the evidence in favor of a relationship between driver race and police searches in this dataset is exceedingly strong.</p>
-</div>
-<div id="categorical-analysis-beyond-the-2-x-2-table" class="section level2">
-<h2><span class="header-section-number">13.7</span> Categorical analysis beyond the 2 X 2 table</h2>
-<p>Categorical analysis can also be applied to contingency tables where there are more than two categories for each variable.</p>
-<p>For example, let’s look at the NHANES data and compare the variable <em>Depressed</em> which denotes the “self-reported number of days where participant felt down, depressed or hopeless”. This variable is coded as <code>None</code>, <code>Several</code>, or <code>Most</code>. Let’s test whether this variable is related to the <em>SleepTrouble</em> variable which reports whether the individual has reported sleeping problems to a doctor.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># summarize depression as a function of sleep trouble</span>
-depressedSleepTrouble &lt;-
+<div id="plot-height-by-gender" class="section level1">
+<h1><span class="header-section-number">Chapter 7</span> plot height by Gender</h1>
+<p>dfmean=NHANES_adult %&gt;% group_by(Gender) %&gt;% summarise(Height=mean(Height))</p>
+<p>p1 = ggplot(dfmean,aes(x=Gender,y=Height)) + geom_bar(stat=“identity”,color=‘gray’) + coord_cartesian(ylim=c(0,210)) + ggtitle(‘Bar graph’) + theme(aspect.ratio=1)</p>
+<p>p2 = ggplot(dfmean,aes(x=Gender,y=Height)) + geom_bar(stat=“identity”,color=‘gray’) + coord_cartesian(ylim=c(0,210)) + ggtitle(‘Bar graph with points’) + theme(aspect.ratio=1) + geom_jitter(data=NHANES_adult,aes(x=Gender,y=Height),width=0.1,alpha=0.1)</p>
+<p>p3 = ggplot(NHANES_adult,aes(x=Gender,y=Height)) + geom_violin() + ggtitle(‘Violin plot’) + theme(aspect.ratio=1)</p>
+<p>p4 = ggplot(NHANES_adult,aes(x=Gender,y=Height)) + geom_boxplot() +<br />
+ggtitle(‘Box plot’) + theme(aspect.ratio=1)</p>
+<p>plot_grid(p1,p2,p3,p4,nrow=2,labels=‘AUTO’)</p>
+<p>```</p>
+<div id="plotting-in-r-using-ggplot" class="section level2">
+<h2><span class="header-section-number">7.1</span> Plotting in R using ggplot</h2>
+<p>There are many different tools for plotting data in R, but we will focus on the <code>ggplot()</code> function provided by a package called <code>ggplot2</code>. ggplot is very powerful, but using it requires getting one’s head around how it works.</p>
+<p>Let’s say that we want to create a <em>scatterplot</em> that plots height against weight for each adult in a sample of 150 people from the NHANES dataset, with different markers used to denote men and women. First we create our sample:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">NHANES_sample &lt;-<span class="st"> </span>
 <span class="st">  </span>NHANES_adult <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">drop_na</span>(SleepTrouble, Depressed) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">count</span>(SleepTrouble, Depressed) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">arrange</span>(SleepTrouble, Depressed)
-
-depressedSleepTroubleTable &lt;-
-<span class="st">  </span>depressedSleepTrouble <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">spread</span>(SleepTrouble, n) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">rename</span>(
-    <span class="dt">NoSleepTrouble =</span> No,
-    <span class="dt">YesSleepTrouble =</span> Yes
-  )
-
-<span class="kw">pander</span>(depressedSleepTroubleTable)</code></pre></div>
-<table style="width:64%;">
-<colgroup>
-<col width="16%" />
-<col width="23%" />
-<col width="23%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="center">Depressed</th>
-<th align="center">NoSleepTrouble</th>
-<th align="center">YesSleepTrouble</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center">None</td>
-<td align="center">2614</td>
-<td align="center">676</td>
-</tr>
-<tr class="even">
-<td align="center">Several</td>
-<td align="center">418</td>
-<td align="center">249</td>
-</tr>
-<tr class="odd">
-<td align="center">Most</td>
-<td align="center">138</td>
-<td align="center">145</td>
-</tr>
-</tbody>
-</table>
-<p>Simply by looking at these data, we can tell that it is likely that there is a relationship between the two variables; notably, while the total number of people with sleep trouble is much less than those without, for people who report being depresssed most days the number with sleep problems is greater than those without. We can quantify this directly using the chi-squared test:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># need to remove the column with the label names</span>
-depressedSleepTroubleTable &lt;-
-<span class="st">  </span>depressedSleepTroubleTable <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="op">-</span>Depressed)
-
-depressedSleepChisq &lt;-<span class="st"> </span><span class="kw">chisq.test</span>(depressedSleepTroubleTable)
-depressedSleepChisq</code></pre></div>
-<pre><code>## 
-##  Pearson&#39;s Chi-squared test
-## 
-## data:  depressedSleepTroubleTable
-## X-squared = 200, df = 2, p-value &lt;2e-16</code></pre>
-<p>This test shows that there is a strong relationship between depression and sleep trouble. We can also compute the Bayes factor to quantify the strength of the evidence in favor the alternative hypothesis:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute bayes factor, using a joint multinomial sampling plan</span>
-bf &lt;-
-<span class="st">  </span><span class="kw">contingencyTableBF</span>(
-    <span class="kw">as.matrix</span>(depressedSleepTroubleTable),
-    <span class="dt">sampleType =</span> <span class="st">&quot;jointMulti&quot;</span>
-  )
-bf</code></pre></div>
-<pre><code>## Bayes factor analysis
-## --------------
-## [1] Non-indep. (a=1) : 1.8e+35 ±0%
-## 
-## Against denominator:
-##   Null, independence, a = 1 
-## ---
-## Bayes factor type: BFcontingencyTable, joint multinomial</code></pre>
-<p>Here see that the Bayes factor is exceedingly large, showing that the evidence in favor of a relation between depression and sleep problems is very strong.</p>
+<span class="st">  </span><span class="kw">drop_na</span>(Weight, Gender) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#remove rows (individuals) with missing values for Weight and Gender</span>
+<span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">150</span>) <span class="co">#take a random sample of n = 150 rows (individuals)</span></code></pre></div>
+<p>Now let’s set up the <code>ggplot()</code> command. This requires us to specify two things. First, we need to tell it which data frame to obtain the data from (in this case, <code>NHANES_sample</code>). Second, we need to tell it which variables from the data frame to use, which we do via the <em>aesthetics</em> function <code>aes()</code>. In this case, we want to plot height on the X axis and weight on the Y axis. The result is shown in Figure <a href="plot-height-by-gender.html#fig:emptyPlot">7.1</a>: The command generates a set of plot axes but doesn’t actually show any data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">NHANES_sample <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Height, <span class="dt">y =</span> Weight))</code></pre></div>
+<div class="figure"><span id="fig:emptyPlot"></span>
+<img src="StatsThinking21_files/figure-html/emptyPlot-1.png" alt="Empty plot frame generated by ggplot()" width="384" height="50%" />
+<p class="caption">
+Figure 7.1: Empty plot frame generated by ggplot()
+</p>
 </div>
-<div id="beware-of-simpsons-paradox" class="section level2">
-<h2><span class="header-section-number">13.8</span> Beware of Simpson’s paradox</h2>
-<p>The contingency tables presented above represent summaries of large numbers of observations, but summaries can sometimes be misleading. Let’s take an example from baseball. The table below shows the batting data (hits/at bats and batting average) for Derek Jeter and David Justice over the years 1995-1997:</p>
-<table>
-<thead>
-<tr class="header">
-<th>Player</th>
-<th>1995</th>
-<th></th>
-<th>1996</th>
-<th></th>
-<th>1997</th>
-<th></th>
-<th>Combined</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Derek Jeter</td>
-<td>12/48</td>
-<td>.250</td>
-<td>183/582</td>
-<td>.314</td>
-<td>190/654</td>
-<td>.291</td>
-<td>385/1284</td>
-<td><strong>.300</strong></td>
-</tr>
-<tr class="even">
-<td>David Justice</td>
-<td>104/411</td>
-<td><strong>.253</strong></td>
-<td>45/140</td>
-<td><strong>.321</strong></td>
-<td>163/495</td>
-<td><strong>.329</strong></td>
-<td>312/1046</td>
-<td>.298</td>
-</tr>
-</tbody>
-</table>
-<p>If you look closely, you will see that something odd is going on: In each individual year Justice had a higher batting average than Jeter, but when we combine the data across all three years, Jeter’s average is actually higher than Justice’s! This is an example of a phenomenon known as <em>Simpson’s paradox</em>, in which a pattern that is present in a combined dataset may not be present in any of the subsets of the data. This occurs when there is another variable that may be changing across the different subsets – in this case, the number of at-bats varies across years, with Justice batting many more times in 1995 (when batting averages were low). We refer to this as a <em>lurking variable</em>, and it’s always important to be attentive to such variables whenever one examines categorical data.</p>
+<p>We next need to add a presentation of the data. The way that we tell <code>ggplot</code> what to show is by adding various commands to the main <code>ggplot()</code> command. In particular, we generally need to add a <em>geometry</em> or “geom”, which specifies how the data will be arranged in the plot. For example, to show each data point we can use the <code>geom_point()</code> geometry, as shown in Figure <a href="plot-height-by-gender.html#fig:simpleGeom">7.2</a>. Each data point represents an individual row in our <code>NHANES_sample</code> dataset with each row corresponding to an individual person in this dataset.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">NHANES_sample <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Height, <span class="dt">y =</span> Weight)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
+<div class="figure"><span id="fig:simpleGeom"></span>
+<img src="StatsThinking21_files/figure-html/simpleGeom-1.png" alt="Simple scatter plot" width="384" height="50%" />
+<p class="caption">
+Figure 7.2: Simple scatter plot
+</p>
+</div>
+<p>Finally, we want to plot the points in separate colors depending on their gender. We do this by simply adding a <em>color</em> keyword to the aesthetics, which tells the <code>geom_point()</code> function to separately color points by Gender. This is shown in Figure <a href="plot-height-by-gender.html#fig:colorPoints">7.3</a>. This figure also shows an example of how we can include multiple geometry layers in a single figure – in this case, we use <code>geom_smooth()</code> to plot the lines that best describe the relation between height and weight, separately by gender. The shading around the lines reflects our confidence in the estimate at that point.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">NHANES_sample <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Height, <span class="dt">y =</span> Weight, <span class="dt">color =</span> Gender)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:colorPoints"></span>
+<img src="StatsThinking21_files/figure-html/colorPoints-1.png" alt="Scatterplot with points separately colored by Gender." width="384" height="50%" />
+<p class="caption">
+Figure 7.3: Scatterplot with points separately colored by Gender.
+</p>
+</div>
+</div>
+<div id="principles-of-good-visualization" class="section level2">
+<h2><span class="header-section-number">7.2</span> Principles of good visualization</h2>
+<p>Many books have been written on effective visualization of data. There are some principles that most of these authors agree on, while others are more contentious. Here we summarize some of the major principles; if you want to learn more, then some good resources are listed in the <em>Suggested Readings</em> section at the end of this chapter.</p>
+<p>Here is our distillation of some important principles for data visualization.</p>
+<div id="show-the-data-and-make-them-stand-out" class="section level3">
+<h3><span class="header-section-number">7.2.1</span> Show the data and make them stand out</h3>
+<p>Let’s say that I had performed a study that examined the relationship between dental health and time spent flossing, and I would like to visualize my data. Figure <a href="plot-height-by-gender.html#fig:dentalFigs">7.4</a> shows four possible presentations of these data.</p>
+<ol style="list-style-type: decimal">
+<li>In panel A, we don’t actually show the data, just a line expressing the relationship between the data. This is clearly not optimal, because we can’t actually see what the underlying data look like.</li>
+</ol>
+<p>Panels B-D show three possible outcomes from plotting the actual data, where each plot shows a different way that the data could have been generated.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>If we saw the plot in Panel B, we would probably be suspicious – rarely would real data follow such a precise pattern.<br />
+</li>
+<li>The data in Panel C, on the other hand, look like real data – they show a general trend, but they are messy, as data in the world usually are.<br />
+</li>
+<li>The data in Panel D show us that the apparent relationship between the two variables is solely caused by one individual, who we would refer to as an <em>outlier</em> because they fall so far outside of the pattern of the rest of the group. It should be clear that we probably don’t want to conclude very much from an effect that is driven by one data point. This figure highlights why it is <em>always</em> important to look at the raw data before putting too much faith in any summary of the data.</li>
+</ol>
+<div class="figure"><span id="fig:dentalFigs"></span>
+<img src="StatsThinking21_files/figure-html/dentalFigs-1.png" alt="Four different possible presentations of data for the dental health example. Each point in the scatter plot represents one data point in the dataset, and the line in each plot represents the linear trend in the data." width="576" />
+<p class="caption">
+Figure 7.4: Four different possible presentations of data for the dental health example. Each point in the scatter plot represents one data point in the dataset, and the line in each plot represents the linear trend in the data.
+</p>
+</div>
+</div>
+</div>
+<div id="maximize-the-dataink-ratio" class="section level2">
+<h2><span class="header-section-number">7.3</span> Maximize the data/ink ratio</h2>
+<p>Edward Tufte has proposed an idea called the data/ink ratio:</p>
+<p><span class="math display">\[
+data/ink\ ratio = \frac{amount\, of\, ink\, used\, on\, data}{total\, amount\, of\, ink}
+\]</span> The point of this is to minimize visual clutter and let the data show through. For example, take the two presentations of the dental health data in Figure <a href="plot-height-by-gender.html#fig:dataInkExample">7.5</a>. Both panels show the same data, but panel A is much easier to apprehend, because of its relatively higher data/ink ratio.</p>
+<div class="figure"><span id="fig:dataInkExample"></span>
+<img src="StatsThinking21_files/figure-html/dataInkExample-1.png" alt="An example of the same data plotted with two different data/ink ratios." width="768" height="50%" />
+<p class="caption">
+Figure 7.5: An example of the same data plotted with two different data/ink ratios.
+</p>
+</div>
+</div>
+<div id="avoid-chartjunk" class="section level2">
+<h2><span class="header-section-number">7.4</span> Avoid chartjunk</h2>
+<p>It’s especially common to see presentations of data in the popular media that are adorned with lots of visual elements that are thematically related to the content but unrelated to the actual data. This is known as <em>chartjunk</em>, and should be avoided at all costs.</p>
+<p>One good way to avoid chartjunk is to avoid using popular spreadsheet programs to plot one’s data. For example, the chart in Figure <a href="plot-height-by-gender.html#fig:chartJunk">7.6</a> (created using Microsoft Excel) plots the relative popularity of different religions in the United States. There are at least three things wrong with this figure:</p>
+<ul>
+<li>it has graphics overlaid on each of the bars which have nothing to do with the actual data.</li>
+<li>it has a distracting background texture.</li>
+<li>it uses three-dimensional bars</li>
+</ul>
+<div class="figure"><span id="fig:chartJunk"></span>
+<img src="images/excel_chartjunk.png" alt="An example of chart junk."  />
+<p class="caption">
+Figure 7.6: An example of chart junk.
+</p>
+</div>
+</div>
+<div id="avoid-distorting-the-data" class="section level2">
+<h2><span class="header-section-number">7.5</span> Avoid distorting the data</h2>
+<p>It’s often possible to use visualization to distort the message of a dataset. A very common one is use of different axis scaling to either exaggerate or hide a pattern of data. For example, let’s say that we are interested in seeing whether rates of violent crime have changed in the US. In Figure <a href="plot-height-by-gender.html#fig:crimePlotAxes">7.7</a>, we can see these data plotted in ways that either make it look like crime has remained constant, or that it has plummeted. The same data can tell two very different stories!</p>
+<div class="figure"><span id="fig:crimePlotAxes"></span>
+<img src="StatsThinking21_files/figure-html/crimePlotAxes-1.png" alt="Crime data from 1990 to 2014 plotted over time.  Panels A and B show the same data, but with different axis ranges. Data obtained from https://www.ucrdatatool.gov/Search/Crime/State/RunCrimeStatebyState.cfm" width="768" height="50%" />
+<p class="caption">
+Figure 7.7: Crime data from 1990 to 2014 plotted over time. Panels A and B show the same data, but with different axis ranges. Data obtained from <a href="https://www.ucrdatatool.gov/Search/Crime/State/RunCrimeStatebyState.cfm" class="uri">https://www.ucrdatatool.gov/Search/Crime/State/RunCrimeStatebyState.cfm</a>
+</p>
+</div>
+<p>One of the major controversies in statistical data visualization is how to choose the Y axis, and in particular whether it should always include zero. In his famous book “How to lie with statistics”, Darrell Huff argued strongly that one should always include the zero point in the Y axis. On the other hand, Edward Tufte has argued against this:</p>
+<blockquote>
+<p>“In general, in a time-series, use a baseline that shows the data not the zero point; don’t spend a lot of empty vertical space trying to reach down to the zero point at the cost of hiding what is going on in the data line itself.” (from <a href="https://qz.com/418083/its-ok-not-to-start-your-y-axis-at-zero/" class="uri">https://qz.com/418083/its-ok-not-to-start-your-y-axis-at-zero/</a>)</p>
+</blockquote>
+<p>There are certainly cases where using the zero point makes no sense at all. Let’s say that we are interested in plotting body temperature for an individual over time. In Figure <a href="plot-height-by-gender.html#fig:bodyTempAxis">7.8</a> we plot the same (simulated) data with or without zero in the Y axis. It should be obvious that by plotting these data with zero in the Y axis (Panel A) we are wasting a lot of space in the figure, given that body temperature of a living person could never go to zero! By including zero, we are also making the apparent jump in temperature during days 21-30 much less evident. In general, my inclination for line plots and scatterplots is to use all of the space in the graph, unless the zero point is truly important to highlight.</p>
+<div class="figure"><span id="fig:bodyTempAxis"></span>
+<img src="StatsThinking21_files/figure-html/bodyTempAxis-1.png" alt="Body temperature over time, plotted with or without the zero point in the Y axis." width="768" height="50%" />
+<p class="caption">
+Figure 7.8: Body temperature over time, plotted with or without the zero point in the Y axis.
+</p>
+</div>
+</div>
+<div id="the-lie-factor" class="section level2">
+<h2><span class="header-section-number">7.6</span> The lie factor</h2>
+<p>Edward Tufte introduced the concept of the “lie factor” to describe the degree to which physical differences in a visualization correspond to the magnitude of the differences in the data. If a graphic has a lie factor near 1, then it is appropriately representing the data, whereas lie factors far from one reflect a distortion of the underlying data.</p>
+<p>The lie factor supports the argument that one should always include the zero point in a bar chart in many cases. In Figure <a href="plot-height-by-gender.html#fig:barCharLieFactor">7.9</a> we plot the same data with and without zero in the Y axis. In panel A, the proportional difference in area between the two bars is exactly the same as the proportional difference between the values (i.e. lie factor = 1), whereas in Panel B (where zero is not included) the proportional difference in area between the two bars is roughly 2.8 times bigger than the proportional difference in the values, and thus it visually exaggerates the size of the difference.</p>
+<div class="figure"><span id="fig:barCharLieFactor"></span>
+<img src="StatsThinking21_files/figure-html/barCharLieFactor-1.png" alt="Two bar charts with associated lie factors." width="768" height="50%" />
+<p class="caption">
+Figure 7.9: Two bar charts with associated lie factors.
+</p>
+</div>
+</div>
+<div id="remember-human-limitations" class="section level2">
+<h2><span class="header-section-number">7.7</span> Remember human limitations</h2>
+<p>Humans have both perceptual and cognitive limitations that can make some visualizations very difficult to understand. It’s always important to keep these in mind when building a visualization.</p>
+<div id="perceptual-limitations" class="section level3">
+<h3><span class="header-section-number">7.7.1</span> Perceptual limitations</h3>
+<p>One important perceptual limitation that many people (including myself) suffer from is color blindness. This can make it very difficult to perceive the information in a figure (like the one in Figure <a href="plot-height-by-gender.html#fig:badColors">7.10</a>) where there is only color contrast between the elements but no brightness contrast. It is always helpful to use graph elements that differ substantially in brightness and/or texture, in addition to color. There are also <a href="http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/#a-colorblind-friendly-palette">“colorblind-friendly” pallettes</a> available for use in R</p>
+<div class="figure"><span id="fig:badColors"></span>
+<img src="StatsThinking21_files/figure-html/badColors-1.png" alt="Example of a bad figure that relies solely on color contrast." width="768" height="50%" />
+<p class="caption">
+Figure 7.10: Example of a bad figure that relies solely on color contrast.
+</p>
+</div>
+<p>Even for people with perfect color vision, there are perceptual limitations that can make some plots ineffective. This is one reason why statisticians never use pie charts: It can be very difficult for humans to apprehend differences in the volume of shapes. The pie chart in Figure <a href="plot-height-by-gender.html#fig:pieChart">7.11</a> (presenting the same data on religious affiliation that we showed above) shows how tricky this can be.</p>
+<div class="figure"><span id="fig:pieChart"></span>
+<img src="images/religion_piechart.png" alt="An example of a pie chart, highlighting the difficult in apprehending the relative volume of the different pie slices."  />
+<p class="caption">
+Figure 7.11: An example of a pie chart, highlighting the difficult in apprehending the relative volume of the different pie slices.
+</p>
+</div>
+<p>This plot is terrible for several reasons. First, it requires distinguishing a large number of colors from very small patches at the bottom of the figure. Second, the visual perspective distorts the relative numbers, such that the pie wedge for Catholic appears much larger than the pie wedge for None, when in fact the number for None is slightly larger (22.8 vs 20.8 percent), as was evident in Figure <a href="plot-height-by-gender.html#fig:chartJunk">7.6</a>. Third, by separating the legend from the graphic, it requires the viewer to hold information in their working memory in order to map between the graphic and legend and to conduct many “table look-ups” in order to continuously match the legend labels to the visualization. And finally, it uses text that is far too small, making it impossible to read without zooming in.</p>
+<p>Plotting the data using a more reasonable approach (Figure <a href="plot-height-by-gender.html#fig:religionBars">7.12</a>), we can see the pattern much more clearly. This plot may not look as flashy as the pie chart generated using Excel, but it’s a much more effective and accurate representation of the data.</p>
+<div class="figure"><span id="fig:religionBars"></span>
+<img src="StatsThinking21_files/figure-html/religionBars-1.png" alt="A clearer presentation of the religious affiliation data (obtained from http://www.pewforum.org/religious-landscape-study/)." width="768" height="50%" />
+<p class="caption">
+Figure 7.12: A clearer presentation of the religious affiliation data (obtained from <a href="http://www.pewforum.org/religious-landscape-study/" class="uri">http://www.pewforum.org/religious-landscape-study/</a>).
+</p>
+</div>
+<p>This plot allows the viewer to make comparisons based on the the <strong>length</strong> of the bars <strong>along a common scale</strong> (the y-axis). Humans tend to be more accurate when decoding differences based on these perceptual elements than based on area or color.</p>
+</div>
+</div>
+<div id="correcting-for-other-factors" class="section level2">
+<h2><span class="header-section-number">7.8</span> Correcting for other factors</h2>
+<p>Often we are interested in plotting data where the variable of interest is affected by other factors than the one we are interested in. For example, let’s say that we want to understand how the price of gasoline has changed over time. Figure <a href="plot-height-by-gender.html#fig:gasPrices">7.13</a> shows historical gas price data, plotted either with or without adjustment for inflation. Whereas the unadjusted data show a huge increase, the adjusted data show that this is mostly just reflective of inflation. Other examples where one needs to adjust data for other factors include population size (as we saw in the crime rate examples in an earlier chapter) and data collected across different seasons.</p>
+<div class="figure"><span id="fig:gasPrices"></span>
+<img src="StatsThinking21_files/figure-html/gasPrices-1.png" alt="The price of gasoline in the US from 1930 to 201 (obtained from http://www.thepeoplehistory.com/70yearsofpricechange.html) with or without correction for inflation (based on Consumer Price Index)." width="384" height="50%" />
+<p class="caption">
+Figure 7.13: The price of gasoline in the US from 1930 to 201 (obtained from <a href="http://www.thepeoplehistory.com/70yearsofpricechange.html" class="uri">http://www.thepeoplehistory.com/70yearsofpricechange.html</a>) with or without correction for inflation (based on Consumer Price Index).
+</p>
+</div>
+</div>
+<div id="suggested-readings-and-videos" class="section level2">
+<h2><span class="header-section-number">7.9</span> Suggested readings and videos</h2>
+<ul>
+<li><a href="https://serialmentor.com/dataviz/"><em>Fundamentals of data visualization</em></a>, by Claus Wilke</li>
+<li><em>Visual Explanations</em>, by Edward Tufte</li>
+<li><em>Visualizing Data</em>, by William S. Cleveland</li>
+<li><em>Graph Design for the Eye and Mind</em>, by Stephen M. Kosslyn</li>
+<li><a href="https://www.youtube.com/watch?v=fSgEeI2Xpdc&amp;feature=youtu.be"><em>How Humans See Data</em></a>, by John Rauser</li>
+</ul>
 
 </div>
 </div>
@@ -990,8 +592,8 @@ bf</code></pre></div>
           </div>
         </div>
       </div>
-<a href="bayesian-statistics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="modeling-continuous-relationships.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="data-visualization.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sampling-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
@@ -1021,7 +623,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/poldrack/psych10-book/edit/master/12-CategoricalRelationships.Rmd",
+"link": "https://github.com/poldrack/psych10-book/edit/master/06-VisualizingData.Rmd",
 "text": "Edit"
 },
 "download": ["StatsThinking21.pdf", "StatsThinking21.epub"],

@@ -123,7 +123,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{Draft: 2019-01-30}
+    \date{Draft: 2019-01-31}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -3973,6 +3973,26 @@ compared to the true value.
 
 \section{Z-scores}\label{z-scores}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{crimeData <-}\StringTok{ }
+\StringTok{  }\KeywordTok{read.table}\NormalTok{(}
+    \StringTok{"data/CrimeOneYearofData_clean.csv"}\NormalTok{, }
+    \DataTypeTok{header =} \OtherTok{TRUE}\NormalTok{, }
+    \DataTypeTok{sep =} \StringTok{","}
+\NormalTok{  )}
+
+\CommentTok{# let's drop DC since it is so small}
+\NormalTok{crimeData <-}\StringTok{ }
+\StringTok{  }\NormalTok{crimeData }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{filter}\NormalTok{(State }\OperatorTok{!=}\StringTok{ "District of Columbia"}\NormalTok{)}
+
+\NormalTok{caCrimeData <-}\StringTok{ }
+\StringTok{  }\NormalTok{crimeData }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{filter}\NormalTok{(State }\OperatorTok{==}\StringTok{ "California"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 Having characterized a distribution in terms of its central tendency and
 variability, it is often useful to express the individual scores in
 terms of where they sit with respect to the overall distribution. Let's
@@ -3984,8 +4004,8 @@ for 2014 from the
 Uniform Crime Reporting site}. The left panel of Figure
 \ref{fig:crimeHist} shows a histogram of the number of violent crimes
 per state, highlighting the value for California. Looking at these data,
-it seems like California is terribly dangerous, with
-\texttt{I(caCrimeData\$Violent.crime.total)} crimes in that year.
+it seems like California is terribly dangerous, with 153709 crimes in
+that year.
 
 \begin{figure}
 \includegraphics[height=0.5\textheight]{StatsThinking21_files/figure-latex/crimeHist-1} \caption{Left: Histogram of the number of violent crimes.  The value for CA is plotted in blue. Right: A map of the same data, with number of crimes plotted for each state in color.}\label{fig:crimeHist}
@@ -4357,19 +4377,31 @@ view of the distribution of the data points.
   distribution of the data.
 \end{enumerate}
 
-\begin{figure}
-\centering
-\includegraphics{StatsThinking21_files/figure-latex/plotHeight-1.pdf}
-\caption{\label{fig:plotHeight}Four different ways of plotting the
-difference in height between men and women in the NHANES dataset. Panel
-A plots the means of the two groups, which gives no way to assess the
-relative overlap of the two distributions. Panel B shows the same bars,
-but also overlays the data points, jittering them so that we can see
-their overall distribution. Panel C shows a violin plot, which shows the
-distribution of the datasets for each group. PAnel D shows a box plot,
-which highlights the spread of the distribution along with any outliers
-(which are shown as individual points).}
-\end{figure}
+\chapter{plot height by Gender}\label{plot-height-by-gender}
+
+dfmean=NHANES\_adult \%\textgreater{}\% group\_by(Gender)
+\%\textgreater{}\% summarise(Height=mean(Height))
+
+p1 = ggplot(dfmean,aes(x=Gender,y=Height)) +
+geom\_bar(stat=``identity'',color=`gray') +
+coord\_cartesian(ylim=c(0,210)) + ggtitle(`Bar graph') +
+theme(aspect.ratio=1)
+
+p2 = ggplot(dfmean,aes(x=Gender,y=Height)) +
+geom\_bar(stat=``identity'',color=`gray') +
+coord\_cartesian(ylim=c(0,210)) + ggtitle(`Bar graph with points') +
+theme(aspect.ratio=1) +
+geom\_jitter(data=NHANES\_adult,aes(x=Gender,y=Height),width=0.1,alpha=0.1)
+
+p3 = ggplot(NHANES\_adult,aes(x=Gender,y=Height)) + geom\_violin() +
+ggtitle(`Violin plot') + theme(aspect.ratio=1)
+
+p4 = ggplot(NHANES\_adult,aes(x=Gender,y=Height)) + geom\_boxplot() +\\
+ggtitle(`Box plot') + theme(aspect.ratio=1)
+
+plot\_grid(p1,p2,p3,p4,nrow=2,labels=`AUTO')
+
+```
 
 \section{Plotting in R using ggplot}\label{plotting-in-r-using-ggplot}
 
@@ -4658,9 +4690,9 @@ pallettes} available for use in R
 Even for people with perfect color vision, there are perceptual
 limitations that can make some plots ineffective. This is one reason why
 statisticians never use pie charts: It can be very difficult for humans
-to apprehend differences in the volume of shapes. The piechart in Figure
-\ref{fig:pieChart} (presenting the same data on religious affiliation
-that we showed above) shows how tricky this can be.
+to apprehend differences in the volume of shapes. The pie chart in
+Figure \ref{fig:pieChart} (presenting the same data on religious
+affiliation that we showed above) shows how tricky this can be.
 
 \begin{figure}
 \centering
