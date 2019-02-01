@@ -123,7 +123,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{Draft: 2019-01-31}
+    \date{Draft: 2019-02-01}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -4378,31 +4378,19 @@ view of the distribution of the data points.
   distribution of the data.
 \end{enumerate}
 
-\chapter{plot height by Gender}\label{plot-height-by-gender}
-
-dfmean=NHANES\_adult \%\textgreater{}\% group\_by(Gender)
-\%\textgreater{}\% summarise(Height=mean(Height))
-
-p1 = ggplot(dfmean,aes(x=Gender,y=Height)) +
-geom\_bar(stat=``identity'',color=`gray') +
-coord\_cartesian(ylim=c(0,210)) + ggtitle(`Bar graph') +
-theme(aspect.ratio=1)
-
-p2 = ggplot(dfmean,aes(x=Gender,y=Height)) +
-geom\_bar(stat=``identity'',color=`gray') +
-coord\_cartesian(ylim=c(0,210)) + ggtitle(`Bar graph with points') +
-theme(aspect.ratio=1) +
-geom\_jitter(data=NHANES\_adult,aes(x=Gender,y=Height),width=0.1,alpha=0.1)
-
-p3 = ggplot(NHANES\_adult,aes(x=Gender,y=Height)) + geom\_violin() +
-ggtitle(`Violin plot') + theme(aspect.ratio=1)
-
-p4 = ggplot(NHANES\_adult,aes(x=Gender,y=Height)) + geom\_boxplot() +\\
-ggtitle(`Box plot') + theme(aspect.ratio=1)
-
-plot\_grid(p1,p2,p3,p4,nrow=2,labels=`AUTO')
-
-```
+\begin{figure}
+\centering
+\includegraphics{StatsThinking21_files/figure-latex/plotHeight-1.pdf}
+\caption{\label{fig:plotHeight}Four different ways of plotting the
+difference in height between men and women in the NHANES dataset. Panel
+A plots the means of the two groups, which gives no way to assess the
+relative overlap of the two distributions. Panel B shows the same bars,
+but also overlays the data points, jittering them so that we can see
+their overall distribution. Panel C shows a violin plot, which shows the
+distribution of the datasets for each group. Panel D shows a box plot,
+which highlights the spread of the distribution along with any outliers
+(which are shown as individual points).}
+\end{figure}
 
 \section{Plotting in R using ggplot}\label{plotting-in-r-using-ggplot}
 
