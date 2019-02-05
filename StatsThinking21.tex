@@ -123,7 +123,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{Draft: 2019-02-02}
+    \date{Draft: 2019-02-05}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -5225,7 +5225,7 @@ Carlo simulations, we would surely choose to have the latter skill.''
 \end{quote}
 
 In this chapter we will introduce the concept of a Monte Carlo
-simulation and discuss how they can be used to perform statistical
+simulation and discuss how it can be used to perform statistical
 analyses.
 
 \section{Monte Carlo simulation}\label{monte-carlo-simulation}
@@ -5272,7 +5272,7 @@ from a normal distribution.
 
 \section{Randomness in statistics}\label{randomness-in-statistics}
 
-The term ``random'' is often used colloquiually to refer to things that
+The term ``random'' is often used colloquially to refer to things that
 are bizarre or unexpected, but in statistics the term has a very
 specific meaning: A process is \emph{random} if it is unpredictable. For
 example, if I flip a fair coin 10 times, the value of the outcome on one
@@ -5513,7 +5513,7 @@ actual dataset; importantly, we sample \emph{with replacement}, such
 that the same data point will often end up being represented multiple
 times within one of the samples. We then compute our statistic of
 interest on each of the bootstrap samples, and use the distribution of
-those estimates
+those estimates.
 
 Let's start by using the bootstrap to estimate the sampling distribution
 of the mean, so that we can compare the result to the standard error of
@@ -8417,7 +8417,7 @@ then compute the posterior?
 \end{Shaded}
 
 \begin{figure}
-\includegraphics[height=0.5\textheight]{StatsThinking21_files/figure-latex/absolutePrior-1} \caption{Effects of the strength of the prior on the posterior distribution. The blue line shows the posterior obtained using the prior based on 50 responders out of 100 people, using an absolute prior which states that p(respond) is 0.8 or greater.  The prior is shown in the dotted red line. }\label{fig:absolutePrior}
+\includegraphics[height=0.5\textheight]{StatsThinking21_files/figure-latex/absolutePrior-1} \caption{Effects of the strength of the prior on the posterior distribution. The blue line shows the posterior obtained using an absolute prior which states that p(respond) is 0.8 or greater.  The prior is shown in the dotted red line.}\label{fig:absolutePrior}
 \end{figure}
 
 In Figure \ref{fig:absolutePrior} we see that there is zero density in
