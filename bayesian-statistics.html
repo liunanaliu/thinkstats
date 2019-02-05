@@ -435,8 +435,8 @@ P(H|D) = \frac{P(D|H)*P(H)}{P(D)}
 <p>What the security staff want to know is what is the likelihood that a person is carrying an explosive, given that the machine has given a positive test. Let’s walk through how to calculate this value using Bayesian analysis.</p>
 <div id="specifying-the-prior" class="section level3">
 <h3><span class="header-section-number">11.3.1</span> Specifying the prior</h3>
-<p>To use Bayes’ theorem, we first need to specify the prior probability for the hypothesis. In this case, we don’t know the real number but we can assume that it’s quite small – for this example, let’s say that one out of every 5 million travelers is expected to have an explosive device.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prior &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="dv">5000000</span></code></pre></div>
+<p>To use Bayes’ theorem, we first need to specify the prior probability for the hypothesis. In this case, we don’t know the real number but we can assume that it’s quite small. According to the <a href="https://www.faa.gov/air_traffic/by_the_numbers/media/Air_Traffic_by_the_Numbers_2018.pdf">FAA</a>, there were 971,595,898 air passengers in the U.S. in 2017. For this example, let’s say that one out of those travelers was carrying an explosive in their bag</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prior &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="dv">971595898</span></code></pre></div>
 </div>
 <div id="collect-some-data" class="section level3">
 <h3><span class="header-section-number">11.3.2</span> Collect some data</h3>
@@ -473,14 +473,14 @@ P(B|A) = \frac{P(A|B)*P(B)}{P(A|B)*P(B) + P(A|\neg B)*P(\neg B)}
 <span class="st">  </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>prior)
 
 <span class="kw">sprintf</span>(<span class="st">&quot;marginal likelihood = %.3e&quot;</span>, marginal_likelihood)</code></pre></div>
-<pre><code>## [1] &quot;marginal likelihood = 2.727e-08&quot;</code></pre>
+<pre><code>## [1] &quot;marginal likelihood = 9.094e-09&quot;</code></pre>
 </div>
 <div id="computing-the-posterior" class="section level3">
 <h3><span class="header-section-number">11.3.5</span> Computing the posterior</h3>
 <p>We now have all of the parts that we need to compute the posterior probability of an explosive being present, given the observed 9 positive outcomes out of 10 tests.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">posterior &lt;-<span class="st"> </span>(likelihood <span class="op">*</span><span class="st"> </span>prior) <span class="op">/</span><span class="st"> </span>marginal_likelihood
 posterior</code></pre></div>
-<pre><code>## [1] 0.67</code></pre>
+<pre><code>## [1] 0.01</code></pre>
 <p>This result shows us that the probability of an explosive in the bag is much higher than the prior, but nowhere near certainty, again highlighting the fact that testing for rare events is almost always liable to produce high numbers of false positives.</p>
 </div>
 </div>
@@ -769,7 +769,7 @@ bf &lt;-
 <h3><span class="header-section-number">11.6.2</span> Bayes factors for statistical hypotheses</h3>
 <p>In the previous example we had specific predictions from each senator, whose likelihood we could quantify using the binomial distribution. However, in real data analysis we generally must deal with uncertainty about our parameters, which complicates the Bayes factor. However, in exchange we gain the ability to quantify the relative amount of evidence in favor of the null versus alternative hypotheses.</p>
 <p>Let’s say that we are a medical researcher performing a clinical trial for the treatment of diabetes, and we wish to know whether a particular drug reduces blood glucose compared to placebo. We recruit a set of volunteers and randomly assign them to either drug or placebo group, and we measure the change in hemoglobin A1C (a marker for blood glucose levels) in each group over the period in which the drug or placebo was administered. What we want to know is: Is there a difference between the drug and placebo?</p>
-<p>First, let’s generate some data and anlayze them using null hypothesis testing (see Figure <a href="bayesian-statistics.html#fig:bayesTesting">11.7</a>).</p>
+<p>First, let’s generate some data and analyze them using null hypothesis testing (see Figure <a href="bayesian-statistics.html#fig:bayesTesting">11.7</a>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create simulated data for drug trial example</span>
 
 <span class="kw">set.seed</span>(<span class="dv">123456</span>)

@@ -7917,13 +7917,15 @@ Bayesian analysis.
 
 To use Bayes' theorem, we first need to specify the prior probability
 for the hypothesis. In this case, we don't know the real number but we
-can assume that it's quite small -- for this example, let's say that one
-out of every 5 million travelers is expected to have an explosive
-device.
+can assume that it's quite small. According to the
+\href{https://www.faa.gov/air_traffic/by_the_numbers/media/Air_Traffic_by_the_Numbers_2018.pdf}{FAA},
+there were 971,595,898 air passengers in the U.S. in 2017. For this
+example, let's say that one out of those travelers was carrying an
+explosive in their bag
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{prior <-}\StringTok{ }\DecValTok{1}\OperatorTok{/}\DecValTok{5000000}
+\NormalTok{prior <-}\StringTok{ }\DecValTok{1}\OperatorTok{/}\DecValTok{971595898}
 \end{Highlighting}
 \end{Shaded}
 
@@ -8005,7 +8007,7 @@ We can compute this in R as follows:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "marginal likelihood = 2.727e-08"
+## [1] "marginal likelihood = 9.094e-09"
 \end{verbatim}
 
 \subsection{Computing the posterior}\label{computing-the-posterior}
@@ -8022,7 +8024,7 @@ outcomes out of 10 tests.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.67
+## [1] 0.01
 \end{verbatim}
 
 This result shows us that the probability of an explosive in the bag is
@@ -8522,7 +8524,7 @@ levels) in each group over the period in which the drug or placebo was
 administered. What we want to know is: Is there a difference between the
 drug and placebo?
 
-First, let's generate some data and anlayze them using null hypothesis
+First, let's generate some data and analyze them using null hypothesis
 testing (see Figure \ref{fig:bayesTesting}).
 
 \begin{Shaded}
