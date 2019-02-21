@@ -580,9 +580,9 @@ MS_{error} = \frac{SS_{error}}{df} = \frac{\sum_{i=1}^n{(y_i - \hat{y_i})^2} }{N
 <p><span class="math display">\[
 SE_{model} = \sqrt{MS_{error}}
 \]</span></p>
-<p>In order to get the standard error for a specific regression parameter estimate, <span class="math inline">\(SE_{\beta_x}\)</span>, we need to rescale <span class="math inline">\(SE_{model}\)</span> into the units of the particular parameter, by dividing it by the standard deviation of the X variable:</p>
+<p>In order to get the standard error for a specific regression parameter estimate, <span class="math inline">\(SE_{\beta_x}\)</span>, we need to rescale the standard error of the model by the square root of the sum of squares of the X variable:</p>
 <p><span class="math display">\[
-SE_{\beta_x} = \frac{SE_{model}}{S_x}
+SE_{\beta_x} = \frac{SE_{model}}{\sqrt{{\sum{(x_i - \bar{x})^2}}}}
 \]</span></p>
 </div>
 <div id="statistical-tests-for-regression-parameters" class="section level3">
