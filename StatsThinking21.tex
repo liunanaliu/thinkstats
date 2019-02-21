@@ -123,7 +123,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{Draft: 2019-02-10}
+    \date{Draft: 2019-02-21}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -7024,7 +7024,7 @@ it goes). In addition, sometimes we don't have a clear null hypothesis,
 so we would like to see what range of estimates are consistent with the
 data. Second, we would like to know how large the effect actually is,
 since as we saw in the weight loss example in the previous chapter, a
-statisticially significant effect is not necessarily a practically
+statistically significant effect is not necessarily a practically
 important effect.
 
 In this chapter we will discuss methods to address these two questions:
@@ -7153,7 +7153,7 @@ normal distribution. This incorporates the extra uncertainty that arises
 when we make conclusions based on small samples.
 
 We can compute the 95\% confidence interval in a way similar to the
-normal distribution example above, but the critical value is determnined
+normal distribution example above, but the critical value is determined
 by the 2.5th percentile and the 97.5th percentile of the \emph{t}
 distribution, which we can compute using the \texttt{qt()} function in
 R. Thus, the confidence interval for the mean (\(\bar{X}\)) is:
@@ -7225,7 +7225,7 @@ parameter.
 size}\label{confidence-intervals-and-sample-size}
 
 Because the standard error decreases with sample size, the means
-confidence interval should get narrowers as the sample size increases,
+confidence interval should get narrower as the sample size increases,
 providing progressively tighter bounds on our estimate. Figure
 \ref{fig:CISampSize} shows an example of how the confidence interval
 would change as a function of sample size for the weight example. From
@@ -7318,9 +7318,9 @@ confidence interval for the mean.
 
 Things get trickier if we want to compare the means of two conditions
 (Schenker and Gentleman 2001). There are a couple of situations that are
-clear. First, each mean is contained within the confidence interval for
-the other mean, then there is certainly no significant difference at the
-chosen confidence level. Second, if there is no overlap between the
+clear. First, if each mean is contained within the confidence interval
+for the other mean, then there is certainly no significant difference at
+the chosen confidence level. Second, if there is no overlap between the
 confidence intervals, then there is certainly a significant difference
 at the chosen level; in fact, this test is substantially
 \emph{conservative}, such that the actual error rate will be lower than
@@ -7348,7 +7348,7 @@ an effect in terms of the actual data, which we refer to as an
 \emph{effect size}. In this section we will introduce the concept and
 discuss various ways that effect sizes can be calculated.
 
-An effect size is a standarized measurement that compares the size of
+An effect size is a standardized measurement that compares the size of
 some statistical effect to a reference quantity, such as the variability
 of the statistic. In some fields of science and engineering, this idea
 is referred to as a ``signal to noise ratio''. There are many different
@@ -7684,13 +7684,9 @@ of how power changes as a function of these factors.
 \end{Highlighting}
 \end{Shaded}
 
-\textbackslash{}begin\{figure\}
-\includegraphics[height=0.5\textheight]{StatsThinking21_files/figure-latex/plotPowerSim-1}
-\textbackslash{}caption\{Results from power simulation, showing power as
-a function of sample size, with effect sizes shown as different colors,
-and alpha shown as line type. The standard criterion of 80\% power is
-shown by the dotted black line.\}\label{fig:plotPowerSim}
-\textbackslash{}end\{figure\}
+\begin{figure}
+\includegraphics[height=0.5\textheight]{StatsThinking21_files/figure-latex/plotPowerSim-1} \caption{Results from power simulation, showing power as a function of sample size, with effect sizes shown as different colors, and alpha shown as line type. The standard criterion of 80 percent power is shown by the dotted black line.}\label{fig:plotPowerSim}
+\end{figure}
 
 This simulation shows us that even with a sample size of 96, we will
 have relatively little power to find a small effect (\(d = 0.2\)) with
@@ -7700,7 +7696,7 @@ if a true effect of that size exists.
 
 There are at least two important reasons to care about statistical
 power, one of which we discuss here and the other of which we will
-return to in Chapter \ref{doing-reproducible-science}. If you are a
+return to in Chapter \ref{doing-reproducible-research}. If you are a
 researcher, you probably don't want to spend your time doing futile
 experiments. Running an underpowered study is essentially futile,
 because it means that there is a very low likelihood that one will find
@@ -7771,7 +7767,7 @@ to find such a large effect -- just as we don't need statistics to tell
 us that 16-year-olds are taller than than 6-year-olds. When we run a
 power analysis, we need to specify an effect size that is plausible for
 our study, which would usually come from previous research. However, in
-Chapter \ref{doing-reproducible-science} we will discuss a phenomenon
+Chapter \ref{doing-reproducible-research} we will discuss a phenomenon
 known as the ``winner's curse'' that likely results in published effect
 sizes being larger than the true effect size, so this should also be
 kept in mind.
